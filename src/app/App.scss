@@ -1,0 +1,67 @@
+@import "root-styles";
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  background-color: var(--x-dark-gray) !important;
+  height: 100%;
+  margin: 0;
+}
+
+.dashboard {
+  min-height: calc(100vh - 80px - 3rem);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.box-shadow {
+  border: 1px solid #DFDFDF;
+  border-radius: 6px;
+  box-shadow: 0 6px 22px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+label {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--x-light-gray);
+}
+
+.summary-data {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--x-darkest-gray)
+}
+
+.input-bar {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  padding: 5px 0 20px 0;
+  font-size: 1em;
+  color: var(--x-darkest-gray)
+}
+
+.input-bar.hidden {
+  visibility: hidden;
+}
+
+.input-bar label {
+  text-align: right;
+  margin: 0 10px 0 40px;
+}
+.input-bar input, .input-bar textarea {
+  margin: 0 40px 0 10px;
+}
+
+.input-bar.lumped-with-next {
+  padding: 5px 0 5px 0;
+}
+
+.options-list input {
+  width: calc(100% - 60px);
+  margin: 0 40px 0 10px;
+}

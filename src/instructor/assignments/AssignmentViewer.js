@@ -1,0 +1,205 @@
+import React, {Fragment, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {UI_SCREEN_MODES, HOMEWORK_PROGRESS} from "../../app/constants";
+import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import {
+  setCurrentlyReviewedStudentId,
+  setActiveUiScreenMode,
+  updateStudentsData,
+  setGradesData,
+  addHomeworksData,
+  setHomeworkGradingData
+} from "../../app/store/appReducer";
+import {Button, Container, Row, Col} from 'react-bootstrap';
+import {API, graphqlOperation} from "aws-amplify";
+import {listHomeworks} from "../../graphql/queries";
+import HomeworkReview from "./HomeworkReview";
+import HomeworkListing from "./HomeworkListing";
+import {fetchAllGradesFromLMS} from "../../utils/mockRingLeaderAPIs";
+import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
+import {notifyUserOfError} from "../../utils/ErrorHandling";
+import {useStudents} from "../../app/store/AppSelectors";
+import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
+
+
+function AssignmentViewer(props) {
+	const dispatch = useDispatch();
+  const homeworks = useSelector(state => state.app.homeworks);
+  // const isSkipGradedStudents = useSelector(state => state.gradingBar.isSkipGradedStudents);
+  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+
+  const activeUser = useSelector(state => state.app.activeUser);
+  const assignment = useSelector(state => state.app.assignment);
+  const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
+
+  const [isLoadingScores, setIsLoadingScores] = useState(true);
+  const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);
+  const [nextTokenVal, setNextTokenVal] = useState(null);
+  const students = useStudents();
+
+
+
+
+  useEffect(() => {
+    if (!assignment?.id) return;
+    fetchScores();
+    fetchBatchOfHomeworks('INIT');
+  }, []);
+
+  useEffect(() => {
+    if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
+  }, [nextTokenVal]);
+
+
+
+  /**
+   * AWS and DynamoDB limits listing query results to 20 results OR 1MB total, whichever comes first. Thus,
+   * we query until we have all of the homework fetched for this assignment.
+   *
+   * This might get sluggish if we have a class with hundreds of students with large amounts of data fetched
+   * in each homework record. If that is the case, the expensive portion of homework should not be fetched here
+   * and instead only fetched when that individual homework is shown/reviewed by the instructor or student.
+   *
+   * @returns {Promise<void>}
+   */
+  async function fetchBatchOfHomeworks(token) {
+    console.log('----------------- fetch batch o homeworks');
+    if (token === "INIT") token = null;
+
+    API.graphql(graphqlOperation(listHomeworks, {
+      filter: {assignmentId: {eq: assignment.id}},
+      nextToken: token
+    }))
+    .then(handleHomeworksResult)
+    .catch((e) => notifyUserOfError(e, `=====> ERROR when fetching homeworks`));
+  }
+
+  function handleHomeworksResult(result) {
+    let rawHomeworks = result.data.listHomeworks.items;
+    //
+    // let updatedCount = 0;
+    // const updatedStudents = students.map(s => {
+    //   const matchingHomework = rawHomeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
+    //   if (!matchingHomework) return s;
+    //
+    //   updatedCount++;
+    //   let studentOutput = {quizAnswers:matchingHomework.quizAnswers};
+    //   matchingHomework.percentCompleted = calcPercentCompleted(assignment, matchingHomework);
+    //   matchingHomework.autoScore = calcAutoScore(assignment, matchingHomework);
+    //   matchingHomework.progress = getHomeworkStatus(s.homework.gradingProgress, matchingHomework);
+    //   delete matchingHomework.assignment;
+    //   delete matchingHomework.studentOwnerId;
+    //   delete matchingHomework.assignmentId;
+    //   delete matchingHomework.quizAnswers;
+    //
+    //   return Object.assign({}, s, {
+    //     homework: Object.assign({}, s.homework, matchingHomework, {studentOutput})})
+    // })
+
+    if (isLoadingHomeworks) setIsLoadingHomeworks(false);
+    // if (updatedCount) dispatch(updateStudentsData(updatedStudents));
+    dispatch(addHomeworksData(rawHomeworks));
+
+    setNextTokenVal(result.data.listHomeworks.nextToken);
+  }
+
+  async function fetchScores() {
+    try {
+      const grades = await fetchAllGradesFromLMS();
+      await dispatch(setGradesData(grades));
+    } catch (error) {
+      notifyUserOfError(error);
+    }
+  }
+
+  // async function fetchScores() {
+  //   console.log('----------------- fetch scores');
+  //   setIsLoadingScores(true);
+  //   try {
+  //     const grades = await fetchAllGradesFromLMS();
+  //     const allStudentGradesData = students.reduce((acc, s) => {
+  //       let studentGradeData = Object.assign({}, grades.find(g => g.studentId === s.id));
+  //       if (!studentGradeData) studentGradeData = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.fullyGraded, comment:'' };
+  //       acc[s.id] = studentGradeData;
+  //       return acc;
+  //     }, {});
+  //     // const updatedStudents = students.map(s => {
+  //     //   let gradingData = Object.assign({}, grades.find(g => g.studentId === s.id));
+  //     //   if (!gradingData) gradingData = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.fullyGraded, comment:'' };
+  //     //
+  //     //   return Object.assign({}, s, {homework:
+  //     //     Object.assign({}, s.homework, {comment: gradingData.comment, instructorScore: gradingData.instructorScore})},
+  //     //     {gradingProgress: gradingData.gradingProgress}
+  //     //   );
+  //     // })
+  //
+  //     // const tempCohortData = {students: students.filter(s => cohorts[0].studentIds.includes(s.id))};
+  //     await dispatch(setHomeworkGradingData(allStudentGradesData));
+  //   } catch (error) {
+  //     console.warn(`=====> ERROR when fetching scores`, error)
+  //   }
+  // }
+
+  function handleRefreshAfterGradeSubmission() {
+    console.log('-----------> handleRefreshAfterGradeSubmission()')
+  }
+
+  function handleGradingButton() {
+    // let orderedHomeworks = homeworks.filter(h => (!isSkipGradedStudents) || (h.progress !== HOMEWORK_PROGRESS.fullyGraded));
+    // if (isHideStudentIdentity) orderedHomeworks.sort((a,b) => a.randomOrderNum - b.randomOrderNum);
+
+    // if (orderedHomeworks?.length) dispatch(setCurrentlyReviewedStudentId(orderedHomeworks[0].id));
+  }
+
+	function handleEditButton() {
+		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editAssignment));
+	}
+
+
+  function toggleHideAndRandomize(e) {
+    e.stopPropagation();
+    dispatch(toggleHideStudentIdentity(!isHideStudentIdentity));
+  }
+
+  // console.log("STUDENTS", students);
+
+
+	if (props.isLoading) {
+		return (
+			<div className="nav-pane">
+				<LoadingIndicator loadingMsg={'LOADING ASSIGNMENT DATA'} size={3} />
+			</div>
+		)
+	}
+
+	return (
+		<Container className="assignment-viewer">
+      {!reviewedStudentId && students?.length &&
+      <Fragment>
+        <Row className='mt-2 mb-5'>
+          <Col className='text-left'>
+            <Button className='btn-sm xbg-dark m-2' disabled={!students?.length} onClick={handleGradingButton}>Start Grading</Button>
+          </Col>
+          <Col className='text-left'>
+            <label onClick={(e) => e.stopPropagation()} className='m-0 mr-3 text-white align-middle'>
+              <input type={'checkbox'} className='mr-1 no-click-thru' onChange={toggleHideAndRandomize} defaultChecked={isHideStudentIdentity}/>
+              Hide identities & randomize
+            </label>
+          </Col>
+          <Col className='text-right'>
+            <Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button>
+          </Col>
+        </Row>
+        <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} />
+      </Fragment>
+      }
+
+      {reviewedStudentId &&
+        // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
+        <HomeworkReview assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
+      }
+		</Container>
+	)
+}
+
+export default AssignmentViewer;

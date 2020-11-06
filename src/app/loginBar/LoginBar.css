@@ -1,0 +1,11 @@
+
+.user-pane-wrapper {
+  background-color: gray;
+}
+
+.button-sign-out {
+  width: 100px;
+  border-radius: 5px;
+  height: 30px;
+  background-color: darkslategray;
+}

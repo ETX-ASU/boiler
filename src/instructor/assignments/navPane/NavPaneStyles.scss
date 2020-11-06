@@ -1,0 +1,50 @@
+@import "../../../app/root-styles";
+
+.nav-pane {
+  min-height: calc(100vh - 80px - 3em);
+}
+
+.add-assignment-btn {
+  display: inline-block;
+  background-color: var(--x-darkest-gray);
+  width: 24px;
+  height: 24px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  &:after {
+    content: '+';
+    color: var(--x-white);
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: var(--x-dark-gray);
+  }
+  &:active {
+    border: 1px solid white;
+    background-color: var(--x-dark-gray);
+  }
+}
+
+.nav-link {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--x-dark-gray);
+  cursor: pointer;
+
+  padding: 0.3em 0.75em;
+  margin-left: 20px;
+  width: 100%;
+
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: 2px solid rgba(0,0,0,0);
+
+  &.active-selection {
+    background-color: var(--x-white);
+  }
+  &:hover {
+    border-color: var(--x-white);
+    border-right: none;
+  }
+}
