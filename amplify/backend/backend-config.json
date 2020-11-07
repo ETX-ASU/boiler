@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "boiler5da431b2": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
