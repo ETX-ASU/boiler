@@ -164,23 +164,62 @@ const getAsyncSpecs = () => {
 }
 
 
-export const createMockLmsData = () => {
-  localStorage.setItem('mockScoresFromLms', JSON.stringify(mockScoresFromLms));
+// export const createMockLmsData = () => {
+//   localStorage.setItem('mockScoresFromLms', JSON.stringify(mockScoresFromLms));
+// }
+
+
+
+
+
+// ===============================================================
+
+// run at start if window.isDevMode = true. If no user instructor 01 or 02 user exists, create them in Mock LMS local storage
+export const initMockUser = (courseId) => {
+  let initContext = JSON.parse(localStorage.getItem(`boiler-context-${courseId}`));
+  let instructor1 = initContext?.members.find(m => m.id === '01');
+  let instructor2 = initContext?.members.find(m => m.id === '02');
+  if (instructor1 && instructor2) return;
+
+  const context = {id: `mock-lms-course-id-${courseId}`, label: "Mock Course Label", title: "MMock Course Title"}
+  localStorage.setItem(`boiler-context-${courseId}`, JSON.stringify({id: 'randomUrlStrand', context, members:[
+    { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"}
+  ]}));
 }
+
+// this is used via the DevUtilityDashboard to generate tons of student homework data for manual testing purposes
+export const createMockLmsData = (assignmentId, courseId, students, grades) => {
+  const members = [
+    { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    ...students
+  ]
+
+  const context = {
+    id: `mock-lms-course-id-${courseId}`,
+    label: "Mock Course Label",
+    title: "MMock Course Title"
+  }
+  localStorage.setItem(`boiler-context-${courseId}`, JSON.stringify({id: 'randomUrlStrand', context, members}));
+  localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(grades));
+}
+
 
 
 // ===============================================================
 
 
 // fetchAllMembersFromLms(assignmentId)
-export const fetchMembersAndContextFromLms = (assignmentId, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
+export const fetchMembersAndContextFromLms = (courseId, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   if (isMockFailurePossible && isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by MOCKED fetchAllMembersFromLms()")), mockDuration);
   } else {
     // We now take the results we expect from LMS and further message the data to fit our data model format
-    setTimeout(() => resolve(mockMembersAndContextFromLms, mockDuration));
+    let contextData = JSON.parse(localStorage.getItem(`boiler-context-${courseId}`));
+    setTimeout(() => resolve(contextData, mockDuration));
   }
 });
 
@@ -238,3 +277,171 @@ export const mockSendGradeToLMS = (studentId, instructorScore, comment, isMockFa
     });
   }
 });
+
+
+
+export const generateMockMembers = (total)=> {
+  const prefixes = ["", " IInd", " IIIrd", " IV", " V", " VI", " VII", " VIII", " IX", " X", " 11th", " 12th", " 13th", " 14th", " 15th", " 16th", " 17th", " 18th", " 19th", " 20th"];
+  let members = [];
+  let prefixNum = 0;
+  let studentId = 10;
+
+  while(members.length <= total) {
+    const memberSet = testNames.map((n) => {
+      return {
+        id: studentId++,
+        status: "Active",
+        name: `${n.givenName} ${n.familyName}${prefixes[prefixNum]}`,
+        givenName: n.givenName,
+        familyName: `${n.familyName}${prefixes[prefixNum]}`,
+        email: `${n.givenName}.${n.familyName}${prefixes[prefixNum]}@FakeMail.com`,
+        roles: ["Learner"],
+        picture: ""
+      }
+    });
+
+    members = members.concat(memberSet);
+    prefixNum++;
+  }
+
+  members.splice(total);
+  return members;
+}
+
+export const testNames = [
+  {givenName:"Ann", familyName:"Aardvark"},
+  {givenName:"Ava", familyName:"Aardwolf"},
+  {givenName:"Alic", familyName:"Anthill"},
+  {givenName:"Alex", familyName:"Asprin"},
+  {givenName:"Aaron", familyName:"Ascott"},
+  {givenName:"Betsy", familyName:"Bigbonett"},
+  {givenName:"Brook", familyName:"Babbler"},
+  {givenName:"Bob", familyName:"Bobberton"},
+  {givenName:"Ben", familyName:"McBigsy"},
+  {givenName:"Charlotte", familyName:"Chumpchange"},
+  {givenName:"Chuck", familyName:"Chomp"},
+  {givenName:"Carter", familyName:"Chinchilla"},
+  {givenName:"Celene", familyName:"Crockpot"},
+  {givenName:"Carlos", familyName:"VonCapybara"},
+  {givenName:"Chelsea", familyName:"Camelton"},
+  {givenName:"Dena", familyName:"Dingo"},
+  {givenName:"Dan", familyName:"Dartfrog"},
+  {givenName:"Derek", familyName:"Donkeyville"},
+  {givenName:"Delilah", familyName:"Duckbutt"},
+  {givenName:"Emma", familyName:"Ermine"},
+  {givenName:"Ethan", familyName:"Elkson"},
+  {givenName:"Ellen", familyName:"Eggplant"},
+  {givenName:"Edgar", familyName:"VonEgret"},
+  {givenName:"Fran", familyName:"McFurby"},
+  {givenName:"Frank", familyName:"Feretwater"},
+  {givenName:"Felix", familyName:"Fishnet"},
+  {givenName:"Faith", familyName:"Friskybits"},
+  {givenName:"Grace", familyName:"Geckofingers"},
+  {givenName:"Gabe", familyName:"Gopherton"},
+  {givenName:"Gary", familyName:"Gorillaheimer"},
+  {givenName:"Gwen", familyName:"Garglespits"},
+  {givenName:"Harper", familyName:"Humpback"},
+  {givenName:"Henry", familyName:"Hyena"},
+  {givenName:"Helen", familyName:"Howlermonkey"},
+  {givenName:"Hank", familyName:"Hoseblower"},
+  {givenName:"Isabel", familyName:"Inkblot"},
+  {givenName:"Isaac", familyName:"Iguana"},
+  {givenName:"Ivan", familyName:"Impala"},
+  {givenName:"Ivanka", familyName:"Igloo"},
+  {givenName:"Julia", familyName:"Jackrabbit"},
+  {givenName:"Jenny", familyName:"Jellyfish"},
+  {givenName:"Jack", familyName:"Jinglefingers"},
+  {givenName:"Jacob", familyName:"Jamsplatt"},
+  {givenName:"John", familyName:"Jumbocakes"},
+  {givenName:"Jerry", familyName:"Jumpinjax"},
+  {givenName:"Jackelyn", familyName:"Jigglesplits"},
+  {givenName:"Kaylee", familyName:"Krawfish"},
+  {givenName:"Kevin", familyName:"Kookaburra"},
+  {givenName:"Kyle", familyName:"Kangarooster"},
+  {givenName:"Kai", familyName:"Krumblecookie"},
+  {givenName:"Karen", familyName:"Kringeworthy"},
+  {givenName:"Kelly", familyName:"Komodo"},
+  {givenName:"Lillian", familyName:"Limpsalot"},
+  {givenName:"Liam", familyName:"McLemur"},
+  {givenName:"Lester", familyName:"VonLlama"},
+  {givenName:"Lisa", familyName:"Licksaspoon"},
+  {givenName:"Mia", familyName:"Minimarts"},
+  {givenName:"Mason", familyName:"Meerkat"},
+  {givenName:"Mark", familyName:"McMarsupial"},
+  {givenName:"Melissa", familyName:"Mollusk"},
+  {givenName:"Mary", familyName:"Moosebait"},
+  {givenName:"Natalie", familyName:"Newton"},
+  {givenName:"Noah", familyName:"Nipplebinder"},
+  {givenName:"Neil", familyName:"Nashtooth"},
+  {givenName:"Nelly", familyName:"Notnever"},
+  {givenName:"Natasha", familyName:"Narwhal"},
+  {givenName:"Nicki", familyName:"Numbskull"},
+  {givenName:"Olivia", familyName:"Oxbucket"},
+  {givenName:"Oscar", familyName:"Orcapants"},
+  {givenName:"Ollie", familyName:"Ocelot"},
+  {givenName:"Olga", familyName:"Organgrinder"},
+  {givenName:"Pete", familyName:"Plugpuller"},
+  {givenName:"Penny", familyName:"Parkit"},
+  {givenName:"Paul", familyName:"Possumbender"},
+  {givenName:"Parker", familyName:"Puma"},
+  {givenName:"Patricia", familyName:"Pigbits"},
+  {givenName:"Quinn", familyName:"Quickerton"},
+  {givenName:"Quincy", familyName:"VonQuokka"},
+  {givenName:"Riley", familyName:"Rabidbat"},
+  {givenName:"Rob", familyName:"Reefshark"},
+  {givenName:"Ryan", familyName:"Riversquid"},
+  {givenName:"Regina", familyName:"Rat"},
+  {givenName:"Ron", familyName:"Rhinobinder"},
+  {givenName:"Sofia", familyName:"Sheepslap"},
+  {givenName:"Sam", familyName:"Sulkyshark"},
+  {givenName:"Steve", familyName:"Snakefingers"},
+  {givenName:"Sasha", familyName:"Skunkerton"},
+  {givenName:"Svetlana", familyName:"McSamurai"},
+  {givenName:"Stacy", familyName:"Sandflaps"},
+  {givenName:"Stan", familyName:"Spidermonkey"},
+  {givenName:"Taylor", familyName:"Topsyturvy"},
+  {givenName:"Tom", familyName:"Thunderpants"},
+  {givenName:"Trent", familyName:"Trickybits"},
+  {givenName:"Tania", familyName:"Tigershark"},
+  {givenName:"Ungar", familyName:"VonUglyshoe"},
+  {givenName:"Ula", familyName:"Ulala"},
+  {givenName:"Vic", familyName:"Vole"},
+  {givenName:"Victoria", familyName:"Vetslap"},
+  {givenName:"Vincent", familyName:"Vicarious"},
+  {givenName:"Vladimir", familyName:"VonBatlegs"},
+  {givenName:"Wes", familyName:"Wallaby"},
+  {givenName:"Willow", familyName:"Warthog"},
+  {givenName:"William", familyName:"Walrus"},
+  {givenName:"Wendy", familyName:"Weasel"},
+  {givenName:"Ximena", familyName:"Xylophone"},
+  {givenName:"Xavier", familyName:"Xmenthal"},
+  {givenName:"Yusuf", familyName:"Yakbutter"},
+  {givenName:"Yaakov", familyName:"Yamsmasher"},
+  {givenName:"Zoey", familyName:"Zebraparts"},
+  {givenName:"Zach", familyName:"Zestwater"}
+];
+
+export const testComments = [
+  "Wow.",
+  "Amazing.",
+  "So impressive. Really. Like, yeah.",
+  "Quit school. I think you're done.",
+  "Keep trying.",
+  "Perhaps you should stick to gym classes.",
+  "I'm not worthy.",
+  "Why am I teaching? You should be teaching this.",
+  "Pay me extra and I'll give you an A.",
+  "I docked you points because you keep misspelling your own name.",
+  "Awful.",
+  "Painful to read, but brilliant when I stop.",
+  "Don't take this the wrong way, but I'm giving you a passing score.",
+  "Considering that you wrote this, I'm impressed.",
+  "It hurts me to think you're trying your best.",
+  "You are my favorite student and you can do no wrong.",
+  "I feel like an idiot when I read your work. I don't know if you're so brilliant that I can't understand this, or if I'm not smart enough. Because of that, I'm going to give you a passing grade.",
+  "Very average.",
+  "Not the best, not the worst.",
+  "Next time, try using a pen or pencil instead of crayons.",
+  "Don't expect to do well in life.",
+  "When you are rich and famous, please remember that I gave you straight A's.",
+];

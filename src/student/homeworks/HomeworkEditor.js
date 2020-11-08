@@ -31,6 +31,7 @@ function HomeworkEditor(props) {
     delete inputData.homeworkStatus;
 
 		try {
+		  console.log('inputData', inputData);
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (!result) throw new Error ("result from updateHomeworkMutation came back null.");
     } catch (e) {

@@ -8,10 +8,9 @@ export const TEST_INSTRUCTOR_INDEX = 0;
 export const TEST_STUDENT_INDEX = 3;
 
 export const ROLE_TYPES = {
-  instructor: 'Instructor',
-  assistant: 'ASSISTANT',
-  learner: 'Learner',
-  guest: 'GUEST',
+  instructor: 'instructor',
+  learner: 'learner',
+  dev: 'dev'
 }
 export const SORT_BY = {
   name: 'name',
@@ -26,6 +25,7 @@ export const UI_SCREEN_MODES = {
   createAssignment: 'UI_SCREEN_MODES.createAssignment',
   viewAssignment: 'UI_SCREEN_MODES.viewAssignment',
   editAssignment: 'UI_SCREEN_MODES.editAssignment',
+  devUtilityDashboard: 'UI_SCREEN_MODES.devUtilityDashboard',
 }
 
 export const ASSIGNMENT_STATUS_TYPES = {

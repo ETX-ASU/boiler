@@ -112,34 +112,6 @@ function AssignmentViewer(props) {
     }
   }
 
-  // async function fetchScores() {
-  //   console.log('----------------- fetch scores');
-  //   setIsLoadingScores(true);
-  //   try {
-  //     const grades = await fetchAllGradesFromLMS();
-  //     const allStudentGradesData = students.reduce((acc, s) => {
-  //       let studentGradeData = Object.assign({}, grades.find(g => g.studentId === s.id));
-  //       if (!studentGradeData) studentGradeData = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.fullyGraded, comment:'' };
-  //       acc[s.id] = studentGradeData;
-  //       return acc;
-  //     }, {});
-  //     // const updatedStudents = students.map(s => {
-  //     //   let gradingData = Object.assign({}, grades.find(g => g.studentId === s.id));
-  //     //   if (!gradingData) gradingData = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.fullyGraded, comment:'' };
-  //     //
-  //     //   return Object.assign({}, s, {homework:
-  //     //     Object.assign({}, s.homework, {comment: gradingData.comment, instructorScore: gradingData.instructorScore})},
-  //     //     {gradingProgress: gradingData.gradingProgress}
-  //     //   );
-  //     // })
-  //
-  //     // const tempCohortData = {students: students.filter(s => cohorts[0].studentIds.includes(s.id))};
-  //     await dispatch(setHomeworkGradingData(allStudentGradesData));
-  //   } catch (error) {
-  //     console.warn(`=====> ERROR when fetching scores`, error)
-  //   }
-  // }
-
   function handleRefreshAfterGradeSubmission() {
     console.log('-----------> handleRefreshAfterGradeSubmission()')
   }
@@ -174,7 +146,11 @@ function AssignmentViewer(props) {
 
 	return (
 		<Container className="assignment-viewer">
-      {!reviewedStudentId && students?.length &&
+      <Row className='xbg-light'>
+        <Col><h2>Sportzball</h2></Col>
+        <Col className='col-3 text-right'><Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button></Col>
+      </Row>
+      {!reviewedStudentId && (students?.length > 0) &&
       <Fragment>
         <Row className='mt-2 mb-5'>
           <Col className='text-left'>
@@ -186,9 +162,9 @@ function AssignmentViewer(props) {
               Hide identities & randomize
             </label>
           </Col>
-          <Col className='text-right'>
-            <Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button>
-          </Col>
+          {/*<Col className='text-right'>*/}
+          {/*  <Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button>*/}
+          {/*</Col>*/}
         </Row>
         <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} />
       </Fragment>

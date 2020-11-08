@@ -11,16 +11,15 @@ import "./assignments.scss";
 
 function AssignmentEditor(props) {
 	const dispatch = useDispatch();
-	const [formData, setFormData] = useState(useSelector(state => state.assignment));
+	const [formData, setFormData] = useState(useSelector(state => state.app.assignment));
 
+	console.log("form data is now", formData);
 
 	async function handleUpdateButton() {
 		// TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
 		if (!formData.title || !formData.summary) return;
 
 		const inputData = Object.assign({}, formData, {
-			startDate: moment(formData.startDate).valueOf(),
-			dueDate: moment(formData.dueDate).valueOf(),
 			lockOnDate: (formData.isLockedOnDate) ? moment(formData.lockOnDate).valueOf() : null
 		});
 		delete inputData.createdAt;
@@ -42,7 +41,6 @@ function AssignmentEditor(props) {
 
 		let newQuestions = quizQuestions.slice();
 		newQuestions.push({
-			questionPosition: 0,
 			questionText: `Question #${quizQuestions.length+1}`,
 			answerOptions: ['Answer A'],
 			correctAnswerIndex: 0,
@@ -156,40 +154,10 @@ function AssignmentEditor(props) {
 				</div>
 
 				<div className="input-bar lumped-with-next">
-					<label>Start Date:</label>
-					<input type="date" required="required" min={moment(formData.startDate).format('YYYY-MM-DD')}
-								 value={moment(formData.startDate).format('YYYY-MM-DD')}
-								 onChange={e => setFormData({...formData, 'startDate': e.target.value})}/>
-				</div>
-
-				<div className="input-bar">
-					<label>Due Date:</label>
-					<input type="date" required="required" min={moment(formData.dueDate).format('YYYY-MM-DD')}
-								 value={moment(formData.dueDate).format('YYYY-MM-DD')}
-								 onChange={e => setFormData({...formData, 'dueDate': e.target.value})}/>
-				</div>
-
-				<div className="input-bar lumped-with-next">
 					<label>Locked after student submission?</label>
 					<input type={'checkbox'}
 								 onChange={e => setFormData({...formData, 'isLockedOnSubmission': e.target.value})}
 								 defaultChecked={formData.isLockedOnSubmission}/>
-				</div>
-
-				<div className="input-bar lumped-with-next">
-					<label>Prevent submission after a specific date?</label>
-					<input type={'checkbox'} onChange={e => {
-						console.log(`target val = ${e.target.checked}`, formData);
-						setFormData({...formData, 'isLockedOnDate': Boolean(e.target.checked)});
-					}}
-								 defaultChecked={formData.isLockedOnDate}/>
-				</div>
-
-				<div className={formData.isLockedOnDate ? "input-bar" : "input-bar hidden"}>
-					<label>Date to block submissions on.</label>
-					<input type="date" required="required" min={moment(formData.lockOnDate).format('YYYY-MM-DD')}
-								 value={moment(formData.lockOnDate).format('YYYY-MM-DD')}
-								 onChange={e => setFormData({...formData, 'lockOnDate': e.target.value})}/>
 				</div>
 
 				<div>
