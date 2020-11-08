@@ -16,5 +16,23 @@
         "boiler5da431b2": {}
       }
     }
+  },
+  "jimd": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boiler-jimd-132246-authRole",
+      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-jimd-132246-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-jimd-132246-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-boiler-jimd-132246-deployment",
+      "UnauthRoleName": "amplify-boiler-jimd-132246-unauthRole",
+      "StackName": "amplify-boiler-jimd-132246",
+      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-jimd-132246/2b1da6c0-2200-11eb-a795-0a64bf4f993b",
+      "AmplifyAppId": "dyl4ur5zvn9kt"
+    },
+    "categories": {
+      "auth": {
+        "boiler5da431b2": {}
+      }
+    }
   }
 }
