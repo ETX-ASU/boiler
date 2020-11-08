@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@asu-etx/rl-amplify-client-lib": "^0.0.2",
-    "@asu-etx/rl-server-lib": "^0.6.24",
+    "@asu-etx/rl-amplify-client-lib": "0.0.3",
     "@asu-etx/rl-shared": "^0.6.15",
     "@aws-amplify/ui-react": "^0.2.15",
     "@testing-library/jest-dom": "^4.2.4",

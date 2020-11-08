@@ -15,7 +15,7 @@ import {fetchStudentGradeFromLMS} from "../utils/mockRingLeaderAPIs";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
-
+import { hasValidSession } from '../lti/ValidateSessionService';
 
 function StudentDashboard() {
 	const dispatch = useDispatch();
@@ -76,4 +76,5 @@ function StudentDashboard() {
 	);
 }
 
-export default withAuthenticator(StudentDashboard);
+export default hasValidSession() ? StudentDashboard : withAuthenticator(StudentDashboard);
+
