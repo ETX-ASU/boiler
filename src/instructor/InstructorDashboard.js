@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {withAuthenticator} from '@aws-amplify/ui-react';
-import { hasValidSession } from '../lti/ValidateSessionService';
+import { hasValidSession } from '@asu-etx/rl-client-lib';
 import {useDispatch, useSelector} from "react-redux";
 import {UI_SCREEN_MODES} from "../app/constants";
 import AssignmentViewer from "./assignments/AssignmentViewer";
