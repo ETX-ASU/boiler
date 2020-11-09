@@ -11,8 +11,11 @@ const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpoints"));
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
+const aws_cache = __importDefault(require("aws-amplify"));
 const rl_shared_1 = require("@asu-etx/rl-shared");
 __importDefault(require("./environment"));
+
+
 const environment_1 = process.env;
 
 /*========================== LOG ALL REQUESTS =========================*/
@@ -67,11 +70,12 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 // Instructor
 function getParameters(req, role) {
     
+    
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    const idToken = JSON.stringify(platform.idToken);
+    aws_cache.Cache.setItem(userId+courseId, req.session);
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
@@ -82,13 +86,14 @@ function getParameters(req, role) {
 
     //example const params = `userId=user-id-uncle-bob&courseId=the-course-id-123&resourceId=4c43a1b5-e5db-4b3e-ae32-a9405927e472`
     if(resourceLinkId !== courseId)
-        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}&platform=${idToken}`
-    return `?role=${role}&userId=${userId}&courseId=${courseId}&platform=${idToken}`
+        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}`
+    return `?role=${role}&userId=${userId}&courseId=${courseId}`
 
 }
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
     const params = getParameters(req, "instructor");
+    
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student

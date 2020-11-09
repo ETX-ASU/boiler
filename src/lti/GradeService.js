@@ -15,7 +15,7 @@ const submitGrade = async (params) => {
   const data = {
     params: params
   };
-  const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE, data);
+  const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE + window.location.search, data);
   logger.debug(`submitGrade: ${results}`);
   return results;
 };
@@ -26,12 +26,12 @@ const submitInstructorGrade = async (
   const data = {
     params: params
   };
-  const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE, data);
+  const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE + window.location.search, data);
   return results;
 };
 
 const getGrades = async (assignmentId) => {
-  const grades = await API.get(LTI_API_NAME, GET_GRADES, {
+  const grades = await API.get(LTI_API_NAME, GET_GRADES + window.location.search, {
     lineItemId: assignmentId
   });
   return grades;
