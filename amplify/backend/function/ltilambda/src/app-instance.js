@@ -71,6 +71,7 @@ function getParameters(req, role) {
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
+    const tokenId = JSON.stringify(platform.tokenId);
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
@@ -81,14 +82,13 @@ function getParameters(req, role) {
 
     //example const params = `userId=user-id-uncle-bob&courseId=the-course-id-123&resourceId=4c43a1b5-e5db-4b3e-ae32-a9405927e472`
     if(resourceLinkId !== courseId)
-        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}`
-    return `?role=${role}&userId=${userId}&courseId=${courseId}`
+        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}&platform=${tokenId}`
+    return `?role=${role}&userId=${userId}&courseId=${courseId}&platform=${tokenId}`
 
 }
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
     const params = getParameters(req, "instructor");
-    res.session.platform = req.session.platform;
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student

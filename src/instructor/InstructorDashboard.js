@@ -30,8 +30,7 @@ function InstructorDashboard() {
 			</Row>
 		</Container>
 	);
-}
-const isValid = hasValidSession();
-export default isValid ? InstructorDashboard : withAuthenticator(InstructorDashboard);
+} 
+export default hasValidSession() ? InstructorDashboard : withAuthenticator(InstructorDashboard);
 
 
