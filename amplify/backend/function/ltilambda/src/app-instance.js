@@ -88,6 +88,7 @@ function getParameters(req, role) {
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
     const params = getParameters(req, "instructor");
+    res.session.platform = req.session.platform;
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student
