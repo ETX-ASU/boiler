@@ -15,7 +15,8 @@ import {fetchStudentGradeFromLMS} from "../utils/mockRingLeaderAPIs";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
-import { hasValidSession } from '@asu-etx/rl-client-lib';
+//import { hasValidSession } from '@asu-etx/rl-client-lib';
+import { hasValidSession } from '../lti/services/ValidateSessionService';
 
 function StudentDashboard() {
 	const dispatch = useDispatch();
