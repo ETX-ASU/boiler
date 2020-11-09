@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "aws-serverless-express": "^3.3.5",
-    "@asu-etx/rl-server-lib": "^0.6.29",
+    "@asu-etx/rl-server-lib": "^0.6.30",
     "@asu-etx/rl-shared": "^0.6.18",
     "body-parser": "^1.17.1",
     "dotenv-expand": "^5.1.0",
