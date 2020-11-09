@@ -7,7 +7,7 @@ import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
 //import { hasValidSession } from '@asu-etx/rl-client-lib';
-import { hasValidSession } from '../lti/services/ValidateSessionService';
+import { hasValidSession } from '../lti/ValidateSessionService';
 
 
 

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.scss';
 import {withAuthenticator} from '@aws-amplify/ui-react';
 //import { hasValidSession } from '@asu-etx/rl-client-lib';
-import { hasValidSession } from '../lti/services/ValidateSessionService';
+import { hasValidSession } from '../lti/ValidateSessionService';
 import {useDispatch, useSelector} from "react-redux";
 
 import {

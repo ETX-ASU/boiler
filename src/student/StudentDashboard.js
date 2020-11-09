@@ -16,7 +16,7 @@ import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
 //import { hasValidSession } from '@asu-etx/rl-client-lib';
-import { hasValidSession } from '../lti/services/ValidateSessionService';
+import { hasValidSession } from '../lti/ValidateSessionService';
 
 function StudentDashboard() {
 	const dispatch = useDispatch();

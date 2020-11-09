@@ -7,7 +7,7 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
 //import { hasValidSession } from '@asu-etx/rl-client-lib';
-import { hasValidSession } from '../lti/services/ValidateSessionService';
+import { hasValidSession } from '../lti/ValidateSessionService';
 
 function InstructorDashboard() {
 	const dispatch = useDispatch();
