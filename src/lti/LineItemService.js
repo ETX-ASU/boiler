@@ -1,7 +1,9 @@
 import API from '@aws-amplify/api';
+import { GET_ASSIGNMENT_ENDPOINT, DELETE_LINE_ITEM, LTI_API_NAME, logger } from "@asu-etx/rl-shared";
+import aws_exports from '../aws-exports';
 API.configure();
-import { GET_ASSIGNMENT_ENDPOINT, DELETE_LINE_ITEM, LTI_API_NAME, LineItem, logger } from "@asu-etx/rl-shared";
 
+API.configure(aws_exports);
 const getLineItems = async () => {
   logger.debug(`hitting endpoint GET:${GET_ASSIGNMENT_ENDPOINT}`);
   const lineItems = await API.get(LTI_API_NAME, GET_ASSIGNMENT_ENDPOINT);

@@ -3,12 +3,12 @@ import {
   PUT_STUDENT_GRADE,
   GET_GRADES,
   logger,
-  SubmitGradeParams,
-  InstructorSubmitGradeParams,
   LTI_API_NAME
 } from "@asu-etx/rl-shared";
 
-API.configure();
+import aws_exports from '../aws-exports';
+
+API.configure(aws_exports);
 
 
 const submitGrade = async (params) => {

@@ -1,7 +1,8 @@
 import API from "@aws-amplify/api";
 import { LTI_API_NAME, ROSTER_ENDPOINT, GET_UNASSIGNED_STUDENTS_ENDPOINT, GET_ASSIGNED_STUDENTS_ENDPOINT, logger, Student } from "@asu-etx/rl-shared";
+import aws_exports from '../aws-exports';
 
-API.configure();
+API.configure(aws_exports);
 
 
 const getUsers = async (role)  => {
