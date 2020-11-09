@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import {mockAssignments} from '../../../utils/mockRingLeaderAPIs';
+import {mockAssignments} from '../../../utils/MockRingLeader';
 import AssignmentsNavPane from './AssignmentsNavPane';
 import {Provider} from "react-redux";
 import store from "../../../app/combinedStore";

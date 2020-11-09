@@ -15,7 +15,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
-import {fetchAllGradesFromLMS} from "../../utils/mockRingLeaderAPIs";
+import {fetchAllGrades} from "../../utils/RingLeader";
 import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {useStudents} from "../../app/store/AppSelectors";
@@ -105,7 +105,7 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      const grades = await fetchAllGradesFromLMS(assignment.id);
+      const grades = await fetchAllGrades(assignment.id);
       await dispatch(setGradesData(grades));
     } catch (error) {
       notifyUserOfError(error);

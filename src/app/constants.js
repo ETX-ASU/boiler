@@ -1,11 +1,6 @@
 export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 export const APP_VERSION_NUM = '0.0.2';
 
-// using mock fetchActiveUserData function.
-// Use 0,1 for instructors or
-// 2,3,4 for students.
-export const TEST_INSTRUCTOR_INDEX = 0;
-export const TEST_STUDENT_INDEX = 3;
 
 export const ROLE_TYPES = {
   instructor: 'instructor',

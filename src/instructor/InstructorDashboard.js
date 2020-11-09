@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {withAuthenticator} from '@aws-amplify/ui-react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {UI_SCREEN_MODES} from "../app/constants";
 import AssignmentViewer from "./assignments/AssignmentViewer";
 import AssignmentCreator from "./assignments/AssignmentCreator";
@@ -9,7 +9,6 @@ import {Col, Container, Row} from "react-bootstrap";
 
 
 function InstructorDashboard() {
-	const dispatch = useDispatch();
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
 
 	return (

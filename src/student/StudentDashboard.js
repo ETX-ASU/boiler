@@ -8,10 +8,10 @@ import {HOMEWORK_PROGRESS, UI_SCREEN_MODES, EMPTY_HOMEWORK} from "../app/constan
 import {Col, Container, Row} from "react-bootstrap";
 import {getHomework, listHomeworks} from "../graphql/queries";
 import {createHomework} from "../graphql/mutations";
-import {setActiveUiScreenMode, setGradesData, setUserHomework} from "../app/store/appReducer";
+import {setActiveUiScreenMode, setUserHomework} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
 import HomeworkEditor from "./homeworks/HomeworkEditor";
-import {mockGetStudentGrade} from "../utils/mockRingLeaderAPIs";
+import {mockGetStudentGrade} from "../utils/MockRingLeader";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
@@ -52,7 +52,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-			console.warn(`=====> ERROR when fetching homeworks`, error)
+      notifyUserOfError(`=====> ERROR when fetching homeworks ${error}`);
 		}
 	}
 

@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import "./GradingBar.css";
 import {Container, Col, Row, Button} from 'react-bootstrap';
-import {toggleHideStudentIdentity, toggleSkipGradedStudents} from "./store/gradingBarReducer";
 import {HOMEWORK_PROGRESS, SORT_BY} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
-import {mockInstructorSendGradeToLMS} from "../../../utils/mockRingLeader";
 import {notifyUserOfError} from "../../../utils/ErrorHandling";
+import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
 
 
 function GradingBar(props) {
@@ -67,7 +66,7 @@ function GradingBar(props) {
   }
 
   async function handleSubmitScore() {
-    const lmsResult = await mockInstructorSendGradeToLMS({
+    const lmsResult = await sendInstructorGradeToLMS({
       assignmentId: assignment.id,
       studentId: reviewedStudent.id,
       score,

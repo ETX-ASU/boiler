@@ -22,14 +22,14 @@ import {
   mockGetGrades,
   mockGetStudentGrade,
   mockInstructorSendGradeToLMS, mockAutoSendGradeToLMS
-} from "./mockRingLeader";
+} from "./MockRingLeader";
 
 
 
 // TODO: The API needs to use the object names I have provided in the demo objects below
 /**
  * Fetch students from the LMS that are in this course.
- * @param role - can be: null, "Learner", "Instructor"
+ * @param role - can be: null, "learner", "instructor"
  * @returns array of all members of the course of the given role type. No role type returns all members.
  *
  * User data will look as follows:
@@ -148,8 +148,8 @@ export function fetchAllGrades(assignmentId) {
  *   gradingProgress: "FullyGraded" <-- optional and currently ignored
  * }
  */
-export function sendInstructorGradeToLMS(assignmentId, gradeData) {
-  return (window.isDevMode) ? mockInstructorSendGradeToLMS(assignmentId, gradeData) : realInstructorSubmitGrade(assignmentId, gradeData);
+export function sendInstructorGradeToLMS(gradeData) {
+  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(gradeData);
 }
 
 
