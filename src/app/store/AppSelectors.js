@@ -16,7 +16,7 @@ export function useStudents() {
 
     const enhancedDataStudents = studentsOnly.map(s => {
       let gradeDataForStudent = Object.assign({}, grades.find(g => g.studentId === s.id));
-      if (!gradeDataForStudent) gradeDataForStudent = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+      if (!gradeDataForStudent) gradeDataForStudent = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
       if (!homeworkForStudent) homeworkForStudent = Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(assignment.quizQuestions.length).fill[-1]});

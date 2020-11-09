@@ -15,6 +15,7 @@ import DevUtilityDashboard from "./devUtility/DevUtilityDashboard";
 
 // THIS SHOULD BE SET TO FALSE FOR LIVE PRODUCTION VERSION
 window.isDevMode = true;
+window.isMockingFailures = false;
 
 Amplify.configure(config);
 

@@ -9,12 +9,6 @@ import {
 // Results from attempt to fetches all members (students & instructors) associated with this COURSE
 // This probably needs to instead by changed to provide the ASSIGNMENT context
 const mockMembersAndContextFromLms = {
-  id: "https://unicon.instructure.com/api/lti/courses/786/names_and_roles?role=http%3A%2F%2Fpurl.imsglobal.org%2Fvocab%2Flis%2Fv2%2Fmembership%23Learner",
-  context: {
-    id: "lms-course-id-abc1234",
-    label: "Fake Course Label",
-    title: "Fake Course Title"
-  },
   members: [
     { id:"user-id-uncle-bob", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["Instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     { id:"user-id-freddy-mcfreaky", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@yahoo.com", roles: ["Instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
@@ -160,7 +154,7 @@ export const mockAssignments = [
 
 
 const getAsyncSpecs = () => {
-	return ({isMockFailureResult: Boolean((Math.random() * 20) < 1), mockDuration: (Math.random() * 3000) + 250})
+	return ({isMockFailureResult: Boolean((window.isMockingFailures && Math.random() * 20) < 1), mockDuration: (Math.random() * 3000) + 250})
 }
 
 
@@ -176,16 +170,15 @@ const getAsyncSpecs = () => {
 
 // run at start if window.isDevMode = true. If no user instructor 01 or 02 user exists, create them in Mock LMS local storage
 export const initMockUser = (courseId) => {
-  let initContext = JSON.parse(localStorage.getItem(`boiler-context-${courseId}`));
+  let initContext = JSON.parse(localStorage.getItem(`boiler-course-users-${courseId}`));
   let instructor1 = initContext?.members.find(m => m.id === '01');
   let instructor2 = initContext?.members.find(m => m.id === '02');
   if (instructor1 && instructor2) return;
 
-  const context = {id: `mock-lms-course-id-${courseId}`, label: "Mock Course Label", title: "MMock Course Title"}
-  localStorage.setItem(`boiler-context-${courseId}`, JSON.stringify({id: 'randomUrlStrand', context, members:[
+  localStorage.setItem(`boiler-course-users-${courseId}`, JSON.stringify([
     { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"}
-  ]}));
+  ]));
 }
 
 // this is used via the DevUtilityDashboard to generate tons of student homework data for manual testing purposes
@@ -196,13 +189,19 @@ export const createMockLmsData = (assignmentId, courseId, students, grades) => {
     ...students
   ]
 
-  const context = {
-    id: `mock-lms-course-id-${courseId}`,
-    label: "Mock Course Label",
-    title: "MMock Course Title"
-  }
-  localStorage.setItem(`boiler-context-${courseId}`, JSON.stringify({id: 'randomUrlStrand', context, members}));
+  localStorage.setItem(`boiler-course-users-${courseId}`, JSON.stringify(members));
   localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(grades));
+}
+
+// used via DevUtilityDashboard to erase all student and homework data associated with this assignment
+export const deleteMockLmsData = (assignmentId, courseId) => {
+  const members = [
+    { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+  ]
+
+  localStorage.setItem(`boiler-course-users-${courseId}`, JSON.stringify({id: 'randomUrlStrand', members}));
+  localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify([]));
 }
 
 
@@ -210,18 +209,7 @@ export const createMockLmsData = (assignmentId, courseId, students, grades) => {
 // ===============================================================
 
 
-// fetchAllMembersFromLms(assignmentId)
-export const fetchMembersAndContextFromLms = (courseId, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
-  const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
-  if (isMockFailurePossible && isMockFailureResult) {
-    setTimeout(() => reject(new Error("====> MOCK ERROR triggered by MOCKED fetchAllMembersFromLms()")), mockDuration);
-  } else {
-    // We now take the results we expect from LMS and further message the data to fit our data model format
-    let contextData = JSON.parse(localStorage.getItem(`boiler-context-${courseId}`));
-    setTimeout(() => resolve(contextData, mockDuration));
-  }
-});
 
 
 export const fetchAllGradesFromLMS = (assignmentId, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
@@ -239,44 +227,7 @@ export const fetchAllGradesFromLMS = (assignmentId, isMockFailurePossible = fals
 
 
 
-export const fetchStudentGradeFromLMS = (assignmentId, studentId, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
-  const {isMockFailureResult, mockDuration} = getAsyncSpecs();
-  let userGrades = JSON.parse(localStorage.getItem('mockScoresFromLms'));
-  const theGrade = userGrades.find(g => g.studentId === studentId);
 
-  if (isMockFailurePossible && isMockFailureResult) {
-    setTimeout(() => reject(new Error("====> MOCK ERROR triggered by fetchStudentGradeFromLMS()")), mockDuration);
-  } else if (!theGrade) {
-    setTimeout(() => resolve(null, mockDuration));
-  } else {
-    setTimeout(() => resolve(theGrade, mockDuration));
-  }
-});
-
-
-export const mockSendGradeToLMS = (studentId, instructorScore, comment, isMockFailurePossible = false) => new Promise(function (resolve, reject) {
-  const {isMockFailureResult, mockDuration} = getAsyncSpecs();
-
-  if (isMockFailurePossible && isMockFailureResult) {
-    setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockSendGradeToLMS()")), mockDuration);
-  } else {
-    setTimeout(() => {
-      let userGrades = JSON.parse(localStorage.getItem('mockScoresFromLms'));
-      let gradeIndex = userGrades.findIndex(g => g.studentId === studentId);
-      if (gradeIndex > -1) {
-        userGrades[gradeIndex].instructorScore = instructorScore;
-        userGrades[gradeIndex].comment = comment;
-        userGrades[gradeIndex].gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-      } else {
-        userGrades.push({studentId, instructorScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
-      }
-      console.log(">>> SET userGrades from LMS: ", userGrades)
-      localStorage.setItem('mockScoresFromLms', JSON.stringify(userGrades));
-
-      resolve(true, mockDuration)
-    });
-  }
-});
 
 
 

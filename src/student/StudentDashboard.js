@@ -11,7 +11,7 @@ import {createHomework} from "../graphql/mutations";
 import {setActiveUiScreenMode, setGradesData, setUserHomework} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
 import HomeworkEditor from "./homeworks/HomeworkEditor";
-import {fetchStudentGradeFromLMS} from "../utils/mockRingLeaderAPIs";
+import {mockGetStudentGrade} from "../utils/mockRingLeaderAPIs";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
@@ -37,12 +37,12 @@ function StudentDashboard() {
 			if (!fetchHomeworkResult.data.listHomeworks.items.length) {
 			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {id: uuid(), studentOwnerId: activeUser.id, assignmentId:assignment.id, quizAnswers:Array(assignment.quizQuestions.length).fill(-1)});
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
-        await dispatch(setUserHomework({...resultHomework.data.createHomework, instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' }, UI_SCREEN_MODES.editHomework));
+        await dispatch(setUserHomework({...resultHomework.data.createHomework, score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' }, UI_SCREEN_MODES.editHomework));
       } else {
 			  const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
 			  const theHomework = resultHomework.data.getHomework;
-        let scoreData = await fetchStudentGradeFromLMS(assignment.id, activeUser.id);
-        if (!scoreData) scoreData = {instructorScore:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+        let scoreData = await mockGetStudentGrade(assignment.id, activeUser.id);
+        if (!scoreData) scoreData = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);
         await setHomework(theHomework);

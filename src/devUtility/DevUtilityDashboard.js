@@ -3,19 +3,21 @@ import {API, graphqlOperation} from 'aws-amplify';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import moment from "moment";
-import {testComments, generateMockMembers, createMockLmsData} from "../utils/mockRingLeaderAPIs";
+import {testComments, generateMockMembers, createMockLmsData, deleteMockLmsData} from "../utils/mockRingLeaderAPIs";
 import {HOMEWORK_PROGRESS, UI_SCREEN_MODES} from "../app/constants";
 import { v4 as uuid } from "uuid";
 import {shuffle} from "../utils/shuffle";
 import {calcAutoScore} from "../utils/homeworkUtils";
-import {updateHomework as updateHomeworkMutation} from "../graphql/mutations";
+import {createHomework, deleteHomework} from "../graphql/mutations";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {notifyUserOfError} from "../utils/ErrorHandling";
+import {listHomeworks} from "../graphql/queries";
 
 
 
 function DevUtilityDashboard(props) {
   const assignment = useSelector(state => state.app.assignment);
+  const activeUser = useSelector(state => state.app.activeUser);
 
   const rand = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const generateRandomClassData = () => {
@@ -28,14 +30,15 @@ function DevUtilityDashboard(props) {
     let {numInProgress, numSubmitted, numNotBegun, numGraded} = formData;
     const totalStudents = numInProgress + numSubmitted + numGraded + numNotBegun;
 
-    let progressStats = shuffle([
+    const progressStats = shuffle([
       ...Array(numNotBegun).fill(HOMEWORK_PROGRESS.notBegun),
       ...Array(numInProgress).fill(HOMEWORK_PROGRESS.inProgress),
       ...Array(numSubmitted).fill(HOMEWORK_PROGRESS.submitted),
       ...Array(numGraded).fill(HOMEWORK_PROGRESS.fullyGraded),
     ]);
 
-    let mockStudents = generateMockMembers(totalStudents);
+    const mockStudents = generateMockMembers(totalStudents);
+
     const mockHomeworks = mockStudents.map((s, i) => {
       const progress = progressStats[i];
       let beganOnDate = 0;
@@ -63,41 +66,52 @@ function DevUtilityDashboard(props) {
     })
 
     const mockGrades = mockHomeworks.map((h, i) => {
-      let instructorScore = (progressStats[i] !== HOMEWORK_PROGRESS.fullyGraded) ? 0 : calcAutoScore(assignment, h);
+      let score = (progressStats[i] !== HOMEWORK_PROGRESS.fullyGraded) ? 0 : calcAutoScore(assignment, h);
       let comment = (progressStats[i] === HOMEWORK_PROGRESS.fullyGraded && !rand(0,3)) ? testComments[rand(0, testComments.length-1)] : '';
       let gradingProgress = (progressStats[i] !== HOMEWORK_PROGRESS.fullyGraded) ? HOMEWORK_PROGRESS.notBegun : HOMEWORK_PROGRESS.fullyGraded;
-      return ({ studentId:h.studentOwnerId, instructorScore, gradingProgress, comment })
+      return ({ studentId:h.studentOwnerId, score, gradingProgress, comment })
     })
 
+    const dbHomeworks = mockHomeworks.filter(h => h.beganOnDate);
+    console.log(`-----> dbHomeworks`, dbHomeworks);
 
+    let results;
     try {
-      const inputData = mockHomeworks[0];
-      console.log("mockInputData ", mockHomeworks[0]);
-
-      const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
-      if (!result) throw new Error ("result from updateHomeworkMutation came back null.");
-      console.log(`-----> results`, result);
-      // await mockHomeworks.map(async h => await API.graphql({query: updateHomeworkMutation, variables: {input: h}}));
-      // results = await Promise.all(mockHomeworks.map(h => API.graphql({query: updateHomeworkMutation, variables: {input: h}})));
-      createMockLmsData(assignment.id,props.courseId, mockStudents, mockGrades);
+      results = await Promise.all(dbHomeworks.map(h => API.graphql({query: createHomework, variables: {input: h}})));
+      createMockLmsData(activeUser.courseId, assignment.id, mockStudents, mockGrades);
     } catch (e) {
       notifyUserOfError(e);
     }
-    // console.log(`-----> mockStudents`, mockStudents);
-    console.log(`-----> mockHomeworks`, mockHomeworks);
-    // console.log(`-----> mockGrades`, mockGrades);
+    console.log(`-----> results`, results);
     // dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
   }
 
+  async function handleDeleteStudents() {
+    deleteMockLmsData(assignment.id, props.courseId);
+    console.log(`students and grade data deleted for assignment: ${assignment.id}`);
+  }
 
+  async function handleDeleteHomeworks() {
+    let results;
+    try {
+      const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {assignmentId: {eq:assignment.id}}}));
+      if (!fetchHomeworkResult.data.listHomeworks.items.length) return;
+      results = await Promise.all(fetchHomeworkResult.data.listHomeworks.items.map(h => API.graphql({query: deleteHomework, variables: {input: {id: h.id}}})));
+      console.log(`homeworks deleted: `, results);
+    } catch (e) {
+      notifyUserOfError(e);
+    }
+  }
 
 
 
 	return (
     <Container className='student-dashboard dashboard bg-white rounded h-100 m-4 p-4'>
       <form>
-        <Row>
-          <Col><h3>Generate Homework Results for Assignment</h3></Col>
+
+        <Row className='xbg-light'>
+          <Col><h3>Generate Students & Homework</h3></Col>
+          <Col><Button onClick={handleSubmitButton}>Generate</Button></Col>
         </Row>
         <Row>
           <Col>
@@ -126,8 +140,14 @@ function DevUtilityDashboard(props) {
           </Col>
         </Row>
         <Row className='pt-4 pl-2 pr-2'>
-          <Button onClick={handleSubmitButton}>Generate</Button>
         </Row>
+
+        <Row className='xbg-light'>
+          <Col><h3>Clear Students & Homework</h3></Col>
+          <Col><Button onClick={handleDeleteHomeworks}>Delete Homeworks</Button></Col>
+          <Col><Button onClick={handleDeleteStudents}>Delete Students</Button></Col>
+        </Row>
+
       </form>
     </Container>
 	);

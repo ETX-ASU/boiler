@@ -5,7 +5,7 @@ import {Container, Col, Row, Button} from 'react-bootstrap';
 import {toggleHideStudentIdentity, toggleSkipGradedStudents} from "./store/gradingBarReducer";
 import {HOMEWORK_PROGRESS, SORT_BY} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
-import {mockSendGradeToLMS as sendGradeToLMS} from "../../../utils/mockRingLeaderAPIs";
+import {mockInstructorSendGradeToLMS} from "../../../utils/mockRingLeader";
 import {notifyUserOfError} from "../../../utils/ErrorHandling";
 
 
@@ -21,9 +21,14 @@ function GradingBar(props) {
   const [numGradedSoFar, setNumGradedSoFar] = useState(0);
 
   useEffect(() => {
-    let tempStudents = students.map(s => ({id:s.id, name:s.name, randomOrderNum: s.randomOrderNum, homeworkStatus:s.homework.progress}))
+    let tempStudents = students.map(s => ({
+      id: s.id,
+      name: s.name,
+      randomOrderNum: s.randomOrderNum,
+      homeworkStatus: s.homework.progress
+    }))
 
-    switch(sortMode) {
+    switch (sortMode) {
       case SORT_BY.name:
         tempStudents.sort((a, b) => a.name.localeCompare(b.name));
         setReviewQueue(tempStudents);
@@ -41,15 +46,15 @@ function GradingBar(props) {
   }, [sortMode, students, reviewedStudent]);
 
   function calcShownScore(homework) {
-    if (homework.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return homework.instructorScore;
+    if (homework.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return homework.score;
     return (homework.autoScore) ? homework.autoScore : 0;
   }
 
-	const navToPrev = () => {
-	  let curIndex = reviewQueue.findIndex(s => s.id === reviewedStudent.id);
-	  if (--curIndex < 0) curIndex = reviewQueue.length-1;
+  const navToPrev = () => {
+    let curIndex = reviewQueue.findIndex(s => s.id === reviewedStudent.id);
+    if (--curIndex < 0) curIndex = reviewQueue.length - 1;
     dispatch(setCurrentlyReviewedStudentId(reviewQueue[curIndex].id));
-	}
+  }
 
   const navToNext = () => {
     let curIndex = reviewQueue.findIndex(s => s.id === reviewedStudent.id);
@@ -62,16 +67,22 @@ function GradingBar(props) {
   }
 
   async function handleSubmitScore() {
-    const lmsResult = await sendGradeToLMS(reviewedStudent.id, score, '');
+    const lmsResult = await mockInstructorSendGradeToLMS({
+      assignmentId: assignment.id,
+      studentId: reviewedStudent.id,
+      score,
+      comment: '',
+      progress: HOMEWORK_PROGRESS.fullyGraded
+    });
     if (!lmsResult) notifyUserOfError('Notify user there was an error posting the grade for this reviewedStudent\'s homework.')
   }
 
-	return (
-		<Container className='p-0 m-0 mt-4 mb-4 login-bar bg-white rounded xt-med xtext-med align-middle'>
-			<Row className='p-0 xbg-light border-top'>
-				<Col className='col-3 text-left'>
+  return (
+    <Container className='p-0 m-0 mt-4 mb-4 login-bar bg-white rounded xt-med xtext-med align-middle'>
+      <Row className='p-0 xbg-light border-top'>
+        <Col className='col-3 text-left'>
           <label>% Work Completed</label>
-				</Col>
+        </Col>
         <Col className='col-3 text-left'>
           <label>Auto Score</label>
         </Col>
@@ -81,20 +92,21 @@ function GradingBar(props) {
         <Col className='col-3 text-right'>
           <label>{`${numGradedSoFar} of 12 Graded`}</label>
         </Col>
-			</Row>
-      <Row className='pt-2 pb-2 rounded-bottom grade-bar-bottom-row' >
+      </Row>
+      <Row className='pt-2 pb-2 rounded-bottom grade-bar-bottom-row'>
         <Col className='col-3 text-left'>
           <span className='stat'>{`${reviewedStudent.percentCompleted}%`}</span>
         </Col>
         <Col className='col-3 text-left'>
-          <span className='stat'>{`${reviewedStudent.autoScore} of ${assignment.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</span>
+          <span
+            className='stat'>{`${reviewedStudent.autoScore} of ${assignment.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</span>
         </Col>
         <Col className='col-3 text-left'>
           <input type="number" min={0} max={100} onChange={handleScoreChange} value={score}
                  disabled={homework.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}
           />
           <span><Button className='btn-sm xbg-med ml-1 mr-0'
-                        // disabled={homework.progress === HOMEWORK_PROGRESS.fullyGraded}
+            // disabled={homework.progress === HOMEWORK_PROGRESS.fullyGraded}
                         onClick={handleSubmitScore}>{`SUBMIT`}</Button></span>
         </Col>
         {/*<GradingInputForm assignments={assignments} homeworks={homeworks} homework.id={homework.id} activeAssignmentId={activeAssignmentId}/>*/}
@@ -103,9 +115,9 @@ function GradingBar(props) {
           <span><Button className='btn-sm xbg-darkest ml-0 mr-1' onClick={navToNext}>{'>'}</Button></span>
         </Col>
       </Row>
-		</Container>
+    </Container>
 
-	)
+  )
 }
 
 export default GradingBar;

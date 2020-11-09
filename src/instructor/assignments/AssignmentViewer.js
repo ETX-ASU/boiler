@@ -105,7 +105,7 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      const grades = await fetchAllGradesFromLMS();
+      const grades = await fetchAllGradesFromLMS(assignment.id);
       await dispatch(setGradesData(grades));
     } catch (error) {
       notifyUserOfError(error);

@@ -4,7 +4,7 @@ import {withAuthenticator} from '@aws-amplify/ui-react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {
-  createMockLmsData, fetchMembersAndContextFromLms,
+  mockGetUsers,
   // mockedFetchActiveUserSessionData as fetchActiveUserSessionData,
 } from "../utils/mockRingLeaderAPIs";
 import {
@@ -38,7 +38,7 @@ function App() {
 
 	useEffect(() => {
     // TODO: Delete this for LIVE deployment.
-    if (window.isDevMode) initMockUser('course-001');
+    if (window.isDevMode) initMockUser(courseId);
 
     if (activeRole === ROLE_TYPES.dev && !window.isDevMode) { throw new Error("Can NOT use dev role when not in DevMode. Set DevMode to true in codebase.") }
     if (!assignmentId && (activeRole !== ROLE_TYPES.dev && activeRole !== ROLE_TYPES.instructor)) { throw new Error("User role of student trying to access app with no assignmentId value.") }
@@ -58,12 +58,12 @@ function App() {
 		try {
 		  // TODO: Perhaps need to refactor to fetch singleMember data? Then, if instructor, then get the other data.
       // TODO: Yeah. Rethink this. I think we can get user data up front. Determine the user role, then fetch based on that info
-			const {members, context} = await fetchMembersAndContextFromLms(courseId);
+			const {members} = await mockGetUsers(courseId);
       const activeUser = members.find(m => m.id === userId);
       activeUser.activeRole = activeRole;
 
       if (!assignmentId) {
-        dispatch(setSessionData(activeUser, {}, context, members));
+        dispatch(setSessionData(activeUser, {}, courseId, members));
         return;
       }
 
@@ -80,7 +80,7 @@ function App() {
 
       // Do NOT store fellow student data if this is NOT an instructor
       if (activeRole === ROLE_TYPES.learner) students = [];
-      dispatch(setSessionData(activeUser, assignment, context, students));
+      dispatch(setSessionData(activeUser, assignment, courseId, students));
 		} catch (error) {
       notifyUserOfError(error)
 		}
