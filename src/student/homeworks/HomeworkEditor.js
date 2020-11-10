@@ -26,7 +26,7 @@ function HomeworkEditor(props) {
 		delete inputData.assignment;
 		delete inputData.createdAt;
 		delete inputData.updatedAt;
-    delete inputData.instructorScore;
+    delete inputData.score;
     delete inputData.comment;
     delete inputData.homeworkStatus;
 

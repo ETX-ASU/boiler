@@ -14,15 +14,13 @@ function HomeworkListItem(props) {
   }
 
 	return (
-		<li className='list-group-item review-link' onClick={handleReviewHomework}>
-      <Container>
-        <Row>
-          <Col className='col-4'>{itemNum}. {student.name}</Col>
-          <Col className='col-5'>{student.email}</Col>
-          <Col className='col-3'>{student.homework.percentCompleted}</Col>
-        </Row>
-      </Container>
-    </li>
+    <Row onClick={handleReviewHomework} className={'review-link'}>
+      <Col className='col-5'>{itemNum}. {student.name}</Col>
+      <Col className='col-1'>{(student.autoScore !== undefined) ? student.autoScore : '--'}</Col>
+      <Col className='col-1'>{(student.score !== undefined) ? student.score : '--'}</Col>
+      <Col className='col-1 text-right'>{student.percentCompleted}%</Col>
+      <Col className='col-4 text-right'>{student.homeworkStatus}</Col>
+    </Row>
 	)
 }
 
