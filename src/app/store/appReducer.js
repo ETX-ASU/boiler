@@ -17,12 +17,12 @@ export const SET_ACTIVE_COHORT_DATA = APP_NAMESPACE+'.SET_ACTIVE_COHORT_DATA';
 export const LOGOUT_ACTIVE_USER = APP_NAMESPACE+'.LOGOUT_ACTIVE_USER';
 
 
-export function setSessionData(activeUser, assignment, context, members) {
+export function setSessionData(activeUser, assignment, courseId, members) {
   return {
     type: SET_SESSION_DATA,
     activeUser,
     assignment,
-    context,
+    courseId,
     members
   }
 }
@@ -114,7 +114,7 @@ const defaultUser = {
 const defaultState = {
   activeUser: defaultUser,
   assignment: {},
-  context: {},
+  courseId: '',
   members: [],
   homeworks: [],
   // gradingData: {},
@@ -174,7 +174,7 @@ function appReducer(currentState = defaultState, action) {
       return Object.assign({}, currentState, {
         activeUser:action.activeUser,
         assignment:action.assignment,
-        context:action.context,
+        courseId:action.courseId,
         members:action.members
       });
 

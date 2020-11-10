@@ -4,22 +4,36 @@ import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import {batchAddHomeworks, createAssignment as createAssignmentMutation} from '../../graphql/mutations';
-import {emptyAssignment} from "../../utils/mockRingLeaderAPIs";
-import {ASSIGNMENT_STATUS_TYPES, UI_SCREEN_MODES} from "../../app/constants";
+import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
+import {UI_SCREEN_MODES} from "../../app/constants";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
 import {Button} from "react-bootstrap";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 
-const initialFormState = Object.assign({}, emptyAssignment);
+const emptyAssignment = {
+  id: '',
+  ownerId: '',
+  title: '',
+  summary: '',
+  image: '',
+  isLockedOnSubmission: true,
+  lockOnDate: 0,
+  quizQuestions: [{
+    questionText: 'Question #1',
+    answerOptions: ['Answer A'],
+    correctAnswerIndex: 0,
+    progressPointsForCompleting: 1,
+    gradePointsForCorrectAnswer: 10
+  }]
+};
 
-
-function AssignmentCreator(props) {
+// TODO: Get rid of assignment lockOnData and isLockedOnSubmission
+function AssignmentCreator() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser)
-	const [formData, setFormData] = useState(initialFormState);
+	const [formData, setFormData] = useState(emptyAssignment);
 
 	async function handleSubmitButton() {
 		if (!formData.title || !formData.summary) return;
@@ -44,23 +58,12 @@ function AssignmentCreator(props) {
 	}
 
 
-	// async function handleImageChange(e) {
-	// 	if (!e.target.files[0]) return
-	// 	const file = e.target.files[0];
-	// 	const quizQuestions = formData.quizQuestions;
-	// 	setFormData({...formData, image: file.name});
-	// 	quizQuestions[0].questionImage = file.name;
-	// 	await Storage.put(file.name, file);
-	// 	fetchAssignments();
-	// }
-
 	function handleAddQuestionButton(e) {
 		const quizQuestions = formData.quizQuestions;
 
 		console.warn("ADDING QUESTION: ", quizQuestions);
 		let newQuestions = quizQuestions.slice();
 		newQuestions.push({
-			questionPosition: 0,
 			questionText: `Question #${quizQuestions.length+1}`,
 			answerOptions: ['Answer A'],
 			correctAnswerIndex: 0,
@@ -171,29 +174,6 @@ function AssignmentCreator(props) {
 					<label>Assignment Summary:</label>
 					<input onChange={e => setFormData({...formData, 'summary': e.target.value})}
 								 defaultValue={formData.summary}/>
-				</div>
-
-				<div className="input-bar lumped-with-next">
-					<label>Locked after student submission?</label>
-					<input type={'checkbox'}
-								 onChange={e => setFormData({...formData, 'isLockedOnSubmission': e.target.value})}
-								 defaultChecked={formData.isLockedOnSubmission}/>
-				</div>
-
-				<div className="input-bar lumped-with-next">
-					<label>Prevent submission after a specific date?</label>
-					<input type={'checkbox'} onChange={e => {
-						console.log(`target val = ${e.target.checked}`, formData);
-						setFormData({...formData, 'isLockedOnDate': Boolean(e.target.checked)});
-					}}
-								 defaultChecked={formData.isLockedOnDate}/>
-				</div>
-
-				<div className={formData.isLockedOnDate ? "input-bar" : "input-bar hidden"}>
-					<label>Date to block submissions on.</label>
-					<input type="date" required="required" min={moment(formData.lockOnDate).format('YYYY-MM-DD')}
-								 value={moment(formData.lockOnDate).format('YYYY-MM-DD')}
-								 onChange={e => setFormData({...formData, 'lockOnDate': e.target.value})}/>
 				</div>
 
 				<div>

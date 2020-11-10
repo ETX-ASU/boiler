@@ -15,7 +15,7 @@ import {API, graphqlOperation} from "aws-amplify";
 import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
-import {fetchAllGradesFromLMS} from "../../utils/mockRingLeaderAPIs";
+import {fetchAllGrades} from "../../utils/RingLeader";
 import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {useStudents} from "../../app/store/AppSelectors";
@@ -38,8 +38,6 @@ function AssignmentViewer(props) {
   const students = useStudents();
 
 
-
-
   useEffect(() => {
     if (!assignment?.id) return;
     fetchScores();
@@ -49,7 +47,6 @@ function AssignmentViewer(props) {
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
   }, [nextTokenVal]);
-
 
 
   /**
@@ -105,7 +102,7 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      const grades = await fetchAllGradesFromLMS();
+      const grades = await fetchAllGrades(assignment.id);
       await dispatch(setGradesData(grades));
     } catch (error) {
       notifyUserOfError(error);
@@ -113,27 +110,26 @@ function AssignmentViewer(props) {
   }
 
   function handleRefreshAfterGradeSubmission() {
+    fetchScores();
     console.log('-----------> handleRefreshAfterGradeSubmission()')
   }
 
-  function handleGradingButton() {
-    // let orderedHomeworks = homeworks.filter(h => (!isSkipGradedStudents) || (h.progress !== HOMEWORK_PROGRESS.fullyGraded));
-    // if (isHideStudentIdentity) orderedHomeworks.sort((a,b) => a.randomOrderNum - b.randomOrderNum);
-
-    // if (orderedHomeworks?.length) dispatch(setCurrentlyReviewedStudentId(orderedHomeworks[0].id));
-  }
+  // function handleGradingButton() {
+  //   // let orderedHomeworks = homeworks.filter(h => (!isSkipGradedStudents) || (h.progress !== HOMEWORK_PROGRESS.fullyGraded));
+  //   // if (isHideStudentIdentity) orderedHomeworks.sort((a,b) => a.randomOrderNum - b.randomOrderNum);
+  //
+  //   // if (orderedHomeworks?.length) dispatch(setCurrentlyReviewedStudentId(orderedHomeworks[0].id));
+  // }
 
 	function handleEditButton() {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editAssignment));
 	}
-
 
   function toggleHideAndRandomize(e) {
     e.stopPropagation();
     dispatch(toggleHideStudentIdentity(!isHideStudentIdentity));
   }
 
-  // console.log("STUDENTS", students);
 
 
 	if (props.isLoading) {
@@ -154,7 +150,7 @@ function AssignmentViewer(props) {
       <Fragment>
         <Row className='mt-2 mb-5'>
           <Col className='text-left'>
-            <Button className='btn-sm xbg-dark m-2' disabled={!students?.length} onClick={handleGradingButton}>Start Grading</Button>
+            {/*<Button className='btn-sm xbg-dark m-2' disabled={!students?.length} onClick={handleGradingButton}>Start Grading</Button>*/}
           </Col>
           <Col className='text-left'>
             <label onClick={(e) => e.stopPropagation()} className='m-0 mr-3 text-white align-middle'>
@@ -172,7 +168,7 @@ function AssignmentViewer(props) {
 
       {reviewedStudentId &&
         // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
-        <HomeworkReview assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
+        <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
       }
 		</Container>
 	)

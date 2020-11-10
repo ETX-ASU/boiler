@@ -10,11 +10,11 @@ import config from './aws-exports';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './app/combinedStore';
-import DevUtilityDashboard from "./devUtility/DevUtilityDashboard";
 
 
 // THIS SHOULD BE SET TO FALSE FOR LIVE PRODUCTION VERSION
 window.isDevMode = true;
+window.isMockingFailures = false;
 
 Amplify.configure(config);
 
