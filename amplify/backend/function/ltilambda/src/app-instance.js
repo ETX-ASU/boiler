@@ -10,15 +10,11 @@ const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpoints"));
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
-
-const cache = require("@aws-amplify/cache");
+const session = require("express-session");
+const MemcachedStore = require("connect-memcached")(session);
+const store  = new MemcachedStore({hosts: ["127.0.0.1:11211"]});
 const rl_shared_1 = require("@asu-etx/rl-shared");
 __importDefault(require("./environment"));
-
-
-
-
-
 
 const environment_1 = process.env;
 
@@ -42,6 +38,7 @@ app.enable("trust proxy");
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 // In Memory Sessions ( not recommended for production servers )
+
 app.use(express_session_1.default({
     secret: "demo-secret",
     resave: true,
@@ -49,7 +46,8 @@ app.use(express_session_1.default({
     cookie: {
         sameSite: "none",
         secure: true,
-        httpOnly: false // ideally set this to true so the client window can't access the cookie
+        httpOnly: false, // ideally set this to true so the client window can't access the cookie
+        store: store
     }
 }));
 // UI static asset server ( CSS, JS, etc...)
@@ -73,12 +71,11 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
 function getParameters(req, role) {
-
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    cache.InMemoryCache.setItem(userId+courseId, req.session);
+    store.setItem(userId+courseId, req.session);
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
@@ -96,7 +93,6 @@ function getParameters(req, role) {
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
     const params = getParameters(req, "instructor");
-    
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student
