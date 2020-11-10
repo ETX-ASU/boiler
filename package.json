@@ -2,6 +2,7 @@
   "name": "boiler",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jimdev2.dyl4ur5zvn9kt.amplifyapp.com/dev",
   "dependencies": {
     "@asu-etx/rl-client-lib": "^0.6.17",
     "@asu-etx/rl-server-lib": "^0.6.43",
