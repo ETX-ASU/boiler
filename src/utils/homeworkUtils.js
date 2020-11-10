@@ -3,7 +3,8 @@ import {HOMEWORK_PROGRESS} from "../app/constants";
 
 
 
-export function getHomeworkStatus(gradingProgress, homework) {
+export function getHomeworkStatus(gradeData, homework) {
+  const {gradingProgress} = gradeData;
   return (gradingProgress === HOMEWORK_PROGRESS.fullyGraded) ? HOMEWORK_PROGRESS.fullyGraded :
     (homework.submittedOnDate) ? HOMEWORK_PROGRESS.submitted :
       (homework.beganOnDate) ? HOMEWORK_PROGRESS.inProgress :

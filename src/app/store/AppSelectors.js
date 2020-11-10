@@ -24,7 +24,15 @@ export function useStudents() {
       let percentCompleted = calcPercentCompleted(assignment, homeworkForStudent);
       let autoScore = calcAutoScore(assignment, homeworkForStudent);
       let homeworkStatus = getHomeworkStatus(gradeDataForStudent, homeworkForStudent);
-      return Object.assign({}, s, {randomOrderNum:positions.shift(), percentCompleted, autoScore, homeworkStatus, homework: homeworkForStudent});
+      return Object.assign({}, s, {
+        randomOrderNum: positions.shift(),
+        score: gradeDataForStudent.score,
+        comment: gradeDataForStudent.comment,
+        percentCompleted,
+        autoScore,
+        homeworkStatus,
+        homework: homeworkForStudent
+      });
     });
 
     setStudents(enhancedDataStudents);

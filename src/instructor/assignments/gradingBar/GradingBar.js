@@ -16,7 +16,7 @@ function GradingBar(props) {
   const sortMode = useSelector(state => state.gradingBar.sortGradingBy);
 
   const [reviewQueue, setReviewQueue] = useState([]);
-  const [score, setScore] = useState(calcShownScore(homework));
+  const [score, setScore] = useState(calcShownScore(reviewedStudent));
   const [numGradedSoFar, setNumGradedSoFar] = useState(0);
 
   useEffect(() => {
@@ -41,12 +41,12 @@ function GradingBar(props) {
     }
 
     setNumGradedSoFar(tempStudents.reduce((acc, s) => (s.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) ? acc + 1 : acc, 0));
-    setScore(calcShownScore(homework))
+    setScore(calcShownScore(reviewedStudent))
   }, [sortMode, students, reviewedStudent]);
 
-  function calcShownScore(homework) {
-    if (homework.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return homework.score;
-    return (homework.autoScore) ? homework.autoScore : 0;
+  function calcShownScore({homeworkStatus, score, autoScore}) {
+    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return score;
+    return (autoScore) ? autoScore : 0;
   }
 
   const navToPrev = () => {
@@ -74,6 +74,7 @@ function GradingBar(props) {
       progress: HOMEWORK_PROGRESS.fullyGraded
     });
     if (!lmsResult) notifyUserOfError('Notify user there was an error posting the grade for this reviewedStudent\'s homework.')
+    props.refreshHandler();
   }
 
   return (
@@ -86,7 +87,7 @@ function GradingBar(props) {
           <label>Auto Score</label>
         </Col>
         <Col className='col-3 text-left'>
-          <label>Your Score</label>
+          <label>{`Current Score: (${(reviewedStudent.score !== undefined) ? reviewedStudent.score : '--'})`}</label>
         </Col>
         <Col className='col-3 text-right'>
           <label>{`${numGradedSoFar} of 12 Graded`}</label>
@@ -102,11 +103,13 @@ function GradingBar(props) {
         </Col>
         <Col className='col-3 text-left'>
           <input type="number" min={0} max={100} onChange={handleScoreChange} value={score}
-                 disabled={homework.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}
+            disabled={reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}
           />
-          <span><Button className='btn-sm xbg-med ml-1 mr-0'
-            // disabled={homework.progress === HOMEWORK_PROGRESS.fullyGraded}
-                        onClick={handleSubmitScore}>{`SUBMIT`}</Button></span>
+          <span>
+            <Button className='btn-sm xbg-med ml-1 mr-0'
+            disabled={reviewedStudent.progress === HOMEWORK_PROGRESS.fullyGraded}
+            onClick={handleSubmitScore}>{(reviewedStudent.score !== undefined) ? `UPDATE` : `SUBMIT`}</Button>
+          </span>
         </Col>
         {/*<GradingInputForm assignments={assignments} homeworks={homeworks} homework.id={homework.id} activeAssignmentId={activeAssignmentId}/>*/}
         <Col className='col-3 text-right'>

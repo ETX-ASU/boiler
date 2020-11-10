@@ -9,9 +9,8 @@ import {getStatusMsg} from "../../utils/homeworkUtils";
 
 function HomeworkReview(props) {
   const {students, reviewedStudentId, assignment} = props;
-  const reviewedStudent =  students.find(s => s.id === reviewedStudentId);
+  const reviewedStudent = students.find(s => s.id === reviewedStudentId);
   const {homework, homeworkStatus, randomOrderNum} =  reviewedStudent;
-  // const {homework, homeworkStatus, randomOrderNum, studentOutput, ...reviewedStudent} = .reviewedStudent;
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 
   const showWork = (homeworkStatus === HOMEWORK_PROGRESS.submitted || homeworkStatus === HOMEWORK_PROGRESS.fullyGraded);
@@ -36,7 +35,7 @@ function HomeworkReview(props) {
 		<Container className="homework-viewer">
       <Row>
         <Col className='p-0 pr-4'>
-          <GradingBar assignment={assignment} students={students} reviewedStudent={reviewedStudent}/>
+          <GradingBar refreshHandler={props.refreshGrades} assignment={assignment} students={students} reviewedStudent={reviewedStudent}/>
         </Col>
       </Row>
 

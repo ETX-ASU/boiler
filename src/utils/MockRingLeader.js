@@ -80,8 +80,8 @@ export const mockGetGrades = (assignmentId) => new Promise(function (resolve, re
 
 
 
-export const mockInstructorSendGradeToLMS = (assignmentId, gradeData) => new Promise(function (resolve, reject) {
-  const {score, comment, studentId, gradingProgress} = gradeData;
+export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
+  const {assignmentId, score, comment, studentId, gradingProgress} = gradeData;
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   if (isMockFailureResult) {
@@ -170,9 +170,9 @@ export const generateMockMembers = (total)=> {
   let studentId = 10;
 
   while(members.length <= total) {
-    const memberSet = testNames.map((n) => {
+    const memberSet = testNames.map((n,i) => {
       return {
-        id: studentId++,
+        id: (studentId+i).toString(),
         status: "Active",
         name: `${n.givenName} ${n.familyName}${prefixes[prefixNum]}`,
         givenName: n.givenName,

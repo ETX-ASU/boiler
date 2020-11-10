@@ -18,11 +18,7 @@ function DevUtilityDashboard() {
   const members = useSelector(state => state.app.members);
 
   const rand = (min, max) => Math.floor(Math.random() * (max - min) + min);
-  const generateRandomClassData = () => {
-    return {percentGraded:rand(15,25), percentSubmitted:rand(25,55), percentInProgress:rand(5,25), percentNotBegun:rand(5, 10)}
-  }
-
-  const [formData, setFormData] = useState(generateRandomClassData());
+  const [formData, setFormData] = useState({percentGraded:25, percentSubmitted:60, percentInProgress:10, percentNotBegun:5});
 
 
   async function handleSubmitButton() {
@@ -35,14 +31,12 @@ function DevUtilityDashboard() {
     const totalStudents = students.length;
 
     let {percentInProgress, percentSubmitted, percentNotBegun, percentGraded} = formData;
-
     const progressStats = shuffle([
       ...Array(Math.floor(totalStudents * percentNotBegun/100)).fill(HOMEWORK_PROGRESS.notBegun),
       ...Array(Math.floor(totalStudents * percentInProgress/100)).fill(HOMEWORK_PROGRESS.inProgress),
       ...Array(Math.floor(totalStudents * percentSubmitted/100)).fill(HOMEWORK_PROGRESS.submitted),
       ...Array(Math.floor(totalStudents * percentGraded/100)).fill(HOMEWORK_PROGRESS.fullyGraded)
     ]);
-
 
     const mockHomeworks = students.map((s, i) => {
       const progress = progressStats[i];
