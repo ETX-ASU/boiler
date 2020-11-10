@@ -1,4 +1,6 @@
 @import "root-styles";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css');
 
 
 body {
@@ -9,9 +11,59 @@ body {
   margin: 0;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 18px;
+}
+h4 {
+  font-size: 14px;
+}
+
 .dashboard {
   min-height: calc(100vh - 80px - 3rem);
   font-family: 'Open Sans', sans-serif;
+}
+
+.screen-header-bar {
+  padding: 14px 20px;
+}
+
+.splitter-right {
+  border-right: 1px solid black;
+}
+
+.vertical-separator {
+  position: absolute;
+  top: calc(50% + 30px);
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  height: auto;
+
+  h3.spacer-word {
+    height: 60px;
+    line-height: 60px;
+    width: fit-content;
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+.bottom-row {
+  position: relative;
+  bottom: 0;
 }
 
 .box-shadow {

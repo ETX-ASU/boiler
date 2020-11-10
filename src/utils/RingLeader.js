@@ -3,7 +3,7 @@ import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/c
 
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-  // submitResourceSelection as realSubmitResourceSelection,
+  submitResourceSelection as realSubmitResourceSelection,
   getGrades as realGetGrades,
   getUsers as realGetUsers,
   getUnassignedStudents as realGetUnassignedStudents,
