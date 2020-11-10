@@ -64,7 +64,6 @@ function AssignmentCreator() {
 		console.warn("ADDING QUESTION: ", quizQuestions);
 		let newQuestions = quizQuestions.slice();
 		newQuestions.push({
-			questionPosition: 0,
 			questionText: `Question #${quizQuestions.length+1}`,
 			answerOptions: ['Answer A'],
 			correctAnswerIndex: 0,

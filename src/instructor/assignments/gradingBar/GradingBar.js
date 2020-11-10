@@ -118,7 +118,6 @@ function GradingBar(props) {
         </Col>
       </Row>
     </Container>
-
   )
 }
 

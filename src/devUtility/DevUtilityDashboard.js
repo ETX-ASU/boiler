@@ -41,7 +41,7 @@ function DevUtilityDashboard() {
     const mockHomeworks = students.map((s, i) => {
       const progress = progressStats[i];
       let beganOnDate = 0;
-      let submittedOnDate = (progress === HOMEWORK_PROGRESS.submitted || HOMEWORK_PROGRESS.fullyGraded) ? moment().valueOf() : 0;
+      let submittedOnDate = (progress === HOMEWORK_PROGRESS.submitted || progress === HOMEWORK_PROGRESS.fullyGraded) ? moment().valueOf() : 0;
       let quizAnswers = Array(assignment.quizQuestions.length).fill(-1);
 
       if (progress !== HOMEWORK_PROGRESS.notBegun) {

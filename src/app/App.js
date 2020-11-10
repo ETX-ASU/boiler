@@ -38,7 +38,7 @@ function App() {
     // TODO: Comment this out for LIVE deployment.
     // IF in DEV mode, and mock data doesn't exist for provided courseId, this creates mock students and instructors for the course
     // Required params: role=dev, userId=any, courseId=any, assignmentId=null or existing assignment id
-    if (window.isDevMode) createMockCourseMembers(courseId, 100);
+    if (window.isDevMode) createMockCourseMembers(courseId, 20);
 
     fetchAndSetAssignmentAndMembers();
 
