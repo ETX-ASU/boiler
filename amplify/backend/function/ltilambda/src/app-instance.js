@@ -1,5 +1,4 @@
 "use strict";
-
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -11,9 +10,14 @@ const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpoints"));
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
-const aws_cache = __importDefault(require("aws-amplify"));
+
+const cache = require("@aws-amplify/cache");
 const rl_shared_1 = require("@asu-etx/rl-shared");
 __importDefault(require("./environment"));
+
+
+
+
 
 
 const environment_1 = process.env;
@@ -69,13 +73,12 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
 function getParameters(req, role) {
-    
-    
+
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    aws_cache.Cache.setItem(userId+courseId, req.session);
+    cache.InMemoryCache.setItem(userId+courseId, req.session);
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";

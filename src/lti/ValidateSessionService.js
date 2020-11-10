@@ -10,7 +10,7 @@ const hasValidSession = async () => {
     LTI_API_NAME,
     LTI_SESSION_VALIDATION_ENDPOINT+window.location.search
   );
-  console.log(`hasValidSession: ${hasValidSession}`);
+  console.log(`hasValidSession: ${JSON.stringify(hasValidSession)}`);
   return hasValidSession.isValid;
 };
 

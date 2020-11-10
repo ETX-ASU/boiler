@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@asu-etx/rl-client-lib": "^0.6.16",
-    "@asu-etx/rl-shared": "^0.6.19",
+    "@asu-etx/rl-client-lib": "^0.6.17",
+    "@asu-etx/rl-server-lib": "^0.6.40",
+    "@asu-etx/rl-shared": "^0.6.20",
+    "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
