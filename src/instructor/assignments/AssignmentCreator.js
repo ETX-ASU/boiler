@@ -9,8 +9,16 @@ import {UI_SCREEN_MODES} from "../../app/constants";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
-import {Button} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
+import HeaderBar from "../../app/HeaderBar";
+import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import ToggleSwitch from "../../app/assets/ToggleSwitch";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+import {library} from "@fortawesome/fontawesome-svg-core";
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
+library.add(faTrash, faPlus);
 
 const emptyAssignment = {
   id: '',
@@ -20,6 +28,8 @@ const emptyAssignment = {
   image: '',
   isLockedOnSubmission: true,
   lockOnDate: 0,
+  isUseAutoscore: true,
+  isUseAutosubmit: false,
   quizQuestions: [{
     questionText: 'Question #1',
     answerOptions: ['Answer A'],
@@ -34,6 +44,10 @@ function AssignmentCreator() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser)
 	const [formData, setFormData] = useState(emptyAssignment);
+
+	async function handleCancelBtn() {
+	  alert("you are cancelling.");
+  }
 
 	async function handleSubmitButton() {
 		if (!formData.title || !formData.summary) return;
@@ -56,6 +70,10 @@ function AssignmentCreator() {
 		// await props.refreshHandler();
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
 	}
+
+  function toggleUseAutoscore(e) {
+    setFormData({...formData, 'isUseAutoscore': !formData.isUseAutoscore});
+  }
 
 
 	function handleAddQuestionButton(e) {
@@ -109,16 +127,58 @@ function AssignmentCreator() {
 	function generateQuestionForm(qNum) {
 		const qData = formData.quizQuestions[qNum];
 		return (
-			<Fragment key={qNum}>
+		  <Fragment key={qNum}>
 				{/* Arbitrary maximum of 3 questions per quiz for this boilerplate.*/}
-				{(!qNum && formData.quizQuestions.length < 3) && <div className='add-question-btn text-center' onClick={handleAddQuestionButton} />}
-				<h4>The Quiz Question ({qNum+1} of {formData.quizQuestions.length})</h4>
+				{/*{(!qNum && formData.quizQuestions.length < 3) && <div className='add-question-btn text-center' onClick={handleAddQuestionButton} />}*/}
+        <h3 className={'subtext mt-2 mb-2'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
+
+        <Container className='mt-4'>
+          <Row className='m-2 border-bottom'>
+            <Col className={'col-12'}>
+              <div className={'form-group'}>
+                <label><h3>Prompt</h3></label>
+                <input className={'form-control'} onChange={e => setFormData({...formData, 'questionText': e.target.value})} defaultValue={qData.questionText} />
+              </div>
+            </Col>
+          </Row>
+          <Row className='m-2'>
+            <Col className={'col-12'}>
+              <div className={'form-group'}>
+                <label><h3>Answer Choice List</h3></label>
+              </div>
+            </Col>
+          </Row>
+          {qData.answerOptions.map((opt, index) =>
+            <div key={index} className='m-2 form-inline align-items-center'>
+              <div className='col'>
+                <div className='input-group mb-2'>
+                  <label className='m-2' htmlFor={`data-q${qNum}-a${index}`}><h3 className='subtext'>{index+1})</h3></label>
+                  <input type='text' className='form-control' id={`data-q${qNum}-a${index}`}
+                         onChange={e => handleOptionChange(e, qNum, index)} defaultValue={opt}
+                         placeholder={`Answer ${index+1}`}/>
+                  <div className='input-group-append'>
+                    <div className='input-group-text form-control'>
+                      <input className="form-check-inline" type="checkbox" />
+                      correct answer
+                    </div>
+                  </div>
+                  <Button className='ml-2 btn xbg-dark mb-2'>
+                    <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "trash"]} />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+
+          )}
+        </Container>
+
 
 				<div className="quiz-question">
-					<div className="input-bar">
-						<label>Question Text</label>
-						<input onChange={e => handleQuestionChange(e, qNum, 'questionText')} defaultValue={qData.questionText}/>
-					</div>
+					{/*<div className="input-bar">*/}
+					{/*	<label>Question Text</label>*/}
+					{/*	<input onChange={e => handleQuestionChange(e, qNum, 'questionText')} defaultValue={qData.questionText}/>*/}
+					{/*</div>*/}
 
 					<div className="input-bar">
 						<label>List of possible answers</label>
@@ -156,37 +216,60 @@ function AssignmentCreator() {
 					</div>
 					<hr/>
 				</div>
-			</Fragment>
+		  </Fragment>
 		)
 	}
 
 	return (
-		<div className="AssignmentCreator">
-      <h3>Create a new Quiz Assignment</h3>
-			<form className='mt-4 mb-4'>
-				<div className="input-bar lumped-with-next">
-					<label>Assignment Title:</label>
-					<input onChange={e => setFormData({...formData, 'title': e.target.value})}
-								 defaultValue={formData.title}/>
-				</div>
+    <Fragment>
+      <HeaderBar title='Create New Assignment' canCancel={true} canSave={true} onCancel={handleCancelBtn} onSave={handleSubmitButton} />
 
-				<div className="input-bar">
-					<label>Assignment Summary:</label>
-					<input onChange={e => setFormData({...formData, 'summary': e.target.value})}
-								 defaultValue={formData.summary}/>
-				</div>
+      <form>
+        <Container className='m-2'>
+        <Row className={'mt-4 mb-4'}>
+          <Col><h2>Basic Assignment Details</h2></Col>
+        </Row>
 
-				<div>
-					{formData.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
-				</div>
-
-			</form>
-
-			<button onClick={handleSubmitButton}>SUBMIT</button>
-			<br/>
-			<br/>
-		</div>
-	)
+        <Row className={'ml-2'}>
+          <Col className={'col-12'}>
+            <div className={'form-group'}>
+              <label htmlFor='dataTitle'><h3>Title</h3></label>
+              <input id='dataTitle' className={'form-control'} onChange={e => setFormData({...formData, 'title': e.target.value})} defaultValue={formData.title} />
+            </div>
+            <div className={'form-group'}>
+              <label htmlFor='dataSummary'><h3>Summary<span className='aside'> - Optional</span></h3></label>
+              <input id='dataSummary' className={'form-control'} onChange={e => setFormData({...formData, 'summary': e.target.value})} defaultValue={formData.summary}/>
+            </div>
+          </Col>
+        </Row>
+        <Row className={'ml-2'}>
+          <Col className='col-6'>
+            <label><h3>Autoscore</h3></label>
+          </Col>
+          <Col className='col-6 d-flex flex-row-reverse'>
+            <div className="custom-control custom-switch" style={{top: `6px`}}>
+              <ToggleSwitch id='dataUseAutoscore' value={formData.isUseAutoscore} handleToggle={toggleUseAutoscore} />
+            </div>
+          </Col>
+        </Row>
+        {formData.isUseAutoscore &&
+        <Row className={'ml-2 mb-4'}>
+          <Col>
+            <input type={'checkbox'}
+              onChange={e => setFormData({...formData, 'isUseAutosubmit': e.target.value})}
+              defaultChecked={formData.isUseAutosubmit} />
+            <label>Auto-submit score to LMS when student submits their assignment</label>
+          </Col>
+        </Row>
+        }
+        </Container>
+        <Container>
+          <h2 className='mb-3'>Quiz Details</h2>
+          {formData.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
+        </Container>
+      </form>
+    </Fragment>
+  )
 }
 
 export default AssignmentCreator;

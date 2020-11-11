@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
-import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
@@ -13,6 +12,7 @@ import {Container, Row, Button, Col} from "react-bootstrap";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {getAssignment, listAssignments} from "../../graphql/queries";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import HeaderBar from "../../app/HeaderBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -82,15 +82,9 @@ function AssignmentNavOrDupe() {
 
 	return (
 		<Fragment>
-      <Row className={'screen-header-bar xbg-light'}>
-        <Col className={'col-9'}><h2>Create New Assignment</h2></Col>
-        <Col className={'col-3 text-right'}>
-          <Button className={'mr-2'}>Cancel</Button>
-          <Button>Save</Button>
-        </Col>
-      </Row>
+      <HeaderBar title='Create New Assignment' canCancel={false} canSave={false} />
 
-      <Container>
+      <Container className='m-2'>
         {isFetchingAssignments &&
           <Row>
             <LoadingIndicator className='p-4 text-center h-100 align-middle' isDarkSpinner={true} loadingMsg={'FETCHING DATA'} size={3} />

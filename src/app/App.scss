@@ -14,14 +14,27 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
+  color: black;
   margin: 0;
+
+  .aside {
+    font-weight: normal;
+    font-style: italic;
+    color: var(--x-light-gray);
+  }
+
+  &.subtext {
+    font-weight: normal;
+    color: var(--x-gray);
+  }
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 24px;
+  line-height: 38px;
 }
 h2 {
-  font-size: 24px;
+  font-size: 22px;
 }
 h3 {
   font-size: 18px;
