@@ -43,7 +43,7 @@ function App() {
     fetchAndSetAssignmentAndMembers();
 
     if (!assignmentId) {
-      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createAssignment));
+      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
     } else if (activeRole === ROLE_TYPES.dev) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.devUtilityDashboard));
     } else {

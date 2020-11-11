@@ -6,30 +6,22 @@ import { v4 as uuid } from "uuid";
 
 import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
 import {UI_SCREEN_MODES} from "../../app/constants";
-import {setActiveUiScreenMode} from "../../app/store/appReducer";
+import {editDupedAssignment, setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
 import {Container, Row, Button, Col} from "react-bootstrap";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
-import {listAssignments} from "../../graphql/queries";
+import {getAssignment, listAssignments} from "../../graphql/queries";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const emptyAssignment = {
-  id: '',
-  ownerId: '',
-  title: '',
-  summary: '',
-  image: '',
-  isLockedOnSubmission: true,
-  lockOnDate: 0,
-  quizQuestions: [{
-    questionText: 'Question #1',
-    answerOptions: ['Answer A'],
-    correctAnswerIndex: 0,
-    progressPointsForCompleting: 1,
-    gradePointsForCorrectAnswer: 10
-  }]
-};
+import {library} from "@fortawesome/fontawesome-svg-core";
+import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
+library.add(faCopy, faPlus);
+
+
+
+
 
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
 function AssignmentNavOrDupe() {
@@ -67,6 +59,25 @@ function AssignmentNavOrDupe() {
     }
   }
 
+
+  async function handleDupeAssignment(e) {
+    const selectedId = document.getElementById('assignmentSelector').value;
+    const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
+    const assignment = assignmentQueryResults.data.getAssignment;
+    console.log("Retrieved assignment", assignment);
+
+    const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, lockOnDate: 0});
+    delete inputData.createdAt;
+    delete inputData.updatedAt;
+    const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
+    console.log("Created duplicate assignment", result);
+
+    dispatch(editDupedAssignment(result.data.createAssignment));
+  }
+
+  function handleCreateAssignment(e) {
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createAssignment));
+  }
 
 
 	return (
@@ -115,8 +126,8 @@ function AssignmentNavOrDupe() {
                     <p>Choose an existing assignment, duplicate it, then customize it.</p>
                     <div className="form-group">
                       <select className="form-control" id="assignmentSelector">
-                        {assignments.map(a =>
-                          <option>{a.title}</option>
+                        {assignments.map((a,i) =>
+                          <option key={i} value={a.id}>{a.title}</option>
                         )}
                       </select>
                     </div>
@@ -131,7 +142,10 @@ function AssignmentNavOrDupe() {
               <Container className={'p-4 h-100'}>
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
-                    <Button>[] New Assignment</Button>
+                    <Button className='align-middle' onClick={handleCreateAssignment}>
+                      <FontAwesomeIcon className='btn-icon' icon={["fa", "plus"]} />
+                      New Assignment
+                    </Button>
                   </Col>
                 </Row>
               </Container>
@@ -140,7 +154,10 @@ function AssignmentNavOrDupe() {
               <Container className={'p-4'}>
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
-                    <Button>[] Duplicate</Button>
+                    <Button className='align-middle' onClick={handleDupeAssignment}>
+                      <FontAwesomeIcon className='btn-icon' icon={["fa", "copy"]} />
+                      Duplicate
+                    </Button>
                   </Col>
                 </Row>
               </Container>

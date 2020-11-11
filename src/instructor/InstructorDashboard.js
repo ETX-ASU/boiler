@@ -19,11 +19,14 @@ function InstructorDashboard() {
 					{(activeUiScreenMode === UI_SCREEN_MODES.viewAssignment) &&
 					<AssignmentViewer />
 					}
-					{(activeUiScreenMode === UI_SCREEN_MODES.editAssignment) &&
+					{(activeUiScreenMode === UI_SCREEN_MODES.editAssignment || activeUiScreenMode === UI_SCREEN_MODES.dupeAssignment) &&
 					<AssignmentEditor />
 					}
-					{(activeUiScreenMode === UI_SCREEN_MODES.createAssignment) &&
+					{(activeUiScreenMode === UI_SCREEN_MODES.createOrDupeAssignment) &&
 					<AssignmentNewOrDupe />
+					}
+					{(activeUiScreenMode === UI_SCREEN_MODES.createAssignment) &&
+					<AssignmentCreator />
 					}
 				</Col>
 			</Row>
