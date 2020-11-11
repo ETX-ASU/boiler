@@ -12,6 +12,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpoints"));
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
 const rl_shared_1 = require("@asu-etx/rl-shared");
+const rl_server_lib_1 = require("@asu-etx/rl-server-lib");
 __importDefault(require("./environment"));
 const environment_1 = process.env;
 
@@ -35,6 +36,15 @@ app.enable("trust proxy");
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 // In Memory Sessions ( not recommended for production servers )
+//rl_server_lib_1.initDBTables();
+
+// Enable CORS for all methods
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next()
+  });
+  
 app.use(express_session_1.default({
     secret: "demo-secret",
     resave: true,
@@ -66,11 +76,14 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
 function getParameters(req, role) {
-    
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
+    //const session = new rl_server_lib_1.Session();
+    //session.session_id =  platform.userId +  platform.userId.context_id;
+    //session.session = JSON.stringify(req.session);
+
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
