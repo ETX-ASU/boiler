@@ -1,4 +1,5 @@
 "use strict";
+
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -11,9 +12,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpoints"));
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
 const rl_shared_1 = require("@asu-etx/rl-shared");
-const session_1 =  require("@asu-etx/rl-server-lib");
 __importDefault(require("./environment"));
-
 const environment_1 = process.env;
 
 /*========================== LOG ALL REQUESTS =========================*/
@@ -67,15 +66,11 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
 function getParameters(req, role) {
+    
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    const session = new session_1.Session();
-    session.sessionId = platform.userId + platform.context_id;
-    session.session = JSON.stringify(req.session);
-
-    session_1.Session.writer.put(session);
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
