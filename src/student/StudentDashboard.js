@@ -77,5 +77,5 @@ function StudentDashboard() {
 	);
 }
 
-export default hasValidSession() ? StudentDashboard : withAuthenticator(StudentDashboard);
+export default !hasValidSession() ? StudentDashboard : withAuthenticator(StudentDashboard);
 

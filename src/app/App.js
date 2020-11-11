@@ -103,4 +103,4 @@ function App() {
 	);
 }
 
-export default hasValidSession() ? App : withAuthenticator(App);
+export default !hasValidSession() ? App : withAuthenticator(App);

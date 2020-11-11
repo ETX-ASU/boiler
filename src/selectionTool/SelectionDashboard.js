@@ -58,4 +58,4 @@ function SelectionDashboard() {
 	);
 }
 
-export default hasValidSession() ?  SelectionDashboard : withAuthenticator(SelectionDashboard);
+export default !hasValidSession() ?  SelectionDashboard : withAuthenticator(SelectionDashboard);
