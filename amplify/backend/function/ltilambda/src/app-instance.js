@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
   });
-  
+
 app.use(express_session_1.default({
     secret: "demo-secret",
     resave: true,
@@ -75,15 +75,24 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 */
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
-function getParameters(req, role) {
+
+const getParameters = async (req, role) => {
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    //const session = new rl_server_lib_1.Session();
-    //session.session_id =  platform.userId +  platform.userId.context_id;
-    //session.session = JSON.stringify(req.session);
-
+    let session = {};
+    try {
+        session = new rl_server_lib_1.Session();
+        session.sessionId =  platform.userId +  platform.context_id;
+        session.session = JSON.stringify(req.session);
+        await rl_server_lib_1.Session.writer.put(session); 
+        await session.save();  
+        console.log(`session added : ${JSON.stringify(session)}`);
+    } catch(err) {
+        console.log(`session failed: ${JSON.stringify(err)}`);
+        console.log(`session failed value : ${JSON.stringify(session)}`);
+    }
     if(!role) {
         if(platform.isInstructor) {
             role = "instructor";
@@ -96,26 +105,26 @@ function getParameters(req, role) {
     if(resourceLinkId !== courseId)
         return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}`
     return `?role=${role}&userId=${userId}&courseId=${courseId}`
+};
 
-}
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
-    const params = getParameters(req, "instructor");
+    const params = await getParameters(req, "instructor");
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student
 app.route(rl_shared_1.LTI_STUDENT_REDIRECT).get(async (req, res) => {
-    const params = getParameters(req, "learner");
+    const params = await getParameters(req, "learner");
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Student Assignment
 app.route(rl_shared_1.LTI_ASSIGNMENT_REDIRECT).get(async (req, res) => {
-    const params = getParameters(req, null);
+    const params = await getParameters(req, null);
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 // Deep Link
 app.route(rl_shared_1.LTI_DEEPLINK_REDIRECT).get(async (req, res) => {
-    const params = getParameters(req, null);
+    const params = await getParameters(req, null);
     res.status(301).redirect(environment_1.APPLICATION_URL + params);
 });
 

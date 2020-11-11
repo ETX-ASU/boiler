@@ -2,10 +2,10 @@
   "name": "boiler",
   "version": "0.1.0",
   "private": true,
-  "homepage":"",
+  "homepage": "",
   "dependencies": {
     "@asu-etx/rl-client-lib": "^0.6.17",
-    "@asu-etx/rl-server-lib": "^0.6.45",
+    "@asu-etx/rl-server-lib": "^0.6.51",
     "@asu-etx/rl-shared": "^0.6.20",
     "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
