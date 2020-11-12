@@ -56,7 +56,7 @@ export const mockGetStudentGrade = (assignmentId, studentId) => new Promise(func
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   const userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
-  let theGrade = userGrades.find(g => g.studentId === studentId);
+  let theGrade = userGrades?.find(g => g.studentId === studentId);
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockGetStudentGrade()")), mockDuration);

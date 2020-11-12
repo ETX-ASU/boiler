@@ -68,7 +68,7 @@ function AssignmentViewer(props) {
       nextToken: token
     }))
     .then(handleHomeworksResult)
-    .catch((e) => notifyUserOfError(e, `=====> ERROR when fetching homeworks`));
+    .catch((e) => notifyUserOfError(e, `=====> ERROR when fetchBatchOfHomeworks`));
   }
 
   function handleHomeworksResult(result) {
