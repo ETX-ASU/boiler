@@ -68,8 +68,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-boiler-jimd-132246-deployment",
-          "S3Key": "amplify-builds/ltilambda-4470416a4a7073423557-build.zip"
+          "S3Bucket": "amplify-boiler-prod-103342-deployment",
+          "S3Key": "amplify-builds/ltilambda-444d2b55597a69563650-build.zip"
         }
       }
     },
