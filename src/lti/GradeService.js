@@ -5,15 +5,19 @@ import {
   logger,
   LTI_API_NAME
 } from "@asu-etx/rl-shared";
-
 import aws_exports from '../aws-exports';
+const queryString = require('query-string');
+const parsed = queryString.parse(window.location.search);
+
 
 API.configure(aws_exports);
 
 
 const submitGrade = async (params) => {
   const data = {
-    params: params
+    params: params,
+    userId: parsed.userId,
+    courseId: parsed.courseId
   };
   const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE + window.location.search, data);
   logger.debug(`submitGrade: ${results}`);
@@ -24,7 +28,9 @@ const submitInstructorGrade = async (
   params
 ) => {
   const data = {
-    params: params
+    params: params,
+    userId: parsed.userId,
+    courseId: parsed.courseId
   };
   const results = await API.post(LTI_API_NAME, PUT_STUDENT_GRADE + window.location.search, data);
   return results;
@@ -32,7 +38,9 @@ const submitInstructorGrade = async (
 
 const getGrades = async (assignmentId) => {
   const grades = await API.get(LTI_API_NAME, GET_GRADES + window.location.search, {
-    lineItemId: assignmentId
+    lineItemId: assignmentId,
+    userId: parsed.userId,
+    courseId: parsed.courseId
   });
   return grades;
 };

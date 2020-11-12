@@ -1,6 +1,7 @@
 import API from '@aws-amplify/api';
 import { GET_ASSIGNMENT_ENDPOINT, DELETE_LINE_ITEM, LTI_API_NAME, logger } from "@asu-etx/rl-shared";
 import aws_exports from '../aws-exports';
+
 API.configure();
 
 API.configure(aws_exports);
