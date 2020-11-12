@@ -31,7 +31,7 @@ const emptyAssignment = {
   isUseAutoScore: true,
   isUseAutoSubmit: false,
   quizQuestions: [{
-    questionText: 'Question #1',
+    questionText: '',
     answerOptions: ['', ''],
     correctAnswerIndex: 0,
     progressPointsForCompleting: 1,
@@ -71,7 +71,7 @@ function AssignmentCreator() {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
 	}
 
-  function toggleUseAutoscore(e) {
+  function toggleUseAutoScore(e) {
 	  // const isUseAutoSubmit = (formData.isUseAutoScore) ? false : formData.isUseAutoSubmit;
     setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit:false});
   }
@@ -79,15 +79,13 @@ function AssignmentCreator() {
 
 	function handleAddQuestionButton(e) {
 		const quizQuestions = formData.quizQuestions;
-
-		console.warn("ADDING QUESTION: ", quizQuestions);
 		let newQuestions = quizQuestions.slice();
 		newQuestions.push({
-			questionText: `Question #${quizQuestions.length+1}`,
-			answerOptions: ['Answer 1'],
+			questionText: '',
+			answerOptions: ['', ''],
 			correctAnswerIndex: 0,
 			progressPointsForCompleting: 1,
-			gradePointsForCorrectAnswer: 10
+			gradePointsForCorrectAnswer: (formData.isUseAutoScore) ? 10 : 0
 		});
 		setFormData({...formData, quizQuestions:newQuestions})
 	}
@@ -124,16 +122,13 @@ function AssignmentCreator() {
 	}
 
 	function removeAnswerOpt(qNum, optIndex) {
-	  const radioBtns = Array.from(document.getElementsByName(`q${qNum}RadioOpts`));
 	  let correctIndex = formData.quizQuestions[qNum].correctAnswerIndex;
-    correctIndex = (correctIndex < optIndex) ? correctIndex : correctIndex-1;
-    // correctAnswerIndex = (correctAnswerIndex === optIndex) ? 0 : formData.quizQuestions[qNum].correctAnswerIndex;
-    // console.log(`NOW correctAnswerIndex = ${correctAnswerIndex}`);
+    correctIndex = (correctIndex <= optIndex) ? correctIndex : correctIndex-1;
+    correctIndex = Math.max(correctIndex, 0);
 
 		const newQuizQuestions = formData.quizQuestions.slice();
 		newQuizQuestions[qNum].answerOptions.splice(optIndex, 1);
 		newQuizQuestions[qNum].correctAnswerIndex = correctIndex;
-		console.warn("formData", newQuizQuestions);
 
 		setFormData({...formData, quizQuestions:newQuizQuestions})
 	}
@@ -156,18 +151,22 @@ function AssignmentCreator() {
                   <input id={`q${qNum}-prompt`}
                     className={'form-control'}
                     onChange={e => setFormData({...formData, questionText: e.target.value})}
+                    placeholder={`Provide text for Question #${qNum+1}`}
                     defaultValue={qData.questionText} />
                 </label>
+
+                {formData.isUseAutoScore &&
                 <label htmlFor={`q${qNum}-points`}>
                   <h3>Points</h3>
                   <input id={`q${qNum}-points`}
-                    type="number"
-                    className='form-control input-group-append'
-                    disabled={Boolean(!formData.isUseAutoScore)}
-                    min={0} max={1000}
-                    onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}
-                    defaultValue={qData.gradePointsForCorrectAnswer}/>
+                         type="number"
+                         className='form-control input-group-append'
+                         disabled={Boolean(!formData.isUseAutoScore)}
+                         min={0} max={1000}
+                         onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}
+                         defaultValue={qData.gradePointsForCorrectAnswer}/>
                 </label>
+                }
                 </div>
             </Col>
           </Row>
@@ -197,7 +196,7 @@ function AssignmentCreator() {
                     </div>
                   </div>
                   <Button className='ml-2 btn xbg-dark'
-                          disabled={qData.answerOptions.length < 1}
+                          disabled={qData.answerOptions.length <= 1}
                           onClick={() => removeAnswerOpt(qNum, index)}>
                     <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "trash"]} />
                   </Button>
@@ -213,37 +212,6 @@ function AssignmentCreator() {
             </Col>
           </Row>
         </Container>
-
-
-				{/*<div className="quiz-question">*/}
-					{/*<div className="input-bar">*/}
-					{/*	<label>Question Text</label>*/}
-					{/*	<input onChange={e => handleQuestionChange(e, qNum, 'questionText')} defaultValue={qData.questionText}/>*/}
-					{/*</div>*/}
-
-
-					{/*<div className="input-bar">*/}
-					{/*	<label>Index of correct answer (0-based)</label>*/}
-					{/*	<input type="number" min={0} max={10}*/}
-					{/*				 onChange={e => handleQuestionChange(e, qNum, 'correctAnswerIndex')}*/}
-					{/*				 defaultValue={qData.correctAnswerIndex}/>*/}
-					{/*</div>*/}
-
-					{/*<div className="input-bar">*/}
-					{/*	<label>Grade points for giving correct answer</label>*/}
-					{/*	<input type="number" min={0} max={1000}*/}
-					{/*				 onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}*/}
-					{/*				 defaultValue={qData.gradePointsForCorrectAnswer}/>*/}
-					{/*</div>*/}
-
-					{/*<div className="input-bar">*/}
-					{/*	<label>Progress points for completing this question</label>*/}
-					{/*	<input type="number" min={0} max={1000}*/}
-					{/*				 onChange={e => handleQuestionChange(e, qNum, 'progressPointsForCompleting')}*/}
-					{/*				 defaultValue={qData.progressPointsForCompleting}/>*/}
-					{/*</div>*/}
-					{/*<hr/>*/}
-				{/*</div>*/}
 		  </Fragment>
 		)
 	}
@@ -276,7 +244,7 @@ function AssignmentCreator() {
           </Col>
           <Col className='col-6 d-flex flex-row-reverse'>
             <div className="custom-control custom-switch" style={{top: `6px`}}>
-              <ToggleSwitch id='dataUseAutoscore' value={formData.isUseAutoScore} handleToggle={toggleUseAutoscore} />
+              <ToggleSwitch id='dataUseAutoscore' value={formData.isUseAutoScore} handleToggle={toggleUseAutoScore} />
             </div>
           </Col>
         </Row>

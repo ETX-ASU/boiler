@@ -11,6 +11,8 @@ export const onCreateAssignment = /* GraphQL */ `
       image
       lockOnDate
       isLockedOnSubmission
+      isUseAutoScore
+      isUseAutoSubmit
       quizQuestions {
         questionText
         answerOptions
@@ -33,6 +35,8 @@ export const onUpdateAssignment = /* GraphQL */ `
       image
       lockOnDate
       isLockedOnSubmission
+      isUseAutoScore
+      isUseAutoSubmit
       quizQuestions {
         questionText
         answerOptions
@@ -55,6 +59,8 @@ export const onDeleteAssignment = /* GraphQL */ `
       image
       lockOnDate
       isLockedOnSubmission
+      isUseAutoScore
+      isUseAutoSubmit
       quizQuestions {
         questionText
         answerOptions
