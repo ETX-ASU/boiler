@@ -28,11 +28,6 @@
       "StackName": "amplify-boiler-prod-103342",
       "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-prod-103342/37104db0-250d-11eb-b044-0624fb6587e5",
       "AmplifyAppId": "dyl4ur5zvn9kt"
-    },
-    "categories": {
-      "auth": {
-        "boiler5da431b2": {}
-      }
     }
   }
 }
