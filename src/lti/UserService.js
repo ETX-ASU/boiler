@@ -8,11 +8,8 @@ API.configure(aws_exports);
 
 const getUsers = async (role)  => {
   logger.debug(`hitting endpoint GET:${ROSTER_ENDPOINT}`);
-  const users = await API.get(LTI_API_NAME, ROSTER_ENDPOINT, { 
-    role: role,
-    userId:parsed.userId,
-    courseId:parsed.courseId
-   });
+  const users = await API.get(LTI_API_NAME, 
+    `${ROSTER_ENDPOINT}?role=${role}&userId=${parsed.userId}&courseId=${parsed.courseId}`);
   return users;
 };
 
@@ -20,13 +17,9 @@ const getUnassignedStudents = async (
   assignmentId,
   resourceLinkId
 ) => {
-  const uanssignedStudents = await API.get(LTI_API_NAME, GET_UNASSIGNED_STUDENTS_ENDPOINT,   {
-      lineItemId: assignmentId,
-      resourceLinkId: resourceLinkId,
-      userId:parsed.userId,
-      courseId:parsed.courseId
-      
-    }
+  const uanssignedStudents = await API.get(LTI_API_NAME,
+    `GET_UNASSIGNED_STUDENTS_ENDPOINT
+    ?userId=${parsed.userId}&courseId=${parsed.courseId}&lineItemId=${assignmentId}&resourceLinkId=${resourceLinkId}`
   );
   return uanssignedStudents;
 };
