@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
-import {withAuthenticator} from '@aws-amplify/ui-react';
 import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
@@ -77,5 +76,5 @@ function StudentDashboard() {
 	);
 }
 
-export default !hasValidSession() ? StudentDashboard : withAuthenticator(StudentDashboard);
+ export default !hasValidSession() ? StudentDashboard : null;
 

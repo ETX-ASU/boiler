@@ -1,5 +1,4 @@
 import React from 'react';
-import {withAuthenticator} from '@aws-amplify/ui-react';
 import {useSelector} from "react-redux";
 import {UI_SCREEN_MODES} from "../app/constants";
 import AssignmentViewer from "./assignments/AssignmentViewer";
@@ -7,7 +6,6 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
-//import { hasValidSession } from '@asu-etx/rl-client-lib';
 import { hasValidSession } from '../lti/ValidateSessionService';
 
 function InstructorDashboard() {
@@ -34,6 +32,6 @@ function InstructorDashboard() {
 		</Container>
 	);
 } 
-export default !hasValidSession() ? InstructorDashboard : withAuthenticator(InstructorDashboard);
+export default hasValidSession() ? InstructorDashboard :  null;
 
 
