@@ -145,7 +145,10 @@ export const createMockCourseMembers = (courseId, totalNumStudents) => {
   const members = [
     { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    { id:"a4c0a444-bc32-41d6-8edb-4df61f035ece", status:"Active", name:"Major Major", givenName:"Major", familyName:"Major", email:"Major@Major.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     ...generateMockMembers(totalNumStudents)
+    
+
   ]
 
   localStorage.setItem(`boiler-course-users-${courseId}`, JSON.stringify(members));
