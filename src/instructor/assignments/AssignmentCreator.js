@@ -9,8 +9,16 @@ import {UI_SCREEN_MODES} from "../../app/constants";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
-import {Button} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
+import HeaderBar from "../../app/HeaderBar";
+import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import ToggleSwitch from "../../app/assets/ToggleSwitch";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+import {library} from "@fortawesome/fontawesome-svg-core";
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
+library.add(faTrash, faPlus);
 
 const emptyAssignment = {
   id: '',
@@ -20,9 +28,11 @@ const emptyAssignment = {
   image: '',
   isLockedOnSubmission: true,
   lockOnDate: 0,
+  isUseAutoScore: true,
+  isUseAutoSubmit: false,
   quizQuestions: [{
     questionText: 'Question #1',
-    answerOptions: ['Answer A'],
+    answerOptions: ['', ''],
     correctAnswerIndex: 0,
     progressPointsForCompleting: 1,
     gradePointsForCorrectAnswer: 10
@@ -34,6 +44,10 @@ function AssignmentCreator() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser)
 	const [formData, setFormData] = useState(emptyAssignment);
+
+	async function handleCancelBtn() {
+	  alert("you are cancelling.");
+  }
 
 	async function handleSubmitButton() {
 		if (!formData.title || !formData.summary) return;
@@ -57,6 +71,11 @@ function AssignmentCreator() {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
 	}
 
+  function toggleUseAutoscore(e) {
+	  // const isUseAutoSubmit = (formData.isUseAutoScore) ? false : formData.isUseAutoSubmit;
+    setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit:false});
+  }
+
 
 	function handleAddQuestionButton(e) {
 		const quizQuestions = formData.quizQuestions;
@@ -65,7 +84,7 @@ function AssignmentCreator() {
 		let newQuestions = quizQuestions.slice();
 		newQuestions.push({
 			questionText: `Question #${quizQuestions.length+1}`,
-			answerOptions: ['Answer A'],
+			answerOptions: ['Answer 1'],
 			correctAnswerIndex: 0,
 			progressPointsForCompleting: 1,
 			gradePointsForCorrectAnswer: 10
@@ -75,9 +94,16 @@ function AssignmentCreator() {
 
 	function handleQuestionChange(e, qNum, propName) {
 		const quizQuestions = formData.quizQuestions;
-		quizQuestions[qNum][propName] = e.target.value;
+		quizQuestions[qNum][propName] =  e.target.value;
 		setFormData({...formData, quizQuestions})
 	}
+
+  function handleCorrectAnswerSelected(e, qNum, index) {
+    console.log(`correctAnswerIndex. WAS = ${formData.quizQuestions[qNum].correctAnswerIndex} | NOW = ${index}`);
+    const quizQuestions = formData.quizQuestions.slice();
+    quizQuestions[qNum].correctAnswerIndex = index;
+    setFormData({...formData, quizQuestions})
+  }
 
 	function handleOptionChange(e, qNum, index) {
 		const options = formData.quizQuestions[qNum].answerOptions.slice();
@@ -97,10 +123,16 @@ function AssignmentCreator() {
 		setFormData({...formData, quizQuestions: newQuizQuestions})
 	}
 
-	function removeAnswerOpt(qNum) {
+	function removeAnswerOpt(qNum, optIndex) {
+	  const radioBtns = Array.from(document.getElementsByName(`q${qNum}RadioOpts`));
+	  let correctIndex = formData.quizQuestions[qNum].correctAnswerIndex;
+    correctIndex = (correctIndex < optIndex) ? correctIndex : correctIndex-1;
+    // correctAnswerIndex = (correctAnswerIndex === optIndex) ? 0 : formData.quizQuestions[qNum].correctAnswerIndex;
+    // console.log(`NOW correctAnswerIndex = ${correctAnswerIndex}`);
+
 		const newQuizQuestions = formData.quizQuestions.slice();
-		newQuizQuestions[qNum].answerOptions = newQuizQuestions[qNum].answerOptions.slice();
-		if (newQuizQuestions[qNum].answerOptions.length > 1) newQuizQuestions[qNum].answerOptions.pop();
+		newQuizQuestions[qNum].answerOptions.splice(optIndex, 1);
+		newQuizQuestions[qNum].correctAnswerIndex = correctIndex;
 		console.warn("formData", newQuizQuestions);
 
 		setFormData({...formData, quizQuestions:newQuizQuestions})
@@ -108,85 +140,178 @@ function AssignmentCreator() {
 
 	function generateQuestionForm(qNum) {
 		const qData = formData.quizQuestions[qNum];
+		console.log(`isUseAutoSubmit`, formData.isUseAutoSubmit);
 		return (
-			<Fragment key={qNum}>
+		  <Fragment key={qNum}>
 				{/* Arbitrary maximum of 3 questions per quiz for this boilerplate.*/}
-				{(!qNum && formData.quizQuestions.length < 3) && <div className='add-question-btn text-center' onClick={handleAddQuestionButton} />}
-				<h4>The Quiz Question ({qNum+1} of {formData.quizQuestions.length})</h4>
+				{/*{(!qNum && formData.quizQuestions.length < 3) && <div className='add-question-btn text-center' onClick={handleAddQuestionButton} />}*/}
+        <h3 className={'subtext mt-2 mb-2'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
 
-				<div className="quiz-question">
-					<div className="input-bar">
-						<label>Question Text</label>
-						<input onChange={e => handleQuestionChange(e, qNum, 'questionText')} defaultValue={qData.questionText}/>
-					</div>
+        <Container className='mt-4'>
+          <Row className='m-2 border-bottom'>
+            <Col>
+              <div className='input-group w-100 pb-3'>
+                <label htmlFor={`q${qNum}-prompt`} className='mr-0' style={{width:'calc(100% - 108px'}}>
+                  <h3>Prompt</h3>
+                  <input id={`q${qNum}-prompt`}
+                    className={'form-control'}
+                    onChange={e => setFormData({...formData, questionText: e.target.value})}
+                    defaultValue={qData.questionText} />
+                </label>
+                <label htmlFor={`q${qNum}-points`}>
+                  <h3>Points</h3>
+                  <input id={`q${qNum}-points`}
+                    type="number"
+                    className='form-control input-group-append'
+                    disabled={Boolean(!formData.isUseAutoScore)}
+                    min={0} max={1000}
+                    onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}
+                    defaultValue={qData.gradePointsForCorrectAnswer}/>
+                </label>
+                </div>
+            </Col>
+          </Row>
 
-					<div className="input-bar">
-						<label>List of possible answers</label>
-						<div className="options-list">
-							{qData.answerOptions.map((opt, index) =>
-								<input key={index} onChange={e => handleOptionChange(e, qNum, index)} defaultValue={opt}/>
-							)}
-							<div className='add-remove-opts-bar'>
-								{/* Arbitrary maximum of 5 answer options per question for this boilerplate.*/}
-								<Button className='btn-sm btn-dark add-answer-opt' disabled={(qData.answerOptions.length >= 5 || qData.answerOptions[qData.answerOptions.length-1] === '')} onClick={() => addAnswerOpt(qNum)}> + </Button>
-								<Button className="btn-sm btn-dark remove-answer-opt" disabled={qData.answerOptions.length <= 1} onClick={() => removeAnswerOpt(qNum)}> - </Button>
-							</div>
-						</div>
-					</div>
+          <Row className='m-2'>
+            <Col className={'col-12'}>
+              <div className={'form-group'}>
+                <label><h3>Answer Options</h3></label>
+              </div>
+            </Col>
+          </Row>
 
-					<div className="input-bar">
-						<label>Index of correct answer (0-based)</label>
-						<input type="number" min={0} max={10}
-									 onChange={e => handleQuestionChange(e, qNum, 'correctAnswerIndex')}
-									 defaultValue={qData.correctAnswerIndex}/>
-					</div>
+          {qData.answerOptions.map((opt, index) =>
+            <Row key={index} className='m-2 form-inline align-items-center'>
+              <Col>
+                <div className='input-group'>
+                  <label className='ml-2 mr-2' htmlFor={`data-q${qNum}-a${index}`}><h3 className='subtext'>{index+1})</h3></label>
+                  <input type='text' className='form-control' id={`data-q${qNum}-a${index}`}
+                         onChange={e => handleOptionChange(e, qNum, index)} value={opt}
+                         placeholder={`Answer ${index+1}`}/>
+                  <div className='input-group-append'>
+                    <div className='input-group-text form-control'>
+                      <input className="form-check-inline" type="radio" name={`q${qNum}RadioOpts`}
+                             onChange={e => handleCorrectAnswerSelected(e, qNum, index)}
+                             checked={qData.correctAnswerIndex===index}/>
+                      correct
+                    </div>
+                  </div>
+                  <Button className='ml-2 btn xbg-dark'
+                          disabled={qData.answerOptions.length < 1}
+                          onClick={() => removeAnswerOpt(qNum, index)}>
+                    <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "trash"]} />
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          )}
+          <Row className='m-2'>
+            <Col className={'col-12 m-2 p-2 border-top'}>
+              <Button className='align-middle pl-3 pr-3 xbg-dark' disabled={qData.answerOptions.length >= 5} onClick={() => addAnswerOpt(qNum)}>
+                Add an option
+              </Button>
+            </Col>
+          </Row>
+        </Container>
 
-					<div className="input-bar">
-						<label>Grade points for giving correct answer</label>
-						<input type="number" min={0} max={1000}
-									 onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}
-									 defaultValue={qData.gradePointsForCorrectAnswer}/>
-					</div>
 
-					<div className="input-bar">
-						<label>Progress points for completing this question</label>
-						<input type="number" min={0} max={1000}
-									 onChange={e => handleQuestionChange(e, qNum, 'progressPointsForCompleting')}
-									 defaultValue={qData.progressPointsForCompleting}/>
-					</div>
-					<hr/>
-				</div>
-			</Fragment>
+				{/*<div className="quiz-question">*/}
+					{/*<div className="input-bar">*/}
+					{/*	<label>Question Text</label>*/}
+					{/*	<input onChange={e => handleQuestionChange(e, qNum, 'questionText')} defaultValue={qData.questionText}/>*/}
+					{/*</div>*/}
+
+
+					{/*<div className="input-bar">*/}
+					{/*	<label>Index of correct answer (0-based)</label>*/}
+					{/*	<input type="number" min={0} max={10}*/}
+					{/*				 onChange={e => handleQuestionChange(e, qNum, 'correctAnswerIndex')}*/}
+					{/*				 defaultValue={qData.correctAnswerIndex}/>*/}
+					{/*</div>*/}
+
+					{/*<div className="input-bar">*/}
+					{/*	<label>Grade points for giving correct answer</label>*/}
+					{/*	<input type="number" min={0} max={1000}*/}
+					{/*				 onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}*/}
+					{/*				 defaultValue={qData.gradePointsForCorrectAnswer}/>*/}
+					{/*</div>*/}
+
+					{/*<div className="input-bar">*/}
+					{/*	<label>Progress points for completing this question</label>*/}
+					{/*	<input type="number" min={0} max={1000}*/}
+					{/*				 onChange={e => handleQuestionChange(e, qNum, 'progressPointsForCompleting')}*/}
+					{/*				 defaultValue={qData.progressPointsForCompleting}/>*/}
+					{/*</div>*/}
+					{/*<hr/>*/}
+				{/*</div>*/}
+		  </Fragment>
 		)
 	}
 
 	return (
-		<div className="AssignmentCreator">
-      <h3>Create a new Quiz Assignment</h3>
-			<form className='mt-4 mb-4'>
-				<div className="input-bar lumped-with-next">
-					<label>Assignment Title:</label>
-					<input onChange={e => setFormData({...formData, 'title': e.target.value})}
-								 defaultValue={formData.title}/>
-				</div>
+    <Fragment>
+      <HeaderBar title='Create New Assignment' canCancel={true} canSave={true} onCancel={handleCancelBtn} onSave={handleSubmitButton} />
 
-				<div className="input-bar">
-					<label>Assignment Summary:</label>
-					<input onChange={e => setFormData({...formData, 'summary': e.target.value})}
-								 defaultValue={formData.summary}/>
-				</div>
+      <form>
+        <Container className='mt-2 ml-2 mr-2 mb-4'>
+        <Row className={'mt-4 mb-4'}>
+          <Col><h2>Basic Assignment Details</h2></Col>
+        </Row>
 
-				<div>
-					{formData.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
-				</div>
+        <Row className={'ml-2'}>
+          <Col className={'col-12'}>
+            <div className={'form-group'}>
+              <label htmlFor='dataTitle'><h3>Title</h3></label>
+              <input id='dataTitle' className={'form-control'} onChange={e => setFormData({...formData, 'title': e.target.value})} defaultValue={formData.title} />
+            </div>
+            <div className={'form-group'}>
+              <label htmlFor='dataSummary'><h3>Summary<span className='aside'> - Optional</span></h3></label>
+              <textarea id='dataSummary' className={'form-control'} onChange={e => setFormData({...formData, 'summary': e.target.value})} defaultValue={formData.summary}/>
+            </div>
+          </Col>
+        </Row>
+        <Row className={'ml-2'}>
+          <Col className='col-6'>
+            <label><h3>Autoscore</h3></label>
+          </Col>
+          <Col className='col-6 d-flex flex-row-reverse'>
+            <div className="custom-control custom-switch" style={{top: `6px`}}>
+              <ToggleSwitch id='dataUseAutoscore' value={formData.isUseAutoScore} handleToggle={toggleUseAutoscore} />
+            </div>
+          </Col>
+        </Row>
+        {formData.isUseAutoScore &&
+        <Row className={'ml-2'}>
+          <Col>
+            <p>
+            <span className='mr-2'>
+              <input type={'checkbox'}
+                onChange={e => setFormData({...formData, isUseAutoSubmit: e.target.checked})}
+                checked={formData.isUseAutoSubmit} />
+            </span>
+            Auto-submit score to LMS when student submits their assignment</p>
+          </Col>
+        </Row>
+        }
+        </Container>
+        <Container>
+          <h2 className='mb-3'>Quiz Details</h2>
+          {formData.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
 
-			</form>
-
-			<button onClick={handleSubmitButton}>SUBMIT</button>
-			<br/>
-			<br/>
-		</div>
-	)
+          <Row className='mt-3 mb-5'>
+            <Col className='text-center'>
+              <h3 className={'subtext'}>
+                <Button className='align-middle rounded-circle xbg-dark p-0 m-2' style={{width:'40px', height:'40px'}} onClick={handleAddQuestionButton}>
+                  <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "plus"]} />
+                </Button>
+                Add another question
+              </h3>
+            </Col>
+          </Row>
+        </Container>
+      </form>
+    </Fragment>
+  )
 }
 
 export default AssignmentCreator;

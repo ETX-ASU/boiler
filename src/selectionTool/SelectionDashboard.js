@@ -11,7 +11,7 @@ import {useLocation} from "react-router-dom";
 function SelectionDashboard() {
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get('userId');
-  	const [assignments, setAssignments] = useState([]);
+  const [assignments, setAssignments] = useState([]);
 	const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
 
 	useEffect(() => {
@@ -47,7 +47,7 @@ function SelectionDashboard() {
 	return (
 		<Container className='student-dashboard dashboard bg-white rounded h-100 m-4 p-4'>
 			<Row>
-				<Col className='main-pane rounded'>
+				<Col className='rounded'>
 					<AssignmentsSelectionList isFetchingAssignments={isFetchingAssignments} assignments={assignments} />
 				</Col>
 			</Row>

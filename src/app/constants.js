@@ -17,7 +17,9 @@ export const SORT_BY = {
 export const UI_SCREEN_MODES = {
   editHomework: 'UI_SCREEN_MODES.editHomework',
   reviewHomework: 'UI_SCREEN_MODES.reviewHomework',
+  createOrDupeAssignment: 'UI_SCREEN_MODES.createOrDupeAssignment',
   createAssignment: 'UI_SCREEN_MODES.createAssignment',
+  dupeAssignment: 'UI_SCREEN_MODES.dupeAssignment',
   viewAssignment: 'UI_SCREEN_MODES.viewAssignment',
   editAssignment: 'UI_SCREEN_MODES.editAssignment',
   devUtilityDashboard: 'UI_SCREEN_MODES.devUtilityDashboard',
