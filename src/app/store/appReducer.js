@@ -3,17 +3,16 @@ import {APP_NAMESPACE, UI_SCREEN_MODES} from "../constants";
 
 export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 export const SET_SESSION_DATA = APP_NAMESPACE+'.SET_SESSION_DATA';
+export const EDIT_DUPED_ASSIGNMENT = APP_NAMESPACE+'.EDIT_DUPED_ASSIGNMENT';
 export const UPDATE_STUDENTS_DATA = APP_NAMESPACE+'.UPDATE_STUDENTS_DATA';
 export const SET_CURRENTLY_REVIEWED_STUDENT = APP_NAMESPACE+'.SET_CURRENTLY_REVIEWED_STUDENT';
 export const SET_USER_HOMEWORK = APP_NAMESPACE+'.SET_USER_HOMEWORK';
 export const SET_GRADES_DATA = APP_NAMESPACE+'.SET_GRADES_DATA';
-// export const SET_HOMEWORK_GRADING_DATA = APP_NAMESPACE+'SET_HOMEWORK_GRADING_DATA';
 
 
 export const SET_ACTIVE_USER_DATA = APP_NAMESPACE+'.SET_ACTIVE_USER_DATA';
 export const SET_ACTIVE_UI_SCREEN_MODE = APP_NAMESPACE+'.SET_ACTIVE_UI_SCREEN_MODE';
 export const SET_ACTIVE_ASSIGNMENT_ID = APP_NAMESPACE+'.SET_ACTIVE_ASSIGNMENT_ID';
-export const SET_ACTIVE_COHORT_DATA = APP_NAMESPACE+'.SET_ACTIVE_COHORT_DATA';
 export const LOGOUT_ACTIVE_USER = APP_NAMESPACE+'.LOGOUT_ACTIVE_USER';
 
 
@@ -24,6 +23,13 @@ export function setSessionData(activeUser, assignment, courseId, members) {
     assignment,
     courseId,
     members
+  }
+}
+
+export function editDupedAssignment(assignment) {
+  return {
+    type: EDIT_DUPED_ASSIGNMENT,
+    assignment
   }
 }
 
@@ -85,14 +91,6 @@ export function setCurrentlyReviewedStudentId(currentlyReviewedStudentId) {
   }
 }
 
-
-
-export function setActiveUserData(activeUser) {
-  return {
-    type: SET_ACTIVE_USER_DATA,
-    activeUser
-  }
-}
 
 export function logoutActiveUser() {
   return {
@@ -178,6 +176,9 @@ function appReducer(currentState = defaultState, action) {
         members:action.members
       });
 
+    case EDIT_DUPED_ASSIGNMENT:
+      return Object.assign({}, currentState, {assignment: action.assignment, activeUiScreenMode: UI_SCREEN_MODES.dupeAssignment})
+
     case UPDATE_STUDENTS_DATA:
       return Object.assign({}, currentState, {members: action.members });
 
@@ -194,17 +195,9 @@ function appReducer(currentState = defaultState, action) {
     //   return Object.assign({}, currentState, {gradingData: action.gradingData});
 
 
-    case SET_ACTIVE_USER_DATA:
-      if (!action.activeUser.assignmentId) {
-        return Object.assign({}, currentState, {activeUser:action.activeUser, entryAssignmentId:null, activeUiScreenMode: UI_SCREEN_MODES.createAssignment})
-      }
-      return Object.assign({}, currentState, {activeUser:action.activeUser, entryAssignmentId:action.activeUser.assignmentId})
-
+      //TODO: Get rid of these
     case LOGOUT_ACTIVE_USER:
       return Object.assign({}, currentState, {activeUser: defaultUser});
-
-    case SET_ACTIVE_COHORT_DATA:
-      return Object.assign({}, currentState, {activeCohortData: action.activeCohortData});
 
     default:
       return currentState;
