@@ -29,6 +29,16 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+input, .form-control {
+  border-color: var(--x-med-gray) !important;
+
+  &:disabled {
+    border-color: var(--x-light-gray) !important;
+    color: var(--x-light-gray);
+    font-style: italic;
+  }
+}
+
 h1 {
   font-size: 24px;
   line-height: 38px;
