@@ -52,7 +52,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-      notifyUserOfError(`=====> ERROR when fetching homeworks ${error}`);
+      notifyUserOfError(`=====> ERROR when fetchAndSetHomework ${error}`);
 		}
 	}
 
