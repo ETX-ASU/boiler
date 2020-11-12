@@ -6,6 +6,9 @@ import {Col, Container, Row} from "react-bootstrap";
 import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
+//import { hasValidSession } from '@asu-etx/rl-client-lib';
+import { hasValidSession } from '../lti/ValidateSessionService';
+
 
 
 function SelectionDashboard() {
@@ -55,4 +58,4 @@ function SelectionDashboard() {
 	);
 }
 
-export default withAuthenticator(SelectionDashboard);
+export default !hasValidSession() ?  SelectionDashboard : withAuthenticator(SelectionDashboard);

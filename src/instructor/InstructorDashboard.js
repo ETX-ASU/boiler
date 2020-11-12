@@ -7,7 +7,8 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
-
+//import { hasValidSession } from '@asu-etx/rl-client-lib';
+import { hasValidSession } from '../lti/ValidateSessionService';
 
 function InstructorDashboard() {
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
@@ -32,6 +33,7 @@ function InstructorDashboard() {
 			</Row>
 		</Container>
 	);
-}
+} 
+export default !hasValidSession() ? InstructorDashboard : withAuthenticator(InstructorDashboard);
 
-export default withAuthenticator(InstructorDashboard);
+

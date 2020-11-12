@@ -1,19 +1,27 @@
 import moment from "moment";
 import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/constants";
-
+/*
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-  submitResourceSelection as realSubmitResourceSelection,
+  //submitResourceSelection as realSubmitResourceSelection,
+ import {
+  getLineItems as realGetLineItems
+} from '../lti/LineItemService';
+  // 
+} from '@asu-etx/rl-client-lib'
+*/
+
+import {
   getGrades as realGetGrades,
+  submitInstructorGrade as realInstructorSubmitGrade,
+  submitGrade as realAutoSubmitGrade,
+} from '../lti/GradeService';
+
+import {
   getUsers as realGetUsers,
   getUnassignedStudents as realGetUnassignedStudents,
   getAssignedStudents as realGetAssignedStudents,
-  submitInstructorGrade as realInstructorSubmitGrade,
-  submitGrade as realAutoSubmitGrade,
-  // getLineItems as realGetLineItems,
-  // deleteLineItem as realDeleteLineItem,
-  // hasValidSession as realHasValidSession,
-} from '@asu-etx/rl-client-lib'
+} from '../lti/UserService';
 
 import {
   mockGetUsers,

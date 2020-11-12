@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import './App.scss';
 import {withAuthenticator} from '@aws-amplify/ui-react';
+//import { hasValidSession } from '@asu-etx/rl-client-lib';
+import { hasValidSession } from '../lti/ValidateSessionService';
 import {useDispatch, useSelector} from "react-redux";
 
 import { setActiveUiScreenMode, setSessionData } from "./store/appReducer";
@@ -28,6 +30,7 @@ function App() {
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get('userId');
   const activeRole = params.get('role');
+
   const assignmentId = params.get('resourceId');
   const courseId = params.get('courseId');
 
@@ -100,4 +103,4 @@ function App() {
 	);
 }
 
-export default withAuthenticator(App);
+export default !hasValidSession() ? App : withAuthenticator(App);
