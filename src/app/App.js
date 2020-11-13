@@ -20,13 +20,9 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers} from "../utils/RingLeader";
-
-import API from "@aws-amplify/api";
 import aws_exports from '../aws-exports';
 
 API.configure(aws_exports);
-
-
 
 function App() {
 	const dispatch = useDispatch();
