@@ -17,16 +17,16 @@
       }
     }
   },
-  "proddy": {
+  "stage": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-boiler-proddy-132714-authRole",
-      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-proddy-132714-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-proddy-132714-authRole",
+      "AuthRoleName": "amplify-boiler-stage-164450-authRole",
+      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-stage-164450-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-stage-164450-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-boiler-proddy-132714-deployment",
-      "UnauthRoleName": "amplify-boiler-proddy-132714-unauthRole",
-      "StackName": "amplify-boiler-proddy-132714",
-      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-proddy-132714/746c62d0-2525-11eb-8dfd-021710aaff3d",
+      "DeploymentBucketName": "amplify-boiler-stage-164450-deployment",
+      "UnauthRoleName": "amplify-boiler-stage-164450-unauthRole",
+      "StackName": "amplify-boiler-stage-164450",
+      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-stage-164450/0f4cb780-2541-11eb-a3d4-02f676be589d",
       "AmplifyAppId": "dyl4ur5zvn9kt"
     },
     "categories": {
