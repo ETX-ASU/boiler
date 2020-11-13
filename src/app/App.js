@@ -128,9 +128,9 @@ function App() {
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
-			<Row className="mb-3">
-				<LoginBar activeUser={activeUser} />
-			</Row>
+			{/*<Row className="mb-3">*/}
+			{/*	<LoginBar activeUser={activeUser} />*/}
+			{/*</Row>*/}
 
 			<Row className='main-content-row'>
 				{!activeUser?.id && <LoadingIndicator msgClasses='xtext-white' loadingMsg='LOADING ASSIGNMENTS'/>}

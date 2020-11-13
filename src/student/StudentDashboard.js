@@ -64,9 +64,9 @@ function StudentDashboard() {
 
 
 	return (
-		<Container className='student-dashboard dashboard bg-white rounded h-100 p-4'>
-			<Row>
-				<Col className='rounded'>
+    <Container className='student-dashboard dashboard bg-white rounded h-100'>
+      <Row className={'m-0'}>
+        <Col className='rounded p-0'>
           {isLoading && <LoadingIndicator loadingMsg='LOADING HOMEWORK'/>}
 
 					{!isLoading && (activeUiScreenMode === UI_SCREEN_MODES.reviewHomework) &&

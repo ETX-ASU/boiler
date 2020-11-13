@@ -44,6 +44,30 @@ input, .form-control {
   max-width: fit-content;
 }
 
+.answer-opt {
+  &:hover {
+    cursor: pointer;
+    background-color: var(--x-gray);
+  }
+  &.selected {
+    .form-control {
+      background-color: lightgoldenrodyellow;
+    }
+
+    .input-group-prepend {
+      background-color: goldenrod;
+
+      .input-group-text {
+        font-weight: bold;
+        background-color: unset;
+      }
+    }
+  }
+  .input-group-prepend {
+    border: 1px solid var(--x-gray) !important;
+  }
+}
+
 h1 {
   font-size: 24px;
   line-height: 38px;
@@ -157,3 +181,4 @@ label {
   width: calc(100% - 60px);
   margin: 0 40px 0 10px;
 }
+

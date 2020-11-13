@@ -1,11 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {API} from 'aws-amplify';
-import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  createAssignment as createAssignmentMutation,
-  updateAssignment as updateAssignmentMutation
-} from '../../graphql/mutations';
+import {updateAssignment as updateAssignmentMutation} from '../../graphql/mutations';
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../../app/constants";
 import {Button, Col, Container, Row} from "react-bootstrap";

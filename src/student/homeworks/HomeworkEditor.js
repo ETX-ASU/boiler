@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import moment from "moment";
 import {useDispatch} from "react-redux";
 import {UI_SCREEN_MODES} from "../../app/constants";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations";
 import {API} from "aws-amplify";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
+import HeaderBar from "../../app/HeaderBar";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faCheck} from '@fortawesome/free-solid-svg-icons'
+library.add(faCheck);
+
+
 
 /** This screen is shown to the student so they can "engage" with the homework assignment.
  * Any work they do or changes or interactions they make would be recorded and the updates
@@ -14,8 +21,7 @@ import {setActiveUiScreenMode} from "../../app/store/appReducer";
 function HomeworkEditor(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
-
-	const [formData, setFormData] = useState(Object.assign({}, {quizAnswers:homework.quizAnswers}));
+	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
 
 	async function handleSubmitButton() {
 		const inputData = Object.assign({}, homework, {
@@ -32,7 +38,6 @@ function HomeworkEditor(props) {
     delete inputData.gradingProgress;
 
 		try {
-		  console.log('inputData', inputData);
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (!result) throw new Error ("result from updateHomeworkMutation came back null.");
     } catch (e) {
@@ -42,58 +47,64 @@ function HomeworkEditor(props) {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
 	}
 
-
-	function handleOptClicked(qNum, optNum) {
-		const qAnswers = formData.quizAnswers.slice();
-		qAnswers[qNum] = optNum;
-		setFormData(Object.assign({}, formData, {quizAnswers: qAnswers}))
+	function handleOptSelected(qNum, optNum) {
+		const quizAnswers = formData.quizAnswers.slice();
+    quizAnswers[qNum] = optNum;
+		setFormData(Object.assign({}, formData, {quizAnswers}))
 	}
 
-	function generateQuestionAndOpts(questionNum) {
-		return (
-      <Row className='mt-4' key={questionNum}>
-				<Col className="quiz-question">
-          <legend className='ml-2'>Question #{questionNum+1}. {assignment.quizQuestions[questionNum].questionText}</legend>
-					{assignment.quizQuestions[questionNum].answerOptions.map((optText, optNum) =>
-						<div key={optNum} className="form-check ml-4">
-							<input
-								className="form-check-input"
-								id={`q-${questionNum}-opt-${optNum}`}
-								onChange={() => handleOptClicked(questionNum, optNum)} key={optNum} type="radio"
-								name={`questionChoice_${questionNum}`} value={optNum}
-								defaultChecked={(homework.quizAnswers[questionNum] === optNum) ? "checked" : ""}
-							/>
-							<label className="form-check-label" htmlFor={`q-${questionNum}-opt-${optNum}`}>{optText}</label>
-						</div>
-					)}
-				</Col>
-			</Row>
-		)
-	}
 
 	return (
-		<Container className="homework-viewer">
+		<Fragment>
+      <HeaderBar title={assignment.title} isLimitedEditing={false} canCancel={false} canSave={true} onSave={handleSubmitButton}/>
+
 			<form>
-        <Row className='xbg-light p-2'>
-          <Col>
-            <label>Assignment Title:</label>
-            <p className='summary-data xt-med'>{assignment.title}</p>
-          </Col>
-          <Col>
-            <label>Homework Summary:</label>
-            <p className='summary-data xt-med'>{assignment.summary}</p>
-          </Col>
-          <Col>
-            <label>Start Date:</label>
-            <p className='summary-data xt-med'>{moment(assignment.startDate).format('YYYY-MM-DD')}</p>
-          </Col>
-        </Row>
-				{assignment.quizQuestions.map((question, index) => generateQuestionAndOpts(index) )}
-				<Row className='pt-4 pl-2 pr-2'>
-					<Button onClick={handleSubmitButton}>SUBMIT</Button>
-				</Row>
+        <Container className='mt-2 ml-1 mr-2 mb-4'>
+          <Row className={'mt-4 mb-4'}>
+            <Col><p>{assignment.summary}</p></Col>
+          </Row>
+        </Container>
+
+        <Container className='mt-3 mb-3'>
+          {formData.quizQuestions.map((question, qNum) =>
+            <Fragment key={qNum}>
+              <Row>
+                <Col>
+                  <h3 className={'subtext mt-2 mb-3 ml-1'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
+                </Col>
+              </Row>
+              <Row className='ml-3 mr-2'>
+                <Col>
+                  <h3>Question</h3>
+                  <p>{question.questionText}</p>
+                  <h3>Your Answer</h3>
+                </Col>
+              </Row>
+              <Row className='ml-4 mr-2 mt-1 p-2 pt-3 xbg-light'>
+                {question.answerOptions.map((opt, index) =>
+                <div key={index} className={`input-group mb-2 answer-opt ${(formData.quizAnswers[qNum] === index) ? 'selected':''}`}>
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">{index+1}</span>
+                  </div>
+                  <div className={'form-control h-auto opt-text'}
+                       onClick={() => handleOptSelected(qNum, index)}
+                       aria-label={opt}>
+                    {opt}
+                    { (formData.quizAnswers[qNum] === index) &&
+                    <div className="input-group-append float-right">
+                      <FontAwesomeIcon icon={faCheck} size='lg'/>
+                    </div>
+                    }
+                  </div>
+                </div>
+                )}
+              </Row>
+            </Fragment>
+          )}
+        </Container>
+
 			</form>
-		</Container>
+		</Fragment>
 	)
 }
 
