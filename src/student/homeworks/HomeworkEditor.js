@@ -59,16 +59,16 @@ function HomeworkEditor(props) {
       <HeaderBar title={assignment.title} isLimitedEditing={false} canCancel={false} canSave={true} onSave={handleSubmitButton}/>
 
 			<form>
-        <Container className='mt-2 ml-1 mr-2 mb-4'>
-          <Row className={'mt-4 mb-4'}>
+        <Container className='mt-2 ml-1 mr-2'>
+          <Row className={'mt-4'}>
             <Col><p>{assignment.summary}</p></Col>
           </Row>
         </Container>
 
-        <Container className='mt-3 mb-3'>
+        <Container className='pb-5'>
           {formData.quizQuestions.map((question, qNum) =>
             <Fragment key={qNum}>
-              <Row>
+              <Row className='mt-4'>
                 <Col>
                   <h3 className={'subtext mt-2 mb-3 ml-1'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
                 </Col>
