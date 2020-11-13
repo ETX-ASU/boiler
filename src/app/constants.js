@@ -23,6 +23,7 @@ export const UI_SCREEN_MODES = {
   viewAssignment: 'UI_SCREEN_MODES.viewAssignment',
   editAssignment: 'UI_SCREEN_MODES.editAssignment',
   devUtilityDashboard: 'UI_SCREEN_MODES.devUtilityDashboard',
+  assignmentSelectorTool: 'UI_SCREEN_MODES.assignmentSelectorTool',
 }
 
 export const ASSIGNMENT_STATUS_TYPES = {

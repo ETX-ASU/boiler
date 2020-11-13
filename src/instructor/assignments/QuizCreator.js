@@ -126,7 +126,7 @@ function QuizCreator(props) {
                   <Button className='ml-2 btn xbg-dark'
                           disabled={qData.answerOptions.length <= 1}
                           onClick={() => removeAnswerOpt(qNum, index)}>
-                    <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "trash"]} />
+                    <FontAwesomeIcon className='btn-icon mr-0' icon={faTrash} />
                   </Button>
                 </div>
               </Col>
@@ -153,7 +153,7 @@ function QuizCreator(props) {
         <Col className='text-center'>
           <h3 className={'subtext'}>
             <Button className='align-middle rounded-circle xbg-dark p-0 m-2' style={{width:'40px', height:'40px'}} onClick={handleAddQuestionButton}>
-              <FontAwesomeIcon className='btn-icon mr-0' icon={["fa", "plus"]} />
+              <FontAwesomeIcon className='btn-icon mr-0' icon={faPlus} />
             </Button>
             Add another question
           </h3>

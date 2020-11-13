@@ -5,6 +5,8 @@ export const onCreateAssignment = /* GraphQL */ `
   subscription OnCreateAssignment {
     onCreateAssignment {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary
@@ -29,6 +31,8 @@ export const onUpdateAssignment = /* GraphQL */ `
   subscription OnUpdateAssignment {
     onUpdateAssignment {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary
@@ -53,6 +57,8 @@ export const onDeleteAssignment = /* GraphQL */ `
   subscription OnDeleteAssignment {
     onDeleteAssignment {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary

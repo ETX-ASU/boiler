@@ -1,14 +1,11 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {UI_SCREEN_MODES, HOMEWORK_PROGRESS} from "../../app/constants";
+import {UI_SCREEN_MODES} from "../../app/constants";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import {
-  setCurrentlyReviewedStudentId,
   setActiveUiScreenMode,
-  updateStudentsData,
   setGradesData,
-  addHomeworksData,
-  setHomeworkGradingData
+  addHomeworksData, setCurrentlyReviewedStudentId,
 } from "../../app/store/appReducer";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {API, graphqlOperation} from "aws-amplify";
@@ -16,10 +13,15 @@ import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
 import {fetchAllGrades} from "../../utils/RingLeader";
-import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {useStudents} from "../../app/store/AppSelectors";
 import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
+import HeaderBar from "../../app/HeaderBar";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faEdit, faPenAlt, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
+library.add(faEdit, faPenAlt, faChevronLeft);
 
 
 function AssignmentViewer(props) {
@@ -42,7 +44,7 @@ function AssignmentViewer(props) {
     if (!assignment?.id) return;
     fetchScores();
     fetchBatchOfHomeworks('INIT');
-  }, []);
+  }, [assignment.id]);
 
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
@@ -73,28 +75,9 @@ function AssignmentViewer(props) {
 
   function handleHomeworksResult(result) {
     let rawHomeworks = result.data.listHomeworks.items;
-    //
-    // let updatedCount = 0;
-    // const updatedStudents = students.map(s => {
-    //   const matchingHomework = rawHomeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
-    //   if (!matchingHomework) return s;
-    //
-    //   updatedCount++;
-    //   let studentOutput = {quizAnswers:matchingHomework.quizAnswers};
-    //   matchingHomework.percentCompleted = calcPercentCompleted(assignment, matchingHomework);
-    //   matchingHomework.autoScore = calcAutoScore(assignment, matchingHomework);
-    //   matchingHomework.progress = getHomeworkStatus(s.homework.gradingProgress, matchingHomework);
-    //   delete matchingHomework.assignment;
-    //   delete matchingHomework.studentOwnerId;
-    //   delete matchingHomework.assignmentId;
-    //   delete matchingHomework.quizAnswers;
-    //
-    //   return Object.assign({}, s, {
-    //     homework: Object.assign({}, s.homework, matchingHomework, {studentOutput})})
-    // })
 
     if (isLoadingHomeworks) setIsLoadingHomeworks(false);
-    // if (updatedCount) dispatch(updateStudentsData(updatedStudents));
+
     dispatch(addHomeworksData(rawHomeworks));
 
     setNextTokenVal(result.data.listHomeworks.nextToken);
@@ -114,15 +97,12 @@ function AssignmentViewer(props) {
     console.log('-----------> handleRefreshAfterGradeSubmission()')
   }
 
-  // function handleGradingButton() {
-  //   // let orderedHomeworks = homeworks.filter(h => (!isSkipGradedStudents) || (h.progress !== HOMEWORK_PROGRESS.fullyGraded));
-  //   // if (isHideStudentIdentity) orderedHomeworks.sort((a,b) => a.randomOrderNum - b.randomOrderNum);
-  //
-  //   // if (orderedHomeworks?.length) dispatch(setCurrentlyReviewedStudentId(orderedHomeworks[0].id));
-  // }
-
-	function handleEditButton() {
+	function handleEditBtn() {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editAssignment));
+	}
+
+	function handleBatchSubmitBtn() {
+		alert('about to batch submit grades');
 	}
 
   function toggleHideAndRandomize(e) {
@@ -131,46 +111,66 @@ function AssignmentViewer(props) {
   }
 
 
-
-	if (props.isLoading) {
-		return (
-			<div className="nav-pane">
-				<LoadingIndicator loadingMsg={'LOADING ASSIGNMENT DATA'} size={3} />
-			</div>
-		)
-	}
-
 	return (
-		<Container className="assignment-viewer">
-      <Row className='xbg-light'>
-        <Col><h2>Sportzball</h2></Col>
-        <Col className='col-3 text-right'><Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button></Col>
-      </Row>
-      {!reviewedStudentId && (students?.length > 0) &&
-      <Fragment>
-        <Row className='mt-2 mb-5'>
-          <Col className='text-left'>
-            {/*<Button className='btn-sm xbg-dark m-2' disabled={!students?.length} onClick={handleGradingButton}>Start Grading</Button>*/}
-          </Col>
-          <Col className='text-left'>
-            <label onClick={(e) => e.stopPropagation()} className='m-0 mr-3 text-white align-middle'>
-              <input type={'checkbox'} className='mr-1 no-click-thru' onChange={toggleHideAndRandomize} defaultChecked={isHideStudentIdentity}/>
-              Hide identities & randomize
-            </label>
-          </Col>
-          {/*<Col className='text-right'>*/}
-          {/*  <Button className='btn-sm xbg-dark m-2' onClick={handleEditButton}>Edit Assignment</Button>*/}
-          {/*</Col>*/}
-        </Row>
-        <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} />
-      </Fragment>
+    <Fragment>
+      {(!reviewedStudentId) ?
+        <HeaderBar title={`Overview: ${(assignment.title) ? assignment.title : ''}`}>
+          <Button onClick={handleEditBtn}>
+            <FontAwesomeIcon className='btn-icon' icon={faPenAlt}/>Edit
+          </Button>
+        </HeaderBar> :
+        <HeaderBar onBackClick={() => dispatch(setCurrentlyReviewedStudentId(''))} title={assignment.title}>
+          <span className='mr-2'>
+            <input type={'checkbox'} onChange={toggleHideAndRandomize} checked={isHideStudentIdentity}/>
+            Hide identity & randomize
+          </span>
+        </HeaderBar>
       }
 
-      {reviewedStudentId &&
-        // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
-        <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
-      }
-		</Container>
+      <Container className="assignment-viewer">
+        {props.loading &&
+          <div className="nav-pane">
+            <LoadingIndicator loadingMsg={'LOADING ASSIGNMENT DATA'} size={3} />
+          </div>
+        }
+        {!reviewedStudentId && (students?.length > 0) &&
+        <Fragment>
+          <Row className='mt-2 mb-2 pt-2 pb-2'>
+            <Col className='col-6'>
+              <Button onClick={handleBatchSubmitBtn}>
+                <FontAwesomeIcon className='btn-icon' icon={faPenAlt} />Batch Submit
+              </Button>
+            </Col>
+            <Col className='text-right'>
+              <span className='mr-2'>
+                <input className='mr-2' type={'checkbox'} onChange={e => dispatch(toggleHideStudentIdentity())} checked={isHideStudentIdentity}/>
+                Hide identity & randomize
+              </span>
+            </Col>
+          </Row>
+          <Row className='mt-2 mb-5'>
+            <Col>
+              <h3>Summary</h3>
+              <p className='summary-data xt-med'>{assignment.summary}</p>
+            </Col>
+            <Col className='col-3 text-right'>
+              <h3>Autoscore</h3>
+              <p className='summary-data xt-med float-right'>
+                {assignment.isUseAutoScore && <FontAwesomeIcon className='mr-2' icon={faCheck} size='lg'/>}
+                {(assignment.isUseAutoScore) ? 'Enabled' : 'Disabled'}
+              </p>
+            </Col>
+          </Row>
+          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} />
+        </Fragment>
+        }
+
+        {reviewedStudentId && (students?.length > 0) &&
+          // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
+          <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
+        }
+      </Container>
+    </Fragment>
 	)
 }
 

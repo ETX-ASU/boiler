@@ -8,6 +8,8 @@ export const createAssignment = /* GraphQL */ `
   ) {
     createAssignment(input: $input, condition: $condition) {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary
@@ -35,6 +37,8 @@ export const updateAssignment = /* GraphQL */ `
   ) {
     updateAssignment(input: $input, condition: $condition) {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary
@@ -62,6 +66,8 @@ export const deleteAssignment = /* GraphQL */ `
   ) {
     deleteAssignment(input: $input, condition: $condition) {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary

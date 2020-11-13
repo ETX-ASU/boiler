@@ -1,25 +1,12 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {logoutActiveUser} from "../store/appReducer";
+import {useSelector} from "react-redux";
 import {APP_VERSION_NUM} from "../constants";
 import "./LoginBar.css";
-import { Auth } from 'aws-amplify';
-import {Container, Col, Row, Button} from 'react-bootstrap';
+import {Container, Col, Row} from 'react-bootstrap';
 
 
 function LoginBar() {
-	const dispatch = useDispatch();
 	const {id, givenName, familyName, activeRole} = useSelector(state => state.app.activeUser);
-
-	const handleSignOut = async () => {
-		try {
-			await Auth.signOut();
-			await dispatch(logoutActiveUser());
-			console.log('Signed out');
-		} catch (error) {
-			console.error('Error signing out user ', error)
-		}
-	}
 
 	const fullName = (!!id) ? `${activeRole}: ${givenName} ${familyName}` : `Logged Out`;
 
@@ -36,14 +23,9 @@ function LoginBar() {
 				</Col>
 				<Col className='col-5 text-right align-middle'>
 					<span className='user-name'>{fullName}</span>
-					<span className='text-right'>
-						{!!id && <Button className='btn-sm xbg-darkest ml-4' onClick={handleSignOut}>Sign out</Button>}
-						{!id && <Button className='btn-sm xbg-darkest ml-4' onClick={() => window.location.reload(true)}>Sign In</Button>}
-					</span>
 				</Col>
 			</Row>
 		</Container>
-
 	)
 }
 
