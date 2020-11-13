@@ -50,7 +50,7 @@ function AssignmentCreator() {
     // dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
   }
 
-	async function handleSubmitButton() {
+	async function handleSubmitBtn() {
 	  console.log("Save pants!")
     // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title || !formData.summary) return;
@@ -87,7 +87,10 @@ function AssignmentCreator() {
 
 	return (
     <Fragment>
-      <HeaderBar title='Create New Assignment' canCancel={true} canSave={true} onCancel={handleCancelBtn} onSave={handleSubmitButton} />
+      <HeaderBar title='Create New Assignment'>
+        <Button onClick={handleCancelBtn} className='mr-2'>Cancel</Button>
+        <Button onClick={handleSubmitBtn}>Update</Button>
+      </HeaderBar>
 
       <form>
         <Container className='mt-2 ml-2 mr-2 mb-4'>

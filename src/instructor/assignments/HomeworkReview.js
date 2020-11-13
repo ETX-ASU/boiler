@@ -1,13 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
+import React, {Fragment, useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {HOMEWORK_PROGRESS} from "../../app/constants";
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
 import {getStatusMsg} from "../../utils/homeworkUtils";
+import HeaderBar from "../../app/HeaderBar";
+import {setCurrentlyReviewedStudentId} from "../../app/store/appReducer";
+import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPenAlt} from "@fortawesome/free-solid-svg-icons";
 
 
 function HomeworkReview(props) {
+  const dispatch = useDispatch();
   const {students, reviewedStudentId, assignment} = props;
   const reviewedStudent = students.find(s => s.id === reviewedStudentId);
   const {homework, homeworkStatus, randomOrderNum} =  reviewedStudent;
@@ -32,57 +38,69 @@ function HomeworkReview(props) {
   }
 
 	return (
-		<Container className="homework-viewer">
-      <Row>
-        <Col className='p-0 pr-4'>
-          <GradingBar refreshHandler={props.refreshGrades} assignment={assignment} students={students} reviewedStudent={reviewedStudent}/>
-        </Col>
-      </Row>
+	  <Fragment>
+      {/*<HeaderBar onBackClick={(reviewedStudentId) ? () => dispatch(setCurrentlyReviewedStudentId('')) : null}*/}
+      {/*           title={`Overview: ${(assignment.title) ? assignment.title : ''}`}>*/}
+      {/*  <span className='mr-2'>*/}
+      {/*    <input type={'checkbox'}*/}
+      {/*           onChange={e => dispatch(toggleHideStudentIdentity())}*/}
+      {/*           checked={isHideStudentIdentity}/>*/}
+      {/*           Hide identity & randomize*/}
+      {/*  </span>*/}
+      {/*</HeaderBar>*/}
 
-      <Row className='p-0'>
-        <Col className='w-auto xt-large xtext-dark font-weight-bold xbg-light'>{studentRefName}</Col>
-      </Row>
-
-      {!isHideStudentIdentity &&
-      <Row className='mt-5 mb-5 p-0'>
-        <Col className='p-0'>
-          <label>Student:</label>
-          <p className='summary-data xt-med ml-3 mb-2'>{studentRefName}</p>
-        </Col>
-        <Col className='no-gutters'>
-          <label>Email:</label>
-          <p className='summary-data xt-med ml-3 mb-2'>{reviewedStudent.email}</p>
-        </Col>
-        <Col className='no-gutters'>
-          <label>Progress:</label>
-          <p className='summary-data xt-med ml-3 mb-2'>{homeworkStatus}</p>
-        </Col>
-      </Row>
-      }
-
-      {showWork && assignment.quizQuestions.map((question, index) =>
-        <Row key={index}>
-          <Col className="quiz-question">
-            <label>You answered question #{index+1} as follows:</label>
-            <legend>{assignment.quizQuestions[index].questionText}</legend>
-            {assignment.quizQuestions[index].answerOptions.map((optText, optNum) =>
-              <div key={optNum} className="form-check">
-                {(homework.quizAnswers[index] === optNum) && <span className="selected-indicator">></span>}
-                <label className={`form-check-label reviewed-answer ${(homework.quizAnswers[index] === optNum) ? "checked" : ""}`} htmlFor={`q-${index}-opt-${optNum}`}>{optText}</label>
-              </div>
-            )}
-            <hr />
+      <Container className="homework-viewer">
+        <Row>
+          <Col className='p-0 pr-4'>
+            <GradingBar refreshHandler={props.refreshGrades} assignment={assignment} students={students} reviewedStudent={reviewedStudent}/>
           </Col>
         </Row>
-      )}
 
-      {!showWork &&
-      <Row className='mt-5 mb-5'>
-        <Col className='w-auto xt-large xtext-dark font-weight-bold'>{statusMsg}</Col>
-      </Row>
-      }
+        <Row className='p-0'>
+          <Col className='w-auto xt-large xtext-dark font-weight-bold xbg-light'>{studentRefName}</Col>
+        </Row>
 
-    </Container>
+        {!isHideStudentIdentity &&
+        <Row className='mt-5 mb-5 p-0'>
+          <Col className='p-0'>
+            <label>Student:</label>
+            <p className='summary-data xt-med ml-3 mb-2'>{studentRefName}</p>
+          </Col>
+          <Col className='no-gutters'>
+            <label>Email:</label>
+            <p className='summary-data xt-med ml-3 mb-2'>{reviewedStudent.email}</p>
+          </Col>
+          <Col className='no-gutters'>
+            <label>Progress:</label>
+            <p className='summary-data xt-med ml-3 mb-2'>{homeworkStatus}</p>
+          </Col>
+        </Row>
+        }
+
+        {showWork && assignment.quizQuestions.map((question, index) =>
+          <Row key={index}>
+            <Col className="quiz-question">
+              <label>You answered question #{index+1} as follows:</label>
+              <legend>{assignment.quizQuestions[index].questionText}</legend>
+              {assignment.quizQuestions[index].answerOptions.map((optText, optNum) =>
+                <div key={optNum} className="form-check">
+                  {(homework.quizAnswers[index] === optNum) && <span className="selected-indicator">></span>}
+                  <label className={`form-check-label reviewed-answer ${(homework.quizAnswers[index] === optNum) ? "checked" : ""}`} htmlFor={`q-${index}-opt-${optNum}`}>{optText}</label>
+                </div>
+              )}
+              <hr />
+            </Col>
+          </Row>
+        )}
+
+        {!showWork &&
+        <Row className='mt-5 mb-5'>
+          <Col className='w-auto xt-large xtext-dark font-weight-bold'>{statusMsg}</Col>
+        </Row>
+        }
+
+      </Container>
+    </Fragment>
 	)
 }
 

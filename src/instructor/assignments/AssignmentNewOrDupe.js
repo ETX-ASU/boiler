@@ -83,7 +83,10 @@ function AssignmentNavOrDupe() {
 
 	return (
 		<Fragment>
-      <HeaderBar title='Create New Assignment' canCancel={false} canSave={false} />
+      <HeaderBar title='Create New Assignment' canCancel={false} canSave={false} >
+        <Button disabled className='mr-2'>Cancel</Button>
+        <Button disabled>Update</Button>
+      </HeaderBar>
 
       <Container className='m-2'>
         {isFetchingAssignments &&
@@ -138,7 +141,7 @@ function AssignmentNavOrDupe() {
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
                     <Button className='align-middle' onClick={handleCreateAssignment}>
-                      <FontAwesomeIcon className='btn-icon' icon={["fa", "plus"]} />
+                      <FontAwesomeIcon className='btn-icon' icon={faPlus} />
                       New Assignment
                     </Button>
                   </Col>
@@ -150,7 +153,7 @@ function AssignmentNavOrDupe() {
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
                     <Button className='align-middle' onClick={handleDupeAssignment}>
-                      <FontAwesomeIcon className='btn-icon' icon={["fa", "copy"]} />
+                      <FontAwesomeIcon className='btn-icon' icon={faCopy} />
                       Duplicate
                     </Button>
                   </Col>

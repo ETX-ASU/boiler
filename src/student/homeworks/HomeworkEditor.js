@@ -23,7 +23,7 @@ function HomeworkEditor(props) {
 	const {homework, assignment} = props;
 	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
 
-	async function handleSubmitButton() {
+	async function handleSubmitBtn() {
 		const inputData = Object.assign({}, homework, {
 			quizAnswers: formData.quizAnswers.slice(),
 			beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
@@ -56,7 +56,9 @@ function HomeworkEditor(props) {
 
 	return (
 		<Fragment>
-      <HeaderBar title={assignment.title} isLimitedEditing={false} canCancel={false} canSave={true} onSave={handleSubmitButton}/>
+      <HeaderBar title={assignment.title}>
+        <Button onClick={handleSubmitBtn}>Submit</Button>
+      </HeaderBar>
 
 			<form>
         <Container className='mt-2 ml-1 mr-2'>

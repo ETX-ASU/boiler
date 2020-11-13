@@ -34,7 +34,7 @@ function HomeworkViewer(props) {
 					<p className='summary-data xt-med'>{assignment.title}</p>
 				</Col>
 				<Col>
-					<label>Homework Summary:</label>
+					<label>Summary:</label>
 					<p className='summary-data xt-med'>{assignment.summary}</p>
 				</Col>
 			</Row>
