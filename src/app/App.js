@@ -19,6 +19,7 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers} from "../utils/RingLeader";
+import SelectionDashboard from "../selectionTool/SelectionDashboard";
 
 
 
@@ -26,18 +27,16 @@ function App() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
   const resourceId = useSelector(state => state.app.resourceId);
-  // const courseId = useSelector(state => state.app.courseId);
-  // const members = useSelector(state => state.app.members);
-
   const params = new URLSearchParams(useLocation().search);
+  const mode = params.get('mode');
 
-
-	useEffect(() => {
+  useEffect(() => {
     console.log(`------------ initialize`);
     const userIdParam = params.get('userId');
     const activeRoleParam = params.get('role');
     const resourceIdParam = params.get('resourceId');
     const courseIdParam = params.get('courseId');
+
 
     /**
      * This initializes the redux store with courseId, resourceId, activeUser data,
@@ -78,12 +77,14 @@ function App() {
     if (activeRoleParam === ROLE_TYPES.dev && !window.isDevMode) { throw new Error("Can NOT use dev role when not in DevMode. Set DevMode to true in codebase.") }
     if (!resourceIdParam && activeRoleParam === ROLE_TYPES.learner) { throw new Error("User role of student trying to access app with no resourceId value.") }
 
+    if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
+
     // TODO: Comment this out for LIVE deployment.
     // IF in DEV mode, and mock data doesn't exist for provided courseId, this creates mock students and instructors for the course
     // Required params: role=dev, userId=any, courseId=any, resourceId=null or existing assignment id
     if (window.isDevMode) createMockCourseMembers(courseIdParam, 20);
 
-    initializeSessionData(courseIdParam, resourceIdParam, userIdParam, activeRoleParam);
+    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, resourceIdParam, userIdParam, activeRoleParam);
 	}, []);
 
 
@@ -125,6 +126,14 @@ function App() {
 		}
 	}
 
+	if (mode === 'selectAssignment') return (
+    <Container className="app mt-4 mb-2 p-0">
+      <Row className='main-content-row'>
+        <SelectionDashboard />
+      </Row>
+    </Container>
+
+  )
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
@@ -133,7 +142,7 @@ function App() {
 			{/*</Row>*/}
 
 			<Row className='main-content-row'>
-				{!activeUser?.id && <LoadingIndicator msgClasses='xtext-white' loadingMsg='LOADING ASSIGNMENTS'/>}
+				{!activeUser?.id && <LoadingIndicator msgClasses='xtext-white' loadingMsg='LOADING'/>}
 				{activeUser.activeRole === ROLE_TYPES.dev && <DevUtilityDashboard />}
 				{activeUser.activeRole === ROLE_TYPES.instructor && <InstructorDashboard />}
 				{activeUser.activeRole === ROLE_TYPES.learner && <StudentDashboard />}

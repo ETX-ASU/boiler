@@ -3,7 +3,7 @@ import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/c
 
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-  submitResourceSelection as realSubmitResourceSelection,
+  // submitResourceSelection as realSubmitResourceSelection,
   getGrades as realGetGrades,
   getUsers as realGetUsers,
   getUnassignedStudents as realGetUnassignedStudents,
@@ -21,9 +21,17 @@ import {
   mockGetUnassignedStudents,
   mockGetGrades,
   mockGetStudentGrade,
-  mockInstructorSendGradeToLMS, mockAutoSendGradeToLMS
+  mockInstructorSendGradeToLMS,
+  mockAutoSendGradeToLMS,
+  mockGetResourceId
 } from "./MockRingLeader";
 
+
+
+// TODO: !!!!!!!!!!!!!!!!!!!!!! Needs real code
+export function getResourceId() {
+  return (window.isDevMode) ? mockGetResourceId() : mockGetResourceId();
+}
 
 
 // TODO: The API needs to use the object names I have provided in the demo objects below
