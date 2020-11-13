@@ -12,16 +12,14 @@ import {
 */
 
 import {
-  getGrades as realGetGrades,
-  submitInstructorGrade as realInstructorSubmitGrade,
-  submitGrade as realAutoSubmitGrade,
-} from '../lti/GradeService';
+  getGradesAws as realGetGrades,
+  submitInstructorGradeAws as realInstructorSubmitGrade,
+  submitGradeAws as realAutoSubmitGrade,
+  getUsersAws as realGetUsers,
+  getUnassignedStudentsAws as realGetUnassignedStudents,
+  getAssignedStudentsAws as realGetAssignedStudents
+} from '@asu-etx/rl-client-lib';
 
-import {
-  getUsers as realGetUsers,
-  getUnassignedStudents as realGetUnassignedStudents,
-  getAssignedStudents as realGetAssignedStudents,
-} from '../lti/UserService';
 
 import {
   mockGetUsers,

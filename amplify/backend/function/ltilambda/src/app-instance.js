@@ -81,6 +81,7 @@ const getParameters = async (req, role) => {
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
+    const hash = rl_server_lib_1.getRedirectToken(platform.userId+platform.context_id);
     let session = {};
     try {
         session = new rl_server_lib_1.Session();
@@ -103,8 +104,8 @@ const getParameters = async (req, role) => {
 
     //example const params = `userId=user-id-uncle-bob&courseId=the-course-id-123&resourceId=4c43a1b5-e5db-4b3e-ae32-a9405927e472`
     if(resourceLinkId !== courseId)
-        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}`
-    return `?role=${role}&userId=${userId}&courseId=${courseId}`
+        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}&hash=${hash}`
+    return `?role=${role}&userId=${userId}&courseId=${courseId}&hash=${hash}`
 };
 
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {

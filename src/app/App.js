@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.scss';
-import { hasValidSession } from '../lti/ValidateSessionService';
+import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
+//import { hasValidSession } from '../lti/ValidateSessionService';
 import {useDispatch, useSelector} from "react-redux";
 
 import { setActiveUiScreenMode, setSessionData } from "./store/appReducer";
@@ -19,6 +20,11 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers} from "../utils/RingLeader";
+
+import API from "@aws-amplify/api";
+import aws_exports from '../aws-exports';
+
+API.configure(aws_exports);
 
 
 

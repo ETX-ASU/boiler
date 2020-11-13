@@ -6,7 +6,8 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
-import { hasValidSession } from '../lti/ValidateSessionService';
+import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
+//import { hasValidSession } from '../lti/ValidateSessionService';
 
 function InstructorDashboard() {
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
