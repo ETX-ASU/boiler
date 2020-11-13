@@ -110,22 +110,22 @@ const getParameters = async (req, role) => {
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
     const params = await getParameters(req, "instructor");
-    res.status(301).redirect(environment_1.APPLICATION_URL + params);
+    res.status(301).redirect( process.env.APPLICATION_URL + params);
 });
 // Student
 app.route(rl_shared_1.LTI_STUDENT_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, "learner");
-    res.status(301).redirect(environment_1.APPLICATION_URL + params);
+    res.status(301).redirect( process.env.APPLICATION_URL + params);
 });
 // Student Assignment
 app.route(rl_shared_1.LTI_ASSIGNMENT_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect(environment_1.APPLICATION_URL + params);
+    res.status(301).redirect( process.env.APPLICATION_URL + params+ "&mode=selectAssignment");
 });
 // Deep Link
 app.route(rl_shared_1.LTI_DEEPLINK_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect(environment_1.APPLICATION_URL + params);
+    res.status(301).redirect(process.env.APPLICATION_URL + params );
 });
 
 
