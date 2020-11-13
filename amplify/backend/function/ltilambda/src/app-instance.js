@@ -14,7 +14,7 @@ const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEnd
 const rl_shared_1 = require("@asu-etx/rl-shared");
 const rl_server_lib_1 = require("@asu-etx/rl-server-lib");
 __importDefault(require("./environment"));
-const environment_1 = process.env;
+const APPLICATION_URL = "https://stage.dyl4ur5zvn9kt.amplifyapp.com";
 
 /*========================== LOG ALL REQUESTS =========================*/
 global_request_logger_1.default.initialize();
@@ -108,24 +108,24 @@ const getParameters = async (req, role) => {
 };
 
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
-    rl_shared_1.logger.debug(`hitting instructor request:${JSON.stringify(req.session)}`);
+    rl_shared_1.logger.debug(`hitting instructor request ${APPLICATION_URL}:${JSON.stringify(req.session)}`);
     const params = await getParameters(req, "instructor");
-    res.status(301).redirect( process.env.APPLICATION_URL + params);
+    res.status(301).redirect( APPLICATION_URL + params);
 });
 // Student
 app.route(rl_shared_1.LTI_STUDENT_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, "learner");
-    res.status(301).redirect( process.env.APPLICATION_URL + params);
+    res.status(301).redirect( APPLICATION_URL + params);
 });
 // Student Assignment
 app.route(rl_shared_1.LTI_ASSIGNMENT_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect( process.env.APPLICATION_URL + params+ "&mode=selectAssignment");
+    res.status(301).redirect( APPLICATION_URL + params+ "&mode=selectAssignment");
 });
 // Deep Link
 app.route(rl_shared_1.LTI_DEEPLINK_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect(process.env.APPLICATION_URL + params );
+    res.status(301).redirect(APPLICATION_URL + params );
 });
 
 
