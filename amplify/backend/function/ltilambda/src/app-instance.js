@@ -120,12 +120,12 @@ app.route(rl_shared_1.LTI_STUDENT_REDIRECT).get(async (req, res) => {
 // Student Assignment
 app.route(rl_shared_1.LTI_ASSIGNMENT_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect( APPLICATION_URL + params+ "&mode=selectAssignment");
+    res.status(301).redirect( APPLICATION_URL + params);
 });
 // Deep Link
 app.route(rl_shared_1.LTI_DEEPLINK_REDIRECT).get(async (req, res) => {
     const params = await getParameters(req, null);
-    res.status(301).redirect(APPLICATION_URL + params );
+    res.status(301).redirect(APPLICATION_URL + params+ "&mode=selectAssignment" );
 });
 
 
