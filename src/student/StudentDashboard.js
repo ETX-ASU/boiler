@@ -8,10 +8,10 @@ import {HOMEWORK_PROGRESS, UI_SCREEN_MODES, EMPTY_HOMEWORK} from "../app/constan
 import {Col, Container, Row} from "react-bootstrap";
 import {getHomework, listHomeworks} from "../graphql/queries";
 import {createHomework} from "../graphql/mutations";
-import {setActiveUiScreenMode, setUserHomework} from "../app/store/appReducer";
+import {setActiveUiScreenMode} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
 import HomeworkEditor from "./homeworks/HomeworkEditor";
-import {mockGetStudentGrade} from "../utils/MockRingLeader";
+import {fetchGradeForStudent} from "../utils/RingLeader";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
@@ -27,21 +27,26 @@ function StudentDashboard() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		fetchAndSetHomework();
-	}, []);
+	  if (assignment.id && homework?.id) {
+      setIsLoading(false);
+    } else if (assignment.id) {
+      fetchAndSetHomework();
+    }
+	}, [assignment, homework]);
 
 
 	async function fetchAndSetHomework() {
 		try {
-			const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {studentOwnerId: {eq:activeUser.id}, assignmentId: {eq:assignment.id}}}));
+			const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {"studentOwnerId":{eq:activeUser.id}, "assignmentId":{eq:assignment.id}}}));
 			if (!fetchHomeworkResult.data.listHomeworks.items.length) {
-			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {id: uuid(), studentOwnerId: activeUser.id, assignmentId:assignment.id, quizAnswers:Array(assignment.quizQuestions.length).fill(-1)});
+			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {id: uuid(), studentOwnerId:activeUser.id, assignmentId:assignment.id, quizAnswers:Array(assignment.quizQuestions.length).fill(-1)});
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
-        await dispatch(setUserHomework({...resultHomework.data.createHomework, score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' }, UI_SCREEN_MODES.editHomework));
+        await setHomework({...resultHomework.data.createHomework, score:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
+        dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
 			  const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
 			  const theHomework = resultHomework.data.getHomework;
-        let scoreData = await mockGetStudentGrade(assignment.id, activeUser.id);
+        let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
         if (!scoreData) scoreData = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);
@@ -52,7 +57,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-      notifyUserOfError(`=====> ERROR when fetchAndSetHomework ${error}`);
+      notifyUserOfError(error);
 		}
 	}
 

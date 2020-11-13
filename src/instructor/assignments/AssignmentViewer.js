@@ -1,14 +1,11 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {UI_SCREEN_MODES, HOMEWORK_PROGRESS} from "../../app/constants";
+import {UI_SCREEN_MODES} from "../../app/constants";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import {
-  setCurrentlyReviewedStudentId,
   setActiveUiScreenMode,
-  updateStudentsData,
   setGradesData,
   addHomeworksData,
-  setHomeworkGradingData
 } from "../../app/store/appReducer";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {API, graphqlOperation} from "aws-amplify";
@@ -16,7 +13,6 @@ import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
 import {fetchAllGrades} from "../../utils/RingLeader";
-import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
 import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {useStudents} from "../../app/store/AppSelectors";
 import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
@@ -94,7 +90,7 @@ function AssignmentViewer(props) {
     // })
 
     if (isLoadingHomeworks) setIsLoadingHomeworks(false);
-    // if (updatedCount) dispatch(updateStudentsData(updatedStudents));
+
     dispatch(addHomeworksData(rawHomeworks));
 
     setNextTokenVal(result.data.listHomeworks.nextToken);
@@ -113,13 +109,6 @@ function AssignmentViewer(props) {
     fetchScores();
     console.log('-----------> handleRefreshAfterGradeSubmission()')
   }
-
-  // function handleGradingButton() {
-  //   // let orderedHomeworks = homeworks.filter(h => (!isSkipGradedStudents) || (h.progress !== HOMEWORK_PROGRESS.fullyGraded));
-  //   // if (isHideStudentIdentity) orderedHomeworks.sort((a,b) => a.randomOrderNum - b.randomOrderNum);
-  //
-  //   // if (orderedHomeworks?.length) dispatch(setCurrentlyReviewedStudentId(orderedHomeworks[0].id));
-  // }
 
 	function handleEditButton() {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editAssignment));

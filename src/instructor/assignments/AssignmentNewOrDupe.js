@@ -26,7 +26,8 @@ library.add(faCopy, faPlus);
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
 function AssignmentNavOrDupe() {
 	const dispatch = useDispatch();
-	const activeUser = useSelector(state => state.app.activeUser)
+	const activeUser = useSelector(state => state.app.activeUser);
+  const courseId = useSelector(state => state.app.courseId);
 
   const [assignments, setAssignments] = useState([]);
   const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
@@ -66,7 +67,7 @@ function AssignmentNavOrDupe() {
     const assignment = assignmentQueryResults.data.getAssignment;
     console.log("Retrieved assignment", assignment);
 
-    const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, lockOnDate: 0});
+    const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, courseId, resourceId:'', lockOnDate: 0});
     delete inputData.createdAt;
     delete inputData.updatedAt;
     const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});

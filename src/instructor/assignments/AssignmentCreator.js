@@ -40,7 +40,8 @@ const emptyAssignment = {
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
 function AssignmentCreator() {
 	const dispatch = useDispatch();
-	const activeUser = useSelector(state => state.app.activeUser)
+	const activeUser = useSelector(state => state.app.activeUser);
+	const courseId = useSelector(state => state.app.courseId);
 	const [formData, setFormData] = useState(emptyAssignment);
 
 
@@ -50,12 +51,15 @@ function AssignmentCreator() {
   }
 
 	async function handleSubmitButton() {
+	  console.log("Save pants!")
     // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title || !formData.summary) return;
 
 		const assignmentId = uuid();
 		const inputData = Object.assign({}, formData, {
 			id: assignmentId,
+      resourceId: '',
+      courseId: courseId,
 			ownerId: activeUser.id,
 			lockOnDate: (formData.isLockedOnDate) ? moment(formData.lockOnDate).valueOf() : 0
 		});
@@ -66,7 +70,10 @@ function AssignmentCreator() {
 		  notifyUserOfError(e);
     }
 
-		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
+    alert(`You have successfully created a new assignment called "${inputData.title}." Now you can return to your LMS to use it
+    in a lesson, or stay here and create/duplicate another assignment.`);
+
+		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
 	}
 
   function toggleUseAutoScore(e) {

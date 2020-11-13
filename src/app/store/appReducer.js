@@ -1,28 +1,33 @@
 // "Note" will become "Assignment" in Boilerplate
 import {APP_NAMESPACE, UI_SCREEN_MODES} from "../constants";
 
-export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 export const SET_SESSION_DATA = APP_NAMESPACE+'.SET_SESSION_DATA';
-export const EDIT_DUPED_ASSIGNMENT = APP_NAMESPACE+'.EDIT_DUPED_ASSIGNMENT';
-export const UPDATE_STUDENTS_DATA = APP_NAMESPACE+'.UPDATE_STUDENTS_DATA';
+export const SET_ASSIGNMENT_DATA = APP_NAMESPACE+'.SET_ASSIGNMENT_DATA';
+
 export const SET_CURRENTLY_REVIEWED_STUDENT = APP_NAMESPACE+'.SET_CURRENTLY_REVIEWED_STUDENT';
-export const SET_USER_HOMEWORK = APP_NAMESPACE+'.SET_USER_HOMEWORK';
 export const SET_GRADES_DATA = APP_NAMESPACE+'.SET_GRADES_DATA';
 
-
-export const SET_ACTIVE_USER_DATA = APP_NAMESPACE+'.SET_ACTIVE_USER_DATA';
 export const SET_ACTIVE_UI_SCREEN_MODE = APP_NAMESPACE+'.SET_ACTIVE_UI_SCREEN_MODE';
-export const SET_ACTIVE_ASSIGNMENT_ID = APP_NAMESPACE+'.SET_ACTIVE_ASSIGNMENT_ID';
-export const LOGOUT_ACTIVE_USER = APP_NAMESPACE+'.LOGOUT_ACTIVE_USER';
+
+export const EDIT_DUPED_ASSIGNMENT = APP_NAMESPACE+'.EDIT_DUPED_ASSIGNMENT';
+export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 
 
-export function setSessionData(activeUser, assignment, courseId, members) {
+// export function setSessionData(activeUser, assignment, courseId, members)
+export function setSessionData(courseId, resourceId, activeUser, members) {
   return {
     type: SET_SESSION_DATA,
-    activeUser,
-    assignment,
     courseId,
+    resourceId,
+    activeUser,
     members
+  }
+}
+
+export function setAssignmentData(assignment) {
+  return {
+    type: SET_ASSIGNMENT_DATA,
+    assignment
   }
 }
 
@@ -40,20 +45,6 @@ export function setActiveUiScreenMode(activeUiScreenMode) {
   }
 }
 
-export function setActiveAssignmentId(activeAssignmentId) {
-  return {
-    type: SET_ACTIVE_ASSIGNMENT_ID,
-    activeAssignmentId
-  }
-}
-
-export function updateStudentsData(members) {
-  return {
-    type: UPDATE_STUDENTS_DATA,
-    members
-  }
-}
-
 export function addHomeworksData(homeworks) {
   return {
     type: ADD_HOMEWORKS_DATA,
@@ -68,33 +59,10 @@ export function setGradesData(grades) {
   }
 }
 
-//
-// export function setHomeworkGradingData(gradingData) {
-//   return {
-//     type: SET_HOMEWORK_GRADING_DATA,
-//     gradingData
-//   }
-// }
-
-export function setUserHomework(homework, activeUiScreenMode) {
-  return {
-    type: SET_USER_HOMEWORK,
-    homework,
-    activeUiScreenMode
-  }
-}
-
 export function setCurrentlyReviewedStudentId(currentlyReviewedStudentId) {
   return {
     type: SET_CURRENTLY_REVIEWED_STUDENT,
     currentlyReviewedStudentId
-  }
-}
-
-
-export function logoutActiveUser() {
-  return {
-    type: LOGOUT_ACTIVE_USER
   }
 }
 
@@ -110,15 +78,15 @@ const defaultUser = {
 };
 
 const defaultState = {
+  courseId: '',
+  resourceId: '',
   activeUser: defaultUser,
   assignment: {},
-  courseId: '',
   members: [],
   homeworks: [],
-  // gradingData: {},
   grades: {},
   currentlyReviewedStudentId: '',
-  activeUiScreenMode: UI_SCREEN_MODES.viewAssignment,
+  activeUiScreenMode: '',
 }
 
 /*
@@ -168,10 +136,9 @@ function appReducer(currentState = defaultState, action) {
       return Object.assign({}, currentState, {homeworks:[...currentState.homeworks, ...action.homeworks]});
 
     case SET_SESSION_DATA:
-      // Expectation is that this is only set once when the tool is first launched/loaded.
       return Object.assign({}, currentState, {
         activeUser:action.activeUser,
-        assignment:action.assignment,
+        resourceId:action.resourceId,
         courseId:action.courseId,
         members:action.members
       });
@@ -179,25 +146,12 @@ function appReducer(currentState = defaultState, action) {
     case EDIT_DUPED_ASSIGNMENT:
       return Object.assign({}, currentState, {assignment: action.assignment, activeUiScreenMode: UI_SCREEN_MODES.dupeAssignment})
 
-    case UPDATE_STUDENTS_DATA:
-      return Object.assign({}, currentState, {members: action.members });
-
     case SET_CURRENTLY_REVIEWED_STUDENT:
       return Object.assign({}, currentState, {currentlyReviewedStudentId: action.currentlyReviewedStudentId});
 
-    case SET_USER_HOMEWORK:
-      return Object.assign({}, currentState,
-        {activeUser: Object.assign({}, currentState.activeUser, {homework: action.homework})},
-        {activeUiScreenMode: action.activeUiScreenMode}
-      );
-    //
-    // case SET_HOMEWORK_GRADING_DATA:
-    //   return Object.assign({}, currentState, {gradingData: action.gradingData});
+    case SET_ASSIGNMENT_DATA:
+      return Object.assign({}, currentState, {assignment: action.assignment});
 
-
-      //TODO: Get rid of these
-    case LOGOUT_ACTIVE_USER:
-      return Object.assign({}, currentState, {activeUser: defaultUser});
 
     default:
       return currentState;

@@ -21,7 +21,6 @@ function AssignmentEditor() {
   const [formData, setFormData] = useState(useSelector(state => state.app.assignment));
   const isLimitedEditing = useSelector(state => Boolean(state.app.homeworks?.length));
 
-
   async function handleCancelBtn() {
     alert("you are cancelling.");
     // dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));

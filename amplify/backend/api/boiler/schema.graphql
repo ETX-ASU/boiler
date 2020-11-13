@@ -8,6 +8,8 @@ type QuizQuestion {
 
 type Assignment @model {
   id: ID!
+  courseId: ID
+  resourceId: ID
   ownerId: ID!
   title: String!
   summary: String

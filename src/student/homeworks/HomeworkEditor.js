@@ -29,13 +29,14 @@ function HomeworkEditor(props) {
     delete inputData.score;
     delete inputData.comment;
     delete inputData.homeworkStatus;
+    delete inputData.gradingProgress;
 
 		try {
 		  console.log('inputData', inputData);
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (!result) throw new Error ("result from updateHomeworkMutation came back null.");
     } catch (e) {
-		  console.warn("Notify student their homework changes were not saved.")
+		  console.warn("Notify student their homework changes were not saved.", e)
     }
 		await props.refreshHandler();
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));

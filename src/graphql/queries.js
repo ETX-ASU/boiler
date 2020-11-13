@@ -5,6 +5,8 @@ export const getAssignment = /* GraphQL */ `
   query GetAssignment($id: ID!) {
     getAssignment(id: $id) {
       id
+      courseId
+      resourceId
       ownerId
       title
       summary
@@ -34,6 +36,8 @@ export const listAssignments = /* GraphQL */ `
     listAssignments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        courseId
+        resourceId
         ownerId
         title
         summary
