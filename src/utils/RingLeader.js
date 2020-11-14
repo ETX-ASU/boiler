@@ -9,16 +9,26 @@ import {
   getLineItems as realGetLineItems
 } from '../lti/LineItemService';
   // 
+  // submitResourceSelection as realSubmitResourceSelection,
+  getGrades as realGetGrades,
+  getUsers as realGetUsers,
+  getUnassignedStudents as realGetUnassignedStudents,
+  getAssignedStudents as realGetAssignedStudents,
+  submitInstructorGrade as realInstructorSubmitGrade,
+  submitGrade as realAutoSubmitGrade,
+  // getLineItems as realGetLineItems,
+  // deleteLineItem as realDeleteLineItem,
+  // hasValidSession as realHasValidSession,
 } from '@asu-etx/rl-client-lib'
 */
 
 import {
-  getGradesAws as realGetGrades,
-  submitInstructorGradeAws as realInstructorSubmitGrade,
-  submitGradeAws as realAutoSubmitGrade,
   getUsersAws as realGetUsers,
   getUnassignedStudentsAws as realGetUnassignedStudents,
-  getAssignedStudentsAws as realGetAssignedStudents
+  getAssignedStudentsAws as realGetAssignedStudents,
+  getGradesAws as realGetGrades,
+  submitInstructorGradeAws as realInstructorSubmitGrade,
+  submitGradeAws as realAutoSubmitGrade
 } from '@asu-etx/rl-client-lib';
 
 
@@ -28,9 +38,17 @@ import {
   mockGetUnassignedStudents,
   mockGetGrades,
   mockGetStudentGrade,
-  mockInstructorSendGradeToLMS, mockAutoSendGradeToLMS
+  mockInstructorSendGradeToLMS,
+  mockAutoSendGradeToLMS,
+  mockGetResourceId
 } from "./MockRingLeader";
 
+
+
+// TODO: !!!!!!!!!!!!!!!!!!!!!! Needs real code
+export function getResourceId() {
+  return (window.isDevMode) ? mockGetResourceId() : mockGetResourceId();
+}
 
 
 // TODO: The API needs to use the object names I have provided in the demo objects below

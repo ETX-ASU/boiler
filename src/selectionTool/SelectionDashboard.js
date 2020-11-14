@@ -13,6 +13,7 @@ import aws_exports from '../aws-exports';
 function SelectionDashboard() {
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get('userId');
+  const courseId = params.get('courseId');
   const [assignments, setAssignments] = useState([]);
 	const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
 
@@ -31,7 +32,7 @@ function SelectionDashboard() {
 
       do {
         const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments,
-          {filter:{ownerId:{eq:userId}},
+          {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
           nextToken: nextTokenVal
         }));
         nextTokenVal = assignmentQueryResults.data.listAssignments.nextToken;

@@ -8,6 +8,21 @@ const getAsyncSpecs = () => {
 
 
 
+export const mockGetResourceId = () => new Promise(function (resolve, reject) {
+  const {isMockFailureResult, mockDuration} = getAsyncSpecs();
+
+  if (isMockFailureResult) {
+    setTimeout(() => reject(new Error("====> MOCK ERROR triggered by MOCKED mockGetResourceId()")), mockDuration);
+  } else {
+    // Generate a fake resource id between 100 to 999
+    let resId = `resource-${Math.floor(Math.random() * (899) + 100)}`;
+    setTimeout(() => resolve(resId, mockDuration));
+  }
+});
+
+
+
+
 export const mockGetUsers = (courseId) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
