@@ -23,6 +23,7 @@
     "name": "canvas-unicon-bitnami",
     "client_id": "10000000000004",
     "iss": "https://canvas.instructure.com",
+    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "platformOIDCAuthEndPoint": "https://cbb1ac38bfb4.ngrok.io/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://cbb1ac38bfb4.ngrok.io/login/oauth2/token",
     "alg": "RS256",
@@ -41,6 +42,7 @@
   {
     "name": "canvas-local-docker",
     "client_id": "10000000000034",
+    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://729fa750dce5.ngrok.io/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://729fa750dce5.ngrok.io/login/oauth2/token",
@@ -60,6 +62,7 @@
   {
     "name": "canvas-local-docker",
     "client_id": "10000000000002",
+    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://729fa750dce5.ngrok.io/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://729fa750dce5.ngrok.io/login/oauth2/token",
@@ -79,6 +82,7 @@
   {
     "name": "blackboard",
     "client_id": "f6dfa56c-8620-475f-b3df-4697e542404b",
+    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "iss": "https://blackboard.com",
     "platformOIDCAuthEndPoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/authorizationcode",
     "platformAccessTokenEndpoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/token",
@@ -98,6 +102,7 @@
   {
     "name": "canvas-unicon-lambda",
     "client_id": "97140000000000191",
+    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://unicon.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
