@@ -8,6 +8,8 @@ import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
 import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
 //import { hasValidSession } from '../lti/ValidateSessionService';
+import aws_exports from '../aws-exports';
+
 
 function InstructorDashboard() {
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
@@ -33,6 +35,6 @@ function InstructorDashboard() {
 		</Container>
 	);
 } 
-export default hasValidSession() ? InstructorDashboard :  null;
+export default hasValidSession(aws_exports) ? InstructorDashboard :  null;
 
 

@@ -7,7 +7,7 @@ import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
 import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
 //import { hasValidSession } from '../lti/ValidateSessionService';
-
+import aws_exports from '../aws-exports';
 
 
 function SelectionDashboard() {
@@ -57,4 +57,4 @@ function SelectionDashboard() {
 	);
 }
 
-export default hasValidSession() ?  SelectionDashboard : null;
+export default hasValidSession(aws_exports) ?  SelectionDashboard : null;

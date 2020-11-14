@@ -16,7 +16,7 @@ import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
 import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
 //import { hasValidSession } from '../lti/ValidateSessionService';
-
+import aws_exports from '../aws-exports';
 function StudentDashboard() {
 	const dispatch = useDispatch();
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
@@ -76,5 +76,5 @@ function StudentDashboard() {
 	);
 }
 
- export default !hasValidSession() ? StudentDashboard : null;
+ export default !hasValidSession(aws_exports) ? StudentDashboard : null;
 
