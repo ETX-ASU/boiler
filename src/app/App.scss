@@ -125,6 +125,37 @@ button {
   }
 }
 
+.page-btn {
+  border: none;
+  font-weight: normal !important;
+  background-color: var(--x-lightest-gray);
+  color: var(--x-dark-gray);
+
+  &.selected {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+  }
+}
+
+button.page-nav-btn {
+  border: none;
+  background-color: var(--x-dark-gray);
+  &:visited, &::selection {
+    border: none;
+    background-color: var(--x-dark-gray);
+  }
+  &:active {
+    border: none;
+    background-color: var(--x-black) !important;
+  }
+  &:hover, &:focus {
+    box-shadow: none;
+    border: none;
+    background-color: var(--x-black);
+  }
+}
+
 .bottom-row {
   position: relative;
   bottom: 0;

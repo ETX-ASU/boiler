@@ -30,7 +30,7 @@ function AssignmentViewer(props) {
   // const isSkipGradedStudents = useSelector(state => state.gradingBar.isSkipGradedStudents);
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 
-  const activeUser = useSelector(state => state.app.activeUser);
+  const resourceId = useSelector(state => state.app.resourceId);
   const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
 
@@ -41,7 +41,9 @@ function AssignmentViewer(props) {
 
 
   useEffect(() => {
+    console.log('assignment changed')
     if (!assignment?.id) return;
+    console.log('fetching scores etc')
     fetchScores();
     fetchBatchOfHomeworks('INIT');
   }, [assignment.id]);
@@ -85,7 +87,8 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      const grades = await fetchAllGrades(assignment.id);
+      let grades = await fetchAllGrades(resourceId);
+      grades = (grades) ? grades : [];
       await dispatch(setGradesData(grades));
     } catch (error) {
       notifyUserOfError(error);
@@ -114,12 +117,12 @@ function AssignmentViewer(props) {
 	return (
     <Fragment>
       {(!reviewedStudentId) ?
-        <HeaderBar title={`Overview: ${(assignment.title) ? assignment.title : ''}`}>
+        <HeaderBar title={`Overview: ${(assignment?.title) ? assignment.title : ''}`}>
           <Button onClick={handleEditBtn}>
             <FontAwesomeIcon className='btn-icon' icon={faPenAlt}/>Edit
           </Button>
         </HeaderBar> :
-        <HeaderBar onBackClick={() => dispatch(setCurrentlyReviewedStudentId(''))} title={assignment.title}>
+        <HeaderBar onBackClick={() => dispatch(setCurrentlyReviewedStudentId(''))} title={assignment?.title}>
           <span className='mr-2'>
             <input type={'checkbox'} onChange={toggleHideAndRandomize} checked={isHideStudentIdentity}/>
             Hide identity & randomize
@@ -133,7 +136,7 @@ function AssignmentViewer(props) {
             <LoadingIndicator loadingMsg={'LOADING ASSIGNMENT DATA'} size={3} />
           </div>
         }
-        {!reviewedStudentId && (students?.length > 0) &&
+        {!reviewedStudentId &&
         <Fragment>
           <Row className='mt-2 mb-2 pt-2 pb-2'>
             <Col className='col-6'>
@@ -161,7 +164,7 @@ function AssignmentViewer(props) {
               </p>
             </Col>
           </Row>
-          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} />
+          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} studentsPerPage={10}/>
         </Fragment>
         }
 
