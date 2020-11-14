@@ -15,7 +15,6 @@ const rl_shared_1 = require("@asu-etx/rl-shared");
 const rl_server_lib_1 = require("@asu-etx/rl-server-lib");
 const { getToolConsumer } = require("@asu-etx/rl-server-lib/build/services/ToolConsumerService");
 __importDefault(require("./environment"));
-const APPLICATION_URL = "https://stage.dyl4ur5zvn9kt.amplifyapp.com";
 
 /*========================== LOG ALL REQUESTS =========================*/
 global_request_logger_1.default.initialize();
@@ -76,7 +75,7 @@ app.use(rl_shared_1.LTI_DEEPLINK_REDIRECT, express_1.default.static(environment_
 */
 /*========================== UI ENDPOINTS ==========================*/
 // Instructor
-
+const APPLICATION_URL = process.env.APPLICATION_URL;
 const getParameters = async (req, role) => {
     const platform = req.session.platform;
     const userId = platform.userId;
@@ -116,22 +115,22 @@ const getParameters = async (req, role) => {
 
 app.route(rl_shared_1.LTI_INSTRUCTOR_REDIRECT).get(async (req, res) => {
     rl_shared_1.logger.debug(`hitting instructor request ${APPLICATION_URL}:${JSON.stringify(req.session)}`);
-    const params = await getParameters(req, "instructor");
+    const params = await getParameters(req, res, "instructor");
     res.status(301).redirect( APPLICATION_URL + params);
 });
 // Student
 app.route(rl_shared_1.LTI_STUDENT_REDIRECT).get(async (req, res) => {
-    const params = await getParameters(req, "learner");
+    const params = await getParameters(req, res, "learner");
     res.status(301).redirect( APPLICATION_URL + params);
 });
 // Student Assignment
 app.route(rl_shared_1.LTI_ASSIGNMENT_REDIRECT).get(async (req, res) => {
-    const params = await getParameters(req, null);
+    const params = await getParameters(req, res, null);
     res.status(301).redirect( APPLICATION_URL + params);
 });
 // Deep Link
 app.route(rl_shared_1.LTI_DEEPLINK_REDIRECT).get(async (req, res) => {
-    const params = await getParameters(req, null);
+    const params = await getParameters(req, res, null);
     res.status(301).redirect(APPLICATION_URL + params+ "&mode=selectAssignment" );
 });
 
