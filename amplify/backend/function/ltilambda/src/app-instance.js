@@ -13,6 +13,7 @@ const ltiLaunchEndpoints_1 = __importDefault(require("./endpoints/ltiLaunchEndpo
 const ltiServiceEndpoints_1 = __importDefault(require("./endpoints/ltiServiceEndpoints"));
 const rl_shared_1 = require("@asu-etx/rl-shared");
 const rl_server_lib_1 = require("@asu-etx/rl-server-lib");
+const { getToolConsumer } = require("@asu-etx/rl-server-lib/build/services/ToolConsumerService");
 __importDefault(require("./environment"));
 const APPLICATION_URL = "https://stage.dyl4ur5zvn9kt.amplifyapp.com";
 
@@ -81,7 +82,12 @@ const getParameters = async (req, role) => {
     const userId = platform.userId;
     const courseId = platform.context_id;
     const resourceLinkId = platform.resourceLinkId;
-    const hash = rl_server_lib_1.getRedirectToken(platform.userId+platform.context_id);
+    const findConsumer =  {iss:platform.iss,
+    client_id:platform.clientId,
+    deployment_id : platform.deploymentId}
+    console.log(`attempting to find consumerTool with following values: ${findConsumer}`);
+    const toolConsumer = getToolConsumer(findConsumer);
+    const hash = rl_server_lib_1.getRedirectToken(toolConsumer, userId+courseId);
     let session = {};
     try {
         session = new rl_server_lib_1.Session();
