@@ -14,7 +14,6 @@ import InstructorDashboard from "../instructor/InstructorDashboard";
 import StudentDashboard from "../student/StudentDashboard";
 import LoadingIndicator from "./assets/LoadingIndicator";
 import {useLocation} from "react-router-dom";
-import {API, graphqlOperation} from "aws-amplify";
 import {getAssignment, listAssignments} from "../graphql/queries";
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {shuffle} from "../utils/shuffle";
