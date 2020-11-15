@@ -47,7 +47,7 @@ function DevUtilityDashboard() {
 
       if (progress !== HOMEWORK_PROGRESS.notBegun) {
         beganOnDate = moment().valueOf();
-        quizAnswers = assignment.quizQuestions.map(q => rand(0, q.answerOptions.length-1));
+        quizAnswers = assignment.quizQuestions.map(q => rand(0, q.answerOptions.length));
         if (progress === HOMEWORK_PROGRESS.inProgress) {
           quizAnswers.pop();
           quizAnswers.push(-1); // partial result so always make last one not started.
@@ -68,9 +68,9 @@ function DevUtilityDashboard() {
     const gradedHomeworks = mockHomeworks.filter((h,i) => progressStats[i] === HOMEWORK_PROGRESS.fullyGraded);
     const mockGrades = gradedHomeworks.map(h => {
       let score = calcAutoScore(assignment, h);
-      let comment = (!rand(0,3)) ? testComments[rand(0, testComments.length-1)] : '';
+      let comment = (!rand(0,3)) ? testComments[rand(0, testComments.length)] : '';
       let gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-      return ({resourceId:resourceId.id, studentId:h.studentOwnerId, score, gradingProgress, comment })
+      return ({resourceId:resourceId, studentId:h.studentOwnerId, score, gradingProgress, comment })
     })
 
     const dbHomeworks = mockHomeworks.filter(h => h.beganOnDate);

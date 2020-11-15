@@ -3,8 +3,9 @@ import {APP_NAMESPACE, UI_SCREEN_MODES} from "../constants";
 
 export const SET_SESSION_DATA = APP_NAMESPACE+'.SET_SESSION_DATA';
 export const SET_ASSIGNMENT_DATA = APP_NAMESPACE+'.SET_ASSIGNMENT_DATA';
+export const SET_DISPLAY_ORDER = APP_NAMESPACE+'.SET_DISPLAY_ORDER';
 
-export const SET_CURRENTLY_REVIEWED_STUDENT = APP_NAMESPACE+'.SET_CURRENTLY_REVIEWED_STUDENT';
+export const SET_CURRENTLY_REVIEWED_STUDENT_ID = APP_NAMESPACE+'.SET_CURRENTLY_REVIEWED_STUDENT_ID';
 export const SET_GRADES_DATA = APP_NAMESPACE+'.SET_GRADES_DATA';
 
 export const SET_ACTIVE_UI_SCREEN_MODE = APP_NAMESPACE+'.SET_ACTIVE_UI_SCREEN_MODE';
@@ -59,9 +60,16 @@ export function setGradesData(grades) {
   }
 }
 
+export function setDisplayOrder(displayOrder) {
+  return {
+    type: SET_DISPLAY_ORDER,
+    displayOrder
+  }
+}
+
 export function setCurrentlyReviewedStudentId(currentlyReviewedStudentId) {
   return {
-    type: SET_CURRENTLY_REVIEWED_STUDENT,
+    type: SET_CURRENTLY_REVIEWED_STUDENT_ID,
     currentlyReviewedStudentId
   }
 }
@@ -87,6 +95,7 @@ const defaultState = {
   grades: {},
   currentlyReviewedStudentId: '',
   activeUiScreenMode: '',
+  displayOrder: []
 }
 
 /*
@@ -146,11 +155,14 @@ function appReducer(currentState = defaultState, action) {
     case EDIT_DUPED_ASSIGNMENT:
       return Object.assign({}, currentState, {assignment: action.assignment, activeUiScreenMode: UI_SCREEN_MODES.dupeAssignment})
 
-    case SET_CURRENTLY_REVIEWED_STUDENT:
+    case SET_CURRENTLY_REVIEWED_STUDENT_ID:
       return Object.assign({}, currentState, {currentlyReviewedStudentId: action.currentlyReviewedStudentId});
 
     case SET_ASSIGNMENT_DATA:
       return Object.assign({}, currentState, {assignment: action.assignment});
+
+    case SET_DISPLAY_ORDER:
+      return Object.assign({}, currentState, {displayOrder: action.displayOrder});
 
 
     default:

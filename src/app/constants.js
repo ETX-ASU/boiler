@@ -10,8 +10,14 @@ export const ROLE_TYPES = {
 export const SORT_BY = {
   name: 'name',
   random: 'random',
+  score: 'score',
+  autoScore: 'autoScore',
   id: 'id',
   completed: 'completed',
+}
+export const SORT_DIRECTION = {
+  ascending: 'ascending',
+  descending: 'descending'
 }
 
 export const UI_SCREEN_MODES = {
@@ -38,6 +44,13 @@ export const HOMEWORK_PROGRESS = {
   inProgress: 'InProgress',
   submitted: 'SubmittedForGrading',
   fullyGraded: 'FullyGraded',
+}
+
+export const STATUS_TEXT = {
+  'NotBegun': 'Not Begun',
+  'InProgress': 'In Progress',
+  'SubmittedForGrading': 'Ready to Grade',
+  'FullyGraded': 'Graded',
 }
 
 export const EMPTY_HOMEWORK = {
