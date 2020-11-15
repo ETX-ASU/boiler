@@ -23,7 +23,7 @@ import {
   mockGetStudentGrade,
   mockInstructorSendGradeToLMS,
   mockAutoSendGradeToLMS,
-  mockGetResourceId
+  mockSubmitResourceSelection
 } from "./MockRingLeader";
 
 
@@ -43,7 +43,7 @@ const submitContentItem = {
 }
 
 export function createAssignmentInLms(submitContentItem) {
-  return (window.isDevMode) ? mockGetResourceId() : realSubmitResourceSelection(submitContentItem);
+  return (window.isDevMode) ? mockSubmitResourceSelection() : realSubmitResourceSelection(submitContentItem);
 }
 
 
