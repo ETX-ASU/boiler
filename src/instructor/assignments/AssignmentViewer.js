@@ -109,7 +109,6 @@ function AssignmentViewer(props) {
 	}
 
   function toggleHideAndRandomize(e) {
-    e.stopPropagation();
     dispatch(toggleHideStudentIdentity(!isHideStudentIdentity));
   }
 
@@ -146,7 +145,7 @@ function AssignmentViewer(props) {
             </Col>
             <Col className='text-right'>
               <span className='mr-2'>
-                <input className='mr-2' type={'checkbox'} onChange={e => dispatch(toggleHideStudentIdentity())} checked={isHideStudentIdentity}/>
+                <input className='mr-2' type={'checkbox'} onChange={toggleHideAndRandomize} checked={isHideStudentIdentity}/>
                 Hide identity & randomize
               </span>
             </Col>
@@ -164,7 +163,7 @@ function AssignmentViewer(props) {
               </p>
             </Col>
           </Row>
-          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} studentsPerPage={10}/>
+          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} studentsPerPage={15}/>
         </Fragment>
         }
 

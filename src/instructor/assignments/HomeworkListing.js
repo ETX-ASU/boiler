@@ -6,12 +6,19 @@ import {SORT_BY} from "../../app/constants";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBackward, faForward, faCaretLeft, faCaretRight, faPenAlt} from "@fortawesome/free-solid-svg-icons";
-library.add(faBackward, faForward, faCaretLeft, faCaretRight);
+import {
+  faBackward,
+  faForward,
+  faCaretLeft,
+  faCaretRight,
+  faComment,
+  faPercent, faEdit, faCheck
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faBackward, faForward, faCaretLeft, faCaretRight, faComment, faPercent, faEdit, faCheck);
 
 
 function HomeworkListing(props) {
-  const [curPageNum, setCurPageNum] = useState(1);
+  const [curPageNum, setCurPageNum] = useState(0);
   const [sortByTypes, setSortByTypes] = useState([SORT_BY.name]);
   const [pageBtns, setPageBtns] = useState([]);
   const students = props.students;
@@ -26,25 +33,22 @@ function HomeworkListing(props) {
       let newPageBtns = new Array(pageCount).fill(-1);
       setPageBtns(newPageBtns.map((b, i) => i));
     } else {
-      // let highNum = curPageNum + 2;
-      let lowNum = Math.max(curPageNum-2, 0);
-      let highNum = Math.min(curPageNum+2, pageCount);
-      if (highNum - lowNum < 5) {
-        if (lowNum === 1) highNum = 5;
-        if (highNum === pageCount) lowNum = pageCount-5;
-      }
-
+      const lowNum = Math.min(Math.max(curPageNum-2, 0), pageCount-5);
       let btnNums = new Array(5).fill(-1).map((b, i) => i + lowNum);
-      console.log("btnNums", btnNums);
       setPageBtns(btnNums);
     }
 
     const topStudentIndex = curPageNum * studentsPerPage + 1;
-    const shown = students.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex+10)
-    // console.log("shown: ", shown);
+    const shown = students.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
   }, [students, curPageNum, studentsPerPage])
 
+
+  function getHomeworksList() {
+    return (
+      shownStudents.map((student, rowNum) => <HomeworkListItem key={student.id} rowNum={rowNum+1} student={student} />)
+    )
+  }
 
   console.log(`curPage -----> ${curPageNum} | ${pageCount}`)
   return (
@@ -72,20 +76,34 @@ function HomeworkListing(props) {
       </Row>
 
       <Row>
-        <Col className='col-5 align-bottom'>Name</Col>
-        <Col className='col-1 align-bottom'>Auto<br/>Score</Col>
-        <Col className='col-1 align-bottom'>Final<br/>Score</Col>
-        <Col className='col-1 align-bottom'>Completed</Col>
-        <Col className='col-4 align-bottom text-right'>Grading Status</Col>
-      </Row>
-      <Row>
         <Col className="pr-4">
           {props.isFetchingHomeworks &&
             <LoadingIndicator className='p-4 text-center h-100 align-middle' isDarkSpinner={true} loadingMsg={'FETCHING STUDENT HOMEWORK'} size={3} />
           }
-          {!props.isFetchingHomeworks && (students.length > 0) && shownStudents.map((student, rowNum) => (
-            <HomeworkListItem key={student.id} rowNum={rowNum+1} student={student} />
-          ))}
+
+          {(!props.isFetchingHomeworks && students.length > 0) &&
+          (<table className="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" className="student-col">Student</th>
+                <th scope="col" className="mini-col text-center">Auto</th>
+                <th scope="col" className="mini-col text-center">Final</th>
+                <th scope="col" className="mini-col text-center"><FontAwesomeIcon icon={faComment}/></th>
+                <th scope="col" className="status-col" colSpan={2}>
+                  Progress
+                  <span className='float-right'>
+                    <FontAwesomeIcon className='ml-2' icon={faPercent}/>
+                    <FontAwesomeIcon className='ml-2' icon={faEdit}/>
+                    <FontAwesomeIcon className='ml-2' icon={faCheck}/>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {getHomeworksList()}
+            </tbody>
+            </table>
+          )}
           {!props.isFetchingHomeworks && (students.length < 1) &&
             <p className='mt-4'>No students have begun their homework for this assignment yet.</p>
           }
