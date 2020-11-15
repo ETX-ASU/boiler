@@ -8,6 +8,7 @@ import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {getResourceId} from "../utils/RingLeader";
+import {submitResourceSelection} from "@asu-etx/rl-client-lib";
 
 
 function AssignmentsSelectionList(props) {
@@ -33,8 +34,25 @@ function AssignmentsSelectionList(props) {
       delete inputData.createdAt;
       delete inputData.updatedAt;
 
-      await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
-      alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
+      const resourceDataForLms = {
+        type: 'ltiResourceLink',
+        label: assignment.title,
+        url: '', // leave null
+        resourceId: assignment.id,
+        lineItem: {
+          scoreMaximum: 100,
+          label: assignment.title,
+          resourceId: assignment.id,
+          tag: `TAG FOR ${assignment.title}`
+        }
+      }
+
+      const dataResult = await getResourceId(resourceDataForLms);
+
+      console.warn("We received this data from LMS: ", dataResult);
+
+      // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
+      // alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
     } catch (e) {
       notifyUserOfError(e);
     }
@@ -56,6 +74,7 @@ function AssignmentsSelectionList(props) {
               {assignments.map((a, rowNum) => (
                 <AssignmentListItem key={a.id} rowNum={rowNum+1} assignment={a}
                                     selected={activeAssignmentIndex === rowNum}
+                                    disabled={a.resourceId}
                                     clickHandler={(e) => handleAssignmentSelected(rowNum)}/>
               ))}
             </ul>

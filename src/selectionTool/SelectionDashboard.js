@@ -30,7 +30,8 @@ function SelectionDashboard() {
 
       do {
         const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments,
-          {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
+          // {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
+          {filter:{ownerId:{eq:userId}},
           nextToken: nextTokenVal
         }));
         nextTokenVal = assignmentQueryResults.data.listAssignments.nextToken;
