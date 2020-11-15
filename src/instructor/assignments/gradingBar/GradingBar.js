@@ -43,7 +43,7 @@ function GradingBar(props) {
 
   async function handleSubmitScore() {
     const lmsResult = await sendInstructorGradeToLMS({
-      assignmentId: assignment.id,
+      resourceId: assignment.id,
       studentId: reviewedStudent.id,
       score,
       comment,
