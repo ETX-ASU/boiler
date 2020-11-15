@@ -37,6 +37,7 @@ function App() {
     const resourceIdParam = params.get('resourceId');
     const courseIdParam = params.get('courseId');
 
+    console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${resourceIdParam} | ${courseIdParam}`)
 
     /**
      * This initializes the redux store with courseId, resourceId, activeUser data,
