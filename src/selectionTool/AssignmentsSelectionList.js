@@ -49,7 +49,7 @@ function AssignmentsSelectionList(props) {
 
       const dataResult = await getResourceId(resourceDataForLms);
 
-      alert("We received this data from LMS: ", dataResult);
+      alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
 
       function setInnerHTML(element, content) {
         element.innerHTML = content;
