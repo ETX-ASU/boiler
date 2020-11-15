@@ -22,6 +22,7 @@ function StudentDashboard() {
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
 	const activeUser = useSelector(state => state.app.activeUser);
 	const assignment = useSelector(state => state.app.assignment);
+	const resourceId = useSelector(state => state.app.resourceId);
 
 	const [homework, setHomework] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +47,7 @@ function StudentDashboard() {
       } else {
 			  const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
 			  const theHomework = resultHomework.data.getHomework;
-        let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
+        let scoreData = await fetchGradeForStudent(resourceId, activeUser.id);
         if (!scoreData) scoreData = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);

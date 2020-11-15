@@ -123,7 +123,65 @@ button {
     margin-right: 12px;
     color: white;
   }
+
+  border: none !important;
+  background-color: var(--x-dark-gray);
+  &:visited, &::selection {
+    border: none;
+    background-color: var(--x-dark-gray);
+  }
+  &:active {
+    border: none;
+    background-color: var(--x-black) !important;
+  }
+  &:hover, &:focus {
+    box-shadow: none;
+    border: none;
+    background-color: var(--x-black) !important;
+  }
 }
+
+table th {
+  &.student-col {
+    width: auto;
+  }
+  &.mini-col {
+    width: 8%;
+  }
+  &.status-col {
+    width: 30%;
+  }
+}
+.page-btn {
+  border: none;
+  font-weight: normal !important;
+  background-color: var(--x-lightest-gray) !important;
+  color: var(--x-dark-gray);
+
+  &.selected {
+    border: 1px solid black !important;
+    background-color: white !important;
+    color: black;
+  }
+}
+
+//button.page-nav-btn {
+//  border: none;
+//  background-color: var(--x-dark-gray);
+//  &:visited, &::selection {
+//    border: none;
+//    background-color: var(--x-dark-gray);
+//  }
+//  &:active {
+//    border: none;
+//    background-color: var(--x-black) !important;
+//  }
+//  &:hover, &:focus {
+//    box-shadow: none;
+//    border: none;
+//    background-color: var(--x-black);
+//  }
+//}
 
 .bottom-row {
   position: relative;

@@ -10,7 +10,7 @@ export function useStudents() {
 
   useEffect(() => {
     console.log("useStudents()");
-    if (!grades?.length || !homeworks?.length || !assignment?.id || !members.length) return;
+    if (!assignment?.id || !members.length) return;
     let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
     let positions = shuffle(studentsOnly.map((h, i) => i+1));
 

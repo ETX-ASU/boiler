@@ -86,7 +86,7 @@ function App() {
     // TODO: Comment this out for LIVE deployment.
     // IF in DEV mode, and mock data doesn't exist for provided courseId, this creates mock students and instructors for the course
     // Required params: role=dev, userId=any, courseId=any, resourceId=null or existing assignment id
-    if (window.isDevMode) createMockCourseMembers(courseIdParam, 20);
+    if (window.isDevMode) createMockCourseMembers(courseIdParam, 80);
 
     if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, resourceIdParam, userIdParam, activeRoleParam);
 	}, []);
@@ -117,11 +117,10 @@ function App() {
 
 	async function initializeAssignmentAndHomeworks() {
 		try {
-
-
       const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments, {filter: {resourceId: {eq: resourceId}}}));
       // const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.listAssignments.items[0];
+      if (!assignment) notifyUserOfError('provided resourceId from URL strand does not match any existing assignment');
 
       // Do NOT store fellow student data if this is NOT an instructor
       dispatch(setAssignmentData(assignment));
