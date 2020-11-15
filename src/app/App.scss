@@ -141,15 +141,41 @@ button {
   }
 }
 
-table th {
-  &.student-col {
-    width: auto;
+table.listing {
+  tr.marker-row {
+    .marker {
+      color: white;
+      line-height: 0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: var(--x-dark-gray);
+    }
+    .status-col, .student-col {
+      text-align: left;
+      padding-left: 30px;
+    }
   }
-  &.mini-col {
-    width: 8%;
-  }
-  &.status-col {
-    width: 30%;
+
+  th {
+    cursor: pointer;
+
+    &.student-col {
+      width: auto;
+    }
+
+    &.mini-col {
+      width: 8%;
+    }
+
+    &.status-col {
+      width: 30%;
+    }
+
+    &.sort-col {
+      color: var(--x-darkest-gray);
+      font-style: italic;
+    }
   }
 }
 .page-btn {
@@ -192,6 +218,10 @@ table th {
   border: 1px solid #DFDFDF;
   border-radius: 6px;
   box-shadow: 0 6px 22px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mini-nav-col {
+  max-width: 30px;
 }
 
 

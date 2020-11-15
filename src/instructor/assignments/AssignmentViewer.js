@@ -20,8 +20,8 @@ import HeaderBar from "../../app/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faEdit, faPenAlt, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
-library.add(faEdit, faPenAlt, faChevronLeft);
+import {faEdit, faPen, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
+library.add(faEdit, faPen, faChevronLeft);
 
 
 function AssignmentViewer(props) {
@@ -118,7 +118,7 @@ function AssignmentViewer(props) {
       {(!reviewedStudentId) ?
         <HeaderBar title={`Overview: ${(assignment?.title) ? assignment.title : ''}`}>
           <Button onClick={handleEditBtn}>
-            <FontAwesomeIcon className='btn-icon' icon={faPenAlt}/>Edit
+            <FontAwesomeIcon className='btn-icon' icon={faPen}/>Edit
           </Button>
         </HeaderBar> :
         <HeaderBar onBackClick={() => dispatch(setCurrentlyReviewedStudentId(''))} title={assignment?.title}>
@@ -140,7 +140,7 @@ function AssignmentViewer(props) {
           <Row className='mt-2 mb-2 pt-2 pb-2'>
             <Col className='col-6'>
               <Button onClick={handleBatchSubmitBtn}>
-                <FontAwesomeIcon className='btn-icon' icon={faPenAlt} />Batch Submit
+                <FontAwesomeIcon className='btn-icon' icon={faPen} />Batch Submit
               </Button>
             </Col>
             <Col className='text-right'>
