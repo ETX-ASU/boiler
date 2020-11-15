@@ -8,7 +8,7 @@ import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {getResourceId} from "../utils/RingLeader";
-import {submitResourceSelection} from "@asu-etx/rl-client-lib";
+
 
 
 function AssignmentsSelectionList(props) {
