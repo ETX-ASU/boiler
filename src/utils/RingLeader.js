@@ -4,16 +4,7 @@ import aws_exports from '../aws-exports';
 /*
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-<<<<<<< HEAD
-  //submitResourceSelection as realSubmitResourceSelection,
- import {
-  getLineItems as realGetLineItems
-} from '../lti/LineItemService';
-  // 
-  // submitResourceSelection as realSubmitResourceSelection,
-=======
   submitResourceSelection as realSubmitResourceSelection,
->>>>>>> main
   getGrades as realGetGrades,
   getUsers as realGetUsers,
   getUnassignedStudents as realGetUnassignedStudents,
