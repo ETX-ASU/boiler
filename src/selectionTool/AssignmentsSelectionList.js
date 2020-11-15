@@ -49,7 +49,14 @@ function AssignmentsSelectionList(props) {
 
       const dataResult = await getResourceId(resourceDataForLms);
 
-      console.warn("We received this data from LMS: ", dataResult);
+      alert("We received this data from LMS: ", dataResult);
+
+      function setInnerHTML(element, content) {
+        element.innerHTML = content;
+        return element;
+      }
+
+      document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
 
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
       // alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
