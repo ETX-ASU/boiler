@@ -7,7 +7,7 @@ import {updateAssignment as updateAssignmentMutation} from "../graphql/mutations
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
-import {getResourceId} from "../utils/RingLeader";
+import {createAssignmentInLms} from "../utils/RingLeader";
 import {submitResourceSelection} from "@asu-etx/rl-client-lib";
 
 
@@ -27,12 +27,10 @@ function AssignmentsSelectionList(props) {
 
     // Add the resourceId to the assignment
     try {
-      const resourceId = await getResourceId();
-
-      const inputData = Object.assign({}, assignment);
-      inputData.resourceId = resourceId;
-      delete inputData.createdAt;
-      delete inputData.updatedAt;
+      // const inputData = Object.assign({}, assignment);
+      // // inputData.resourceId = resourceId;
+      // // delete inputData.createdAt;
+      // // delete inputData.updatedAt;
 
       const resourceDataForLms = {
         type: 'ltiResourceLink',
@@ -47,7 +45,7 @@ function AssignmentsSelectionList(props) {
         }
       }
 
-      const dataResult = await getResourceId(resourceDataForLms);
+      const dataResult = await createAssignmentInLms(resourceDataForLms);
 
       alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
 

@@ -15,7 +15,6 @@ import {listHomeworks} from "../graphql/queries";
 
 function DevUtilityDashboard() {
   const assignment = useSelector(state => state.app.assignment);
-  const resourceId = useSelector(state => state.app.resourceId);
   const members = useSelector(state => state.app.members);
 
   const rand = (min, max) => Math.floor(Math.random() * (max - min) + min);
@@ -23,8 +22,8 @@ function DevUtilityDashboard() {
 
 
   async function handleSubmitButton() {
-    if (!resourceId) {
-      alert("You have not provided a resource id in the URL!");
+    if (!assignment.id) {
+      alert("You have not provided an assignment id in the URL!");
       return;
     }
 
@@ -70,7 +69,7 @@ function DevUtilityDashboard() {
       let score = calcAutoScore(assignment, h);
       let comment = (!rand(0,3)) ? testComments[rand(0, testComments.length)] : '';
       let gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-      return ({resourceId:resourceId, studentId:h.studentOwnerId, score, gradingProgress, comment })
+      return ({assignmentId:assignment.id, studentId:h.studentOwnerId, score, gradingProgress, comment })
     })
 
     const dbHomeworks = mockHomeworks.filter(h => h.beganOnDate);
@@ -95,7 +94,7 @@ function DevUtilityDashboard() {
       if (!fetchHomeworkResult.data.listHomeworks.items.length) return;
       results = await Promise.all(fetchHomeworkResult.data.listHomeworks.items.map(h => API.graphql({query: deleteHomework, variables: {input: {id: h.id}}})));
       console.log(`homeworks deleted: `, results);
-      deleteMockGrades(resourceId);
+      deleteMockGrades(assignment.id);
       console.log('grades for homework deleted.');
     } catch (e) {
       notifyUserOfError(e);

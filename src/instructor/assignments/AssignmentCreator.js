@@ -58,7 +58,7 @@ function AssignmentCreator() {
 		const assignmentId = uuid();
 		const inputData = Object.assign({}, formData, {
 			id: assignmentId,
-      resourceId: '',
+      resourceId: '', // TODO: Must remove from DB
       courseId: courseId,
 			ownerId: activeUser.id,
 			lockOnDate: (formData.isLockedOnDate) ? moment(formData.lockOnDate).valueOf() : 0
