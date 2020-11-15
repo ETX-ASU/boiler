@@ -11,7 +11,7 @@ const getAsyncSpecs = () => {
 
 
 
-export const mockGetResourceId = (submissionContentItem) => new Promise(function (resolve, reject) {
+export const mockSubmitResourceSelection = (submissionContentItem) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   if (isMockFailureResult) {
