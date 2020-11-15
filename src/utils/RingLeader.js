@@ -104,11 +104,7 @@ export function fetchUsers(role) {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 export function fetchAssignedStudents(courseId, assignmentId) {
-<<<<<<< HEAD
   return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
-=======
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(courseId, assignmentId);
->>>>>>> main
 }
 
 /**
@@ -122,11 +118,7 @@ export function fetchAssignedStudents(courseId, assignmentId) {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 export function fetchUnassignedStudents(courseId, assignmentId) {
-<<<<<<< HEAD
   return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
-=======
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(courseId, assignmentId);
->>>>>>> main
 }
 
 
@@ -170,11 +162,7 @@ export function fetchGradeForStudent(assignmentId, studentId) {
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
 export function fetchAllGrades(assignmentId) {
-<<<<<<< HEAD
   return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(aws_exports, assignmentId);
-=======
-  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(assignmentId);
->>>>>>> main
 }
 
 
