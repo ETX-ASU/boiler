@@ -1,5 +1,5 @@
 export function notifyUserOfError(error) {
-  console.error(error);
+  alert(error);
 }
 
 export function logError(error) {

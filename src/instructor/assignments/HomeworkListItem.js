@@ -1,26 +1,28 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setCurrentlyReviewedStudentId} from "../../app/store/appReducer";
 
 
 function HomeworkListItem(props) {
   const dispatch = useDispatch();
+  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 	const student= props.student;
-	const itemNum = (props.rowNum < 10) ? "0"+props.rowNum : props.rowNum;
+
+  const studentRefName = (isHideStudentIdentity) ? `Student #${student.randomOrderNum}` : student.name;
 
   function handleReviewHomework() {
     dispatch(setCurrentlyReviewedStudentId(student.id));
   }
 
 	return (
-    <Row onClick={handleReviewHomework} className={'review-link'}>
-      <Col className='col-5'>{itemNum}. {student.name}</Col>
-      <Col className='col-1'>{(student.autoScore !== undefined) ? student.autoScore : '--'}</Col>
-      <Col className='col-1'>{(student.score !== undefined) ? student.score : '--'}</Col>
-      <Col className='col-1 text-right'>{student.percentCompleted}%</Col>
-      <Col className='col-4 text-right'>{student.homeworkStatus}</Col>
-    </Row>
+    <tr onClick={handleReviewHomework} className={'review-link'}>
+      <td>{studentRefName}</td>
+      <td className='text-center'>{(student.autoScore !== undefined) ? student.autoScore : '--'}</td>
+      <td className='text-center'>{(student.score !== undefined) ? student.score : '--'}</td>
+      <td className='text-center'>{(student.comment !== undefined) ? student.comment : '--'}</td>
+      <td className=''>{student.homeworkStatus}</td>
+      <td className='text-right'>{student.percentCompleted}%</td>
+    </tr>
 	)
 }
 

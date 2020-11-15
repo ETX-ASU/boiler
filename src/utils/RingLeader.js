@@ -3,7 +3,7 @@ import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/c
 
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-  // submitResourceSelection as realSubmitResourceSelection,
+  submitResourceSelection as realSubmitResourceSelection,
   getGrades as realGetGrades,
   getUsers as realGetUsers,
   getUnassignedStudents as realGetUnassignedStudents,
@@ -29,8 +29,21 @@ import {
 
 
 // TODO: !!!!!!!!!!!!!!!!!!!!!! Needs real code
-export function getResourceId() {
-  return (window.isDevMode) ? mockGetResourceId() : mockGetResourceId();
+const submitContentItem = {
+  type: 'ltiResourceLink',
+  label: 'name of the quiz (used in gradebook)',
+  url: '', // leave null
+  resourceId: 'the actual assignment id used in my DynamoDB',
+  lineItem: {
+    scoreMaximum: 100,
+    label: 'name of the quiz',
+    resourceId: 'the actual assignment id used in my DynamoDB - same as above',
+    tag: 'not required'
+  }
+}
+
+export function getResourceId(submitContentItem) {
+  return (window.isDevMode) ? mockGetResourceId() : mockGetResourceId(submitContentItem);
 }
 
 
@@ -61,10 +74,10 @@ export function fetchUsers(role) {
  * Fetch students that are enrolled in the given assignment.
  *
  * @param courseId - This course we want students for
- * @param assignmentId - The assignment we want find enrolled students for
+ * @param resourceId - The assignment we want find enrolled students for
  * @returns array of all members of the course of the given role type. No role type returns all members.
  *
- * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
+ * NOTE: We must pass resourceId because it is possible to enter into the app without a specific assignment id.
  *
  * class StudentUser {
     id: string | undefined; // "6281a0fe-bdba-44df-802d-27451ad14b60",
@@ -76,29 +89,29 @@ export function fetchUsers(role) {
     picture: string | undefined; // "https://canvas.instructure.com/images/messages/avatar-50.png"
   }
  */
-// TODO: The API should change param order to use courseId then assignmentId
-export function fetchAssignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(courseId, assignmentId);
+// TODO: The API should change param order to use courseId then resourceId
+export function fetchAssignedStudents(courseId, resourceId) {
+  return (window.isDevMode) ? mockGetAssignedStudents(courseId, resourceId) : realGetAssignedStudents(courseId, resourceId);
 }
 
 /**
  * Fetch students that are enrolled in the given assignment.
  *
  * @param courseId - This course we want students for
- * @param assignmentId - The assignment we want to find unenrolled students for
+ * @param resourceId - The assignment we want to find unenrolled students for
  * @returns array of all members of the course of the given role type. No role type returns all members.
  *
- * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
+ * NOTE: We must pass resourceId because it is possible to enter into the app without a specific assignment id.
  */
-// TODO: The API should change param order to use courseId then assignmentId
-export function fetchUnassignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(courseId, assignmentId);
+// TODO: The API should change param order to use courseId then resourceId
+export function fetchUnassignedStudents(courseId, resourceId) {
+  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, resourceId) : realGetUnassignedStudents(courseId, resourceId);
 }
 
 
 /**
  *
- * @param assignmentId
+ * @param resourceId
  * @param studentId
  * @returns A grade object for the student if they have been graded, otherwise null
  *
@@ -110,20 +123,21 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchGradeForStudent(assignmentId, studentId) {
-  if (window.isDevMode) return mockGetStudentGrade(assignmentId, studentId);
+export function fetchGradeForStudent(resourceId, studentId) {
+  if (window.isDevMode) return mockGetStudentGrade(resourceId, studentId);
 
   // Temp solution until we have additional method.
-  let allGrades = fetchAllGrades(assignmentId);
+  let allGrades = fetchAllGrades(resourceId);
   return allGrades.find(g => g.studentId === studentId);
 
   // TODO: We need a RL method that gets a single student id. (We don't want a student to be able to fetch ids of all students)
-  // return realGetStudentGrade(assignmentId, studentId);
+  // return realGetStudentGrade(resourceId, studentId);
 }
+
 
 /**
  *
- * @param assignmentId
+ * @param resourceId
  * @returns An array of grade objects, one for each homework that has been graded.
  *
  * GradeObj {
@@ -134,19 +148,18 @@ export function fetchGradeForStudent(assignmentId, studentId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchAllGrades(assignmentId) {
-  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(assignmentId);
+export function fetchAllGrades(resourceId) {
+  return (window.isDevMode) ? mockGetGrades(resourceId) : realGetGrades(resourceId);
 }
 
 
 /**
  *
- * @param assignmentId - assignment associated with this grade
  * @param gradeData - object containing grade submission data, described below
  * @returns {Promise<unknown>}
  *
  * SubmitGradeObj {
- *   assignmentId: "9551a0fe-802d-44df-802d-27451ad14cc3",
+ *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3",
  *   studentId: "fa8fde11-43df-4328-9939-58b56309d20d",
  *   score: 100,
  *   comment: "Instructor comment on the student performance",
@@ -163,7 +176,8 @@ export function sendInstructorGradeToLMS(gradeData) {
 
 
 // TODO: Note name changes from grade to score
-export function sendAutoGradeToLMS(assignmentId, studentId, score, comment) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, score, comment) :
+// Note: resourceId is NOT required in actual API, but is used by mock API
+export function sendAutoGradeToLMS(resourceId, studentId, score, comment) {
+  return (window.isDevMode) ? mockAutoSendGradeToLMS(resourceId, studentId, score, comment) :
     realAutoSubmitGrade({score, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
 }
