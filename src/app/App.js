@@ -26,7 +26,7 @@ import SelectionDashboard from "../selectionTool/SelectionDashboard";
 function App() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
-  const resourceId = useSelector(state => state.app.resourceId);
+  const assignmentId = useSelector(state => state.app.assignmentId);
   const params = new URLSearchParams(useLocation().search);
   const mode = params.get('mode');
 
@@ -34,23 +34,23 @@ function App() {
     console.log(`------------ initialize`);
     const userIdParam = params.get('userId');
     const activeRoleParam = params.get('role');
-    const resourceIdParam = params.get('resourceId');
+    const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
 
-    console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${resourceIdParam} | ${courseIdParam}`)
+    // console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
 
     /**
-     * This initializes the redux store with courseId, resourceId, activeUser data,
+     * This initializes the redux store with courseId, assignmentId, activeUser data,
      * members data for members in this course.
      *
      * @param courseId - should not change once set
-     * @param resourceId - may only change from null to an existing resource in the DB
+     * @param assignmentId - may only change from null to an existing resource in the DB
      * @param userId - should not change once set
      * @param activeRole - for now, should not change once set
      * @returns nothing. It simply updates redux store with initial session data.
      *
      */
-    async function initializeSessionData(courseId, resourceId, userId, activeRole) {
+    async function initializeSessionData(courseId, assignmentId, userId, activeRole) {
       try {
         let members = await fetchUsers(courseId);
         const activeUser = members.find(m => m.id === userId);
@@ -58,7 +58,7 @@ function App() {
         if (!activeUser) notifyUserOfError('User not found!');
 
         if (activeUser.activeRole === ROLE_TYPES.learner) {
-          dispatch(setSessionData(courseId, resourceId, activeUser, []));
+          dispatch(setSessionData(courseId, assignmentId, activeUser, []));
           return;
         }
 
@@ -69,44 +69,44 @@ function App() {
           {...s, randomOrderNum:positions[i], homework:{percentCompleted:0, beganOnDate:0, autoScore:0, progress:HOMEWORK_PROGRESS.notBegun}}
         ));
 
-        dispatch(setSessionData(courseId, resourceId, activeUser, students));
+        dispatch(setSessionData(courseId, assignmentId, activeUser, students));
       } catch (error) {
         notifyUserOfError(error)
       }
     }
 
     if (activeRoleParam === ROLE_TYPES.dev && !window.isDevMode) { throw new Error("Can NOT use dev role when not in DevMode. Set DevMode to true in codebase.") }
-    if (!resourceIdParam && activeRoleParam === ROLE_TYPES.learner) { throw new Error("User role of student trying to access app with no resourceId value.") }
+    if (!assignmentIdParam && activeRoleParam === ROLE_TYPES.learner) { throw new Error("User role of student trying to access app with no assignmentId value.") }
 
     if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
 
     // TODO: Comment this out for LIVE deployment.
     // IF in DEV mode, and mock data doesn't exist for provided courseId, this creates mock students and instructors for the course
-    // Required params: role=dev, userId=any, courseId=any, resourceId=null or existing assignment id
+    // Required params: role=dev, userId=any, courseId=any, assignmentId=null or existing assignment id
     if (window.isDevMode) createMockCourseMembers(courseIdParam, 80);
 
-    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, resourceIdParam, userIdParam, activeRoleParam);
+    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam);
 	}, []);
 
 
   /**
-   * If the resourceId changes, we need to fetch data about students associated with the current assignment
+   * If the assignmentId changes, we need to fetch data about students associated with the current assignment
    * and fetch homework associated with each student
    */
 	useEffect(() => {
-    console.log(`------------ resourceId changed to: ${resourceId}`);
-	  if (resourceId) {
+    console.log(`------------ assignmentId changed to: ${assignmentId}`);
+	  if (assignmentId) {
 	    initializeAssignmentAndHomeworks()
     }
 
-    if (!resourceId) {
+    if (!assignmentId) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
     } else if (activeUser.activeRole === ROLE_TYPES.dev) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.devUtilityDashboard));
     } else {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
     }
-  }, [resourceId])
+  }, [assignmentId])
 
 
 
@@ -114,10 +114,11 @@ function App() {
 
 	async function initializeAssignmentAndHomeworks() {
 		try {
-      const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments, {filter: {resourceId: {eq: resourceId}}}));
-      // const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
-      const assignment = assignmentQueryResults.data.listAssignments.items[0];
-      if (!assignment) notifyUserOfError('provided resourceId from URL strand does not match any existing assignment');
+      // const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments, {filter: {assignmentId: {eq: assignmentId}}}));
+      const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
+      const assignment = assignmentQueryResults.data.getAssignment;
+      // const assignment = assignmentQueryResults.data.listAssignments.items[0];
+      if (!assignment) notifyUserOfError('provided assignmentId from URL strand does not match any existing assignment');
 
       // Do NOT store fellow student data if this is NOT an instructor
       dispatch(setAssignmentData(assignment));
