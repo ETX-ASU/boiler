@@ -33,11 +33,11 @@ const submitContentItem = {
   type: 'ltiResourceLink',
   label: 'name of the quiz (used in gradebook)',
   url: '', // leave null
-  resourceId: 'the actual assignment id used in my DynamoDB',
+  assignmentId: 'the actual assignment id used in my DynamoDB',
   lineItem: {
     scoreMaximum: 100,
     label: 'name of the quiz',
-    resourceId: 'the actual assignment id used in my DynamoDB - same as above',
+    assignmentId: 'the actual assignment id used in my DynamoDB - same as above',
     tag: 'not required'
   }
 }
