@@ -56,7 +56,7 @@ const submitContentItem = {
 }
 
 export function getResourceId(submitContentItem) {
-  return (window.isDevMode) ? mockGetResourceId() : realSubmitResourceSelection(submitContentItem);
+  return (window.isDevMode) ? mockGetResourceId() : realSubmitResourceSelection(aws_exports, submitContentItem);
 }
 
 
