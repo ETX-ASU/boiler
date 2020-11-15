@@ -11,7 +11,7 @@ function AssignmentListItem(props) {
         <Row>
           <Col className='col-4 bg'>{assignment.title}</Col>
           <Col className='col-4 bg'>{assignment.courseId}</Col>
-          <Col className='col-4 bg'>{assignment.resourceId}</Col>
+          <Col className='col-4 bg'>{assignment.id}</Col>
         </Row>
       </Container>
     </li>
