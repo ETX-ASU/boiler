@@ -7,7 +7,7 @@ import {updateAssignment as updateAssignmentMutation} from "../graphql/mutations
 import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
-import {getResourceId} from "../utils/RingLeader";
+import {createAssignmentInLms} from "../utils/RingLeader";
 
 function AssignmentsSelectionList(props) {
 	const assignments = props.assignments;
