@@ -15,11 +15,11 @@ export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 
 
 // export function setSessionData(activeUser, assignment, courseId, members)
-export function setSessionData(courseId, resourceId, activeUser, members) {
+export function setSessionData(courseId, assignmentId, activeUser, members) {
   return {
     type: SET_SESSION_DATA,
     courseId,
-    resourceId,
+    assignmentId,
     activeUser,
     members
   }
@@ -87,7 +87,7 @@ const defaultUser = {
 
 const defaultState = {
   courseId: '',
-  resourceId: '',
+  assignmentId: '',
   activeUser: defaultUser,
   assignment: {},
   members: [],
@@ -147,7 +147,7 @@ function appReducer(currentState = defaultState, action) {
     case SET_SESSION_DATA:
       return Object.assign({}, currentState, {
         activeUser:action.activeUser,
-        resourceId:action.resourceId,
+        assignmentId:action.assignmentId,
         courseId:action.courseId,
         members:action.members
       });

@@ -33,16 +33,16 @@ const submitContentItem = {
   type: 'ltiResourceLink',
   label: 'name of the quiz (used in gradebook)',
   url: '', // leave null
-  resourceId: 'the actual assignment id used in my DynamoDB',
+  assignmentId: 'the actual assignment id used in my DynamoDB',
   lineItem: {
     scoreMaximum: 100,
     label: 'name of the quiz',
-    resourceId: 'the actual assignment id used in my DynamoDB - same as above',
+    assignmentId: 'the actual assignment id used in my DynamoDB - same as above',
     tag: 'not required'
   }
 }
 
-export function getResourceId(submitContentItem) {
+export function createAssignmentInLms(submitContentItem) {
   return (window.isDevMode) ? mockGetResourceId() : realSubmitResourceSelection(submitContentItem);
 }
 
@@ -74,10 +74,10 @@ export function fetchUsers(role) {
  * Fetch students that are enrolled in the given assignment.
  *
  * @param courseId - This course we want students for
- * @param resourceId - The assignment we want find enrolled students for
+ * @param assignmentId - The assignment we want find enrolled students for
  * @returns array of all members of the course of the given role type. No role type returns all members.
  *
- * NOTE: We must pass resourceId because it is possible to enter into the app without a specific assignment id.
+ * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
  *
  * class StudentUser {
     id: string | undefined; // "6281a0fe-bdba-44df-802d-27451ad14b60",
@@ -89,29 +89,29 @@ export function fetchUsers(role) {
     picture: string | undefined; // "https://canvas.instructure.com/images/messages/avatar-50.png"
   }
  */
-// TODO: The API should change param order to use courseId then resourceId
-export function fetchAssignedStudents(courseId, resourceId) {
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, resourceId) : realGetAssignedStudents(courseId, resourceId);
+// TODO: The API should change param order to use courseId then assignmentId
+export function fetchAssignedStudents(courseId, assignmentId) {
+  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(courseId, assignmentId);
 }
 
 /**
  * Fetch students that are enrolled in the given assignment.
  *
  * @param courseId - This course we want students for
- * @param resourceId - The assignment we want to find unenrolled students for
+ * @param assignmentId - The assignment we want to find unenrolled students for
  * @returns array of all members of the course of the given role type. No role type returns all members.
  *
- * NOTE: We must pass resourceId because it is possible to enter into the app without a specific assignment id.
+ * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
  */
-// TODO: The API should change param order to use courseId then resourceId
-export function fetchUnassignedStudents(courseId, resourceId) {
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, resourceId) : realGetUnassignedStudents(courseId, resourceId);
+// TODO: The API should change param order to use courseId then assignmentId
+export function fetchUnassignedStudents(courseId, assignmentId) {
+  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(courseId, assignmentId);
 }
 
 
 /**
  *
- * @param resourceId
+ * @param assignmentId
  * @param studentId
  * @returns A grade object for the student if they have been graded, otherwise null
  *
@@ -123,21 +123,21 @@ export function fetchUnassignedStudents(courseId, resourceId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchGradeForStudent(resourceId, studentId) {
-  if (window.isDevMode) return mockGetStudentGrade(resourceId, studentId);
+export function fetchGradeForStudent(assignmentId, studentId) {
+  if (window.isDevMode) return mockGetStudentGrade(assignmentId, studentId);
 
   // Temp solution until we have additional method.
-  let allGrades = fetchAllGrades(resourceId);
+  let allGrades = fetchAllGrades(assignmentId);
   return allGrades.find(g => g.studentId === studentId);
 
   // TODO: We need a RL method that gets a single student id. (We don't want a student to be able to fetch ids of all students)
-  // return realGetStudentGrade(resourceId, studentId);
+  // return realGetStudentGrade(assignmentId, studentId);
 }
 
 
 /**
  *
- * @param resourceId
+ * @param assignmentId
  * @returns An array of grade objects, one for each homework that has been graded.
  *
  * GradeObj {
@@ -148,8 +148,8 @@ export function fetchGradeForStudent(resourceId, studentId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchAllGrades(resourceId) {
-  return (window.isDevMode) ? mockGetGrades(resourceId) : realGetGrades(resourceId);
+export function fetchAllGrades(assignmentId) {
+  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(assignmentId);
 }
 
 
@@ -159,7 +159,7 @@ export function fetchAllGrades(resourceId) {
  * @returns {Promise<unknown>}
  *
  * SubmitGradeObj {
- *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3",
+ *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3", (assignmentId)
  *   studentId: "fa8fde11-43df-4328-9939-58b56309d20d",
  *   score: 100,
  *   comment: "Instructor comment on the student performance",
@@ -177,7 +177,7 @@ export function sendInstructorGradeToLMS(gradeData) {
 
 // TODO: Note name changes from grade to score
 // Note: resourceId is NOT required in actual API, but is used by mock API
-export function sendAutoGradeToLMS(resourceId, studentId, score, comment) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(resourceId, studentId, score, comment) :
+export function sendAutoGradeToLMS(assignmentId, studentId, score, comment) {
+  return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, score, comment) :
     realAutoSubmitGrade({score, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
 }

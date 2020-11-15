@@ -30,7 +30,6 @@ function AssignmentViewer(props) {
   // const isSkipGradedStudents = useSelector(state => state.gradingBar.isSkipGradedStudents);
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 
-  const resourceId = useSelector(state => state.app.resourceId);
   const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
 
@@ -87,7 +86,7 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      let grades = await fetchAllGrades(resourceId);
+      let grades = await fetchAllGrades(assignment.id);
       grades = (grades) ? grades : [];
       await dispatch(setGradesData(grades));
     } catch (error) {
