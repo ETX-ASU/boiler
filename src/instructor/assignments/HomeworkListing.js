@@ -22,17 +22,21 @@ library.add(faBackward, faForward, faCaretLeft, faCaretRight, faComment, faPerce
 function HomeworkListing(props) {
   const dispatch = useDispatch();
   const [curPageNum, setCurPageNum] = useState(0);
-  const [sortBy, setSortBy] = useState({type:SORT_BY.name, direction:SORT_DIRECTION.ascending});
+  const [sortBy, setSortBy] = useState({type:SORT_BY.name, isAscending:true});
   const [pageBtns, setPageBtns] = useState([]);
   // const [sortedStudents, setSortedStudents] = useState(props.students);
-  const studentsPerPage = props.studentsPerPage;
+  const [studentsPerPage, setStudentsPerPage] = useState(props.studentsPerPage);
   const [shownStudents, setShownStudents] = useState([]);
   const [pageCount, setPageCount] = useState(1);
+  const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 
-  useEffect(() => {
+  useEffect(function reCalcPageCount(){
     setPageCount(Math.ceil(props.students.length/studentsPerPage));
+  }, [props.students, studentsPerPage])
 
+  useEffect(function rePaginateList() {
+    console.log(`pageCount: ${pageCount}`);
     if (pageCount <= 5) {
       let newPageBtns = new Array(pageCount).fill(-1);
       setPageBtns(newPageBtns.map((b, i) => i));
@@ -43,87 +47,98 @@ function HomeworkListing(props) {
     }
 
     const topStudentIndex = curPageNum * studentsPerPage;
-    const sortedStudents = getSortedStudents(props.students.slice(), sortBy.type, sortBy.direction);
+    const sortedStudents = getSortedStudents(props.students.slice(), sortBy.type, sortBy.isAscending);
+    console.log("sortedStudents", sortedStudents);
     dispatch(setDisplayOrder(sortedStudents.map(s => s.id)));
     // setSortedStudents(sortedStudents);
 
-
     const shown = sortedStudents.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
-  }, [props.students, sortBy, curPageNum, studentsPerPage, isHideStudentIdentity])
+  }, [pageCount, sortBy, curPageNum, isHideStudentIdentity, activeUiScreenMode])
 
 
   function getSortedStudents(items, type, direction) {
-    const sortType = `${type}-${direction}`;
+    let order;
 
-    switch (sortType) {
-      case `${SORT_BY.name}-${SORT_DIRECTION.ascending}`:
-        if (isHideStudentIdentity) {
-          items.sort((a, b) => a.randomOrderNum - b.randomOrderNum);
-        } else {
-          items.sort((a, b) => a.name.localeCompare(b.name));
-        }
+    switch (type) {
+      case SORT_BY.name:
+        items.sort((a, b) => (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name));
         break;
-      case `${SORT_BY.name}-${SORT_DIRECTION.descending}`:
-        if (isHideStudentIdentity) {
-          items.sort((a, b) => b.randomOrderNum - a.randomOrderNum);
-        } else {
-          items.sort((a, b) => b.name.localeCompare(a.name));
-        }
-        break;
-      case `${SORT_BY.autoScore}-${SORT_DIRECTION.ascending}`:
+      case SORT_BY.autoScore:
         items.sort((a, b) => a.autoScore - b.autoScore);
         break;
-      case `${SORT_BY.autoScore}-${SORT_DIRECTION.decending}`:
-        items.sort((a, b) => b.autoScore - a.autoScore);
+      case SORT_BY.score:
+        items.sort((a, b) => {
+          const aVal = isNaN(a.score) ? -1 : a.score;
+          const bVal = isNaN(b.score) ? -1 : b.score;
+          return aVal - bVal;
+        });
         break;
-      case `${SORT_BY.score}-${SORT_DIRECTION.ascending}`:
-        items.sort((a, b) => a.score - b.score);
+      case SORT_BY.hasComment:
+        items.sort((a, b) => {
+          if (!!a.comment && !b.comment) return -1;
+          if (!a.comment && !!b.comment) return 1;
+          return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
+        });
         break;
-      case `${SORT_BY.score}-${SORT_DIRECTION.decending}`:
-        items.sort((a, b) => b.score - a.score);
+      case HOMEWORK_PROGRESS.inProgress:
+        order = [HOMEWORK_PROGRESS.fullyGraded, HOMEWORK_PROGRESS.submitted, HOMEWORK_PROGRESS.inProgress, HOMEWORK_PROGRESS.notBegun];
+        items.sort((a, b) => {
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          const aVal = order.indexOf(a.homeworkStatus);
+          const bVal = order.indexOf(b.homeworkStatus);
+          if (aVal !== bVal) return aVal - bVal;
+          return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
+        });
         break;
-      // case `${SORT_BY.status}-${HOMEWORK_PROGRESS.inProgress}`:
-      //   items.sort((a, b) => {
-      //     let res = a.percentCompleted - b.percentCompleted;
-      //     return (res) ? res : a.name.localeCompare(b.name);
-      //   });
-      //   break;
-      // case `${SORT_BY.status}-${HOMEWORK_PROGRESS.submitted}`:
-      //   items.sort((a, b) => {
-      //     if (a.homeworkStatus === HOMEWORK_PROGRESS.submitted && b.homeworkStatus !== HOMEWORK_PROGRESS.submitted) return -1;
-      //     if (a.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded)
-      //     let res = a.percentCompleted - b.percentCompleted;
-      //     return (res) ? res : a.name.localeCompare(b.name);
-      //   });
-      //   break;
-      // case `${SORT_BY.status}-${HOMEWORK_PROGRESS.fullyGraded}`:
-      //   items.sort((a, b) => b.name.localeCompare(a.name));
-      //   break;
+      case HOMEWORK_PROGRESS.submitted:
+        order = [HOMEWORK_PROGRESS.submitted, HOMEWORK_PROGRESS.inProgress, HOMEWORK_PROGRESS.notBegun, HOMEWORK_PROGRESS.fullyGraded];
+        items.sort((a, b) => {
+          const aVal = order.indexOf(a.homeworkStatus);
+          const bVal = order.indexOf(b.homeworkStatus);
+          if (aVal !== bVal) return aVal - bVal;
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
+        });
+        break;
+      case HOMEWORK_PROGRESS.fullyGraded:
+        order = [HOMEWORK_PROGRESS.fullyGraded, HOMEWORK_PROGRESS.submitted, HOMEWORK_PROGRESS.inProgress, HOMEWORK_PROGRESS.notBegun];
+        items.sort((a, b) => {
+          const aVal = order.indexOf(a.homeworkStatus);
+          const bVal = order.indexOf(b.homeworkStatus);
+          if (aVal !== bVal) return aVal - bVal;
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
+        });
+        break;
+      default:
+        items.sort((a, b) => (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name));
+        break;
     }
-    return items;
+    return (direction) ? items : items.reverse();
   }
 
   function toggleSortOn(type) {
-    if (type === sortBy.type) {
-      if (sortBy.direction === SORT_DIRECTION.ascending) {
-        setSortBy({type:sortBy.type, direction: SORT_DIRECTION.descending});
-      } else {
-        setSortBy({type:sortBy.type, direction: SORT_DIRECTION.ascending});
-      }
-    } else {
-      if (type === SORT_BY.name || type === SORT_BY.score || type === SORT_BY.autoScore) {
-        setSortBy({type:type, direction: SORT_DIRECTION.ascending});
-      }
-    }
+    const sortDir = (type === sortBy.type) ? (!sortBy.isAscending) : true;
+    setSortBy({type:type, isAscending:sortDir});
   }
 
+  function toggleProgressSortType() {
+    const order = [HOMEWORK_PROGRESS.inProgress, HOMEWORK_PROGRESS.submitted, HOMEWORK_PROGRESS.fullyGraded];
+    if (!sortBy.isAscending) {
+      let index = order.indexOf(sortBy.type) + 1;
+      index = (index === 3) ? 0 : index;
+      setSortBy({type:order[index], isAscending:false});
+    }
+    setSortBy({type:sortBy.type, isAscending:true});
+  }
 
   function getHomeworksList() {
     return (
       shownStudents.map((student, rowNum) => <HomeworkListItem key={student.id} rowNum={rowNum+1} student={student} />)
     )
   }
+
 
   return (
     <Fragment>
@@ -161,25 +176,23 @@ function HomeworkListing(props) {
               <tr>
                 <th scope="col" className={`pb-1 pt-2 student-col ${sortBy.type === SORT_BY.name ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.name)}>Student
-                    {/*{(sortBy.type === SORT_BY.name && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}*/}
-                    {/*{(sortBy.type === SORT_BY.name && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}*/}
                   </span>
                 </th>
                 <th scope="col" className={`pb-1 pt-2 mini-col text-center ${sortBy.type === SORT_BY.autoScore ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.autoScore)}>Auto
-                    {/*{(sortBy.type === SORT_BY.autoScore && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}*/}
-                    {/*{(sortBy.type === SORT_BY.autoScore && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}*/}
                   </span>
                 </th>
                 <th scope="col" className={`pb-1 pt-2 mini-col text-center ${sortBy.type === SORT_BY.score ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.score)}>Final
-                    {/*{(sortBy.type === SORT_BY.score && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}*/}
-                    {/*{(sortBy.type === SORT_BY.score && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}*/}
                   </span>
                 </th>
-                <th scope="col" className="pb-1 pt-2 mini-col text-center"><FontAwesomeIcon icon={faComment}/></th>
-                <th scope="col" className="pb-1 pt-2 status-col" colSpan={2}>
-                  Progress
+                <th scope="col" className={`pb-1 pt-2 mini-col text-center ${sortBy.type === SORT_BY.hasComment ? 'sort-col' : ''}`}>
+                  <span onClick={() => toggleSortOn(SORT_BY.hasComment)}>
+                    <FontAwesomeIcon icon={faComment}/>
+                  </span>
+                </th>
+                <th scope="col" className={`pb-1 pt-2 status-col ${sortBy.type === HOMEWORK_PROGRESS.inProgress ? 'sort-col' : ''}`} colSpan={2}>
+                  <span onClick={toggleProgressSortType}>Progress</span>
                   <span className='float-right'>
                     <FontAwesomeIcon className='ml-2' icon={faPercent} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.inProgress)} />
                     <FontAwesomeIcon className='ml-2' icon={faEdit} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.submitted)} />
@@ -189,24 +202,40 @@ function HomeworkListing(props) {
               </tr>
               <tr className='marker-row'>
                 <th scope="col" className={`marker student-col ${sortBy.type === SORT_BY.name ? 'sort-col' : ''}`}>
-                  {(sortBy.type === SORT_BY.name && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
-                  {(sortBy.type === SORT_BY.name && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                  {(sortBy.type === SORT_BY.name && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                  {(sortBy.type === SORT_BY.name && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
                 <th scope="col" className={`marker ${sortBy.type === SORT_BY.autoScore ? 'sort-col' : ''}`}>
-                  {(sortBy.type === SORT_BY.autoScore && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
-                  {(sortBy.type === SORT_BY.autoScore && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                  {(sortBy.type === SORT_BY.autoScore && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                  {(sortBy.type === SORT_BY.autoScore && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
                 <th scope="col" className={`marker ${sortBy.type === SORT_BY.score ? 'sort-col' : ''}`}>
-                  {(sortBy.type === SORT_BY.score && sortBy.direction === SORT_DIRECTION.descending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
-                  {(sortBy.type === SORT_BY.score && sortBy.direction === SORT_DIRECTION.ascending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                  {(sortBy.type === SORT_BY.score && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                  {(sortBy.type === SORT_BY.score && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
-                <th scope="col" className={`marker ${sortBy.type === SORT_BY.comment ? 'sort-col' : ''}`}>
-                  {(sortBy.type === SORT_BY.comment && sortBy.direction) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
-                  {(sortBy.type === SORT_BY.comment && !sortBy.direction) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                <th scope="col" className={`marker ${sortBy.type === SORT_BY.hasComment ? 'sort-col' : ''}`}>
+                  {(sortBy.type === SORT_BY.hasComment && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                  {(sortBy.type === SORT_BY.hasComment && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
-                <th scope="col" className={`marker status-col ${sortBy.type === SORT_BY.comment ? 'sort-col' : ''}`} colSpan={2}>
-                  {/*{(sortBy.type === SORT_BY.comment && sortBy.direction) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}*/}
-                  {/*{(sortBy.type === SORT_BY.comment && !sortBy.direction) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}*/}
+                <th scope="col" className={`marker status-col ${sortBy.type === HOMEWORK_PROGRESS.inProgress ? 'sort-col' : ''}`} colSpan={2}>
+                  {(sortBy.type === HOMEWORK_PROGRESS.inProgress &&
+                    <span style={{width: '60px'}}>
+                      {!sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                      {sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                    </span>
+                  )}
+                  {(sortBy.type === HOMEWORK_PROGRESS.submitted &&
+                    <span style={{width: '40px'}}>
+                      {!sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                      {sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                    </span>
+                  )}
+                  {(sortBy.type === HOMEWORK_PROGRESS.fullyGraded &&
+                    <span style={{width: '20px'}}>
+                      {!sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
+                      {sortBy.isAscending && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
+                    </span>
+                  )}
                 </th>
               </tr>
             </thead>

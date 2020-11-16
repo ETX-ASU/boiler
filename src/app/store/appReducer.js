@@ -1,20 +1,15 @@
-// "Note" will become "Assignment" in Boilerplate
 import {APP_NAMESPACE, UI_SCREEN_MODES} from "../constants";
 
 export const SET_SESSION_DATA = APP_NAMESPACE+'.SET_SESSION_DATA';
 export const SET_ASSIGNMENT_DATA = APP_NAMESPACE+'.SET_ASSIGNMENT_DATA';
 export const SET_DISPLAY_ORDER = APP_NAMESPACE+'.SET_DISPLAY_ORDER';
-
 export const SET_CURRENTLY_REVIEWED_STUDENT_ID = APP_NAMESPACE+'.SET_CURRENTLY_REVIEWED_STUDENT_ID';
 export const SET_GRADES_DATA = APP_NAMESPACE+'.SET_GRADES_DATA';
-
 export const SET_ACTIVE_UI_SCREEN_MODE = APP_NAMESPACE+'.SET_ACTIVE_UI_SCREEN_MODE';
-
 export const EDIT_DUPED_ASSIGNMENT = APP_NAMESPACE+'.EDIT_DUPED_ASSIGNMENT';
 export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 
 
-// export function setSessionData(activeUser, assignment, courseId, members)
 export function setSessionData(courseId, assignmentId, activeUser, members) {
   return {
     type: SET_SESSION_DATA,
@@ -76,19 +71,17 @@ export function setCurrentlyReviewedStudentId(currentlyReviewedStudentId) {
 
 
 
-const defaultUser = {
-  id: '',
-  givenName: '',
-  familyName: '',
-  email: '',
-  activeRole: '',
-  roles: []
-};
-
 const defaultState = {
   courseId: '',
   assignmentId: '',
-  activeUser: defaultUser,
+  activeUser: {
+    id: '',
+    givenName: '',
+    familyName: '',
+    email: '',
+    activeRole: '',
+    roles: []
+  },
   assignment: {},
   members: [],
   homeworks: [],
@@ -98,49 +91,15 @@ const defaultState = {
   displayOrder: []
 }
 
-/*
-
-Refactor of Redux Store:
-
-// EXTERNALLY PERSISTED DATA
-activeUser:
-  - loaded once, on launch. No sign in/sign out. That is essentially handled by launching/closing app.
-context:
-  - Same as activeUser. Loaded once, on Launch
-assignment:
-  - If it exists, it is loaded once on launch.
-  - If no assignment exists, left empty and created in DB. Then loaded once after creation.
-members:
-  - Loaded once, on launch. Then filtered to remove the activeUser and any non-members.
-  - (For functionality, if you have a student role, you can have homework.)
-gradingData:
-  - loaded on launch.
-  - Re-fetched/Updated when instructor submits a grade to the LMS
-    - Should probably re-fetch a single student grade instead of entire class
-homeworks:
-  - Loaded on launch.
-  - Perhaps a refresh button so the instructor can check for recently submitted homework? (That is, if the
-  instructor has been grading for an hour, they could hit refresh in order to see if new student work or changes
-  have been submitted during this time?)
-
-// LOCAL DATA
-currentlyReviewedStudentId:
-  - set initially to null
-  - changed frequently by app due to navigation
-activeUiScreenMode:
-  - set initially
-  - changed frequently by app due to navigation
-
-
- */
-
 
 function appReducer(currentState = defaultState, action) {
   switch (action.type) {
     case SET_ACTIVE_UI_SCREEN_MODE:
       return Object.assign({}, currentState, {activeUiScreenMode: action.activeUiScreenMode});
+
     case SET_GRADES_DATA:
       return Object.assign({}, currentState, {grades: action.grades});
+
     case ADD_HOMEWORKS_DATA:
       return Object.assign({}, currentState, {homeworks:[...currentState.homeworks, ...action.homeworks]});
 
@@ -163,7 +122,6 @@ function appReducer(currentState = defaultState, action) {
 
     case SET_DISPLAY_ORDER:
       return Object.assign({}, currentState, {displayOrder: action.displayOrder});
-
 
     default:
       return currentState;

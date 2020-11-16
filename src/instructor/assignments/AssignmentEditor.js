@@ -9,20 +9,68 @@ import "./assignments.scss";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 import QuizCreator from "./QuizCreator";
-import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
+import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
+import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
 
 
 function AssignmentEditor() {
   const dispatch = useDispatch();
+  const urlAssignmentId = useSelector(state => state.app.assignmentId);
   const [formData, setFormData] = useState(useSelector(state => state.app.assignment));
   const isLimitedEditing = useSelector(state => Boolean(state.app.homeworks?.length));
 
-  async function handleCancelBtn() {
-    alert("you are cancelling.");
+
+  function closeModalAndReturnToOptScreen(e) {
+    dispatch(setModalVisibility(false));
+    if (formData.id)
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+  }
+
+  function closeModalAndReturnToViewScreen(e) {
+    dispatch(setModalVisibility(false));
+    if (formData.id)
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
   }
+
+  async function handleCancelBtn() {
+    if (!urlAssignmentId) {
+      dispatch(setModalData({
+        isShown: true,
+        title: 'Cancel Edits Warning',
+        prompt: (
+          <Fragment>
+            <p>Do you want to cancel editing this duplicated assignment or continue?</p>
+            <p>Canceling will lose any edits you have made on this screen to your assignment.</p>
+          </Fragment>
+        ),
+        buttons: (
+          <Fragment>
+            <Button onClick={closeModalAndReturnToOptScreen}>Cancel</Button>
+            <Button onClick={() => dispatch(setModalVisibility(false))}>Continue editing</Button>
+          </Fragment>
+        )
+      }));
+    } else {
+      dispatch(setModalData({
+        isShown: true,
+        title: 'Cancel Edits Warning',
+        prompt: (
+          <Fragment>
+            <p>Do you want to cancel new assignment or continue editing?</p>
+            <p>Canceling will not save your new assignment.</p>
+          </Fragment>
+        ),
+        buttons: (
+          <Fragment>
+            <Button onClick={closeModalAndReturnToViewScreen}>Cancel</Button>
+            <Button onClick={() => dispatch(setModalVisibility(false))}>Continue editing</Button>
+          </Fragment>
+        )
+      }));
+    }
+  }
+
 
   async function handleUpdateBtn() {
     // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
@@ -34,8 +82,8 @@ function AssignmentEditor() {
 
     try {
       await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
-    } catch (e) {
-      notifyUserOfError(e);
+    } catch (error) {
+      dispatch(setError(<p>We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again.</p>, error));
     }
 
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));

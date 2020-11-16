@@ -10,11 +10,11 @@ import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {notifyUserOfError} from "../../utils/ErrorHandling";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
 import QuizCreator from "./QuizCreator";
+import {setModalVisibility, setModalData, setError} from "../../app/store/modalReducer";
 
 const emptyAssignment = {
   id: '',
@@ -45,9 +45,29 @@ function AssignmentCreator() {
 	const [formData, setFormData] = useState(emptyAssignment);
 
 
+  function closeModalAndReturnToOptScreen(e) {
+    dispatch(setModalVisibility(false));
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+  }
+
 	async function handleCancelBtn() {
-	  alert("you are cancelling.");
-    // dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
+    console.log('handleCancelBtn()')
+    dispatch(setModalData({
+      title: 'Cancel Warning',
+      prompt: (
+        <Fragment>
+          <p>Do you want to cancel new assignment or continue editing?</p>
+          <p>Canceling will not save your new assignment.</p>
+        </Fragment>
+      ),
+      isShown: true,
+      buttons: (
+        <Fragment>
+          <Button onClick={closeModalAndReturnToOptScreen}>Cancel new assignment</Button>
+          <Button onClick={() => dispatch(setModalVisibility(false))}>Continue editing</Button>
+        </Fragment>
+      )
+    }));
   }
 
 	async function handleSubmitBtn() {
@@ -66,14 +86,17 @@ function AssignmentCreator() {
 
 		try {
       await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-    } catch (e) {
-		  notifyUserOfError(e);
+      dispatch(setModalData({
+        title: 'Assignment Saved',
+        prompt: (<p>Assignment has been saved! It is now accessible in your LMS.</p>),
+        isShown: true,
+        buttons: (<Button onClick={closeModalAndReturnToOptScreen}>Continue</Button>)
+      }));
+    } catch (error) {
+      dispatch(setError(<p>We're sorry. There was a problem saving your new assignment.</p>, error));
     }
 
-    alert(`You have successfully created a new assignment called "${inputData.title}." Now you can return to your LMS to use it
-    in a lesson, or stay here and create/duplicate another assignment.`);
 
-		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
 	}
 
   function toggleUseAutoScore(e) {

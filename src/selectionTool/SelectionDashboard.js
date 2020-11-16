@@ -6,11 +6,13 @@ import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
 import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
-//import { hasValidSession } from '../lti/ValidateSessionService';
 import aws_exports from '../aws-exports';
+import ConfirmationModal from "../app/ConfirmationModal";
+import {setError} from "../app/store/modalReducer";
 
 
 function SelectionDashboard() {
+  const dispatch = useDispatch();
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get('userId');
   const courseId = params.get('courseId');
@@ -43,7 +45,7 @@ function SelectionDashboard() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
 		} catch (error) {
-			console.warn(`=====> ERROR when fetching all assignments`, error)
+      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch the list of your existing assignments.</p>, error));
 		}
 	}
 

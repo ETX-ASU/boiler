@@ -14,6 +14,7 @@ export const SORT_BY = {
   autoScore: 'autoScore',
   id: 'id',
   completed: 'completed',
+  hasComment: 'hasComment'
 }
 export const SORT_DIRECTION = {
   ascending: 'ascending',

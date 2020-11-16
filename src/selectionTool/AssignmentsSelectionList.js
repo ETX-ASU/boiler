@@ -4,13 +4,16 @@ import {Col, Container, Row, Button} from "react-bootstrap";
 import AssignmentListItem from "./AssignmentListItem";
 import {API} from "aws-amplify";
 import {updateAssignment as updateAssignmentMutation} from "../graphql/mutations";
-import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import $ from "jquery";
+import {setError} from "../app/store/modalReducer";
+import {useDispatch} from "react-redux";
+
 
 function AssignmentsSelectionList(props) {
+  const dispatch = useDispatch();
 	const assignments = props.assignments;
   const [activeAssignmentIndex, setActiveAssignmentIndex] = useState(0);
 
@@ -57,8 +60,8 @@ function AssignmentsSelectionList(props) {
 
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
       // alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
-    } catch (e) {
-      notifyUserOfError(e);
+    } catch (error) {
+      dispatch(setError(<p>Sorry. An error occurred while trying to connect and create this assignment within the LMS.</p>, error));
     }
   }
 
