@@ -12,9 +12,9 @@ import {setActiveUiScreenMode} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
 import HomeworkEditor from "./homeworks/HomeworkEditor";
 import {fetchGradeForStudent} from "../utils/RingLeader";
-import {notifyUserOfError} from "../utils/ErrorHandling";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
+import {setError} from "../app/store/modalReducer";
 
 
 function StudentDashboard() {
@@ -58,7 +58,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-      notifyUserOfError(error);
+      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again.</p>, error));
 		}
 	}
 

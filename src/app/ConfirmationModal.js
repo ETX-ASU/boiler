@@ -22,12 +22,12 @@ function ConfirmationModal() {
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{prompt}</p>
+        {prompt}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
-          Close
-        </Button>
+        {!buttons &&
+          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+        }
         {buttons}
       </Modal.Footer>
     </Modal>

@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import "./GradingBar.css";
 import {Container, Col, Row, Button} from 'react-bootstrap';
-import {HOMEWORK_PROGRESS, SORT_BY, STATUS_TEXT} from "../../../app/constants";
+import {HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
-import {notifyUserOfError} from "../../../utils/ErrorHandling";
 import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {setError} from "../../../app/store/modalReducer";
 library.add(faArrowCircleLeft, faArrowCircleRight);
 
 
@@ -51,7 +51,7 @@ function GradingBar(props) {
     };
 
     const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
-    if (!lmsResult) notifyUserOfError('Notify user there was an error posting the grade for this reviewedStudent\'s homework.')
+    if (!lmsResult) dispatch(setError(<p>We're sorry. We encountered an error while posting the grade for this student's work.</p>));
     props.refreshHandler();
   }
 
@@ -109,45 +109,6 @@ function GradingBar(props) {
         </Col>
       </Row>
 
-      {/*<Row className='p-0 xbg-light border-top'>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <label>% Work Completed</label>*/}
-      {/*  </Col>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <label>Auto Score</label>*/}
-      {/*  </Col>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <label>{`Current Score: (${(reviewedStudent.score !== undefined) ? reviewedStudent.score : '--'})`}</label>*/}
-      {/*  </Col>*/}
-      {/*  <Col className='col-3 text-right'>*/}
-      {/*    <label>{`${numGradedSoFar} of 12 Graded`}</label>*/}
-      {/*  </Col>*/}
-      {/*</Row>*/}
-      {/*<Row className='pt-2 pb-2 rounded-bottom grade-bar-bottom-row'>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <span className='stat'>{`${reviewedStudent.percentCompleted}%`}</span>*/}
-      {/*  </Col>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <span*/}
-      {/*      className='stat'>{`${reviewedStudent.autoScore} of ${assignment.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</span>*/}
-      {/*  </Col>*/}
-      {/*  <Col className='col-3 text-left'>*/}
-      {/*    <input type="number" min={0} max={100} onChange={(e) => setScore(parseInt(e.target.value))} value={score}*/}
-      {/*      disabled={reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}*/}
-      {/*    />*/}
-      {/*    <span>*/}
-      {/*      <Button className='btn-sm xbg-med ml-1 mr-0'*/}
-      {/*      disabled={reviewedStudent.progress === HOMEWORK_PROGRESS.fullyGraded}*/}
-      {/*      onClick={handleSubmitScore}>{(reviewedStudent.score !== undefined) ? `UPDATE` : `SUBMIT`}</Button>*/}
-      {/*    </span>*/}
-      {/*  </Col>*/}
-
-      {/*  /!*<GradingInputForm assignments={assignments} homeworks={homeworks} homework.id={homework.id} activeAssignmentId={activeAssignmentId}/>*!/*/}
-      {/*  <Col className='col-3 text-right'>*/}
-      {/*    <span><Button className='btn-sm xbg-darkest ml-0 mr-1' onClick={navToPrev}>{'<'}</Button></span>*/}
-      {/*    <span><Button className='btn-sm xbg-darkest ml-0 mr-1' onClick={navToNext}>{'>'}</Button></span>*/}
-      {/*  </Col>*/}
-      {/*</Row>*/}
     </Container>
   )
 }

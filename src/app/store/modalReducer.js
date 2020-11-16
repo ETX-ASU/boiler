@@ -1,3 +1,5 @@
+import React from "react";
+import {Fragment} from "react";
 
 export const MODAL_STYLES = {
   info: 'info',
@@ -9,11 +11,24 @@ export const MODAL_STYLES = {
 export const SET_MODAL_IS_SHOWN = 'SET_MODAL_IS_SHOWN';
 export const SET_MODAL_DATA = 'SET_MODAL_DATA';
 export const SET_MODAL_BUTTONS = 'SET_MODAL_BUTTONS';
+export const SET_ERROR = 'SET_ERROR';
 
 export function setModalVisibility(isShown) {
   return {
     type: SET_MODAL_IS_SHOWN,
     isShown
+  }
+}
+
+export function setError(msg, error) {
+  return {
+    type: SET_ERROR,
+    data: {
+      title: 'Error',
+      isShown: true,
+      prompt: error ? (<Fragment>msg<p>ERROR: {error}</p></Fragment>) : msg,
+      buttons: null
+    }
   }
 }
 

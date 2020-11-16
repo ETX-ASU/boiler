@@ -11,6 +11,7 @@ import HeaderBar from "../../app/HeaderBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck} from '@fortawesome/free-solid-svg-icons'
+import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
 library.add(faCheck);
 
 
@@ -23,36 +24,72 @@ function HomeworkEditor(props) {
 	const {homework, assignment} = props;
 	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
 
-	async function handleSubmitBtn() {
-		const inputData = Object.assign({}, homework, {
-			quizAnswers: formData.quizAnswers.slice(),
-			beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
-			submittedOnDate: (homework.submittedOnDate) ? homework.submittedOnDate : moment().valueOf()
-		});
-		delete inputData.assignment;
-		delete inputData.createdAt;
-		delete inputData.updatedAt;
-    delete inputData.score;
-    delete inputData.comment;
-    delete inputData.homeworkStatus;
-    delete inputData.gradingProgress;
+	async function submitHomeworkForReview() {
+    dispatch(setModalVisibility(false));
 
-		try {
+    try {
+      const inputData = Object.assign({}, homework, {
+        quizAnswers: formData.quizAnswers.slice(),
+        beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
+        submittedOnDate: (homework.submittedOnDate) ? homework.submittedOnDate : moment().valueOf()
+      });
+      delete inputData.assignment;
+      delete inputData.createdAt;
+      delete inputData.updatedAt;
+      delete inputData.score;
+      delete inputData.comment;
+      delete inputData.homeworkStatus;
+      delete inputData.gradingProgress;
+
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
-      if (!result) throw new Error ("result from updateHomeworkMutation came back null.");
-    } catch (e) {
-		  console.warn("Notify student their homework changes were not saved.", e)
+      if (!result) dispatch(setError(<p>We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.</p>));
+
+      dispatch(setModalData({
+        isShown: true,
+        title: 'Submitted!',
+        prompt: (
+          <p>You can now review your submitted assignment.</p>
+        ),
+        buttons: (
+          <Button onClick={closeModalAndReview}>View</Button>
+        )
+      }));
+
+    } catch (error) {
+      dispatch(setError(<p>We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.</p>, error));
     }
-		await props.refreshHandler();
-		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
+  }
+
+  async function closeModalAndReview() {
+    dispatch(setModalVisibility(false));
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
+    await props.refreshHandler();
+  }
+
+	async function handleSubmitBtn() {
+    dispatch(setModalData({
+      isShown: true,
+      title: 'Are you sure?',
+      prompt: (
+        <Fragment>
+          <p>Once submitted, you cannot go back to make additional edits to your assignment.</p>
+        </Fragment>
+      ),
+      buttons: (
+        <Fragment>
+          <Button onClick={() => dispatch(setModalVisibility(false))}>Cancel</Button>
+          <Button onClick={submitHomeworkForReview}>Submit</Button>
+        </Fragment>
+      )
+    }));
 	}
+
 
 	function handleOptSelected(qNum, optNum) {
 		const quizAnswers = formData.quizAnswers.slice();
     quizAnswers[qNum] = optNum;
 		setFormData(Object.assign({}, formData, {quizAnswers}))
 	}
-
 
 	return (
 		<Fragment>

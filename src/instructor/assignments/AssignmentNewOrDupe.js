@@ -9,7 +9,6 @@ import {editDupedAssignment, setActiveUiScreenMode} from "../../app/store/appRed
 import "./assignments.scss";
 
 import {Container, Row, Button, Col} from "react-bootstrap";
-import {notifyUserOfError} from "../../utils/ErrorHandling";
 import {getAssignment, listAssignments} from "../../graphql/queries";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import HeaderBar from "../../app/HeaderBar";
@@ -17,9 +16,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
+import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
 library.add(faCopy, faPlus);
-
-
 
 
 
@@ -56,24 +54,40 @@ function AssignmentNavOrDupe() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
     } catch (error) {
-      console.warn(`=====> ERROR when fetching all assignments`, error)
+      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.</p>, error));
     }
   }
 
+  function closeModalAndEditDuped(dupedAssignmentData) {
+    dispatch(setModalVisibility(false));
+    dispatch(editDupedAssignment(dupedAssignmentData));
+  }
 
   async function handleDupeAssignment(e) {
-    const selectedId = document.getElementById('assignmentSelector').value;
-    const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
-    const assignment = assignmentQueryResults.data.getAssignment;
-    console.log("Retrieved assignment", assignment);
+    try {
+      const selectedId = document.getElementById('assignmentSelector').value;
+      const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
+      const assignment = assignmentQueryResults.data.getAssignment;
 
-    const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
-    delete inputData.createdAt;
-    delete inputData.updatedAt;
-    const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-    console.log("Created duplicate assignment", result);
+      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
+      delete inputData.createdAt;
+      delete inputData.updatedAt;
+      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
 
-    dispatch(editDupedAssignment(result.data.createAssignment));
+      await dispatch(setModalData({
+        title: 'Assignment Saved',
+        prompt: (
+          <Fragment>
+            <p>A new assignment called Copy of {assignment.title} has been saved! It is now accessible in your LMS.</p>
+            <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+          </Fragment>
+        ),
+        isShown: true,
+        buttons: (<Button onClick={() => closeModalAndEditDuped(result.data.createAssignment)}>Return</Button>)
+      }));
+    } catch (error) {
+      dispatch(setError(<p>We're sorry. There was a problem duplicating and saving your new assignment.</p>, error));
+    }
   }
 
   function handleCreateAssignment(e) {
