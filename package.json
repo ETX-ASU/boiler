@@ -4,9 +4,9 @@
   "private": true,
   "homepage": "",
   "dependencies": {
-    "@asu-etx/rl-client-lib": "^0.7.8",
-    "@asu-etx/rl-server-lib": "^0.7.20",
-    "@asu-etx/rl-shared": "^0.7.1",
+    "@asu-etx/rl-client-lib": "^0.7.9",
+    "@asu-etx/rl-server-lib": "^0.7.21",
+    "@asu-etx/rl-shared": "^0.7.2",
     "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
