@@ -45,14 +45,14 @@ function AssignmentsSelectionList(props) {
 
       const dataResult = await createAssignmentInLms(resourceDataForLms);
 
-      alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
+      /*alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
 
       function setInnerHTML(element, content) {
         element.innerHTML = content;
         return element;
-      }
-
-      document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
+      }*/
+      $("body").append(dataResult);
+      //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
 
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
       // alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
