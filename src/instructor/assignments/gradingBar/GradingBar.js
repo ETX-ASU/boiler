@@ -28,27 +28,29 @@ function GradingBar(props) {
   }
 
   const navToPrev = () => {
-    let curStudentIndex = displayOrder.findIndex(s => s.id === reviewedStudent.id);
+    let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex - 1 < 0) ? displayOrder.length - 1 : curStudentIndex - 1;
     // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex])
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
   const navToNext = () => {
-    let curStudentIndex = displayOrder.findIndex(s => s.id === reviewedStudent.id);
+    let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex + 1 >= displayOrder.length) ? 0 : curStudentIndex + 1;
     // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex].id)
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
   async function handleSubmitScore() {
-    const lmsResult = await sendInstructorGradeToLMS({
+    const scoreDataObj = {
       resourceId: assignment.id,
       studentId: reviewedStudent.id,
       score,
       comment,
       progress: HOMEWORK_PROGRESS.fullyGraded
-    });
+    };
+
+    const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
     if (!lmsResult) notifyUserOfError('Notify user there was an error posting the grade for this reviewedStudent\'s homework.')
     props.refreshHandler();
   }

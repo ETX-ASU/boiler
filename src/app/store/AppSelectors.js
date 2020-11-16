@@ -38,6 +38,6 @@ export function useStudents() {
     setStudents(enhancedDataStudents);
   }, [grades, homeworks])
 
-  console.log("ENHANCED STUDENTS[0] NOW: ", students[0]);
+  // console.log("ENHANCED STUDENTS[0] NOW: ", students[0]);
   return students;
 }

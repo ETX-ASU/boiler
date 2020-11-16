@@ -6,6 +6,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
+import ConfirmationModal from "../app/ConfirmationModal";
 
 
 function SelectionDashboard() {

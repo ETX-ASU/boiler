@@ -15,6 +15,7 @@ import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
 import QuizCreator from "./QuizCreator";
+import {setModalVisibility, setModalData} from "../../app/store/modalReducer";
 
 const emptyAssignment = {
   id: '',
@@ -45,8 +46,20 @@ function AssignmentCreator() {
 	const [formData, setFormData] = useState(emptyAssignment);
 
 
+  function handleSillyButton(e) {
+    console.log("Silly!");
+  }
+
 	async function handleCancelBtn() {
-	  alert("you are cancelling.");
+    console.log('handleCancelBtn()')
+    dispatch(setModalData({
+      title: 'Cancel Warning',
+      prompt: 'Are you sure you want to cancel creating this assignment? You will lose your work?',
+      isShown: true,
+      buttons: (<Button onClick={handleSillyButton}>Silly Button!</Button>)
+    }));
+    // dispatch(setModalVisibility(true));
+	  // alert("you are cancelling.");
     // dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
   }
 

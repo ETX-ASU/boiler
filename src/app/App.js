@@ -20,6 +20,7 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers} from "../utils/RingLeader";
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
+import ConfirmationModal from "./ConfirmationModal";
 
 
 
@@ -138,6 +139,7 @@ function App() {
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
+      <ConfirmationModal />
 			{/*<Row className="mb-3">*/}
 			{/*	<LoginBar activeUser={activeUser} />*/}
 			{/*</Row>*/}
