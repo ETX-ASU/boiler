@@ -8,6 +8,7 @@ import {notifyUserOfError} from "../utils/ErrorHandling";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {createAssignmentInLms} from "../utils/RingLeader";
+import $ from "jquery";
 
 function AssignmentsSelectionList(props) {
 	const assignments = props.assignments;
