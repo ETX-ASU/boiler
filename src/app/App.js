@@ -13,13 +13,14 @@ import LoadingIndicator from "./assets/LoadingIndicator";
 import {useLocation} from "react-router-dom";
 import {API, graphqlOperation} from "aws-amplify";
 import {getAssignment, listAssignments} from "../graphql/queries";
-import {notifyUserOfError} from "../utils/ErrorHandling";
 import {shuffle} from "../utils/shuffle";
 import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers} from "../utils/RingLeader";
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
+import ConfirmationModal from "./ConfirmationModal";
+import {setError} from "./store/modalReducer";
 
 
 
@@ -55,7 +56,9 @@ function App() {
         let members = await fetchUsers(courseId);
         const activeUser = members.find(m => m.id === userId);
         activeUser.activeRole = activeRole;
-        if (!activeUser) notifyUserOfError('User not found!');
+        if (!activeUser) {
+          dispatch(setError(<p>We're sorry. Initialization of session data failed because no matching user was found.</p>));
+        }
 
         if (activeUser.activeRole === ROLE_TYPES.learner) {
           dispatch(setSessionData(courseId, assignmentId, activeUser, []));
@@ -71,7 +74,7 @@ function App() {
 
         dispatch(setSessionData(courseId, assignmentId, activeUser, students));
       } catch (error) {
-        notifyUserOfError(error)
+        dispatch(setError(<p>We're sorry. There was an error initializing session data. Please wait a moment and try again.</p>, error));
       }
     }
 
@@ -114,16 +117,12 @@ function App() {
 
 	async function initializeAssignmentAndHomeworks() {
 		try {
-      // const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments, {filter: {assignmentId: {eq: assignmentId}}}));
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.getAssignment;
-      // const assignment = assignmentQueryResults.data.listAssignments.items[0];
-      if (!assignment) notifyUserOfError('provided assignmentId from URL strand does not match any existing assignment');
-
-      // Do NOT store fellow student data if this is NOT an instructor
+      if (!assignment?.id) dispatch(setError(<p>We're sorry. There was an error fetching the assignment.</p>, 'Provided assignmentId from URL strand does not match any existing DB assignment.'));
       dispatch(setAssignmentData(assignment));
 		} catch (error) {
-      notifyUserOfError(error)
+      dispatch(setError(<p>We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again.</p>, error));
 		}
 	}
 
@@ -138,6 +137,7 @@ function App() {
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
+      <ConfirmationModal />
 			{/*<Row className="mb-3">*/}
 			{/*	<LoginBar activeUser={activeUser} />*/}
 			{/*</Row>*/}

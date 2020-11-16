@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import moment from "moment";
 import {testComments, createMockGrades, deleteMockGrades} from "../utils/MockRingLeader";
@@ -9,11 +9,12 @@ import { v4 as uuid } from "uuid";
 import {shuffle} from "../utils/shuffle";
 import {calcAutoScore} from "../utils/homeworkUtils";
 import {createHomework, deleteHomework} from "../graphql/mutations";
-import {notifyUserOfError} from "../utils/ErrorHandling";
 import {listHomeworks} from "../graphql/queries";
+import {setError} from "../app/store/modalReducer";
 
 
 function DevUtilityDashboard() {
+  const dispatch = useDispatch();
   const assignment = useSelector(state => state.app.assignment);
   const members = useSelector(state => state.app.members);
 
@@ -81,8 +82,8 @@ function DevUtilityDashboard() {
       createMockGrades(mockGrades);
       console.log(`-----> mockGrades`, mockGrades);
 
-    } catch (e) {
-      notifyUserOfError(e);
+    } catch (error) {
+      dispatch(setError(<p>Sorry. An error occurred.</p>, error));
     }
     console.log(`-----> results`, results);
   }
@@ -96,8 +97,8 @@ function DevUtilityDashboard() {
       console.log(`homeworks deleted: `, results);
       deleteMockGrades(assignment.id);
       console.log('grades for homework deleted.');
-    } catch (e) {
-      notifyUserOfError(e);
+    } catch (error) {
+      dispatch(setError(<p>Sorry. An error occurred.</p>, error));
     }
   }
 
