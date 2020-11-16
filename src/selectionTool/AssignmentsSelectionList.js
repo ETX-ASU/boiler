@@ -39,6 +39,7 @@ function AssignmentsSelectionList(props) {
         lineItem: {
           scoreMaximum: 100,
           label: assignment.title,
+          resourceId: assignment.id,
           tag: `TAG FOR ${assignment.title}`
         }
       }

@@ -80,7 +80,7 @@ const getParameters = async (req, role) => {
     const platform = req.session.platform;
     const userId = platform.userId;
     const courseId = platform.context_id;
-    const resourceLinkId = platform.resourceLinkId;
+    const resourceLinkId = req.query.assignmentId ? req.query.assignmentId : platform.resourceLinkId; 
     const findConsumer =  {iss:platform.iss,
     client_id:platform.clientId,
     deployment_id : platform.deploymentId}
@@ -107,9 +107,9 @@ const getParameters = async (req, role) => {
         }
     }
 
-    //example const params = `userId=user-id-uncle-bob&courseId=the-course-id-123&resourceId=4c43a1b5-e5db-4b3e-ae32-a9405927e472`
+    //example const params = `userId=user-id-uncle-bob&courseId=the-course-id-123a&assignmentId=4c43a1b5-e5db-4b3e-ae32-a9405927e472`
     if(resourceLinkId !== courseId)
-        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&resourceId=${resourceLinkId}&hash=${hash}`
+        return `/assignment?role=${role}&userId=${userId}&courseId=${courseId}&assignmentId=${resourceLinkId}&hash=${hash}`
     return `?role=${role}&userId=${userId}&courseId=${courseId}&hash=${hash}`
 };
 
