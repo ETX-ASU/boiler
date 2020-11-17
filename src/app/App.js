@@ -98,18 +98,18 @@ function App() {
    */
 	useEffect(() => {
     console.log(`------------ assignmentId changed to: ${assignmentId}`);
-	  if (assignmentId) {
+	  if (assignmentId && activeUser.id) {
 	    initializeAssignmentAndHomeworks()
     }
 
-    if (!assignmentId) {
+    if (!assignmentId && activeUser.id) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
     } else if (activeUser.activeRole === ROLE_TYPES.dev) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.devUtilityDashboard));
     } else {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
     }
-  }, [assignmentId])
+  }, [assignmentId, activeUser])
 
 
 
