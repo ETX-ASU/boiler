@@ -103,7 +103,7 @@ const getParameters = async (req, role) => {
         if(platform.isInstructor) {
             role = "instructor";
         } else {
-            role = "student";
+            role = "learner";
         }
     }
 
