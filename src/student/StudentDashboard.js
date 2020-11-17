@@ -39,12 +39,16 @@ function StudentDashboard() {
 	async function fetchAndSetHomework() {
 		try {
 			const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {"studentOwnerId":{eq:activeUser.id}, "assignmentId":{eq:assignment.id}}}));
-			if (!fetchHomeworkResult.data.listHomeworks.items.length) {
+			if (!fetchHomeworkResult.data.listHomeworks.items?.length) {
+        console.warn("NO homework exists for this student. Attempting to create.")
 			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {id: uuid(), studentOwnerId:activeUser.id, assignmentId:assignment.id, quizAnswers:Array(assignment.quizQuestions.length).fill(-1)});
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
+        console.warn("Successful in creating homework for this student");
+
         await setHomework({...resultHomework.data.createHomework, score:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
         dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
+        console.warn(`About to fetch homework id ${fetchHomeworkResult.data.listHomeworks.items[0].id}`);
 			  const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
 			  const theHomework = resultHomework.data.getHomework;
         let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
@@ -58,7 +62,8 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again.</p>, error));
+		  alert(error);
+      // dispatch(setError(<p>We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again.</p>, error));
 		}
 	}
 
