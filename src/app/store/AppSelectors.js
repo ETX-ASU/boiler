@@ -15,7 +15,7 @@ export function useStudents() {
     let positions = shuffle(studentsOnly.map((h, i) => i+1));
 
     const enhancedDataStudents = studentsOnly.map(s => {
-      let gradeDataForStudent = Object.assign({}, grades.find(g => g.studentId === s.id));
+      let gradeDataForStudent = (grades) ? Object.assign({}, grades.find(g => g.studentId === s.id)) : null;
       if (!gradeDataForStudent) gradeDataForStudent = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));

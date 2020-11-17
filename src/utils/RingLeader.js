@@ -18,6 +18,7 @@ import {
 */
 
 import {
+  hasValidSessionAws as realHasValidSession,
   getUsersAws as realGetUsers,
   getUnassignedStudentsAws as realGetUnassignedStudents,
   getAssignedStudentsAws as realGetAssignedStudents,
@@ -29,6 +30,7 @@ import {
 
 
 import {
+  mockHasValidSession,
   mockGetUsers,
   mockGetAssignedStudents,
   mockGetUnassignedStudents,
@@ -53,6 +55,10 @@ const submitContentItem = {
     resourceId: 'the actual assignment id used in my DynamoDB - same as above',
     tag: 'not required'
   }
+}
+
+export function hasValidSession(awsExports) {
+  return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
 }
 
 export function createAssignmentInLms(submitContentItem) {

@@ -10,8 +10,6 @@ function AssignmentListItem(props) {
       <Container>
         <Row>
           <Col className='col-4 bg'>{assignment.title}</Col>
-          <Col className='col-4 bg'>{assignment.courseId}</Col>
-          <Col className='col-4 bg'>{assignment.id}</Col>
         </Row>
       </Container>
     </li>

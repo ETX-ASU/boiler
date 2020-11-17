@@ -23,17 +23,8 @@ function AssignmentsSelectionList(props) {
 
   async function handleConnectToLMS() {
     const assignment = assignments[activeAssignmentIndex];
-    const isConfirmed = window.confirm(`Connecting to Assignment #${activeAssignmentIndex}: ${assignment.title}. Are you sure we should continue?`);
-    if (!isConfirmed) return;
 
-
-    // Add the resourceId to the assignment
     try {
-      // const inputData = Object.assign({}, assignment);
-      // // inputData.resourceId = resourceId;
-      // // delete inputData.createdAt;
-      // // delete inputData.updatedAt;
-
       const resourceDataForLms = {
         type: 'ltiResourceLink',
         label: assignment.title,
@@ -59,7 +50,7 @@ function AssignmentsSelectionList(props) {
       //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
 
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
-      // alert(`SUCCESSFUL! Set resourceId = ${resourceId}`);
+      alert(`SUCCESSFUL`);
     } catch (error) {
       dispatch(setError(<p>Sorry. An error occurred while trying to connect and create this assignment within the LMS.</p>, error));
     }

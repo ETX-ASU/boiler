@@ -6,12 +6,12 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
-import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
-//import { hasValidSession } from '../lti/ValidateSessionService';
+import {hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 
 
 function InstructorDashboard() {
+  const assignmentId = useSelector(state => state.app.assignmentId);
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
 
 	return (
@@ -24,7 +24,7 @@ function InstructorDashboard() {
 					{(activeUiScreenMode === UI_SCREEN_MODES.editAssignment || activeUiScreenMode === UI_SCREEN_MODES.dupeAssignment) &&
 					<AssignmentEditor />
 					}
-					{(activeUiScreenMode === UI_SCREEN_MODES.createOrDupeAssignment) &&
+					{(activeUiScreenMode === UI_SCREEN_MODES.createOrDupeAssignment) && !assignmentId &&
 					<AssignmentNewOrDupe />
 					}
 					{(activeUiScreenMode === UI_SCREEN_MODES.createAssignment) &&
@@ -34,7 +34,7 @@ function InstructorDashboard() {
 			</Row>
 		</Container>
 	);
-} 
+}
 export default hasValidSession(aws_exports) ? InstructorDashboard :  null;
 
 

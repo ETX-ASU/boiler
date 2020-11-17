@@ -5,7 +5,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
-import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
+import {hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 import ConfirmationModal from "../app/ConfirmationModal";
 import {setError} from "../app/store/modalReducer";
