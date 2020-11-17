@@ -14,12 +14,35 @@ const getAsyncSpecs = () => {
 export const mockSubmitResourceSelection = (submissionContentItem) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
+  // const fakeFormScript = `
+  //   <form id="ltijs_submit"
+  //     style="display: none;"
+  //     action="platform.deepLinkingSettings.deep_link_return_url"
+  //     method="POST">
+  //       <input type="hidden" name="JWT" value="message" />
+  //   </form>
+  //   <script>
+  //   document.getElementById("ltijs_submit").submit()
+  //   </script>;
+  // `;
+
+  const fakeForm = `
+    <form id='ltijs_submit' style:"display:none">
+      <input type="hidden" name="JWT" value="fakeVals" />
+    </form>
+    <script>
+      // document.getElementById("ltijs_submit").submit()
+      console.log("running fake form submission script");
+      // window.location.replace("http://www.w3schools.com");
+    </script>
+  `
+
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by MOCKED mockGetResourceId()")), mockDuration);
   } else {
     // Generate a fake resource id between 100 to 999
-    let resId = `resource-${Math.floor(Math.random() * (899) + 100)}`;
-    setTimeout(() => resolve(resId, mockDuration));
+    // let resId = `resource-${Math.floor(Math.random() * (899) + 100)}`;
+    setTimeout(() => resolve(fakeForm, mockDuration));
   }
 });
 

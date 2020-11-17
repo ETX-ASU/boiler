@@ -113,8 +113,6 @@ function App() {
 
 
 
-
-
 	async function initializeAssignmentAndHomeworks() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
