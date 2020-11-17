@@ -1,23 +1,23 @@
 import React, {useEffect} from 'react';
 import './App.scss';
-import {withAuthenticator} from '@aws-amplify/ui-react';
+import {API, graphqlOperation} from "aws-amplify";
+
 import {useDispatch, useSelector} from "react-redux";
 
 import { setActiveUiScreenMode, setSessionData, setAssignmentData } from "./store/appReducer";
 import {HOMEWORK_PROGRESS, ROLE_TYPES, UI_SCREEN_MODES} from "./constants";
-import LoginBar from "./loginBar/LoginBar";
 import {Container, Row} from "react-bootstrap";
 import InstructorDashboard from "../instructor/InstructorDashboard";
 import StudentDashboard from "../student/StudentDashboard";
 import LoadingIndicator from "./assets/LoadingIndicator";
 import {useLocation} from "react-router-dom";
-import {API, graphqlOperation} from "aws-amplify";
-import {getAssignment, listAssignments} from "../graphql/queries";
+import {getAssignment} from "../graphql/queries";
 import {shuffle} from "../utils/shuffle";
 import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../utils/MockRingLeader";
-import {fetchUsers} from "../utils/RingLeader";
+import {fetchUsers, hasValidSession} from "../utils/RingLeader";
+import aws_exports from '../aws-exports';
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
 import ConfirmationModal from "./ConfirmationModal";
 import {setError} from "./store/modalReducer";
@@ -149,5 +149,4 @@ function App() {
 		</Container>
 	);
 }
-
-export default withAuthenticator(App);
+export default hasValidSession(aws_exports) ? App :  null;

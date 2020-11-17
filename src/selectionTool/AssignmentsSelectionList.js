@@ -7,7 +7,7 @@ import {updateAssignment as updateAssignmentMutation} from "../graphql/mutations
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {createAssignmentInLms} from "../utils/RingLeader";
-import {submitResourceSelection} from "@asu-etx/rl-client-lib";
+import $ from "jquery";
 import {setError} from "../app/store/modalReducer";
 import {useDispatch} from "react-redux";
 
@@ -40,10 +40,17 @@ function AssignmentsSelectionList(props) {
 
       const dataResult = await createAssignmentInLms(resourceDataForLms);
 
-      console.log('got result of ', dataResult);
-      let scriptElem = document.createElement('div');
-      scriptElem.innerHTML = dataResult;
-      document.body.appendChild(scriptElem);
+      /*alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
+
+      function setInnerHTML(element, content) {
+        element.innerHTML = content;
+        return element;
+      }*/
+      $("body").append(dataResult);
+      //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
+
+      // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
+      alert(`SUCCESSFUL`);
     } catch (error) {
       dispatch(setError(<p>Sorry. An error occurred while trying to connect and create this assignment within the LMS.</p>, error));
     }

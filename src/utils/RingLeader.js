@@ -1,6 +1,7 @@
 import moment from "moment";
 import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/constants";
-
+import aws_exports from '../aws-exports';
+/*
 import {
   // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
   submitResourceSelection as realSubmitResourceSelection,
@@ -14,8 +15,22 @@ import {
   // deleteLineItem as realDeleteLineItem,
   // hasValidSession as realHasValidSession,
 } from '@asu-etx/rl-client-lib'
+*/
 
 import {
+  hasValidSessionAws as realHasValidSession,
+  getUsersAws as realGetUsers,
+  getUnassignedStudentsAws as realGetUnassignedStudents,
+  getAssignedStudentsAws as realGetAssignedStudents,
+  getGradesAws as realGetGrades,
+  submitInstructorGradeAws as realInstructorSubmitGrade,
+  submitGradeAws as realAutoSubmitGrade,
+  submitResourceSelectionAws as realSubmitResourceSelection
+} from '@asu-etx/rl-client-lib';
+
+
+import {
+  mockHasValidSession,
   mockGetUsers,
   mockGetAssignedStudents,
   mockGetUnassignedStudents,
@@ -42,8 +57,12 @@ const submitContentItem = {
   }
 }
 
+export function hasValidSession(awsExports) {
+  return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
+}
+
 export function createAssignmentInLms(submitContentItem) {
-  return (window.isDevMode) ? mockSubmitResourceSelection() : realSubmitResourceSelection(submitContentItem);
+  return (window.isDevMode) ? mockSubmitResourceSelection() : realSubmitResourceSelection(aws_exports, submitContentItem);
 }
 
 
@@ -67,7 +86,7 @@ export function createAssignmentInLms(submitContentItem) {
   }
  */
 export function fetchUsers(role) {
-  return (window.isDevMode) ? mockGetUsers(role) : realGetUsers(role);
+  return (window.isDevMode) ? mockGetUsers(role) : realGetUsers(aws_exports, role);
 }
 
 /**
@@ -91,7 +110,7 @@ export function fetchUsers(role) {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 export function fetchAssignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(courseId, assignmentId);
+  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
 }
 
 /**
@@ -105,7 +124,7 @@ export function fetchAssignedStudents(courseId, assignmentId) {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 export function fetchUnassignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(courseId, assignmentId);
+  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
 }
 
 
@@ -149,7 +168,7 @@ export function fetchGradeForStudent(assignmentId, studentId) {
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
 export function fetchAllGrades(assignmentId) {
-  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(assignmentId);
+  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(aws_exports, assignmentId);
 }
 
 
@@ -170,7 +189,7 @@ export function fetchAllGrades(assignmentId) {
  * }
  */
 export function sendInstructorGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(gradeData);
+  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(aws_exports, gradeData);
 }
 
 

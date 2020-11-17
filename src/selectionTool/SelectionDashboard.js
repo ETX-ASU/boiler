@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
-import {withAuthenticator} from '@aws-amplify/ui-react';
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Container, Row} from "react-bootstrap";
 import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
+import {hasValidSession} from "../utils/RingLeader";
+import aws_exports from '../aws-exports';
 import ConfirmationModal from "../app/ConfirmationModal";
 import {setError} from "../app/store/modalReducer";
 
@@ -60,4 +61,4 @@ function SelectionDashboard() {
 	);
 }
 
-export default withAuthenticator(SelectionDashboard);
+export default hasValidSession(aws_exports) ?  SelectionDashboard : null;

@@ -9,7 +9,7 @@ const getAsyncSpecs = () => {
 
 
 
-
+export const mockHasValidSession = () => window.isDevMode;
 
 export const mockSubmitResourceSelection = (submissionContentItem) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
@@ -26,23 +26,27 @@ export const mockSubmitResourceSelection = (submissionContentItem) => new Promis
   //   </script>;
   // `;
 
-  const fakeForm = `
-    <form id='ltijs_submit' style:"display:none">
-      <input type="hidden" name="JWT" value="fakeVals" />
-    </form>
-    <script>
-      // document.getElementById("ltijs_submit").submit()
-      console.log("running fake form submission script");
-      // window.location.replace("http://www.w3schools.com");
-    </script>
-  `
+  // console.log('got result of ', dataResult);
+  // let scriptElem = document.createElement('div');
+  // scriptElem.innerHTML = dataResult;
+  // document.body.appendChild(scriptElem);
+  // const fakeForm = `
+  //   <form id='ltijs_submit' style:"display:none">
+  //     <input type="hidden" name="JWT" value="fakeVals" />
+  //   </form>
+  //   <script>
+  //     // document.getElementById("ltijs_submit").submit()
+  //     console.log("running fake form submission script");
+  //     // window.location.replace("http://www.w3schools.com");
+  //   </script>
+  // `
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by MOCKED mockGetResourceId()")), mockDuration);
   } else {
     // Generate a fake resource id between 100 to 999
     // let resId = `resource-${Math.floor(Math.random() * (899) + 100)}`;
-    setTimeout(() => resolve(fakeForm, mockDuration));
+    setTimeout(() => resolve('fakeForm', mockDuration));
   }
 });
 
@@ -186,7 +190,10 @@ export const createMockCourseMembers = (courseId, totalNumStudents) => {
   const members = [
     { id:"01", status:"Active", name:"Uncle Bob McBobberton", givenName:"Bob", familyName:"McBobberton", email:"UncleBob@FakeSchool.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     { id:"02", status:"Active", name:"Freddy McFreaky", givenName:"Freddy", familyName:"McFreaky", email:"FMcFreaky@Fake.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
+    { id:"a4c0a444-bc32-41d6-8edb-4df61f035ece", status:"Active", name:"Major Major", givenName:"Major", familyName:"Major", email:"Major@Major.com", roles: ["instructor"], picture:"https://canvas.instructure.com/images/messages/avatar-50.png"},
     ...generateMockMembers(totalNumStudents)
+
+
   ]
 
   localStorage.setItem(`boiler-course-users-${courseId}`, JSON.stringify(members));

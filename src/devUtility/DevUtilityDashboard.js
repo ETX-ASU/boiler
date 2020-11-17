@@ -11,6 +11,8 @@ import {calcAutoScore} from "../utils/homeworkUtils";
 import {createHomework, deleteHomework} from "../graphql/mutations";
 import {listHomeworks} from "../graphql/queries";
 import {setError} from "../app/store/modalReducer";
+import {hasValidSession} from "../utils/RingLeader";
+import aws_exports from "../aws-exports";
 
 
 function DevUtilityDashboard() {
@@ -165,4 +167,4 @@ function DevUtilityDashboard() {
 	);
 }
 
-export default DevUtilityDashboard;
+export default hasValidSession(aws_exports) ? DevUtilityDashboard :  null;
