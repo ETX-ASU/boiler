@@ -10,10 +10,9 @@ import {createHomework} from "../graphql/mutations";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
 import HomeworkEditor from "./homeworks/HomeworkEditor";
-import {fetchGradeForStudent} from "../utils/RingLeader";
+import {fetchGradeForStudent, hasValidSession} from "../utils/RingLeader";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
-import { hasValidSessionAws as hasValidSession } from '@asu-etx/rl-client-lib';
 import aws_exports from '../aws-exports';
 import {setError} from "../app/store/modalReducer";
 
