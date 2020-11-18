@@ -1,6 +1,7 @@
 require('dotenv').config();
 const awsServerlessExpress = require('aws-serverless-express');
-const app = require('./app-instance');
+
+const app = require('./app-cached');
 
 const server = awsServerlessExpress.createServer(app);
 

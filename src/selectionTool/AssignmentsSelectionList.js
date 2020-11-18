@@ -38,7 +38,7 @@ function AssignmentsSelectionList(props) {
         }
       }
 
-      const dataResult = await createAssignmentInLms(resourceDataForLms);
+      await createAssignmentInLms(resourceDataForLms);
 
       /*alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
 
@@ -46,7 +46,7 @@ function AssignmentsSelectionList(props) {
         element.innerHTML = content;
         return element;
       }*/
-      $("body").append(dataResult);
+      //$("body").append(dataResult);
       //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
 
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});

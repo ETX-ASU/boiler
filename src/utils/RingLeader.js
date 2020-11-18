@@ -57,12 +57,12 @@ const submitContentItem = {
   }
 }
 
-export function hasValidSession(awsExports) {
-  return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
+const hasValidSession = async (awsExports) => {
+  return (window.isDevMode) ? mockHasValidSession() : await realHasValidSession(awsExports);
 }
 
-export function createAssignmentInLms(submitContentItem) {
-  return (window.isDevMode) ? mockSubmitResourceSelection() : realSubmitResourceSelection(aws_exports, submitContentItem);
+const createAssignmentInLms = async (submitContentItem) => {
+  return (window.isDevMode) ? mockSubmitResourceSelection() : await realSubmitResourceSelection(aws_exports, submitContentItem);
 }
 
 
@@ -85,8 +85,8 @@ export function createAssignmentInLms(submitContentItem) {
     roles: [string] | undefined; // ["Learner"]
   }
  */
-export function fetchUsers(role) {
-  return (window.isDevMode) ? mockGetUsers(role) : realGetUsers(aws_exports, role);
+const fetchUsers = async (role) => {
+  return (window.isDevMode) ? mockGetUsers(role) : await realGetUsers(aws_exports, role);
 }
 
 /**
@@ -109,8 +109,8 @@ export function fetchUsers(role) {
   }
  */
 // TODO: The API should change param order to use courseId then assignmentId
-export function fetchAssignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
+const fetchAssignedStudents = async (courseId, assignmentId) => {
+  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : await realGetAssignedStudents(aws_exports, courseId, assignmentId);
 }
 
 /**
@@ -123,8 +123,8 @@ export function fetchAssignedStudents(courseId, assignmentId) {
  * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
  */
 // TODO: The API should change param order to use courseId then assignmentId
-export function fetchUnassignedStudents(courseId, assignmentId) {
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
+const fetchUnassignedStudents = async (courseId, assignmentId) => {
+  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : await realGetUnassignedStudents(aws_exports, courseId, assignmentId);
 }
 
 
@@ -167,8 +167,8 @@ export function fetchGradeForStudent(assignmentId, studentId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchAllGrades(assignmentId) {
-  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(aws_exports, assignmentId);
+const fetchAllGrades = async (assignmentId) => {
+  return (window.isDevMode) ? mockGetGrades(assignmentId) : await realGetGrades(aws_exports, assignmentId);
 }
 
 
@@ -188,15 +188,25 @@ export function fetchAllGrades(assignmentId) {
  *   gradingProgress: "FullyGraded" <-- optional and currently ignored
  * }
  */
-export function sendInstructorGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(aws_exports, gradeData);
+const sendInstructorGradeToLMS = async (gradeData) => {
+  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : await realInstructorSubmitGrade(aws_exports, gradeData);
 }
 
 
 
 // TODO: Note name changes from grade to score
 // Note: resourceId is NOT required in actual API, but is used by mock API
-export function sendAutoGradeToLMS(assignmentId, studentId, score, comment) {
+const sendAutoGradeToLMS = async (assignmentId, studentId, score, comment) => {
   return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, score, comment) :
-    realAutoSubmitGrade({score, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+    await realAutoSubmitGrade({score, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
 }
+
+export {
+  hasValidSession,
+  createAssignmentInLms,
+  sendAutoGradeToLMS, 
+  sendInstructorGradeToLMS, 
+  fetchAllGrades, 
+  fetchUnassignedStudents,
+  fetchAssignedStudents,
+  fetchUsers};

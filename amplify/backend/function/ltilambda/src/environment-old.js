@@ -9,5 +9,5 @@ console.log(`config: ${JSON.stringify(process.env)}`);
 const environment = process.env.environment ? process.env.environment : "local";
 const client_folder = process.env.client_folder ? process.env.client_folder : "browser-client";
 console.log(`environment loaded: ${environment}`);
-process.env.toolConsumers = JSON.stringify(require(`./environments/${environment}/.tool_consumers.${environment}.json`));
+//process.env.TOOL_CONSUMERS = process.env.TOOL_CONSUMERS ? process.env.TOOL_CONSUMERS : JSON.stringify(require(`./environments/${environment}/.tool_consumers.${environment}.json`));
 process.env.USER_INTERFACE_ROOT = path_1.default.join(__dirname +`/${client_folder}/build/`);

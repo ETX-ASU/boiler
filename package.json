@@ -5,8 +5,8 @@
   "homepage": "",
   "dependencies": {
     "@asu-etx/rl-client-lib": "^0.7.14",
-    "@asu-etx/rl-server-lib": "^0.7.33",
-    "@asu-etx/rl-shared": "^0.7.4",
+    "@asu-etx/rl-server-lib": "^0.7.37",
+    "@asu-etx/rl-shared": "^0.7.6",
     "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
