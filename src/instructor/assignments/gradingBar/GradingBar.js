@@ -51,7 +51,7 @@ function GradingBar(props) {
     };
 
     const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
-    if (!lmsResult) dispatch(setError(<p>We're sorry. We encountered an error while posting the grade for this student's work.</p>));
+    if (!lmsResult) window.confirm(`We're sorry. We encountered an error while posting the grade for this student's work.`);
     props.refreshHandler();
   }
 

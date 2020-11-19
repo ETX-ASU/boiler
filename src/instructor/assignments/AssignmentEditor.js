@@ -11,7 +11,7 @@ import ToggleSwitch from "../../app/assets/ToggleSwitch";
 import QuizCreator from "./QuizCreator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
-import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
+import {setModalData, setModalVisibility} from "../../app/store/modalReducer";
 
 
 function AssignmentEditor() {
@@ -83,7 +83,7 @@ function AssignmentEditor() {
     try {
       await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
     } catch (error) {
-      dispatch(setError(<p>We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again.</p>, error));
+      window.confirm(`We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again. Error: ${error}`);
     }
 
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));

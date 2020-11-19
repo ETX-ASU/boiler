@@ -20,7 +20,6 @@ import {fetchUsers, hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
 import ConfirmationModal from "./ConfirmationModal";
-import {setError} from "./store/modalReducer";
 
 
 
@@ -38,7 +37,7 @@ function App() {
     const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
 
-    // console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
+    console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
 
     /**
      * This initializes the redux store with courseId, assignmentId, activeUser data,
@@ -57,7 +56,7 @@ function App() {
         const activeUser = members.find(m => m.id === userId);
         activeUser.activeRole = activeRole;
         if (!activeUser) {
-          dispatch(setError(<p>We're sorry. Initialization of session data failed because no matching user was found.</p>));
+          window.confirm(`We're sorry. Initialization of session data failed because no matching user was found.`);
         }
 
         if (activeUser.activeRole === ROLE_TYPES.learner) {
@@ -74,7 +73,8 @@ function App() {
 
         dispatch(setSessionData(courseId, assignmentId, activeUser, students));
       } catch (error) {
-        dispatch(setError(<p>We're sorry. There was an error initializing session data. Please wait a moment and try again.</p>, error));
+        console.error(error);
+        window.confirm(`We're sorry. There was an error initializing session data. Please wait a moment and try again. Error: ${error}`);
       }
     }
 
@@ -117,25 +117,25 @@ function App() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.getAssignment;
-      if (!assignment?.id) dispatch(setError(<p>We're sorry. There was an error fetching the assignment.</p>, 'Provided assignmentId from URL strand does not match any existing DB assignment.'));
+      if (!assignment?.id) window.confirm(`We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
       dispatch(setAssignmentData(assignment));
 		} catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again.</p>, error));
+      window.confirm(`We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again. Error: ${error}`);
 		}
 	}
-
-	if (mode === 'selectAssignment') return (
-    <Container className="app mt-4 mb-2 p-0">
-      <Row className='main-content-row'>
-        <SelectionDashboard />
-      </Row>
-    </Container>
-
-  )
+  //
+	// if (mode === 'selectAssignment') return (
+  //   <Container className="app mt-4 mb-2 p-0">
+  //     <Row className='main-content-row'>
+  //       <SelectionDashboard />
+  //     </Row>
+  //   </Container>
+  //
+  // )
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
-      <ConfirmationModal />
+      {/*<ConfirmationModal />*/}
 			{/*<Row className="mb-3">*/}
 			{/*	<LoginBar activeUser={activeUser} />*/}
 			{/*</Row>*/}

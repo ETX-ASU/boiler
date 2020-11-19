@@ -20,17 +20,6 @@ export function setModalVisibility(isShown) {
   }
 }
 
-export function setError(msg, error) {
-  return {
-    type: SET_ERROR,
-    data: {
-      title: 'Error',
-      isShown: true,
-      prompt: error ? (<Fragment>msg<p>ERROR: {error}</p></Fragment>) : msg,
-      buttons: null
-    }
-  }
-}
 
 export function setModalData(data) {
   return {

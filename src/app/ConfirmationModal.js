@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Modal, ModalDialog, ModalBody, ModalFooter, Button} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {useDispatch, useSelector} from "react-redux";
@@ -6,14 +6,14 @@ import {setModalVisibility} from "./store/modalReducer";
 
 
 
-function ConfirmationModal() {
+function ConfirmationModal(props) {
   const dispatch = useDispatch();
-  const modal = useSelector(state => state.modal);
-  const {prompt, title, isShown, buttons} = modal;
+  const [isShown, setIsShown] = useState(props.isShown);
+  const {prompt, title} = props;
 
   function handleCloseModal() {
     console.log('handleCloseModal()');
-    dispatch(setModalVisibility(false));
+    setIsShown(false);
   }
 
   return(
@@ -25,10 +25,10 @@ function ConfirmationModal() {
         {prompt}
       </Modal.Body>
       <Modal.Footer>
-        {!buttons &&
+        {!props.children &&
           <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
         }
-        {buttons}
+        {props.children}
       </Modal.Footer>
     </Modal>
   )

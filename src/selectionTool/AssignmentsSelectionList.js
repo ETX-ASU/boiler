@@ -8,7 +8,6 @@ import {setActiveUiScreenMode} from "../app/store/appReducer";
 import {UI_SCREEN_MODES} from "../app/constants";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import $ from "jquery";
-import {setError} from "../app/store/modalReducer";
 import {useDispatch} from "react-redux";
 
 
@@ -52,7 +51,7 @@ function AssignmentsSelectionList(props) {
       // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
       alert(`SUCCESSFUL`);
     } catch (error) {
-      dispatch(setError(<p>Sorry. An error occurred while trying to connect and create this assignment within the LMS.</p>, error));
+      window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
     }
   }
 
