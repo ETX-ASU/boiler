@@ -87,5 +87,5 @@ function StudentDashboard() {
 	);
 }
 
- export default !hasValidSession(aws_exports) ? StudentDashboard : null;
+ export default hasValidSession(aws_exports) ? StudentDashboard : null;
 
