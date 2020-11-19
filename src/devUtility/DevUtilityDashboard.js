@@ -85,7 +85,7 @@ function DevUtilityDashboard() {
       console.log(`-----> mockGrades`, mockGrades);
 
     } catch (error) {
-      dispatch(setError(<p>Sorry. An error occurred.</p>, error));
+      window.confirm(`Sorry. An error occurred. Error: ${error}`);
     }
     console.log(`-----> results`, results);
   }
@@ -100,7 +100,7 @@ function DevUtilityDashboard() {
       deleteMockGrades(assignment.id);
       console.log('grades for homework deleted.');
     } catch (error) {
-      dispatch(setError(<p>Sorry. An error occurred.</p>, error));
+      window.confirm(`Sorry. An error occurred. Error: ${error}`);
     }
   }
 

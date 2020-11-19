@@ -14,7 +14,7 @@ import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
 import QuizCreator from "./QuizCreator";
-import {setModalVisibility, setModalData, setError} from "../../app/store/modalReducer";
+import {setModalVisibility, setModalData} from "../../app/store/modalReducer";
 
 const emptyAssignment = {
   id: '',
@@ -93,7 +93,7 @@ function AssignmentCreator() {
         buttons: (<Button onClick={closeModalAndReturnToOptScreen}>Continue</Button>)
       }));
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was a problem saving your new assignment.</p>, error));
+      window.confirm(`We're sorry. There was a problem saving your new assignment. Error: ${error}`);
     }
 
 

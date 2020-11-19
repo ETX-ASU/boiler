@@ -16,7 +16,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
-import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
+import {setModalData, setModalVisibility} from "../../app/store/modalReducer";
 library.add(faCopy, faPlus);
 
 
@@ -54,7 +54,7 @@ function AssignmentNavOrDupe() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.</p>, error));
+      window.confirm(`We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication. Error: ${error}`);
     }
   }
 
@@ -86,7 +86,7 @@ function AssignmentNavOrDupe() {
         buttons: (<Button onClick={() => closeModalAndEditDuped(result.data.createAssignment)}>Return</Button>)
       }));
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was a problem duplicating and saving your new assignment.</p>, error));
+      window.confirm(`We're sorry. There was a problem duplicating and saving your new assignment. Error: ${error}`);
     }
   }
 

@@ -11,7 +11,7 @@ import HeaderBar from "../../app/HeaderBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck} from '@fortawesome/free-solid-svg-icons'
-import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
+import {setModalData, setModalVisibility} from "../../app/store/modalReducer";
 library.add(faCheck);
 
 
@@ -42,7 +42,7 @@ function HomeworkEditor(props) {
       delete inputData.gradingProgress;
 
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
-      if (!result) dispatch(setError(<p>We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.</p>));
+      if (!result) window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
 
       dispatch(setModalData({
         isShown: true,
@@ -56,7 +56,7 @@ function HomeworkEditor(props) {
       }));
 
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.</p>, error));
+      window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again. Error: ${error}`);
     }
   }
 
