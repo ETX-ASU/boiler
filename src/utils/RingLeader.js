@@ -58,11 +58,11 @@ const submitContentItem = {
 }
 
 const hasValidSession = async (awsExports) => {
-  return (window.isDevMode) ? mockHasValidSession() : await realHasValidSession(awsExports);
+  return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
 }
 
 const createAssignmentInLms = async (submitContentItem) => {
-  return (window.isDevMode) ? mockSubmitResourceSelection() : await realSubmitResourceSelection(aws_exports, submitContentItem);
+  return (window.isDevMode) ? mockSubmitResourceSelection() : realSubmitResourceSelection(aws_exports, submitContentItem);
 }
 
 
@@ -86,7 +86,7 @@ const createAssignmentInLms = async (submitContentItem) => {
   }
  */
 const fetchUsers = async (role) => {
-  return (window.isDevMode) ? mockGetUsers(role) : await realGetUsers(aws_exports, role);
+  return (window.isDevMode) ? mockGetUsers(role) : realGetUsers(aws_exports, role);
 }
 
 /**
@@ -110,7 +110,7 @@ const fetchUsers = async (role) => {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 const fetchAssignedStudents = async (courseId, assignmentId) => {
-  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : await realGetAssignedStudents(aws_exports, courseId, assignmentId);
+  return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
 }
 
 /**
@@ -124,7 +124,7 @@ const fetchAssignedStudents = async (courseId, assignmentId) => {
  */
 // TODO: The API should change param order to use courseId then assignmentId
 const fetchUnassignedStudents = async (courseId, assignmentId) => {
-  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : await realGetUnassignedStudents(aws_exports, courseId, assignmentId);
+  return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
 }
 
 

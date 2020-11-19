@@ -38,7 +38,7 @@ function AssignmentsSelectionList(props) {
         }
       }
 
-      await createAssignmentInLms(resourceDataForLms);
+     const dataResult =  await createAssignmentInLms(resourceDataForLms);
 
       /*alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
 
@@ -46,11 +46,13 @@ function AssignmentsSelectionList(props) {
         element.innerHTML = content;
         return element;
       }*/
-      //$("body").append(dataResult);
+
+      //TODO remove query, launch with React.
+      $("body").append(dataResult);
       //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
 
-      // await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
-      alert(`SUCCESSFUL`);
+      //await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
+      //alert(`SUCCESSFUL`);
     } catch (error) {
       dispatch(setError(<p>Sorry. An error occurred while trying to connect and create this assignment within the LMS.</p>, error));
     }

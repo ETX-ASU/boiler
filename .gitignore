@@ -43,4 +43,4 @@ amplifytools.xcconfig
 .vscode/
 
 #environment
-.tool_consumers.*
+#.tool_consumers.*
