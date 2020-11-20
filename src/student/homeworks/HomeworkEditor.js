@@ -22,8 +22,8 @@ library.add(faCheck);
 function HomeworkEditor(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
-  const [activeModal, setActiveModal] = useState(null);
 	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
+  const [activeModal, setActiveModal] = useState(null);
 
 
 	async function submitHomeworkForReview() {
@@ -72,7 +72,7 @@ function HomeworkEditor(props) {
       case MODAL_TYPES.warningBeforeHomeworkSubmission:
         return (
           <ConfirmationModal title={'Are you sure?'} buttons={[
-            {name:'Cancel', onClick:setActiveModal(null)},
+            {name:'Cancel', onClick: () => setActiveModal(null)},
             {name:'Submit', onClick:submitHomeworkForReview},
           ]}>
             <p>Once submitted, you cannot go back to make additional edits to your assignment.</p>
