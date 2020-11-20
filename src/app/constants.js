@@ -1,6 +1,14 @@
 export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 export const APP_VERSION_NUM = '0.0.2';
 
+export const MODAL_TYPES = {
+  confirmAssignmentDuped: "confirmAssignmentDuped",
+  cancelNewAssignmentEditsWarning: "cancelNewAssignmentEditsWarning",
+  cancelDupedAssignmentEditsWarning: "cancelDupedAssignmentEditsWarning",
+  confirmAssignmentSaved: "confirmAssignmentSaved",
+  confirmHomeworkSubmitted: "confirmHomeworkSubmitted",
+  warningBeforeHomeworkSubmission: "warningBeforeHomeworkSubmission"
+}
 
 export const ROLE_TYPES = {
   instructor: 'instructor',

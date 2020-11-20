@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
-import {UI_SCREEN_MODES} from "../../app/constants";
+import {UI_SCREEN_MODES, MODAL_TYPES} from "../../app/constants";
 import {editDupedAssignment, setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
@@ -12,13 +12,12 @@ import {Container, Row, Button, Col} from "react-bootstrap";
 import {getAssignment, listAssignments} from "../../graphql/queries";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import HeaderBar from "../../app/HeaderBar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ConfirmationModal from "../../app/ConfirmationModal";
 
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
-import {setError, setModalData, setModalVisibility} from "../../app/store/modalReducer";
 library.add(faCopy, faPlus);
-
 
 
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
@@ -29,6 +28,7 @@ function AssignmentNavOrDupe() {
 
   const [assignments, setAssignments] = useState([]);
   const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
+  const [activeModal, setActiveModal] = useState(null);
 
   useEffect(() => {
     fetchAssignmentList();
@@ -54,12 +54,12 @@ function AssignmentNavOrDupe() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.</p>, error));
+      window.confirm(`We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication. Error: ${error}`);
     }
   }
 
   function closeModalAndEditDuped(dupedAssignmentData) {
-    dispatch(setModalVisibility(false));
+    setActiveModal(null);
     dispatch(editDupedAssignment(dupedAssignmentData));
   }
 
@@ -74,19 +74,10 @@ function AssignmentNavOrDupe() {
       delete inputData.updatedAt;
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
 
-      await dispatch(setModalData({
-        title: 'Assignment Saved',
-        prompt: (
-          <Fragment>
-            <p>A new assignment called Copy of {assignment.title} has been saved! It is now accessible in your LMS.</p>
-            <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
-          </Fragment>
-        ),
-        isShown: true,
-        buttons: (<Button onClick={() => closeModalAndEditDuped(result.data.createAssignment)}>Return</Button>)
-      }));
+      setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was a problem duplicating and saving your new assignment.</p>, error));
+      window.confirm(`We're sorry. There was a problem duplicating and saving your new assignment. Error: ${error}`);
     }
   }
 
@@ -95,8 +86,22 @@ function AssignmentNavOrDupe() {
   }
 
 
+  function renderModal() {
+    switch (activeModal.type) {
+      case MODAL_TYPES.confirmAssignmentDuped:
+        return (
+          <ConfirmationModal title={'Assignment Saved'}
+             buttons={[{name:'Edit Duplicated Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[1])}]}>
+            <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
+            <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+          </ConfirmationModal>
+        )
+    }
+  }
+
 	return (
 		<Fragment>
+      {activeModal && renderModal()}
       <HeaderBar title='Create New Assignment' canCancel={false} canSave={false} >
         <Button disabled className='mr-2'>Cancel</Button>
         <Button disabled>Update</Button>

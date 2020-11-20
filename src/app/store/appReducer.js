@@ -85,7 +85,7 @@ const defaultState = {
   assignment: {},
   members: [],
   homeworks: [],
-  grades: {},
+  grades: [],
   currentlyReviewedStudentId: '',
   activeUiScreenMode: '',
   displayOrder: []

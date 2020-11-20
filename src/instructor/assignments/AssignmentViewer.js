@@ -20,7 +20,6 @@ import HeaderBar from "../../app/HeaderBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEdit, faPen, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
-import {setError} from "../../app/store/modalReducer";
 library.add(faEdit, faPen, faChevronLeft);
 
 
@@ -45,7 +44,7 @@ function AssignmentViewer(props) {
     console.log('fetching scores etc')
     fetchScores();
     fetchBatchOfHomeworks('INIT');
-  }, [assignment.id]);
+  }, [assignment.id, assignment]);
 
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
@@ -71,7 +70,7 @@ function AssignmentViewer(props) {
       nextToken: token
     }))
     .then(handleHomeworksResult)
-    .catch((e) => dispatch(setError(<p>We're sorry. There was a problem fetching student work.</p>, e))
+    .catch((error) => window.confirm(`We're sorry. There was a problem fetching student work. Error: ${error}`)
     );
   }
 
@@ -91,7 +90,7 @@ function AssignmentViewer(props) {
       grades = (grades) ? grades : [];
       await dispatch(setGradesData(grades));
     } catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error fetching student grade data. Please wait a moment and try again.</p>, error));
+      window.confirm(`We're sorry. There was an error fetching student grade data. Please wait a moment and try again. Error: ${error}`);
     }
   }
 
@@ -105,6 +104,7 @@ function AssignmentViewer(props) {
 	}
 
 	function handleBatchSubmitBtn() {
+    // TODO: Needs actual implementation
 		alert('about to batch submit grades');
 	}
 

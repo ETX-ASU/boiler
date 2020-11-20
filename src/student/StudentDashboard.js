@@ -14,7 +14,6 @@ import {fetchGradeForStudent, hasValidSession} from "../utils/RingLeader";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
 import aws_exports from '../aws-exports';
-import {setError} from "../app/store/modalReducer";
 
 
 function StudentDashboard() {
@@ -48,9 +47,9 @@ function StudentDashboard() {
         await setHomework({...resultHomework.data.createHomework, score:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
         dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
-        console.warn(`About to fetch homework id ${fetchHomeworkResult.data.listHomeworks.items[0].id}`);
-			  const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
-			  const theHomework = resultHomework.data.getHomework;
+        // console.warn(`About to fetch homework id ${fetchHomeworkResult.data.listHomeworks.items[0].id}`);
+			  // const resultHomework = await API.graphql(graphqlOperation(getHomework, {id:fetchHomeworkResult.data.listHomeworks.items[0].id}));
+			  const theHomework = fetchHomeworkResult.data.listHomeworks.items[0];
         let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
         if (!scoreData) scoreData = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
@@ -62,8 +61,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-		  alert(error);
-      // dispatch(setError(<p>We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again.</p>, error));
+      window.confirm(`We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again. ${error}`);
 		}
 	}
 
@@ -87,5 +85,5 @@ function StudentDashboard() {
 	);
 }
 
- export default !hasValidSession(aws_exports) ? StudentDashboard : null;
+ export default hasValidSession(aws_exports) ? StudentDashboard : null;
 

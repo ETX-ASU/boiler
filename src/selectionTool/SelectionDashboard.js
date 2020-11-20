@@ -8,7 +8,6 @@ import {useLocation} from "react-router-dom";
 import {hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 import ConfirmationModal from "../app/ConfirmationModal";
-import {setError} from "../app/store/modalReducer";
 
 
 function SelectionDashboard() {
@@ -34,8 +33,8 @@ function SelectionDashboard() {
 
       do {
         const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments,
-          // {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
-          {filter:{ownerId:{eq:userId}},
+          {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
+          // {filter:{ownerId:{eq:userId}},
           nextToken: nextTokenVal
         }));
         nextTokenVal = assignmentQueryResults.data.listAssignments.nextToken;
@@ -45,7 +44,7 @@ function SelectionDashboard() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
 		} catch (error) {
-      dispatch(setError(<p>We're sorry. There was an error while attempting to fetch the list of your existing assignments.</p>, error));
+      window.confirm(`We're sorry. There was an error while attempting to fetch the list of your existing assignments. Error: ${error}`);
 		}
 	}
 
