@@ -41,3 +41,6 @@ amplifytools.xcconfig
 #vscode
 #visual studio
 .vscode/
+
+#environment
+#.tool_consumers.*

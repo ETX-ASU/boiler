@@ -1,6 +1,8 @@
 require('dotenv').config();
 const awsServerlessExpress = require('aws-serverless-express');
-const app = require('./app-instance');
+const environment = process.env.environment ? process.env.environment : "local";
+process.env.TOOL_CONSUMERS = process.env.TOOL_CONSUMERS ? process.env.TOOL_CONSUMERS : JSON.stringify(require(`./environments/${environment}/.tool_consumers.${environment}.json`));
+const app = require('./app-cached');
 
 const server = awsServerlessExpress.createServer(app);
 

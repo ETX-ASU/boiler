@@ -4,9 +4,8 @@
   "private": true,
   "homepage": "",
   "dependencies": {
-    "@asu-etx/rl-client-lib": "^0.7.14",
-    "@asu-etx/rl-server-lib": "^0.7.33",
-    "@asu-etx/rl-shared": "^0.7.4",
+    "@asu-etx/rl-client-lib": "^0.7.18",
+    "@asu-etx/rl-shared": "^0.7.7",
     "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -17,13 +16,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "aws-amplify": "^3.3.7",
-    "aws-serverless-express": "^3.3.8",
     "bootstrap": "^4.5.2",
-    "dotenv-expand": "^5.1.0",
-    "express-session": "^1.17.1",
-    "global-request-logger": "^0.1.1",
-    "got": "^11.8.0",
-    "lodash.isplainobject": "^4.0.6",
+    "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "query-string": "^6.13.7",
@@ -35,10 +29,7 @@
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "serverless": "^2.9.0",
-    "uuid": "^8.3.1",
-    "web-vitals": "^0.2.4",
-    "winston": "^3.3.3"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
