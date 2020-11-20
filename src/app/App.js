@@ -20,7 +20,6 @@ import {fetchUsers, hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
 import ConfirmationModal from "./ConfirmationModal";
-import {setError} from "./store/modalReducer";
 
 
 
@@ -37,6 +36,7 @@ function App() {
     const activeRoleParam = params.get('role');
     const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
+    const mode = params.get('mode');
 
     console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
 
@@ -131,12 +131,11 @@ function App() {
         <SelectionDashboard />
       </Row>
     </Container>
-
   )
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">
-      <ConfirmationModal />
+      {/*<ConfirmationModal />*/}
 			{/*<Row className="mb-3">*/}
 			{/*	<LoginBar activeUser={activeUser} />*/}
 			{/*</Row>*/}

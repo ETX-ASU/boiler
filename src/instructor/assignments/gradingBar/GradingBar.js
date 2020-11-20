@@ -9,7 +9,6 @@ import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
-// import {setError} from "../../../app/store/modalReducer";
 library.add(faArrowCircleLeft, faArrowCircleRight);
 
 
