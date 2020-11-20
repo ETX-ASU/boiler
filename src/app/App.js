@@ -36,6 +36,7 @@ function App() {
     const activeRoleParam = params.get('role');
     const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
+    const mode = params.get('mode');
 
     console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
 
@@ -123,15 +124,14 @@ function App() {
       window.confirm(`We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again. Error: ${error}`);
 		}
 	}
-  //
-	// if (mode === 'selectAssignment') return (
-  //   <Container className="app mt-4 mb-2 p-0">
-  //     <Row className='main-content-row'>
-  //       <SelectionDashboard />
-  //     </Row>
-  //   </Container>
-  //
-  // )
+
+	if (mode === 'selectAssignment') return (
+    <Container className="app mt-4 mb-2 p-0">
+      <Row className='main-content-row'>
+        <SelectionDashboard />
+      </Row>
+    </Container>
+  )
 
 	return (
 		<Container className="app mt-4 mb-2 p-0">

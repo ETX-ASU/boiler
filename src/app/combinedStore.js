@@ -1,13 +1,11 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import appReducer from "./store/appReducer";
-import modalReducer from "./store/modalReducer";
 import gradingBarReducer from "../instructor/assignments/gradingBar/store/gradingBarReducer";
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     app: appReducer,
     gradingBar: gradingBarReducer,
-    modal: modalReducer
   }
 );
 

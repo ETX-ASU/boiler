@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import moment from "moment";
 import {useDispatch} from "react-redux";
-import {UI_SCREEN_MODES} from "../../app/constants";
+import {MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations";
 import {API} from "aws-amplify";
@@ -11,7 +11,7 @@ import HeaderBar from "../../app/HeaderBar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck} from '@fortawesome/free-solid-svg-icons'
-import {setModalData, setModalVisibility} from "../../app/store/modalReducer";
+import ConfirmationModal from "../../app/ConfirmationModal";
 library.add(faCheck);
 
 
@@ -22,10 +22,12 @@ library.add(faCheck);
 function HomeworkEditor(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
+  const [activeModal, setActiveModal] = useState(null);
 	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
 
+
 	async function submitHomeworkForReview() {
-    dispatch(setModalVisibility(false));
+    setActiveModal(null);
 
     try {
       const inputData = Object.assign({}, homework, {
@@ -42,47 +44,21 @@ function HomeworkEditor(props) {
       delete inputData.gradingProgress;
 
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
-      if (!result) window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
-
-      dispatch(setModalData({
-        isShown: true,
-        title: 'Submitted!',
-        prompt: (
-          <p>You can now review your submitted assignment.</p>
-        ),
-        buttons: (
-          <Button onClick={closeModalAndReview}>View</Button>
-        )
-      }));
-
+      if (result) {
+        setActiveModal({type: MODAL_TYPES.confirmHomeworkSubmitted})
+      } else {
+        window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
+      }
     } catch (error) {
       window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again. Error: ${error}`);
     }
   }
 
   async function closeModalAndReview() {
-    dispatch(setModalVisibility(false));
+    setActiveModal(null);
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
     await props.refreshHandler();
   }
-
-	async function handleSubmitBtn() {
-    dispatch(setModalData({
-      isShown: true,
-      title: 'Are you sure?',
-      prompt: (
-        <Fragment>
-          <p>Once submitted, you cannot go back to make additional edits to your assignment.</p>
-        </Fragment>
-      ),
-      buttons: (
-        <Fragment>
-          <Button onClick={() => dispatch(setModalVisibility(false))}>Cancel</Button>
-          <Button onClick={submitHomeworkForReview}>Submit</Button>
-        </Fragment>
-      )
-    }));
-	}
 
 
 	function handleOptSelected(qNum, optNum) {
@@ -91,10 +67,34 @@ function HomeworkEditor(props) {
 		setFormData(Object.assign({}, formData, {quizAnswers}))
 	}
 
+  function renderModal() {
+    switch (activeModal.type) {
+      case MODAL_TYPES.warningBeforeHomeworkSubmission:
+        return (
+          <ConfirmationModal title={'Are you sure?'} buttons={[
+            {name:'Cancel', onClick:setActiveModal(null)},
+            {name:'Submit', onClick:submitHomeworkForReview},
+          ]}>
+            <p>Once submitted, you cannot go back to make additional edits to your assignment.</p>
+          </ConfirmationModal>
+        )
+      case MODAL_TYPES.confirmHomeworkSubmitted:
+        return (
+          <ConfirmationModal title={'Submitted!'} buttons={[
+            {name:'Continue Editing', onClick:closeModalAndReview},
+          ]}>
+            <p>You can now review your submitted assignment.</p>
+          </ConfirmationModal>
+        )
+    }
+  }
+
+
 	return (
 		<Fragment>
+      {activeModal && renderModal()}
       <HeaderBar title={assignment.title}>
-        <Button onClick={handleSubmitBtn}>Submit</Button>
+        <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
       </HeaderBar>
 
 			<form>

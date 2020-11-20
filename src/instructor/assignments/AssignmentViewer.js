@@ -44,7 +44,7 @@ function AssignmentViewer(props) {
     console.log('fetching scores etc')
     fetchScores();
     fetchBatchOfHomeworks('INIT');
-  }, [assignment.id]);
+  }, [assignment.id, assignment]);
 
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
@@ -104,6 +104,7 @@ function AssignmentViewer(props) {
 	}
 
 	function handleBatchSubmitBtn() {
+    // TODO: Needs actual implementation
 		alert('about to batch submit grades');
 	}
 
