@@ -60,8 +60,8 @@ function AssignmentCreator() {
 		});
 
 		try {
-      await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      setActiveModal(MODAL_TYPES.confirmAssignmentSaved);
+      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
+      if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
     } catch (error) {
       window.confirm(`We're sorry. There was a problem saving your new assignment. Error: ${error}`);
     }
@@ -104,7 +104,7 @@ function AssignmentCreator() {
       {activeModal && renderModal()}
       <HeaderBar title='Create New Assignment'>
         <Button onClick={() => setActiveModal({type: MODAL_TYPES.cancelNewAssignmentEditsWarning})} className='mr-2'>Cancel</Button>
-        <Button onClick={handleSubmitBtn}>Update</Button>
+        <Button onClick={handleSubmitBtn}>Create</Button>
       </HeaderBar>
 
       <form>
