@@ -1,0 +1,32 @@
+type QuizQuestion {
+  questionText: String!
+  answerOptions: [String]
+  correctAnswerIndex: Int
+  progressPointsForCompleting: Int
+  gradePointsForCorrectAnswer: Int
+}
+
+type Assignment @model {
+  id: ID!
+  courseId: ID
+  resourceId: ID
+  ownerId: ID!
+  title: String!
+  summary: String
+  image: String
+  lockOnDate: AWSTimestamp
+  isLockedOnSubmission: Boolean
+  isUseAutoScore: Boolean
+  isUseAutoSubmit: Boolean
+  quizQuestions: [QuizQuestion]
+}
+
+type Homework @model {
+  id: ID!
+  assignmentId: ID!
+  studentOwnerId: ID!
+  quizAnswers: [Int]
+  beganOnDate: AWSTimestamp
+  submittedOnDate: AWSTimestamp
+  isLocked: Boolean
+}

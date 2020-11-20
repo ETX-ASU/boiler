@@ -74,7 +74,7 @@ function App() {
 
         dispatch(setSessionData(courseId, assignmentId, activeUser, students));
       } catch (error) {
-        console.error(error);
+        console.error(" -------------> CHECK devMode. In local env should be set to true.", error);
         window.confirm(`We're sorry. There was an error initializing session data. Please wait a moment and try again. Error: ${error}`);
       }
     }
