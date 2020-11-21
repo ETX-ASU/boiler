@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import "./GradingBar.css";
 import {Container, Col, Row, Button} from 'react-bootstrap';
-import {HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
 import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
 
@@ -14,29 +14,27 @@ library.add(faArrowCircleLeft, faArrowCircleRight);
 
 function GradingBar(props) {
   const dispatch = useDispatch();
-  const {assignment, students, reviewedStudent} = props;
+  const {assignment, reviewedStudent} = props;
 
   const displayOrder = useSelector(state => state.app.displayOrder);
-  const [score, setScore] = useState(calcShownScore(reviewedStudent));
+  const [resultScore, setResultScore] = useState(calcShownScore(reviewedStudent));
   const [comment, setComment] = useState('');
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
 
-  function calcShownScore({homeworkStatus, score, autoScore}) {
-    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return score;
+  function calcShownScore({homeworkStatus, resultScore, autoScore}) {
+    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return resultScore;
     return (autoScore) ? autoScore : 0;
   }
 
   const navToPrev = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex - 1 < 0) ? displayOrder.length - 1 : curStudentIndex - 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex])
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
   const navToNext = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex + 1 >= displayOrder.length) ? 0 : curStudentIndex + 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex].id)
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
@@ -44,9 +42,10 @@ function GradingBar(props) {
     const scoreDataObj = {
       resourceId: assignment.id,
       studentId: reviewedStudent.id,
-      score,
+      resultScore,
       comment,
-      progress: HOMEWORK_PROGRESS.fullyGraded
+      activityProgress: ACTIVITY_PROGRESS[reviewedStudent.homeworkStatus],
+      gradingProgress: HOMEWORK_PROGRESS.fullyGraded
     };
 
     const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
@@ -80,7 +79,7 @@ function GradingBar(props) {
                          type="number"
                          className='form-control'
                          min={0} max={100}
-                         onChange={(e) => setScore(parseInt(e.target.value))} defaultValue={score}
+                         onChange={(e) => setResultScore(parseInt(e.target.value))} defaultValue={resultScore}
                          disabled={reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}
                   />
                 </div>
@@ -88,7 +87,7 @@ function GradingBar(props) {
                   <span className='ml-1 mr-0'>
                     <Button className='btn-med xbg-darkest'
                       disabled={reviewedStudent.progress === HOMEWORK_PROGRESS.fullyGraded}
-                      onClick={handleSubmitScore}>{(reviewedStudent.score !== undefined) ? `Update` : `Submit`}</Button>
+                      onClick={handleSubmitScore}>{(reviewedStudent.resultScore !== undefined) ? `Update` : `Submit`}</Button>
                   </span>
                 </div>
               </Col>

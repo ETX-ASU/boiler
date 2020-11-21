@@ -5,7 +5,6 @@ export const EditButton = styled.button.attrs({
 	className: 'edit-button',
 })`
   font-size: ${props => props.size}ems;
-  //font-family:
   cursor: pointer;
 
   &:hover {

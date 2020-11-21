@@ -16,7 +16,7 @@ export function useStudents() {
 
     const enhancedDataStudents = studentsOnly.map(s => {
       let gradeDataForStudent = (grades) ? Object.assign({}, grades.find(g => g.studentId === s.id)) : null;
-      if (!gradeDataForStudent) gradeDataForStudent = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+      if (!gradeDataForStudent) gradeDataForStudent = {resultScore:0, resultMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
       if (!homeworkForStudent) homeworkForStudent = Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(assignment.quizQuestions.length).fill[-1]});
@@ -26,7 +26,8 @@ export function useStudents() {
       let homeworkStatus = getHomeworkStatus(gradeDataForStudent, homeworkForStudent);
       return Object.assign({}, s, {
         randomOrderNum: positions.shift(),
-        score: gradeDataForStudent.score,
+        resultScore: gradeDataForStudent.resultScore,
+        resultMaximum: gradeDataForStudent.resultMaximum,
         comment: gradeDataForStudent.comment,
         percentCompleted,
         autoScore,

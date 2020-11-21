@@ -13,7 +13,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "./QuizCreator";
+import QuizCreator from "../../toolDisplays/QuizCreator";
 import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
@@ -75,13 +75,17 @@ function AssignmentCreator() {
 	  setFormData({...formData, quizQuestions});
   }
 
+  function handleReturnToCreateOrDupe() {
+    setActiveModal(null);
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))
+  }
 
   function renderModal() {
     switch (activeModal.type) {
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
           <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
-            {name: 'Cancel', onClick: () => dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))},
+            {name: 'Cancel', onClick: handleReturnToCreateOrDupe},
             {name: 'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>
             <p>Do you want to cancel new assignment or continue editing?</p>
@@ -91,7 +95,7 @@ function AssignmentCreator() {
       case MODAL_TYPES.confirmAssignmentSaved:
         return (
           <ConfirmationModal title={'Assignment Saved'} buttons={[
-            {name: 'Continue', onClick: () => setActiveModal(null)},
+            {name: 'Continue', onClick: handleReturnToCreateOrDupe},
           ]}>
             <p>Assignment has been saved! It is now accessible in your LMS.</p>
           </ConfirmationModal>

@@ -25,14 +25,9 @@ library.add(faEdit, faPen, faChevronLeft);
 
 function AssignmentViewer(props) {
 	const dispatch = useDispatch();
-  const homeworks = useSelector(state => state.app.homeworks);
-  // const isSkipGradedStudents = useSelector(state => state.gradingBar.isSkipGradedStudents);
   const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
-
   const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
-
-  const [isLoadingScores, setIsLoadingScores] = useState(true);
   const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);
   const [nextTokenVal, setNextTokenVal] = useState(null);
   const students = useStudents();
@@ -62,7 +57,6 @@ function AssignmentViewer(props) {
    * @returns {Promise<void>}
    */
   async function fetchBatchOfHomeworks(token) {
-    console.log('----------------- fetch batch o homeworks');
     if (token === "INIT") token = null;
 
     API.graphql(graphqlOperation(listHomeworks, {
@@ -168,7 +162,6 @@ function AssignmentViewer(props) {
         }
 
         {reviewedStudentId && (students?.length > 0) &&
-          // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
           <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
         }
       </Container>
