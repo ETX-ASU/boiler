@@ -85,8 +85,8 @@ function AssignmentCreator() {
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
           <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
-            {name: 'Cancel', onClick: () => dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))},
-            {name: 'Continue Creating', onClick:handleReturnToCreateOrDupe},
+            {name: 'Cancel', onClick: handleReturnToCreateOrDupe},
+            {name: 'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>
             <p>Do you want to cancel new assignment or continue editing?</p>
             <p>Canceling will not save your new assignment.</p>
@@ -95,7 +95,7 @@ function AssignmentCreator() {
       case MODAL_TYPES.confirmAssignmentSaved:
         return (
           <ConfirmationModal title={'Assignment Saved'} buttons={[
-            {name: 'Continue', onClick: () => setActiveModal(null)},
+            {name: 'Continue', onClick: handleReturnToCreateOrDupe},
           ]}>
             <p>Assignment has been saved! It is now accessible in your LMS.</p>
           </ConfirmationModal>
