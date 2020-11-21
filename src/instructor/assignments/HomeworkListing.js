@@ -47,9 +47,7 @@ function HomeworkListing(props) {
 
     const topStudentIndex = curPageNum * studentsPerPage;
     const sortedStudents = getSortedStudents(props.students.slice(), sortBy.type, sortBy.isAscending);
-    console.log("sortedStudents", sortedStudents);
     dispatch(setDisplayOrder(sortedStudents.map(s => s.id)));
-    // setSortedStudents(sortedStudents);
 
     const shown = sortedStudents.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
@@ -68,8 +66,8 @@ function HomeworkListing(props) {
         break;
       case SORT_BY.score:
         items.sort((a, b) => {
-          const aVal = isNaN(a.score) ? -1 : a.score;
-          const bVal = isNaN(b.score) ? -1 : b.score;
+          const aVal = isNaN(a.resultScore) ? -1 : a.resultScore;
+          const bVal = isNaN(b.resultScore) ? -1 : b.resultScore;
           return aVal - bVal;
         });
         break;

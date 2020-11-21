@@ -62,6 +62,7 @@ export const STATUS_TEXT = {
   'FullyGraded': 'Graded',
 }
 
+
 export const EMPTY_HOMEWORK = {
   id: '',
   assignmentId: '',
@@ -74,6 +75,18 @@ export const EMPTY_HOMEWORK = {
 
 // These constants listed below must match LTI constants
 
+export const ACTIVITY_PROGRESS = {
+  NotBegun: 'Initialized',
+  InProgress: 'InProgress',
+  Submitted: 'Submitted',
+  Completed: 'Completed',
+}
+
+
+/*
+activityProgress must be one of:
+Initialized, Started, InProgress, Submitted, Completed
+*/
 
 /*
 'FullyGraded' - The grading process is completed; the score value, if any, represents the current Final Grade;
