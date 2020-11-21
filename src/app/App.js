@@ -19,7 +19,6 @@ import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers, hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
 import SelectionDashboard from "../selectionTool/SelectionDashboard";
-import ConfirmationModal from "./ConfirmationModal";
 
 
 
@@ -134,12 +133,7 @@ function App() {
   )
 
 	return (
-		<Container className="app mt-4 mb-2 p-0">
-      {/*<ConfirmationModal />*/}
-			{/*<Row className="mb-3">*/}
-			{/*	<LoginBar activeUser={activeUser} />*/}
-			{/*</Row>*/}
-
+		<Container className="app mt-4 mb-5 p-0">
 			<Row className='main-content-row'>
 				{!activeUser?.id && <LoadingIndicator msgClasses='xtext-white' loadingMsg='LOADING'/>}
 				{activeUser.activeRole === ROLE_TYPES.dev && <DevUtilityDashboard />}

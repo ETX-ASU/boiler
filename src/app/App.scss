@@ -49,6 +49,7 @@ input, .form-control {
     cursor: pointer;
     background-color: var(--x-gray);
   }
+
   &.selected {
     .form-control {
       background-color: lightgoldenrodyellow;
@@ -63,10 +64,37 @@ input, .form-control {
       }
     }
   }
+
+  &.correct-selection {
+    .form-control {
+      background-color: palegreen;
+    }
+    .input-group-prepend {
+      background-color: limegreen;
+    }
+  }
+
+  &.incorrect-selection {
+    .form-control {
+      background-color: palevioletred;
+    }
+    .input-group-prepend {
+      background-color: darkred;
+    }
+  }
+
   .input-group-prepend {
     border: 1px solid var(--x-gray) !important;
   }
 }
+
+.read-only .answer-opt {
+  &:hover {
+    cursor: default;
+    background-color: unset;
+  }
+}
+
 
 h1 {
   font-size: 24px;

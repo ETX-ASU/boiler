@@ -1,47 +1,27 @@
-import React from 'react';
-import moment from "moment";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import React, {Fragment} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import "./homeworks.scss";
+import HeaderBar from "../../app/HeaderBar";
+import {HOMEWORK_PROGRESS} from "../../app/constants";
+import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
 
 
 function HomeworkViewer(props) {
 	const {homework, assignment} = props;
 
-
-	function generateQuestionAndAnswer(questionNum) {
-		return (
-			<Row className='mt-4' key={questionNum}>
-				<Col className="quiz-question">
-					{/*<label>You answered question #{questionNum+1} as follows:</label>*/}
-					<legend className='ml-2'>Question #{questionNum+1}. {assignment.quizQuestions[questionNum].questionText}</legend>
-					{assignment.quizQuestions[questionNum].answerOptions.map((optText, optNum) =>
-						<div key={optNum} className="form-check ml-4">
-							{(homework.quizAnswers[questionNum] === optNum) && <span className="selected-indicator">></span>}
-							<label className={`form-check-label reviewed-answer ${(homework.quizAnswers[questionNum] === optNum) ? "checked" : ""}`} htmlFor={`q-${questionNum}-opt-${optNum}`}>{optText}</label>
-						</div>
-					)}
-				</Col>
-			</Row>
-		)
-	}
-
 	return (
-		<Container className="homework-viewer">
-			<Row className='xbg-light p-2'>
-				<Col>
-					<label>Assignment Title:</label>
-					<p className='summary-data xt-med'>{assignment.title}</p>
-				</Col>
-				<Col>
-					<label>Summary:</label>
-					<p className='summary-data xt-med'>{assignment.summary}</p>
-				</Col>
-			</Row>
+		<Fragment>
+      <HeaderBar title={assignment.title} />
 
-			{assignment.quizQuestions.map((question, index) => generateQuestionAndAnswer(index) )}
+      <Container className='mt-2 ml-1 mr-2'>
+        <Row className={'mt-4'}>
+          <Col><p>{assignment.summary}</p></Col>
+        </Row>
 
-		</Container>
+        <QuizViewerAndEditor quizQuestions={assignment.quizQuestions} quizAnswers={homework.quizAnswers} isReadOnly={true} isShowCorrect={true} />
+
+      </Container>
+    </Fragment>
 	)
 }
 

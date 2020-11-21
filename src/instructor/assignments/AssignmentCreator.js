@@ -13,7 +13,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "./QuizCreator";
+import QuizCreator from "../../toolDisplays/QuizCreator";
 import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
@@ -75,6 +75,10 @@ function AssignmentCreator() {
 	  setFormData({...formData, quizQuestions});
   }
 
+  function handleReturnToCreateOrDupe() {
+    setActiveModal(null);
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))
+  }
 
   function renderModal() {
     switch (activeModal.type) {
@@ -82,7 +86,7 @@ function AssignmentCreator() {
         return (
           <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
             {name: 'Cancel', onClick: () => dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))},
-            {name: 'Continue Creating', onClick: () => setActiveModal(null)},
+            {name: 'Continue Creating', onClick:handleReturnToCreateOrDupe},
           ]}>
             <p>Do you want to cancel new assignment or continue editing?</p>
             <p>Canceling will not save your new assignment.</p>
