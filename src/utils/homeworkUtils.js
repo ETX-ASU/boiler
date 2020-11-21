@@ -1,8 +1,6 @@
 import {HOMEWORK_PROGRESS} from "../app/constants";
 
 
-
-
 export function getHomeworkStatus(gradeData, homework) {
   const {gradingProgress} = gradeData;
   return (gradingProgress === HOMEWORK_PROGRESS.fullyGraded) ? HOMEWORK_PROGRESS.fullyGraded :

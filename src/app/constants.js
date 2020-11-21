@@ -1,6 +1,14 @@
 export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 export const APP_VERSION_NUM = '0.0.2';
 
+export const MODAL_TYPES = {
+  confirmAssignmentDuped: "confirmAssignmentDuped",
+  cancelNewAssignmentEditsWarning: "cancelNewAssignmentEditsWarning",
+  cancelDupedAssignmentEditsWarning: "cancelDupedAssignmentEditsWarning",
+  confirmAssignmentSaved: "confirmAssignmentSaved",
+  confirmHomeworkSubmitted: "confirmHomeworkSubmitted",
+  warningBeforeHomeworkSubmission: "warningBeforeHomeworkSubmission"
+}
 
 export const ROLE_TYPES = {
   instructor: 'instructor',
@@ -23,12 +31,12 @@ export const SORT_DIRECTION = {
 
 export const UI_SCREEN_MODES = {
   editHomework: 'UI_SCREEN_MODES.editHomework',
-  reviewHomework: 'UI_SCREEN_MODES.reviewHomework',
   createOrDupeAssignment: 'UI_SCREEN_MODES.createOrDupeAssignment',
   createAssignment: 'UI_SCREEN_MODES.createAssignment',
   dupeAssignment: 'UI_SCREEN_MODES.dupeAssignment',
   viewAssignment: 'UI_SCREEN_MODES.viewAssignment',
   editAssignment: 'UI_SCREEN_MODES.editAssignment',
+  reviewHomework: 'UI_SCREEN_MODES.reviewHomework',
   devUtilityDashboard: 'UI_SCREEN_MODES.devUtilityDashboard',
   assignmentSelectorTool: 'UI_SCREEN_MODES.assignmentSelectorTool',
 }

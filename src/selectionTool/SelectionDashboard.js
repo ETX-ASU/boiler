@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
-import {useDispatch, useSelector} from "react-redux";
 import {Col, Container, Row} from "react-bootstrap";
 import {listAssignments} from "../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
 import {hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
-import ConfirmationModal from "../app/ConfirmationModal";
 
 
 function SelectionDashboard() {
-  const dispatch = useDispatch();
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get('userId');
   const courseId = params.get('courseId');
@@ -33,8 +30,8 @@ function SelectionDashboard() {
 
       do {
         const assignmentQueryResults = await API.graphql(graphqlOperation(listAssignments,
-          // {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
-          {filter:{ownerId:{eq:userId}},
+          {filter:{ownerId:{eq:userId}, courseId:{eq:courseId}, resourceId:{eq:''}},
+          // {filter:{ownerId:{eq:userId}},
           nextToken: nextTokenVal
         }));
         nextTokenVal = assignmentQueryResults.data.listAssignments.nextToken;

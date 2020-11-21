@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
-import {UI_SCREEN_MODES} from "../../app/constants";
+import {MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
@@ -13,8 +13,8 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "./QuizCreator";
-import {setModalVisibility, setModalData} from "../../app/store/modalReducer";
+import QuizCreator from "../../toolDisplays/QuizCreator";
+import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
   id: '',
@@ -43,36 +43,11 @@ function AssignmentCreator() {
 	const activeUser = useSelector(state => state.app.activeUser);
 	const courseId = useSelector(state => state.app.courseId);
 	const [formData, setFormData] = useState(emptyAssignment);
+  const [activeModal, setActiveModal] = useState(null);
 
 
-  function closeModalAndReturnToOptScreen(e) {
-    dispatch(setModalVisibility(false));
-    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
-  }
-
-	async function handleCancelBtn() {
-    console.log('handleCancelBtn()')
-    dispatch(setModalData({
-      title: 'Cancel Warning',
-      prompt: (
-        <Fragment>
-          <p>Do you want to cancel new assignment or continue editing?</p>
-          <p>Canceling will not save your new assignment.</p>
-        </Fragment>
-      ),
-      isShown: true,
-      buttons: (
-        <Fragment>
-          <Button onClick={closeModalAndReturnToOptScreen}>Cancel new assignment</Button>
-          <Button onClick={() => dispatch(setModalVisibility(false))}>Continue editing</Button>
-        </Fragment>
-      )
-    }));
-  }
 
 	async function handleSubmitBtn() {
-	  console.log("Save pants!")
-    // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title || !formData.summary) return;
 
 		const assignmentId = uuid();
@@ -85,18 +60,11 @@ function AssignmentCreator() {
 		});
 
 		try {
-      await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      dispatch(setModalData({
-        title: 'Assignment Saved',
-        prompt: (<p>Assignment has been saved! It is now accessible in your LMS.</p>),
-        isShown: true,
-        buttons: (<Button onClick={closeModalAndReturnToOptScreen}>Continue</Button>)
-      }));
+      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
+      if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
     } catch (error) {
       window.confirm(`We're sorry. There was a problem saving your new assignment. Error: ${error}`);
     }
-
-
 	}
 
   function toggleUseAutoScore(e) {
@@ -108,11 +76,35 @@ function AssignmentCreator() {
   }
 
 
+  function renderModal() {
+    switch (activeModal.type) {
+      case MODAL_TYPES.cancelNewAssignmentEditsWarning:
+        return (
+          <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
+            {name: 'Cancel', onClick: () => dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))},
+            {name: 'Continue Creating', onClick: () => setActiveModal(null)},
+          ]}>
+            <p>Do you want to cancel new assignment or continue editing?</p>
+            <p>Canceling will not save your new assignment.</p>
+          </ConfirmationModal>
+        );
+      case MODAL_TYPES.confirmAssignmentSaved:
+        return (
+          <ConfirmationModal title={'Assignment Saved'} buttons={[
+            {name: 'Continue', onClick: () => setActiveModal(null)},
+          ]}>
+            <p>Assignment has been saved! It is now accessible in your LMS.</p>
+          </ConfirmationModal>
+        );
+    }
+  }
+
 	return (
     <Fragment>
+      {activeModal && renderModal()}
       <HeaderBar title='Create New Assignment'>
-        <Button onClick={handleCancelBtn} className='mr-2'>Cancel</Button>
-        <Button onClick={handleSubmitBtn}>Update</Button>
+        <Button onClick={() => setActiveModal({type: MODAL_TYPES.cancelNewAssignmentEditsWarning})} className='mr-2'>Cancel</Button>
+        <Button onClick={handleSubmitBtn}>Create</Button>
       </HeaderBar>
 
       <form>

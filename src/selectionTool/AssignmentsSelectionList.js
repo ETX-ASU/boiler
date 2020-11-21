@@ -2,17 +2,10 @@ import React, {useState} from 'react';
 import LoadingIndicator from "../app/assets/LoadingIndicator";
 import {Col, Container, Row, Button} from "react-bootstrap";
 import AssignmentListItem from "./AssignmentListItem";
-import {API} from "aws-amplify";
-import {updateAssignment as updateAssignmentMutation} from "../graphql/mutations";
-import {setActiveUiScreenMode} from "../app/store/appReducer";
-import {UI_SCREEN_MODES} from "../app/constants";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import $ from "jquery";
-import {useDispatch} from "react-redux";
-
 
 function AssignmentsSelectionList(props) {
-  const dispatch = useDispatch();
 	const assignments = props.assignments;
   const [activeAssignmentIndex, setActiveAssignmentIndex] = useState(0);
 
@@ -38,19 +31,8 @@ function AssignmentsSelectionList(props) {
       }
 
      const dataResult =  await createAssignmentInLms(resourceDataForLms);
-
-      /*alert(`We received this data from LMS: ${JSON.stringify(dataResult)}`);
-
-      function setInnerHTML(element, content) {
-        element.innerHTML = content;
-        return element;
-      }*/
-
       //TODO remove query, launch with React.
       $("body").append(dataResult);
-      //document.getElementsByTagName('body')[0].appendChild(setInnerHTML(document.createElement("div"), dataResult));
-
-      //await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
     } catch (error) {
       window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
     }
