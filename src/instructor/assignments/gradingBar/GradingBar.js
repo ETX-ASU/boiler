@@ -14,7 +14,7 @@ library.add(faArrowCircleLeft, faArrowCircleRight);
 
 function GradingBar(props) {
   const dispatch = useDispatch();
-  const {assignment, students, reviewedStudent} = props;
+  const {assignment, reviewedStudent} = props;
 
   const displayOrder = useSelector(state => state.app.displayOrder);
   const [score, setScore] = useState(calcShownScore(reviewedStudent));
@@ -29,14 +29,12 @@ function GradingBar(props) {
   const navToPrev = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex - 1 < 0) ? displayOrder.length - 1 : curStudentIndex - 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex])
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
   const navToNext = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex + 1 >= displayOrder.length) ? 0 : curStudentIndex + 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex].id)
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 

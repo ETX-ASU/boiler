@@ -10,9 +10,10 @@ import HeaderBar from "../../app/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCheck} from '@fortawesome/free-solid-svg-icons'
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/ConfirmationModal";
-library.add(faCheck);
+import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+library.add(faCheck, faTimes);
 
 
 
@@ -81,13 +82,65 @@ function HomeworkEditor(props) {
       case MODAL_TYPES.confirmHomeworkSubmitted:
         return (
           <ConfirmationModal title={'Submitted!'} buttons={[
-            {name:'Continue Editing', onClick:closeModalAndReview},
+            {name:'Review', onClick:closeModalAndReview},
           ]}>
             <p>You can now review your submitted assignment.</p>
           </ConfirmationModal>
         )
     }
   }
+
+
+/*
+  function styleForAnswer(qNum, selectedAnswerIndex, isShowCorrect) {
+    const isSelected = (formData.quizAnswers[qNum] === selectedAnswerIndex);
+    if (!isSelected) return '';
+    const isCorrect = formData.quizQuestions[qNum].correctAnswerIndex === selectedAnswerIndex;
+    return (!isShowCorrect) ? 'selected' : (isCorrect) ? 'selected correct-selection' : 'selected incorrect-selection';
+  }
+
+  function isCorrectChoice(qNum, selectedAnswerIndex) {
+    return (formData.quizAnswers[qNum] === selectedAnswerIndex)
+  }
+
+  function renderQuestionsAndAnswers(isReadOnly, showCorrect = false) {
+    return (
+      formData.quizQuestions.map((question, qNum) =>
+      <Fragment key={qNum}>
+        <Row className='mt-4'>
+          <Col>
+            <h3 className={'subtext mt-2 mb-3 ml-1'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
+          </Col>
+        </Row>
+        <Row className='ml-3 mr-2'>
+          <Col>
+            <h3>Question</h3>
+            <p>{question.questionText}</p>
+            <h3>Your Answer</h3>
+          </Col>
+        </Row>
+        <Row className='ml-4 mr-2 mt-1 p-2 pt-3 xbg-light'>
+          {question.answerOptions.map((opt, index) =>
+            <div key={index} className={`input-group mb-2 answer-opt ${styleForAnswer(qNum, index, false)}`}>
+              <div className="input-group-prepend">
+                <span className="input-group-text">{index+1}</span>
+              </div>
+              <div className={'form-control h-auto opt-text'} onClick={(isReadOnly) ? null : () => handleOptSelected(qNum, index)} aria-label={opt}>
+                {opt}
+                { (formData.quizAnswers[qNum] === index) &&
+                <div className="input-group-append float-right">
+                  {(isReadOnly || (showCorrect && isCorrectChoice(qNum, index))) && <FontAwesomeIcon icon={faCheck} size='lg'/>}
+                  {(showCorrect && !isCorrectChoice(qNum, index)) && <FontAwesomeIcon icon={faTimes} size='lg'/>}
+                </div>
+                }
+              </div>
+            </div>
+          )}
+        </Row>
+      </Fragment>
+    ))
+  }
+*/
 
 
 	return (
@@ -105,41 +158,8 @@ function HomeworkEditor(props) {
         </Container>
 
         <Container className='pb-5'>
-          {formData.quizQuestions.map((question, qNum) =>
-            <Fragment key={qNum}>
-              <Row className='mt-4'>
-                <Col>
-                  <h3 className={'subtext mt-2 mb-3 ml-1'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
-                </Col>
-              </Row>
-              <Row className='ml-3 mr-2'>
-                <Col>
-                  <h3>Question</h3>
-                  <p>{question.questionText}</p>
-                  <h3>Your Answer</h3>
-                </Col>
-              </Row>
-              <Row className='ml-4 mr-2 mt-1 p-2 pt-3 xbg-light'>
-                {question.answerOptions.map((opt, index) =>
-                <div key={index} className={`input-group mb-2 answer-opt ${(formData.quizAnswers[qNum] === index) ? 'selected':''}`}>
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">{index+1}</span>
-                  </div>
-                  <div className={'form-control h-auto opt-text'}
-                       onClick={() => handleOptSelected(qNum, index)}
-                       aria-label={opt}>
-                    {opt}
-                    { (formData.quizAnswers[qNum] === index) &&
-                    <div className="input-group-append float-right">
-                      <FontAwesomeIcon icon={faCheck} size='lg'/>
-                    </div>
-                    }
-                  </div>
-                </div>
-                )}
-              </Row>
-            </Fragment>
-          )}
+          <QuizViewerAndEditor quizQuestions={formData.quizQuestions} quizAnswers={formData.quizAnswers}
+                               isReadOnly={false} isShowCorrect={false} handleOptSelected={handleOptSelected} />
         </Container>
 
 			</form>

@@ -8,11 +8,10 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import "./assignments.scss";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
-import QuizCreator from "./QuizCreator";
+import QuizCreator from "../../toolDisplays/QuizCreator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/ConfirmationModal";
-
 
 
 function AssignmentEditor() {
@@ -21,9 +20,6 @@ function AssignmentEditor() {
   const [formData, setFormData] = useState(useSelector(state => state.app.assignment));
   const isLimitedEditing = useSelector(state => Boolean(state.app.homeworks?.length));
   const [activeModal, setActiveModal] = useState(null);
-
-
-
 
   async function handleCancelBtn() {
     if (!urlAssignmentId) {

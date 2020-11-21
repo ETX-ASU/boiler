@@ -16,7 +16,7 @@ function InstructorDashboard() {
 
 	return (
 		<Container className='instructor-dashboard dashboard bg-white rounded h-100'>
-			<Row className={'m-0'}>
+			<Row className={'m-0 pb-5'}>
 				<Col className='rounded p-0'>
 					{(activeUiScreenMode === UI_SCREEN_MODES.viewAssignment) &&
 					<AssignmentViewer />

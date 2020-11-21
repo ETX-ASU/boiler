@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import HomeworkListItem from "./HomeworkListItem";
-import {HOMEWORK_PROGRESS, SORT_BY, SORT_DIRECTION, STATUS_TEXT} from "../../app/constants";
+import {HOMEWORK_PROGRESS, SORT_BY} from "../../app/constants";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -24,7 +24,6 @@ function HomeworkListing(props) {
   const [curPageNum, setCurPageNum] = useState(0);
   const [sortBy, setSortBy] = useState({type:SORT_BY.name, isAscending:true});
   const [pageBtns, setPageBtns] = useState([]);
-  // const [sortedStudents, setSortedStudents] = useState(props.students);
   const [studentsPerPage, setStudentsPerPage] = useState(props.studentsPerPage);
   const [shownStudents, setShownStudents] = useState([]);
   const [pageCount, setPageCount] = useState(1);
