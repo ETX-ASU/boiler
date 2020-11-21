@@ -39,8 +39,9 @@ function HomeworkEditor(props) {
       delete inputData.assignment;
       delete inputData.createdAt;
       delete inputData.updatedAt;
-      delete inputData.score;
+      delete inputData.resultScore;
       delete inputData.comment;
+      delete inputData.activityProgress;
       delete inputData.homeworkStatus;
       delete inputData.gradingProgress;
 
