@@ -13,7 +13,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "./QuizCreator";
+import QuizCreator from "../../toolDisplays/QuizCreator";
 import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {

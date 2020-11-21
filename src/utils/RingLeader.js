@@ -43,8 +43,8 @@ import {
 
 
 
-// TODO: !!!!!!!!!!!!!!!!!!!!!! Needs real code
-const submitContentItem = {
+
+/*const submitContentItem = {
   type: 'ltiResourceLink',
   label: 'name of the quiz (used in gradebook)',
   url: '', // leave null
@@ -55,7 +55,7 @@ const submitContentItem = {
     resourceId: 'the actual assignment id used in my DynamoDB - same as above',
     tag: 'not required'
   }
-}
+}*/
 
 export function hasValidSession(awsExports) {
   return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
@@ -142,15 +142,12 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchGradeForStudent(assignmentId, studentId) {
-  if (window.isDevMode) return mockGetStudentGrade(assignmentId, studentId);
-
-  // Temp solution until we have additional method.
-  let allGrades = fetchAllGrades(assignmentId);
-  return allGrades.find(g => g.studentId === studentId);
+export async function fetchGradeForStudent(assignmentId, studentId) {
+  let allGrades = (window.isDevMode) ? await mockGetGrades(assignmentId) : await realGetGrades(aws_exports, assignmentId);
 
   // TODO: We need a RL method that gets a single student id. (We don't want a student to be able to fetch ids of all students)
-  // return realGetStudentGrade(assignmentId, studentId);
+  // Temp solution until we have additional method.
+  return allGrades.find(g => g.studentId === studentId);
 }
 
 

@@ -115,6 +115,7 @@ export const mockGetGrades = (assignmentId) => new Promise(function (resolve, re
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+  if (!userGrades) userGrades = [];
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockGetStudentGrade()")), mockDuration);
