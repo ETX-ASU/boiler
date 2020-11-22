@@ -52,7 +52,7 @@ function AssignmentEditor() {
   }
 
   function handleQuizChanges(quizQuestions) {
-    setFormData({...formData, quizQuestions});
+    setFormData({...formData, toolAssignmentData: {quizQuestions} });
   }
 
 
@@ -160,7 +160,7 @@ function AssignmentEditor() {
         <QuizCreator
           isLimitedEditing={isLimitedEditing}
           isUseAutoScore={formData.isUseAutoScore}
-          quizQuestions={formData.quizQuestions}
+          quizQuestions={formData.toolAssignmentData.quizQuestions}
           setQuizQuestions={handleQuizChanges}/>
       </form>
     </Fragment>

@@ -71,7 +71,7 @@ function GradingBar(props) {
               <Col className='col-7 pt-1 pb-2 xbg-light'>
                 <div className='ml-2 mr-5 d-inline-block align-top'>
                   <label htmlFor='autoScore' className='xtext-darkest'>Auto Score</label>
-                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${assignment.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</div>
+                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${assignment.toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</div>
                 </div>
                 <div className='mr-5 d-inline-block align-top'>
                   <label htmlFor='yourScore' className='xtext-darkest'>Your Score</label>

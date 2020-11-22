@@ -67,7 +67,7 @@ function HomeworkReview(props) {
         }
 
         {isShowWork() &&
-          <QuizViewerAndEditor quizQuestions={assignment.quizQuestions} quizAnswers={reviewedStudent.homework.quizAnswers} isReadOnly={false} isShowCorrect={true} />
+          <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={false} isShowCorrect={true} />
         }
 
         {!isShowWork() &&
