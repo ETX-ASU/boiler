@@ -23,6 +23,7 @@ import {
   getUnassignedStudentsAws as realGetUnassignedStudents,
   getAssignedStudentsAws as realGetAssignedStudents,
   getGradesAws as realGetGrades,
+  getGradeAws as realGetGrade,
   submitInstructorGradeAws as realInstructorSubmitGrade,
   submitGradeAws as realAutoSubmitGrade,
   submitResourceSelectionAws as realSubmitResourceSelection
@@ -143,7 +144,7 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
 export async function fetchGradeForStudent(assignmentId, studentId) {
-  let allGrades = (window.isDevMode) ? await mockGetGrades(assignmentId) : await realGetGrades(aws_exports, assignmentId);
+  let allGrades = (window.isDevMode) ? await mockGetGrades(assignmentId) : await realGetGrade(aws_exports, assignmentId, studentId);
 
   // TODO: We need a RL method that gets a single student id. (We don't want a student to be able to fetch ids of all students)
   // Temp solution until we have additional method.
