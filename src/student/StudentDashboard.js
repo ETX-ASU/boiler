@@ -42,12 +42,12 @@ function StudentDashboard() {
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
         console.warn("Successful in creating homework for this student");
 
-        await setHomework({...resultHomework.data.createHomework, score:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
+        await setHomework({...resultHomework.data.createHomework, resultScore:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
         dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
 			  const theHomework = fetchHomeworkResult.data.listHomeworks.items[0];
         let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
-        if (!scoreData) scoreData = {score:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+        if (!scoreData) scoreData = {resultScore:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);
         await setHomework(theHomework);
