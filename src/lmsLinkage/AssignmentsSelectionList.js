@@ -42,6 +42,7 @@ function AssignmentsSelectionList(props) {
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
       $("body").append(linkToLmsResult);
     } catch (error) {
+      console.log(error);
       window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
     }
   }
@@ -65,9 +66,6 @@ function AssignmentsSelectionList(props) {
                   <option key={i} value={a.id}>{a.title}</option>
                 )}
               </select>
-              <Button className='align-middle' onClick={handleConnectToLMS}>
-                Connect this Assignment to LMS
-              </Button>
             </div>
           }
           {!props.isFetchingAssignments && (assignments.length < 1) &&
@@ -76,7 +74,7 @@ function AssignmentsSelectionList(props) {
         </Col>
       </Row>
       <Row>
-        <Button onClick={handleConnectToLMS}>
+        <Button className='align-middle' onClick={handleConnectToLMS}>
           Connect this Assignment to LMS
         </Button>
       </Row>
