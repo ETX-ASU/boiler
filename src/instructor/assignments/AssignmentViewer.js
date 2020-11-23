@@ -5,7 +5,7 @@ import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import {
   setActiveUiScreenMode,
   setGradesData,
-  addHomeworksData, setCurrentlyReviewedStudentId,
+  addHomeworksData, setCurrentlyReviewedStudentId, toggleHideStudentIdentity
 } from "../../app/store/appReducer";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {API, graphqlOperation} from "aws-amplify";
@@ -14,7 +14,6 @@ import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
 import {fetchAllGrades} from "../../utils/RingLeader";
 import {useStudents} from "../../app/store/AppSelectors";
-import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
 import HeaderBar from "../../app/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -25,14 +24,9 @@ library.add(faEdit, faPen, faChevronLeft);
 
 function AssignmentViewer(props) {
 	const dispatch = useDispatch();
-  const homeworks = useSelector(state => state.app.homeworks);
-  // const isSkipGradedStudents = useSelector(state => state.gradingBar.isSkipGradedStudents);
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
-
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
   const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
-
-  const [isLoadingScores, setIsLoadingScores] = useState(true);
   const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);
   const [nextTokenVal, setNextTokenVal] = useState(null);
   const students = useStudents();
@@ -44,7 +38,7 @@ function AssignmentViewer(props) {
     console.log('fetching scores etc')
     fetchScores();
     fetchBatchOfHomeworks('INIT');
-  }, [assignment.id]);
+  }, [assignment.id, assignment]);
 
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
@@ -62,7 +56,6 @@ function AssignmentViewer(props) {
    * @returns {Promise<void>}
    */
   async function fetchBatchOfHomeworks(token) {
-    console.log('----------------- fetch batch o homeworks');
     if (token === "INIT") token = null;
 
     API.graphql(graphqlOperation(listHomeworks, {
@@ -104,6 +97,7 @@ function AssignmentViewer(props) {
 	}
 
 	function handleBatchSubmitBtn() {
+    // TODO: Needs actual implementation
 		alert('about to batch submit grades');
 	}
 
@@ -167,7 +161,6 @@ function AssignmentViewer(props) {
         }
 
         {reviewedStudentId && (students?.length > 0) &&
-          // <HomeworkReview refreshHandler={fetchHomeworksAndGradesForActiveAssignment} activeHomeworkData={activeHomeworkData} />
           <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
         }
       </Container>

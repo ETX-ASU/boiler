@@ -10,7 +10,6 @@ import {shuffle} from "../utils/shuffle";
 import {calcAutoScore} from "../utils/homeworkUtils";
 import {createHomework, deleteHomework} from "../graphql/mutations";
 import {listHomeworks} from "../graphql/queries";
-import {setError} from "../app/store/modalReducer";
 import {hasValidSession} from "../utils/RingLeader";
 import aws_exports from "../aws-exports";
 
@@ -45,11 +44,11 @@ function DevUtilityDashboard() {
       const progress = progressStats[i];
       let beganOnDate = 0;
       let submittedOnDate = (progress === HOMEWORK_PROGRESS.submitted || progress === HOMEWORK_PROGRESS.fullyGraded) ? moment().valueOf() : 0;
-      let quizAnswers = Array(assignment.quizQuestions.length).fill(-1);
+      let quizAnswers = Array(assignment.toolAssignmentData.quizQuestions.length).fill(-1);
 
       if (progress !== HOMEWORK_PROGRESS.notBegun) {
         beganOnDate = moment().valueOf();
-        quizAnswers = assignment.quizQuestions.map(q => rand(0, q.answerOptions.length));
+        quizAnswers = assignment.toolAssignmentData.quizQuestions.map(q => rand(0, q.answerOptions.length));
         if (progress === HOMEWORK_PROGRESS.inProgress) {
           quizAnswers.pop();
           quizAnswers.push(-1); // partial result so always make last one not started.
@@ -61,7 +60,9 @@ function DevUtilityDashboard() {
         assignmentId: assignment.id,
         studentOwnerId: s.id.toString(),
         beganOnDate,
-        quizAnswers,
+        toolHomeworkData: {
+          quizAnswers
+        },
         submittedOnDate,
         isLocked: false,
       })
@@ -69,10 +70,10 @@ function DevUtilityDashboard() {
 
     const gradedHomeworks = mockHomeworks.filter((h,i) => progressStats[i] === HOMEWORK_PROGRESS.fullyGraded);
     const mockGrades = gradedHomeworks.map(h => {
-      let score = calcAutoScore(assignment, h);
+      let resultScore = calcAutoScore(assignment, h);
       let comment = (!rand(0,3)) ? testComments[rand(0, testComments.length)] : '';
       let gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-      return ({assignmentId:assignment.id, studentId:h.studentOwnerId, score, gradingProgress, comment })
+      return ({assignmentId:assignment.id, studentId:h.studentOwnerId, resultScore, gradingProgress, comment })
     })
 
     const dbHomeworks = mockHomeworks.filter(h => h.beganOnDate);

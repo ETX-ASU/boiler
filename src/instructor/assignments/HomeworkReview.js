@@ -1,32 +1,34 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {HOMEWORK_PROGRESS} from "../../app/constants";
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 
 
 function HomeworkReview(props) {
-  // const dispatch = useDispatch();
   const {students, reviewedStudentId, assignment} = props;
   const [reviewedStudent, setReviewedStudent] = useState(students.find(s => s.id === reviewedStudentId));
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
-
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
 
   useEffect(() => {
     setReviewedStudent(students.find(s => s.id === reviewedStudentId))
-    console.log('------> reviewedStudentId', reviewedStudentId);
   }, [reviewedStudentId])
 
 
   function getStatusMsg() {
     const studentRefName = getStudentRefName();
+    if(reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded && !reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) {
+      return `${studentRefName} did no work, but you have already given them a grade anyway.`;
+    }
+
     switch(reviewedStudent.homeworkStatus) {
       case(HOMEWORK_PROGRESS.notBegun): return `${studentRefName} has not started their work yet.`;
       case(HOMEWORK_PROGRESS.inProgress): return`${studentRefName} completed A PORTION of their homework, but never submitted it.`;
-      // case(HOMEWORK_PROGRESS.inProgress): return`${studentRefName} completed ${percentCompleted} of their homework, but never submitted it.`;
       case(HOMEWORK_PROGRESS.submitted): return`${studentRefName}'s homework is ready for grading.`;
+      // TODO: should switch to use the activityProgress to check this
       case(HOMEWORK_PROGRESS.fullyGraded): return`You have already graded ${studentRefName}'s homework`;
       default: return `no progress information for ${studentRefName}`;
     }
@@ -38,25 +40,19 @@ function HomeworkReview(props) {
   }
 
   function isShowWork() {
+    // TODO: should switch to use the activityProgress to check this
+    if (!reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) return false;
+
     return (reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.submitted ||
       reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded);
   }
 
+
+  console.log('------> ', reviewedStudent.givenName, reviewedStudent.resultScore, reviewedStudent.comment);
 	return (
 	  <Fragment>
-      {/*<HeaderBar onBackClick={(reviewedStudentId) ? () => dispatch(setCurrentlyReviewedStudentId('')) : null}*/}
-      {/*           title={`Overview: ${(assignment.title) ? assignment.title : ''}`}>*/}
-      {/*  <span className='mr-2'>*/}
-      {/*    <input type={'checkbox'}*/}
-      {/*           onChange={e => dispatch(toggleHideStudentIdentity())}*/}
-      {/*           checked={isHideStudentIdentity}/>*/}
-      {/*           Hide identity & randomize*/}
-      {/*  </span>*/}
-      {/*</HeaderBar>*/}
-
       <Container className="homework-viewer">
-        <GradingBar refreshHandler={props.refreshGrades} assignment={assignment} students={students} reviewedStudent={reviewedStudent}/>
-
+        <GradingBar refreshHandler={props.refreshGrades} assignment={assignment} reviewedStudent={reviewedStudent}/>
 
         <Row className='p-0'>
           <Col className='w-auto xt-large xtext-dark font-weight-bold xbg-light'>{getStudentRefName()}</Col>
@@ -79,21 +75,9 @@ function HomeworkReview(props) {
         </Row>
         }
 
-        {isShowWork() && assignment.quizQuestions.map((question, index) =>
-          <Row key={index}>
-            <Col className="quiz-question">
-              <label>You answered question #{index+1} as follows:</label>
-              <legend>{assignment.quizQuestions[index].questionText}</legend>
-              {assignment.quizQuestions[index].answerOptions.map((optText, optNum) =>
-                <div key={optNum} className="form-check">
-                  {(reviewedStudent.homework.quizAnswers[index] === optNum) && <span className="selected-indicator">></span>}
-                  <label className={`form-check-label reviewed-answer ${(reviewedStudent.homework.quizAnswers[index] === optNum) ? "checked" : ""}`} htmlFor={`q-${index}-opt-${optNum}`}>{optText}</label>
-                </div>
-              )}
-              <hr />
-            </Col>
-          </Row>
-        )}
+        {isShowWork() &&
+          <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={true} isShowCorrect={true} />
+        }
 
         {!isShowWork() &&
         <Row className='mt-5 mb-5'>

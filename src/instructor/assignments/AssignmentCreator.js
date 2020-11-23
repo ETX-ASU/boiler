@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
-import {UI_SCREEN_MODES} from "../../app/constants";
+import {MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
@@ -13,8 +13,8 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "./QuizCreator";
-import {setModalVisibility, setModalData} from "../../app/store/modalReducer";
+import QuizCreator from "../../tool/QuizCreator";
+import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
   id: '',
@@ -22,19 +22,22 @@ const emptyAssignment = {
   title: '',
   summary: '',
   image: '',
+  isLinkedToLms: false,
   isLockedOnSubmission: true,
   lockOnDate: 0,
   isUseAutoScore: true,
   isUseAutoSubmit: false,
 
-  // This data is specific to the tool (Quiz tool data is just an array of questions & answers
-  quizQuestions: [{
-    questionText: '',
-    answerOptions: ['', ''],
-    correctAnswerIndex: 0,
-    progressPointsForCompleting: 1,
-    gradePointsForCorrectAnswer: 10
-  }]
+  // This data is specific to the tool (Quiz tool data is just an array of questions & answers)
+  toolAssignmentData: {
+    quizQuestions: [{
+      questionText: '',
+      answerOptions: ['', ''],
+      correctAnswerIndex: 0,
+      progressPointsForCompleting: 1,
+      gradePointsForCorrectAnswer: 10
+    }]
+  }
 };
 
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
@@ -43,60 +46,25 @@ function AssignmentCreator() {
 	const activeUser = useSelector(state => state.app.activeUser);
 	const courseId = useSelector(state => state.app.courseId);
 	const [formData, setFormData] = useState(emptyAssignment);
-
-
-  function closeModalAndReturnToOptScreen(e) {
-    dispatch(setModalVisibility(false));
-    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
-  }
-
-	async function handleCancelBtn() {
-    console.log('handleCancelBtn()')
-    dispatch(setModalData({
-      title: 'Cancel Warning',
-      prompt: (
-        <Fragment>
-          <p>Do you want to cancel new assignment or continue editing?</p>
-          <p>Canceling will not save your new assignment.</p>
-        </Fragment>
-      ),
-      isShown: true,
-      buttons: (
-        <Fragment>
-          <Button onClick={closeModalAndReturnToOptScreen}>Cancel new assignment</Button>
-          <Button onClick={() => dispatch(setModalVisibility(false))}>Continue editing</Button>
-        </Fragment>
-      )
-    }));
-  }
+  const [activeModal, setActiveModal] = useState(null);
 
 	async function handleSubmitBtn() {
-	  console.log("Save pants!")
-    // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title || !formData.summary) return;
 
 		const assignmentId = uuid();
 		const inputData = Object.assign({}, formData, {
 			id: assignmentId,
-      resourceId: '', // TODO: Must remove from DB
       courseId: courseId,
 			ownerId: activeUser.id,
 			lockOnDate: (formData.isLockedOnDate) ? moment(formData.lockOnDate).valueOf() : 0
 		});
 
 		try {
-      await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      dispatch(setModalData({
-        title: 'Assignment Saved',
-        prompt: (<p>Assignment has been saved! It is now accessible in your LMS.</p>),
-        isShown: true,
-        buttons: (<Button onClick={closeModalAndReturnToOptScreen}>Continue</Button>)
-      }));
+      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
+      if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
     } catch (error) {
       window.confirm(`We're sorry. There was a problem saving your new assignment. Error: ${error}`);
     }
-
-
 	}
 
   function toggleUseAutoScore(e) {
@@ -104,15 +72,43 @@ function AssignmentCreator() {
   }
 
   function handleQuizChanges(quizQuestions) {
-	  setFormData({...formData, quizQuestions});
+	  setFormData({...formData, toolAssignmentData: {quizQuestions} });
   }
 
+  function handleReturnToCreateOrDupe() {
+    setActiveModal(null);
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))
+  }
+
+  function renderModal() {
+    switch (activeModal.type) {
+      case MODAL_TYPES.cancelNewAssignmentEditsWarning:
+        return (
+          <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
+            {name: 'Cancel', onClick: handleReturnToCreateOrDupe},
+            {name: 'Continue Creating', onClick: () => setActiveModal(null)},
+          ]}>
+            <p>Do you want to cancel new assignment or continue editing?</p>
+            <p>Canceling will not save your new assignment.</p>
+          </ConfirmationModal>
+        );
+      case MODAL_TYPES.confirmAssignmentSaved:
+        return (
+          <ConfirmationModal title={'Assignment Saved'} buttons={[
+            {name: 'Continue', onClick: handleReturnToCreateOrDupe},
+          ]}>
+            <p>Assignment has been saved! It is now accessible in your LMS.</p>
+          </ConfirmationModal>
+        );
+    }
+  }
 
 	return (
     <Fragment>
+      {activeModal && renderModal()}
       <HeaderBar title='Create New Assignment'>
-        <Button onClick={handleCancelBtn} className='mr-2'>Cancel</Button>
-        <Button onClick={handleSubmitBtn}>Update</Button>
+        <Button onClick={() => setActiveModal({type: MODAL_TYPES.cancelNewAssignmentEditsWarning})} className='mr-2'>Cancel</Button>
+        <Button onClick={handleSubmitBtn}>Create</Button>
       </HeaderBar>
 
       <form>
@@ -159,7 +155,7 @@ function AssignmentCreator() {
         </Container>
 
         {/*The assignment data collected here is specific to the tool, while the above assignment data is used in every tool*/}
-        <QuizCreator isUseAutoScore={formData.isUseAutoScore} quizQuestions={formData.quizQuestions} setQuizQuestions={handleQuizChanges}/>
+        <QuizCreator isUseAutoScore={formData.isUseAutoScore} quizQuestions={formData.toolAssignmentData.quizQuestions} setQuizQuestions={handleQuizChanges}/>
       </form>
     </Fragment>
   )

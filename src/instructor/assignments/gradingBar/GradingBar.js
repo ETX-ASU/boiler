@@ -1,43 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import "./GradingBar.css";
+import "./GradingBar.scss";
 import {Container, Col, Row, Button} from 'react-bootstrap';
-import {HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
 import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
-// import {setError} from "../../../app/store/modalReducer";
 library.add(faArrowCircleLeft, faArrowCircleRight);
 
 
 function GradingBar(props) {
   const dispatch = useDispatch();
-  const {assignment, students, reviewedStudent} = props;
+  const {assignment, reviewedStudent} = props;
 
   const displayOrder = useSelector(state => state.app.displayOrder);
-  const [score, setScore] = useState(calcShownScore(reviewedStudent));
+  const [resultScore, setResultScore] = useState(calcShownScore(reviewedStudent));
   const [comment, setComment] = useState('');
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
-  function calcShownScore({homeworkStatus, score, autoScore}) {
-    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return score;
+  useEffect(() => {
+    setComment(reviewedStudent.comment || '');
+    setResultScore(calcShownScore(reviewedStudent));
+  }, [reviewedStudent.resultScore, reviewedStudent.id, reviewedStudent.comment])
+
+  function calcShownScore({homeworkStatus, resultScore, autoScore}) {
+    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return resultScore;
     return (autoScore) ? autoScore : 0;
   }
 
   const navToPrev = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex - 1 < 0) ? displayOrder.length - 1 : curStudentIndex - 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex])
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
   const navToNext = () => {
     let curStudentIndex = displayOrder.indexOf(reviewedStudent.id);
     let navToStudentIndex = (curStudentIndex + 1 >= displayOrder.length) ? 0 : curStudentIndex + 1;
-    // let navToStudentData = students.find(s => s.id === displayOrder[navToStudentIndex].id)
     dispatch(setCurrentlyReviewedStudentId(displayOrder[navToStudentIndex]));
   }
 
@@ -45,9 +47,10 @@ function GradingBar(props) {
     const scoreDataObj = {
       resourceId: assignment.id,
       studentId: reviewedStudent.id,
-      score,
+      resultScore,
       comment,
-      progress: HOMEWORK_PROGRESS.fullyGraded
+      activityProgress: ACTIVITY_PROGRESS[reviewedStudent.homeworkStatus],
+      gradingProgress: HOMEWORK_PROGRESS.fullyGraded
     };
 
     const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
@@ -55,41 +58,44 @@ function GradingBar(props) {
     props.refreshHandler();
   }
 
+  function handleCommentUpdated(e) {
+    setComment(e.target.value || '')
+  }
+
   return (
     <Container className='p-0 m-0 mt-4 mb-4 login-bar bg-white rounded xt-med xtext-med align-middle'>
       <Row>
         <Col className='align-middle' style={{'maxWidth':'40px'}}>
-          <FontAwesomeIcon size='2x' icon={faArrowCircleLeft} onClick={navToPrev} />
+          <FontAwesomeIcon size='2x' icon={faArrowCircleLeft} onClick={navToPrev} className='grade-bar-nav-btn' />
         </Col>
 
         <Col className=''>
           <Container>
             <Row>
-              <Col className='col-5' style={{'width':'calc(100% - 100px)'}}>
+              <Col className='col-4' style={{'width':'calc(100% - 100px)'}}>
                 <h2>{(isHideStudentIdentity) ? `Student #${reviewedStudent.randomOrderNum}` : reviewedStudent.name}</h2>
                 <span className='aside'><h3 className='subtext d-inline-block'>{reviewedStudent.percentCompleted}% Complete | </h3>
                   {STATUS_TEXT[reviewedStudent.homeworkStatus]}</span>
               </Col>
-              <Col className='col-7 pt-1 pb-2 xbg-light'>
-                <div className='ml-2 mr-5 d-inline-block align-top'>
+              <Col className='col-8 pt-1 pb-2 xbg-light'>
+                <div className='ml-0 mr-4 d-inline-block align-top'>
                   <label htmlFor='autoScore' className='xtext-darkest'>Auto Score</label>
-                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${assignment.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</div>
+                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${assignment.toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</div>
                 </div>
-                <div className='mr-5 d-inline-block align-top'>
-                  <label htmlFor='yourScore' className='xtext-darkest'>Your Score</label>
+                <div className='mr-4 d-inline-block align-top'>
+                  <label htmlFor='yourScore' className='xtext-darkest'>Given Score</label>
                   <input id={`yourScore`}
                          type="number"
                          className='form-control'
                          min={0} max={100}
-                         onChange={(e) => setScore(parseInt(e.target.value))} defaultValue={score}
-                         disabled={reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded}
+                         onChange={(e) => setResultScore(parseInt(e.target.value))} value={resultScore}
                   />
                 </div>
-                <div className='ml-5 mr-2 pt-3 d-inline-block align-middle float-right'>
+                <div className='mr-1 pt-3 d-inline-block align-middle float-right'>
                   <span className='ml-1 mr-0'>
                     <Button className='btn-med xbg-darkest'
                       disabled={reviewedStudent.progress === HOMEWORK_PROGRESS.fullyGraded}
-                      onClick={handleSubmitScore}>{(reviewedStudent.score !== undefined) ? `Update` : `Submit`}</Button>
+                      onClick={handleSubmitScore}>{(reviewedStudent.resultScore !== undefined) ? `Update` : `Submit`}</Button>
                   </span>
                 </div>
               </Col>
@@ -99,13 +105,13 @@ function GradingBar(props) {
         </Col>
 
         <Col className='align-middle text-right' style={{'maxWidth':'40px'}}>
-          <FontAwesomeIcon size='2x' icon={faArrowCircleRight} onClick={navToNext} />
+          <FontAwesomeIcon size='2x' icon={faArrowCircleRight} onClick={navToNext} className='grade-bar-nav-btn' />
         </Col>
       </Row>
 
       <Row>
         <Col className='col-12'>
-          <input type='text' className='mt-2 form-control' placeholder='Leave feedback' value={comment} onChange={(e) => setComment(e.target.value)}/>
+          <textarea className='mt-2 form-control' placeholder='Leave feedback' onChange={handleCommentUpdated} value={comment}/>
         </Col>
       </Row>
 
@@ -114,3 +120,5 @@ function GradingBar(props) {
 }
 
 export default GradingBar;
+
+

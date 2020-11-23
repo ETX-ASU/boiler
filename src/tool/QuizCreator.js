@@ -67,7 +67,6 @@ function QuizCreator(props) {
     const qData = props.quizQuestions[qNum];
     return (
       <Fragment key={qNum}>
-        {/* Arbitrary maximum of 3 questions per quiz for this boilerplate.*/}
         <h3 className={'subtext mt-2 mb-2'}>Question ({qNum+1} of {props.quizQuestions.length})</h3>
 
         <Container className='mt-4'>

@@ -18,9 +18,7 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers, hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
-import SelectionDashboard from "../selectionTool/SelectionDashboard";
-import ConfirmationModal from "./ConfirmationModal";
-import {setError} from "./store/modalReducer";
+import SelectionDashboard from "../lmsLinkage/SelectionDashboard";
 
 
 
@@ -37,6 +35,7 @@ function App() {
     const activeRoleParam = params.get('role');
     const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
+    const mode = params.get('mode');
 
     console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
 
@@ -74,7 +73,7 @@ function App() {
 
         dispatch(setSessionData(courseId, assignmentId, activeUser, students));
       } catch (error) {
-        console.error(error);
+        console.error(" -------------> CHECK devMode. In local env should be set to true.", error);
         window.confirm(`We're sorry. There was an error initializing session data. Please wait a moment and try again. Error: ${error}`);
       }
     }
@@ -131,16 +130,10 @@ function App() {
         <SelectionDashboard />
       </Row>
     </Container>
-
   )
 
 	return (
-		<Container className="app mt-4 mb-2 p-0">
-      <ConfirmationModal />
-			{/*<Row className="mb-3">*/}
-			{/*	<LoginBar activeUser={activeUser} />*/}
-			{/*</Row>*/}
-
+		<Container className="app mt-4 mb-5 p-0">
 			<Row className='main-content-row'>
 				{!activeUser?.id && <LoadingIndicator msgClasses='xtext-white' loadingMsg='LOADING'/>}
 				{activeUser.activeRole === ROLE_TYPES.dev && <DevUtilityDashboard />}

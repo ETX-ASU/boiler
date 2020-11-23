@@ -23,6 +23,7 @@ import {
   getUnassignedStudentsAws as realGetUnassignedStudents,
   getAssignedStudentsAws as realGetAssignedStudents,
   getGradesAws as realGetGrades,
+  getGradeAws as realGetGrade,
   submitInstructorGradeAws as realInstructorSubmitGrade,
   submitGradeAws as realAutoSubmitGrade,
   submitResourceSelectionAws as realSubmitResourceSelection
@@ -43,8 +44,8 @@ import {
 
 
 
-// TODO: !!!!!!!!!!!!!!!!!!!!!! Needs real code
-const submitContentItem = {
+
+/*const submitContentItem = {
   type: 'ltiResourceLink',
   label: 'name of the quiz (used in gradebook)',
   url: '', // leave null
@@ -55,7 +56,7 @@ const submitContentItem = {
     resourceId: 'the actual assignment id used in my DynamoDB - same as above',
     tag: 'not required'
   }
-}
+}*/
 
 export function hasValidSession(awsExports) {
   return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
@@ -136,21 +137,18 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "score": 71,
+    "resultScore": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
-export function fetchGradeForStudent(assignmentId, studentId) {
-  if (window.isDevMode) return mockGetStudentGrade(assignmentId, studentId);
-
-  // Temp solution until we have additional method.
-  let allGrades = fetchAllGrades(assignmentId);
-  return allGrades.find(g => g.studentId === studentId);
+export async function fetchGradeForStudent(assignmentId, studentId) {
+  let allGrades = (window.isDevMode) ? await mockGetGrades(assignmentId) : await realGetGrade(aws_exports, assignmentId, studentId);
 
   // TODO: We need a RL method that gets a single student id. (We don't want a student to be able to fetch ids of all students)
-  // return realGetStudentGrade(assignmentId, studentId);
+  // Temp solution until we have additional method.
+  return allGrades.find(g => g.studentId === studentId);
 }
 
 
@@ -161,7 +159,7 @@ export function fetchGradeForStudent(assignmentId, studentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "score": 71,
+    "resultScore": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
@@ -180,7 +178,7 @@ export function fetchAllGrades(assignmentId) {
  * SubmitGradeObj {
  *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3", (assignmentId)
  *   studentId: "fa8fde11-43df-4328-9939-58b56309d20d",
- *   score: 100,
+ *   resultScore: 100,
  *   comment: "Instructor comment on the student performance",
  *
  *   // TODO: how come we send progress values, but we can't/don't receive them?!
@@ -194,9 +192,8 @@ export function sendInstructorGradeToLMS(gradeData) {
 
 
 
-// TODO: Note name changes from grade to score
 // Note: resourceId is NOT required in actual API, but is used by mock API
-export function sendAutoGradeToLMS(assignmentId, studentId, score, comment) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, score, comment) :
-    realAutoSubmitGrade({score, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+export function sendAutoGradeToLMS(assignmentId, studentId, resultScore, comment) {
+  return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, resultScore, comment) :
+    realAutoSubmitGrade({resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
 }

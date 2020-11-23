@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import HomeworkListItem from "./HomeworkListItem";
-import {HOMEWORK_PROGRESS, SORT_BY, SORT_DIRECTION, STATUS_TEXT} from "../../app/constants";
+import {HOMEWORK_PROGRESS, SORT_BY} from "../../app/constants";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -24,12 +24,11 @@ function HomeworkListing(props) {
   const [curPageNum, setCurPageNum] = useState(0);
   const [sortBy, setSortBy] = useState({type:SORT_BY.name, isAscending:true});
   const [pageBtns, setPageBtns] = useState([]);
-  // const [sortedStudents, setSortedStudents] = useState(props.students);
   const [studentsPerPage, setStudentsPerPage] = useState(props.studentsPerPage);
   const [shownStudents, setShownStudents] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
   useEffect(function reCalcPageCount(){
     setPageCount(Math.ceil(props.students.length/studentsPerPage));
@@ -48,9 +47,7 @@ function HomeworkListing(props) {
 
     const topStudentIndex = curPageNum * studentsPerPage;
     const sortedStudents = getSortedStudents(props.students.slice(), sortBy.type, sortBy.isAscending);
-    console.log("sortedStudents", sortedStudents);
     dispatch(setDisplayOrder(sortedStudents.map(s => s.id)));
-    // setSortedStudents(sortedStudents);
 
     const shown = sortedStudents.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
@@ -69,8 +66,8 @@ function HomeworkListing(props) {
         break;
       case SORT_BY.score:
         items.sort((a, b) => {
-          const aVal = isNaN(a.score) ? -1 : a.score;
-          const bVal = isNaN(b.score) ? -1 : b.score;
+          const aVal = isNaN(a.resultScore) ? -1 : a.resultScore;
+          const bVal = isNaN(b.resultScore) ? -1 : b.resultScore;
           return aVal - bVal;
         });
         break;
