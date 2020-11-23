@@ -6,7 +6,7 @@ import AssignmentListItem from "./AssignmentListItem";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import {updateAssignment} from "../graphql/mutations";
 
-import $ from "jquery";
+// import $ from "jquery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
@@ -40,7 +40,11 @@ function AssignmentsSelectionList(props) {
 
       //TODO remove query, launch with React.
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
-      $("body").append(linkToLmsResult);
+      // $("body").append(linkToLmsResult);
+      // append the HTML to the body
+      await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
+      // submit the form
+      document.getElementById("ltijs_submit").submit();
     } catch (error) {
       console.log(error);
       window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
