@@ -22,6 +22,7 @@ const emptyAssignment = {
   title: '',
   summary: '',
   image: '',
+  isLinkedToLms: false,
   isLockedOnSubmission: true,
   lockOnDate: 0,
   isUseAutoScore: true,
@@ -46,8 +47,6 @@ function AssignmentCreator() {
 	const courseId = useSelector(state => state.app.courseId);
 	const [formData, setFormData] = useState(emptyAssignment);
   const [activeModal, setActiveModal] = useState(null);
-
-
 
 	async function handleSubmitBtn() {
     if (!formData.title || !formData.summary) return;
