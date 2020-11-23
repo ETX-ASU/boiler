@@ -67,7 +67,9 @@ export const EMPTY_HOMEWORK = {
   id: '',
   assignmentId: '',
   studentOwnerId: '',
-  quizAnswers: [],
+  toolHomeworkData: {
+    quizAnswers: []
+  },
   beganOnDate: 0,
   submittedOnDate: 0,
   isLocked: false

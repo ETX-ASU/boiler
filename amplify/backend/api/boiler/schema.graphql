@@ -9,24 +9,32 @@ type QuizQuestion {
 type Assignment @model {
   id: ID!
   courseId: ID
-  resourceId: ID
   ownerId: ID!
   title: String!
   summary: String
   image: String
+  isLinkedToLms: Boolean
   lockOnDate: AWSTimestamp
   isLockedOnSubmission: Boolean
   isUseAutoScore: Boolean
   isUseAutoSubmit: Boolean
-  quizQuestions: [QuizQuestion]
+  toolAssignmentData: ToolAssignmentData
 }
 
 type Homework @model {
   id: ID!
   assignmentId: ID!
   studentOwnerId: ID!
-  quizAnswers: [Int]
   beganOnDate: AWSTimestamp
   submittedOnDate: AWSTimestamp
   isLocked: Boolean
+  toolHomeworkData: ToolHomeworkData
+}
+
+type ToolAssignmentData {
+  quizQuestions: [QuizQuestion]
+}
+
+type ToolHomeworkData {
+  quizAnswers: [Int]
 }

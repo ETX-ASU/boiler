@@ -44,11 +44,11 @@ function DevUtilityDashboard() {
       const progress = progressStats[i];
       let beganOnDate = 0;
       let submittedOnDate = (progress === HOMEWORK_PROGRESS.submitted || progress === HOMEWORK_PROGRESS.fullyGraded) ? moment().valueOf() : 0;
-      let quizAnswers = Array(assignment.quizQuestions.length).fill(-1);
+      let quizAnswers = Array(assignment.toolAssignmentData.quizQuestions.length).fill(-1);
 
       if (progress !== HOMEWORK_PROGRESS.notBegun) {
         beganOnDate = moment().valueOf();
-        quizAnswers = assignment.quizQuestions.map(q => rand(0, q.answerOptions.length));
+        quizAnswers = assignment.toolAssignmentData.quizQuestions.map(q => rand(0, q.answerOptions.length));
         if (progress === HOMEWORK_PROGRESS.inProgress) {
           quizAnswers.pop();
           quizAnswers.push(-1); // partial result so always make last one not started.
@@ -60,7 +60,9 @@ function DevUtilityDashboard() {
         assignmentId: assignment.id,
         studentOwnerId: s.id.toString(),
         beganOnDate,
-        quizAnswers,
+        toolHomeworkData: {
+          quizAnswers
+        },
         submittedOnDate,
         isLocked: false,
       })

@@ -44,3 +44,6 @@ amplifytools.xcconfig
 
 #environment
 #.tool_consumers.*
+/debug.log
+/NOTES.md
+/NOTES-v1.md
