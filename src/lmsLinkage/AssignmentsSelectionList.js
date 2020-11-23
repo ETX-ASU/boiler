@@ -42,7 +42,7 @@ function AssignmentsSelectionList(props) {
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
       // $("body").append(linkToLmsResult);
       // append the HTML to the body
-      await document.body.appendChild(linkToLmsResult);
+      await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
       // submit the form
       document.getElementById("ltijs_submit").submit();
     } catch (error) {
