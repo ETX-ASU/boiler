@@ -15,16 +15,20 @@ function HomeworkReview(props) {
 
   useEffect(() => {
     setReviewedStudent(students.find(s => s.id === reviewedStudentId))
-    console.log('------> reviewedStudentId', reviewedStudentId);
   }, [reviewedStudentId])
 
 
   function getStatusMsg() {
     const studentRefName = getStudentRefName();
+    if(reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded && !reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) {
+      return `${studentRefName} did no work, but you have already given them a grade anyway.`;
+    }
+
     switch(reviewedStudent.homeworkStatus) {
       case(HOMEWORK_PROGRESS.notBegun): return `${studentRefName} has not started their work yet.`;
       case(HOMEWORK_PROGRESS.inProgress): return`${studentRefName} completed A PORTION of their homework, but never submitted it.`;
       case(HOMEWORK_PROGRESS.submitted): return`${studentRefName}'s homework is ready for grading.`;
+      // TODO: should switch to use the activityProgress to check this
       case(HOMEWORK_PROGRESS.fullyGraded): return`You have already graded ${studentRefName}'s homework`;
       default: return `no progress information for ${studentRefName}`;
     }
@@ -36,10 +40,15 @@ function HomeworkReview(props) {
   }
 
   function isShowWork() {
+    // TODO: should switch to use the activityProgress to check this
+    if (!reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) return false;
+
     return (reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.submitted ||
       reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded);
   }
 
+
+  console.log('------> ', reviewedStudent.givenName, reviewedStudent.resultScore, reviewedStudent.comment);
 	return (
 	  <Fragment>
       <Container className="homework-viewer">
@@ -67,7 +76,7 @@ function HomeworkReview(props) {
         }
 
         {isShowWork() &&
-          <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={false} isShowCorrect={true} />
+          <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={true} isShowCorrect={true} />
         }
 
         {!isShowWork() &&
