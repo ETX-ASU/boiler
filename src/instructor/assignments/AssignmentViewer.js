@@ -5,7 +5,7 @@ import LoadingIndicator from "../../app/assets/LoadingIndicator";
 import {
   setActiveUiScreenMode,
   setGradesData,
-  addHomeworksData, setCurrentlyReviewedStudentId,
+  addHomeworksData, setCurrentlyReviewedStudentId, toggleHideStudentIdentity
 } from "../../app/store/appReducer";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {API, graphqlOperation} from "aws-amplify";
@@ -14,7 +14,6 @@ import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
 import {fetchAllGrades} from "../../utils/RingLeader";
 import {useStudents} from "../../app/store/AppSelectors";
-import {toggleHideStudentIdentity} from "./gradingBar/store/gradingBarReducer";
 import HeaderBar from "../../app/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -25,7 +24,7 @@ library.add(faEdit, faPen, faChevronLeft);
 
 function AssignmentViewer(props) {
 	const dispatch = useDispatch();
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
   const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
   const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);

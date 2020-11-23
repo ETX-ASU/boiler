@@ -19,7 +19,7 @@ function GradingBar(props) {
   const displayOrder = useSelector(state => state.app.displayOrder);
   const [resultScore, setResultScore] = useState(calcShownScore(reviewedStudent));
   const [comment, setComment] = useState('');
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
   useEffect(() => {
     setComment(reviewedStudent.comment || '');

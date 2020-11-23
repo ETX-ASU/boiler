@@ -4,13 +4,13 @@ import {HOMEWORK_PROGRESS} from "../../app/constants";
 import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
-import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 
 
 function HomeworkReview(props) {
   const {students, reviewedStudentId, assignment} = props;
   const [reviewedStudent, setReviewedStudent] = useState(students.find(s => s.id === reviewedStudentId));
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
 
   useEffect(() => {

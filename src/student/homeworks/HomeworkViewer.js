@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import "./homeworks.scss";
 import HeaderBar from "../../app/HeaderBar";
 import {HOMEWORK_PROGRESS} from "../../app/constants";
-import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 
 
 function HomeworkViewer(props) {

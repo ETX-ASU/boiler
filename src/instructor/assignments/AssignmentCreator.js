@@ -13,7 +13,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "../../toolDisplays/QuizCreator";
+import QuizCreator from "../../tool/QuizCreator";
 import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
@@ -27,7 +27,7 @@ const emptyAssignment = {
   isUseAutoScore: true,
   isUseAutoSubmit: false,
 
-  // This data is specific to the tool (Quiz tool data is just an array of questions & answers
+  // This data is specific to the tool (Quiz tool data is just an array of questions & answers)
   toolAssignmentData: {
     quizQuestions: [{
       questionText: '',

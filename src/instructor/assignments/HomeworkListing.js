@@ -28,7 +28,7 @@ function HomeworkListing(props) {
   const [shownStudents, setShownStudents] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
   useEffect(function reCalcPageCount(){
     setPageCount(Math.ceil(props.students.length/studentsPerPage));

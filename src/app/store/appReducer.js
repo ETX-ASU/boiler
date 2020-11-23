@@ -1,4 +1,4 @@
-import {APP_NAMESPACE, UI_SCREEN_MODES} from "../constants";
+import {APP_NAMESPACE, SORT_BY, UI_SCREEN_MODES} from "../constants";
 
 export const SET_SESSION_DATA = APP_NAMESPACE+'.SET_SESSION_DATA';
 export const SET_ASSIGNMENT_DATA = APP_NAMESPACE+'.SET_ASSIGNMENT_DATA';
@@ -8,6 +8,7 @@ export const SET_GRADES_DATA = APP_NAMESPACE+'.SET_GRADES_DATA';
 export const SET_ACTIVE_UI_SCREEN_MODE = APP_NAMESPACE+'.SET_ACTIVE_UI_SCREEN_MODE';
 export const EDIT_DUPED_ASSIGNMENT = APP_NAMESPACE+'.EDIT_DUPED_ASSIGNMENT';
 export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
+export const TOGGLE_HIDE_STUDENT_IDENTITY = 'grading-bar.TOGGLE_HIDE_STUDENT_IDENTITY';
 
 
 export function setSessionData(courseId, assignmentId, activeUser, members) {
@@ -69,6 +70,12 @@ export function setCurrentlyReviewedStudentId(currentlyReviewedStudentId) {
   }
 }
 
+export function toggleHideStudentIdentity(isHideStudentIdentity) {
+  return {
+    type: TOGGLE_HIDE_STUDENT_IDENTITY,
+    isHideStudentIdentity
+  }
+}
 
 
 const defaultState = {
@@ -88,7 +95,8 @@ const defaultState = {
   grades: [],
   currentlyReviewedStudentId: '',
   activeUiScreenMode: '',
-  displayOrder: []
+  displayOrder: [],
+  isHideStudentIdentity: true
 }
 
 
@@ -122,6 +130,9 @@ function appReducer(currentState = defaultState, action) {
 
     case SET_DISPLAY_ORDER:
       return Object.assign({}, currentState, {displayOrder: action.displayOrder});
+
+    case TOGGLE_HIDE_STUDENT_IDENTITY:
+      return Object.assign(currentState, {isHideStudentIdentity: action.isHideStudentIdentity, sortGradingBy: SORT_BY.random});
 
     default:
       return currentState;

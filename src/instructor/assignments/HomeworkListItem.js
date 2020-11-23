@@ -10,7 +10,7 @@ library.add(faArrowCircleLeft, faArrowCircleRight);
 
 function HomeworkListItem(props) {
   const dispatch = useDispatch();
-  const isHideStudentIdentity = useSelector(state => state.gradingBar.isHideStudentIdentity);
+  const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 	const student = props.student;
 
   const studentRefName = (isHideStudentIdentity) ? `Student #${student.randomOrderNum}` : student.name;

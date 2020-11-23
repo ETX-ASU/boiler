@@ -11,7 +11,7 @@ import HeaderBar from "../../app/HeaderBar";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/ConfirmationModal";
-import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 library.add(faCheck, faTimes);
 
 
