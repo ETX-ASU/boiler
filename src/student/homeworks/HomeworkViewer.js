@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import "./homeworks.scss";
 import HeaderBar from "../../app/HeaderBar";
 import {HOMEWORK_PROGRESS} from "../../app/constants";
-import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 
 
 function HomeworkViewer(props) {
@@ -18,7 +18,7 @@ function HomeworkViewer(props) {
           <Col><p>{assignment.summary}</p></Col>
         </Row>
 
-        <QuizViewerAndEditor quizQuestions={assignment.quizQuestions} quizAnswers={homework.quizAnswers} isReadOnly={true} isShowCorrect={true} />
+        <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={homework.toolHomeworkData.quizAnswers} isReadOnly={true} isShowCorrect={true} />
 
       </Container>
     </Fragment>

@@ -1,12 +1,11 @@
 import React, {Fragment} from 'react';
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 
 function QuizViewerAndEditor(props) {
   const {quizQuestions, quizAnswers, isReadOnly, isShowCorrect, handleOptSelected} = props;
-
 
   function styleForAnswer(qNum, selectedAnswerIndex) {
     const isSelected = (quizAnswers[qNum] === selectedAnswerIndex);
@@ -16,9 +15,6 @@ function QuizViewerAndEditor(props) {
   }
 
   function isCorrectChoice(qNum, selectedAnswerIndex) {
-    if (qNum === 0 && selectedAnswerIndex === 1) {
-      console.log(`isCorrectChoice = ${(quizQuestions[qNum].correctAnswerIndex === selectedAnswerIndex)}`);
-    }
     return (quizQuestions[qNum].correctAnswerIndex === selectedAnswerIndex);
   }
 

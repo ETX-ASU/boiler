@@ -13,7 +13,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/HeaderBar";
 import ToggleSwitch from "../../app/assets/ToggleSwitch";
 
-import QuizCreator from "../../toolDisplays/QuizCreator";
+import QuizCreator from "../../tool/QuizCreator";
 import ConfirmationModal from "../../app/ConfirmationModal";
 
 const emptyAssignment = {
@@ -27,14 +27,16 @@ const emptyAssignment = {
   isUseAutoScore: true,
   isUseAutoSubmit: false,
 
-  // This data is specific to the tool (Quiz tool data is just an array of questions & answers
-  quizQuestions: [{
-    questionText: '',
-    answerOptions: ['', ''],
-    correctAnswerIndex: 0,
-    progressPointsForCompleting: 1,
-    gradePointsForCorrectAnswer: 10
-  }]
+  // This data is specific to the tool (Quiz tool data is just an array of questions & answers)
+  toolAssignmentData: {
+    quizQuestions: [{
+      questionText: '',
+      answerOptions: ['', ''],
+      correctAnswerIndex: 0,
+      progressPointsForCompleting: 1,
+      gradePointsForCorrectAnswer: 10
+    }]
+  }
 };
 
 // TODO: Get rid of assignment lockOnData and isLockedOnSubmission
@@ -53,7 +55,6 @@ function AssignmentCreator() {
 		const assignmentId = uuid();
 		const inputData = Object.assign({}, formData, {
 			id: assignmentId,
-      resourceId: '', // TODO: Must remove from DB
       courseId: courseId,
 			ownerId: activeUser.id,
 			lockOnDate: (formData.isLockedOnDate) ? moment(formData.lockOnDate).valueOf() : 0
@@ -72,7 +73,7 @@ function AssignmentCreator() {
   }
 
   function handleQuizChanges(quizQuestions) {
-	  setFormData({...formData, quizQuestions});
+	  setFormData({...formData, toolAssignmentData: {quizQuestions} });
   }
 
   function handleReturnToCreateOrDupe() {
@@ -155,7 +156,7 @@ function AssignmentCreator() {
         </Container>
 
         {/*The assignment data collected here is specific to the tool, while the above assignment data is used in every tool*/}
-        <QuizCreator isUseAutoScore={formData.isUseAutoScore} quizQuestions={formData.quizQuestions} setQuizQuestions={handleQuizChanges}/>
+        <QuizCreator isUseAutoScore={formData.isUseAutoScore} quizQuestions={formData.toolAssignmentData.quizQuestions} setQuizQuestions={handleQuizChanges}/>
       </form>
     </Fragment>
   )

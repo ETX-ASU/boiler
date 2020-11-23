@@ -8,11 +8,10 @@ import {API} from "aws-amplify";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import HeaderBar from "../../app/HeaderBar";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/ConfirmationModal";
-import QuizViewerAndEditor from "../../toolDisplays/QuizViewerAndEditor";
+import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
 library.add(faCheck, faTimes);
 
 
@@ -23,7 +22,7 @@ library.add(faCheck, faTimes);
 function HomeworkEditor(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
-	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.quizQuestions, quizAnswers:homework.quizAnswers}));
+	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.toolAssignmentData.quizQuestions, quizAnswers:homework.toolHomeworkData.quizAnswers}));
   const [activeModal, setActiveModal] = useState(null);
 
 
@@ -32,7 +31,7 @@ function HomeworkEditor(props) {
 
     try {
       const inputData = Object.assign({}, homework, {
-        quizAnswers: formData.quizAnswers.slice(),
+        toolHomeworkData: {quizAnswers: formData.quizAnswers.slice()},
         beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
         submittedOnDate: (homework.submittedOnDate) ? homework.submittedOnDate : moment().valueOf()
       });
@@ -90,59 +89,6 @@ function HomeworkEditor(props) {
         )
     }
   }
-
-
-/*
-  function styleForAnswer(qNum, selectedAnswerIndex, isShowCorrect) {
-    const isSelected = (formData.quizAnswers[qNum] === selectedAnswerIndex);
-    if (!isSelected) return '';
-    const isCorrect = formData.quizQuestions[qNum].correctAnswerIndex === selectedAnswerIndex;
-    return (!isShowCorrect) ? 'selected' : (isCorrect) ? 'selected correct-selection' : 'selected incorrect-selection';
-  }
-
-  function isCorrectChoice(qNum, selectedAnswerIndex) {
-    return (formData.quizAnswers[qNum] === selectedAnswerIndex)
-  }
-
-  function renderQuestionsAndAnswers(isReadOnly, showCorrect = false) {
-    return (
-      formData.quizQuestions.map((question, qNum) =>
-      <Fragment key={qNum}>
-        <Row className='mt-4'>
-          <Col>
-            <h3 className={'subtext mt-2 mb-3 ml-1'}>Question ({qNum+1} of {formData.quizQuestions.length})</h3>
-          </Col>
-        </Row>
-        <Row className='ml-3 mr-2'>
-          <Col>
-            <h3>Question</h3>
-            <p>{question.questionText}</p>
-            <h3>Your Answer</h3>
-          </Col>
-        </Row>
-        <Row className='ml-4 mr-2 mt-1 p-2 pt-3 xbg-light'>
-          {question.answerOptions.map((opt, index) =>
-            <div key={index} className={`input-group mb-2 answer-opt ${styleForAnswer(qNum, index, false)}`}>
-              <div className="input-group-prepend">
-                <span className="input-group-text">{index+1}</span>
-              </div>
-              <div className={'form-control h-auto opt-text'} onClick={(isReadOnly) ? null : () => handleOptSelected(qNum, index)} aria-label={opt}>
-                {opt}
-                { (formData.quizAnswers[qNum] === index) &&
-                <div className="input-group-append float-right">
-                  {(isReadOnly || (showCorrect && isCorrectChoice(qNum, index))) && <FontAwesomeIcon icon={faCheck} size='lg'/>}
-                  {(showCorrect && !isCorrectChoice(qNum, index)) && <FontAwesomeIcon icon={faTimes} size='lg'/>}
-                </div>
-                }
-              </div>
-            </div>
-          )}
-        </Row>
-      </Fragment>
-    ))
-  }
-*/
-
 
 	return (
 		<Fragment>

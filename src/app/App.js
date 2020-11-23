@@ -18,7 +18,7 @@ import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
 import {createMockCourseMembers} from "../utils/MockRingLeader";
 import {fetchUsers, hasValidSession} from "../utils/RingLeader";
 import aws_exports from '../aws-exports';
-import SelectionDashboard from "../selectionTool/SelectionDashboard";
+import SelectionDashboard from "../lmsLinkage/SelectionDashboard";
 
 
 
