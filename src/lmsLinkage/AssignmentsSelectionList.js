@@ -41,7 +41,9 @@ function AssignmentsSelectionList(props) {
       //TODO remove query, launch with React.
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
       // $("body").append(linkToLmsResult);
+      // append the HTML to the body
       await document.body.appendChild(linkToLmsResult);
+      // submit the form
       document.getElementById("ltijs_submit").submit();
     } catch (error) {
       window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
