@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {API} from 'aws-amplify';
 import {useDispatch, useSelector} from "react-redux";
 import {updateAssignment as updateAssignmentMutation} from '../../graphql/mutations';
-import {setActiveUiScreenMode} from "../../app/store/appReducer";
+import {setActiveUiScreenMode, setAssignmentData} from "../../app/store/appReducer";
 import {UI_SCREEN_MODES, MODAL_TYPES} from "../../app/constants";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import "./assignments.scss";
@@ -43,7 +43,12 @@ function AssignmentEditor() {
       window.confirm(`We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again. Error: ${error}`);
     }
 
-    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
+    if (!urlAssignmentId) {
+      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+    } else {
+      dispatch(setAssignmentData(formData));
+      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
+    }
   }
 
 
@@ -52,7 +57,7 @@ function AssignmentEditor() {
   }
 
   function handleQuizChanges(quizQuestions) {
-    setFormData({...formData, quizQuestions});
+    setFormData({...formData, toolAssignmentData: {quizQuestions} });
   }
 
 
@@ -160,7 +165,7 @@ function AssignmentEditor() {
         <QuizCreator
           isLimitedEditing={isLimitedEditing}
           isUseAutoScore={formData.isUseAutoScore}
-          quizQuestions={formData.quizQuestions}
+          quizQuestions={formData.toolAssignmentData.quizQuestions}
           setQuizQuestions={handleQuizChanges}/>
       </form>
     </Fragment>

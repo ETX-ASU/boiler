@@ -6,21 +6,23 @@ export const onCreateAssignment = /* GraphQL */ `
     onCreateAssignment {
       id
       courseId
-      resourceId
       ownerId
       title
       summary
       image
+      isLinkedToLms
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
-      quizQuestions {
-        questionText
-        answerOptions
-        correctAnswerIndex
-        progressPointsForCompleting
-        gradePointsForCorrectAnswer
+      toolAssignmentData {
+        quizQuestions {
+          questionText
+          answerOptions
+          correctAnswerIndex
+          progressPointsForCompleting
+          gradePointsForCorrectAnswer
+        }
       }
       createdAt
       updatedAt
@@ -32,21 +34,23 @@ export const onUpdateAssignment = /* GraphQL */ `
     onUpdateAssignment {
       id
       courseId
-      resourceId
       ownerId
       title
       summary
       image
+      isLinkedToLms
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
-      quizQuestions {
-        questionText
-        answerOptions
-        correctAnswerIndex
-        progressPointsForCompleting
-        gradePointsForCorrectAnswer
+      toolAssignmentData {
+        quizQuestions {
+          questionText
+          answerOptions
+          correctAnswerIndex
+          progressPointsForCompleting
+          gradePointsForCorrectAnswer
+        }
       }
       createdAt
       updatedAt
@@ -58,21 +62,23 @@ export const onDeleteAssignment = /* GraphQL */ `
     onDeleteAssignment {
       id
       courseId
-      resourceId
       ownerId
       title
       summary
       image
+      isLinkedToLms
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
-      quizQuestions {
-        questionText
-        answerOptions
-        correctAnswerIndex
-        progressPointsForCompleting
-        gradePointsForCorrectAnswer
+      toolAssignmentData {
+        quizQuestions {
+          questionText
+          answerOptions
+          correctAnswerIndex
+          progressPointsForCompleting
+          gradePointsForCorrectAnswer
+        }
       }
       createdAt
       updatedAt
@@ -85,10 +91,12 @@ export const onCreateHomework = /* GraphQL */ `
       id
       assignmentId
       studentOwnerId
-      quizAnswers
       beganOnDate
       submittedOnDate
       isLocked
+      toolHomeworkData {
+        quizAnswers
+      }
       createdAt
       updatedAt
     }
@@ -100,10 +108,12 @@ export const onUpdateHomework = /* GraphQL */ `
       id
       assignmentId
       studentOwnerId
-      quizAnswers
       beganOnDate
       submittedOnDate
       isLocked
+      toolHomeworkData {
+        quizAnswers
+      }
       createdAt
       updatedAt
     }
@@ -115,10 +125,12 @@ export const onDeleteHomework = /* GraphQL */ `
       id
       assignmentId
       studentOwnerId
-      quizAnswers
       beganOnDate
       submittedOnDate
       isLocked
+      toolHomeworkData {
+        quizAnswers
+      }
       createdAt
       updatedAt
     }

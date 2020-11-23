@@ -19,7 +19,7 @@ export function useStudents() {
       if (!gradeDataForStudent) gradeDataForStudent = {resultScore:0, resultMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
-      if (!homeworkForStudent) homeworkForStudent = Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(assignment.quizQuestions.length).fill[-1]});
+      if (!homeworkForStudent) homeworkForStudent = Object.assign({}, EMPTY_HOMEWORK, {toolHomeworkData:{quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill[-1]}});
 
       let percentCompleted = calcPercentCompleted(assignment, homeworkForStudent);
       let autoScore = calcAutoScore(assignment, homeworkForStudent);

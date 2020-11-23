@@ -127,24 +127,28 @@ export const mockGetGrades = (assignmentId) => new Promise(function (resolve, re
 
 
 export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
-  const {assignmentId, resultScore, comment, studentId, gradingProgress} = gradeData;
+  const {resourceId, resultScore, comment, studentId, gradingProgress} = gradeData;
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
+  const assignmentId = resourceId;
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockInstructorSendGradeToLMS()")), mockDuration);
   } else {
     setTimeout(() => {
-      const userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+      if (!userGrades) userGrades = [];
       let gradeIndex = userGrades.findIndex(g => g.studentId === studentId);
       if (gradeIndex > -1) {
         userGrades[gradeIndex].resultScore = resultScore;
         userGrades[gradeIndex].comment = comment;
         userGrades[gradeIndex].gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
+        localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
+        console.log("Updated existing student grade", assignmentId, userGrades[gradeIndex]);
       } else {
         userGrades.push({studentId, resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+        console.log("Added new student grade", assignmentId, {studentId, resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+        localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
       }
-
-      localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
 
       resolve(true, mockDuration)
     });
@@ -159,7 +163,8 @@ export const mockAutoSendGradeToLMS = (assignmentId, studentId, resultScore, com
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockAutoSendGradeToLMS()")), mockDuration);
   } else {
     setTimeout(() => {
-      const userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+      if (!userGrades) userGrades = [];
       let gradeIndex = userGrades.findIndex(g => g.studentId === studentId);
       if (gradeIndex > -1) {
         userGrades[gradeIndex].resultScore = resultScore;

@@ -6,21 +6,23 @@ export const getAssignment = /* GraphQL */ `
     getAssignment(id: $id) {
       id
       courseId
-      resourceId
       ownerId
       title
       summary
       image
+      isLinkedToLms
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
-      quizQuestions {
-        questionText
-        answerOptions
-        correctAnswerIndex
-        progressPointsForCompleting
-        gradePointsForCorrectAnswer
+      toolAssignmentData {
+        quizQuestions {
+          questionText
+          answerOptions
+          correctAnswerIndex
+          progressPointsForCompleting
+          gradePointsForCorrectAnswer
+        }
       }
       createdAt
       updatedAt
@@ -37,22 +39,15 @@ export const listAssignments = /* GraphQL */ `
       items {
         id
         courseId
-        resourceId
         ownerId
         title
         summary
         image
+        isLinkedToLms
         lockOnDate
         isLockedOnSubmission
         isUseAutoScore
         isUseAutoSubmit
-        quizQuestions {
-          questionText
-          answerOptions
-          correctAnswerIndex
-          progressPointsForCompleting
-          gradePointsForCorrectAnswer
-        }
         createdAt
         updatedAt
       }
@@ -66,10 +61,12 @@ export const getHomework = /* GraphQL */ `
       id
       assignmentId
       studentOwnerId
-      quizAnswers
       beganOnDate
       submittedOnDate
       isLocked
+      toolHomeworkData {
+        quizAnswers
+      }
       createdAt
       updatedAt
     }
@@ -86,10 +83,12 @@ export const listHomeworks = /* GraphQL */ `
         id
         assignmentId
         studentOwnerId
-        quizAnswers
         beganOnDate
         submittedOnDate
         isLocked
+        toolHomeworkData {
+          quizAnswers
+        }
         createdAt
         updatedAt
       }
