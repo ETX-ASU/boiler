@@ -32,7 +32,7 @@ function AssignmentsSelectionList(props) {
 
     const inputData = Object.assign({}, assignment, {isLinkedToLms: true});
     delete inputData.createdAt;
-    delete inputData.udpatedAt;
+    delete inputData.updatedAt;
 
     try {
       const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
