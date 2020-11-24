@@ -6,7 +6,6 @@ import AssignmentListItem from "./AssignmentListItem";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import {updateAssignment} from "../graphql/mutations";
 
-// import $ from "jquery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
