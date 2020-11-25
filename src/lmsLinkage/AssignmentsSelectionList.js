@@ -6,7 +6,7 @@ import AssignmentListItem from "./AssignmentListItem";
 import {createAssignmentInLms} from "../utils/RingLeader";
 import {updateAssignment} from "../graphql/mutations";
 
-import $ from "jquery";
+// import $ from "jquery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
 
@@ -32,7 +32,7 @@ function AssignmentsSelectionList(props) {
 
     const inputData = Object.assign({}, assignment, {isLinkedToLms: true});
     delete inputData.createdAt;
-    delete inputData.udpatedAt;
+    delete inputData.updatedAt;
 
     try {
       const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
@@ -40,8 +40,13 @@ function AssignmentsSelectionList(props) {
 
       //TODO remove query, launch with React.
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
-      $("body").append(linkToLmsResult);
+      // $("body").append(linkToLmsResult);
+      // append the HTML to the body
+      await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
+      // submit the form
+      document.getElementById("ltijs_submit").submit();
     } catch (error) {
+      console.log(error);
       window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
     }
   }
@@ -65,9 +70,6 @@ function AssignmentsSelectionList(props) {
                   <option key={i} value={a.id}>{a.title}</option>
                 )}
               </select>
-              <Button className='align-middle' onClick={handleConnectToLMS}>
-                Connect this Assignment to LMS
-              </Button>
             </div>
           }
           {!props.isFetchingAssignments && (assignments.length < 1) &&
@@ -76,7 +78,7 @@ function AssignmentsSelectionList(props) {
         </Col>
       </Row>
       <Row>
-        <Button onClick={handleConnectToLMS}>
+        <Button className='align-middle' onClick={handleConnectToLMS}>
           Connect this Assignment to LMS
         </Button>
       </Row>
