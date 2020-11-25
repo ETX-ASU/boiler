@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 
-function QuizViewerAndEditor(props) {
+function QuizViewerAndEngager(props) {
   const {quizQuestions, quizAnswers, isReadOnly, isShowCorrect, handleOptSelected} = props;
 
   function styleForAnswer(qNum, selectedAnswerIndex) {
@@ -66,4 +66,4 @@ function QuizViewerAndEditor(props) {
     ))
 }
 
-export default QuizViewerAndEditor;
+export default QuizViewerAndEngager;

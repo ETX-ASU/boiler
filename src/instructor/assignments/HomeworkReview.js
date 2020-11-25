@@ -4,7 +4,7 @@ import {HOMEWORK_PROGRESS} from "../../app/constants";
 import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
-import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
+import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
 
 
 function HomeworkReview(props) {
@@ -76,7 +76,7 @@ function HomeworkReview(props) {
         }
 
         {isShowWork() &&
-          <QuizViewerAndEditor quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={true} isShowCorrect={true} />
+          <QuizViewerAndEngager quizQuestions={assignment.toolAssignmentData.quizQuestions} quizAnswers={reviewedStudent.homework.toolHomeworkData.quizAnswers} isReadOnly={true} isShowCorrect={true} />
         }
 
         {!isShowWork() &&

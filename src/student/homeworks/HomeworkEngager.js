@@ -11,7 +11,7 @@ import HeaderBar from "../../app/HeaderBar";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/ConfirmationModal";
-import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
+import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
 library.add(faCheck, faTimes);
 
 
@@ -19,7 +19,7 @@ library.add(faCheck, faTimes);
 /** This screen is shown to the student so they can "engage" with the homework assignment.
  * Any work they do or changes or interactions they make would be recorded and the updates
  * saved to the database as necessary. */
-function HomeworkEditor(props) {
+function HomeworkEngager(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
 	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.toolAssignmentData.quizQuestions, quizAnswers:homework.toolHomeworkData.quizAnswers}));
@@ -105,8 +105,8 @@ function HomeworkEditor(props) {
         </Container>
 
         <Container className='pb-5'>
-          <QuizViewerAndEditor quizQuestions={formData.quizQuestions} quizAnswers={formData.quizAnswers}
-                               isReadOnly={false} isShowCorrect={false} handleOptSelected={handleOptSelected} />
+          <QuizViewerAndEngager quizQuestions={formData.quizQuestions} quizAnswers={formData.quizAnswers}
+                                isReadOnly={false} isShowCorrect={false} handleOptSelected={handleOptSelected} />
         </Container>
 
 			</form>
@@ -114,4 +114,4 @@ function HomeworkEditor(props) {
 	)
 }
 
-export default HomeworkEditor;
+export default HomeworkEngager;

@@ -9,7 +9,7 @@ import {listHomeworks} from "../graphql/queries";
 import {createHomework} from "../graphql/mutations";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
-import HomeworkEditor from "./homeworks/HomeworkEditor";
+import HomeworkEngager from "./homeworks/HomeworkEngager";
 import {fetchGradeForStudent, hasValidSession} from "../utils/RingLeader";
 import {getHomeworkStatus} from "../utils/homeworkUtils";
 import LoadingIndicator from "../app/assets/LoadingIndicator";
@@ -73,7 +73,7 @@ function StudentDashboard() {
 					<HomeworkViewer refreshHandler={fetchAndSetHomework} assignment={assignment} homework={homework} />
 					}
 					{!isLoading && (activeUiScreenMode === UI_SCREEN_MODES.editHomework) &&
-					<HomeworkEditor refreshHandler={fetchAndSetHomework} assignment={assignment} homework={homework} />
+					<HomeworkEngager refreshHandler={fetchAndSetHomework} assignment={assignment} homework={homework} />
 					}
 				</Col>
 			</Row>
