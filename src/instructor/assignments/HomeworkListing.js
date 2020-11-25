@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {Button, Col, Row} from "react-bootstrap";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import LoadingIndicator from "../../app/components/LoadingIndicator";
 import HomeworkListItem from "./HomeworkListItem";
 import {HOMEWORK_PROGRESS, SORT_BY} from "../../app/constants";
 

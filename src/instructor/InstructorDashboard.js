@@ -6,7 +6,7 @@ import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
 import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
-import {hasValidSession} from "../utils/RingLeader";
+import {hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
 
 

@@ -10,11 +10,11 @@ import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
 
 import {Button, Col, Container, Row} from "react-bootstrap";
-import HeaderBar from "../../app/HeaderBar";
-import ToggleSwitch from "../../app/assets/ToggleSwitch";
+import HeaderBar from "../../app/components/HeaderBar";
+import ToggleSwitch from "../../app/components/ToggleSwitch";
 
 import QuizCreator from "../../tool/QuizCreator";
-import ConfirmationModal from "../../app/ConfirmationModal";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
 
 const emptyAssignment = {
   id: '',
@@ -71,8 +71,8 @@ function AssignmentCreator() {
     setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit:false});
   }
 
-  function handleQuizChanges(quizQuestions) {
-	  setFormData({...formData, toolAssignmentData: {quizQuestions} });
+  function handleQuizChanges(toolAssignmentData) {
+	  setFormData({...formData, toolAssignmentData});
   }
 
   function handleReturnToCreateOrDupe() {
@@ -155,7 +155,7 @@ function AssignmentCreator() {
         </Container>
 
         {/*The assignment data collected here is specific to the tool, while the above assignment data is used in every tool*/}
-        <QuizCreator isUseAutoScore={formData.isUseAutoScore} quizQuestions={formData.toolAssignmentData.quizQuestions} setQuizQuestions={handleQuizChanges}/>
+        <QuizCreator isUseAutoScore={formData.isUseAutoScore} toolAssignmentData={formData.toolAssignmentData} updateToolAssignmentData={handleQuizChanges}/>
       </form>
     </Fragment>
   )

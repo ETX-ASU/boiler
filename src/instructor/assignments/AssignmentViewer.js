@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {UI_SCREEN_MODES} from "../../app/constants";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
+import LoadingIndicator from "../../app/components/LoadingIndicator";
 import {
   setActiveUiScreenMode,
   setGradesData,
@@ -12,9 +12,9 @@ import {API, graphqlOperation} from "aws-amplify";
 import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
-import {fetchAllGrades} from "../../utils/RingLeader";
+import {fetchAllGrades} from "../../lmsConnection/RingLeader";
 import {useStudents} from "../../app/store/AppSelectors";
-import HeaderBar from "../../app/HeaderBar";
+import HeaderBar from "../../app/components/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";

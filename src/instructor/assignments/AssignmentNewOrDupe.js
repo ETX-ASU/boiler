@@ -10,9 +10,9 @@ import "./assignments.scss";
 
 import {Container, Row, Button, Col} from "react-bootstrap";
 import {getAssignment, listAssignments} from "../../graphql/queries";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
-import HeaderBar from "../../app/HeaderBar";
-import ConfirmationModal from "../../app/ConfirmationModal";
+import LoadingIndicator from "../../app/components/LoadingIndicator";
+import HeaderBar from "../../app/components/HeaderBar";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";

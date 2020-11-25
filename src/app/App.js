@@ -9,16 +9,16 @@ import {HOMEWORK_PROGRESS, ROLE_TYPES, UI_SCREEN_MODES} from "./constants";
 import {Container, Row} from "react-bootstrap";
 import InstructorDashboard from "../instructor/InstructorDashboard";
 import StudentDashboard from "../student/StudentDashboard";
-import LoadingIndicator from "./assets/LoadingIndicator";
+import LoadingIndicator from "./components/LoadingIndicator";
 import {useLocation} from "react-router-dom";
 import {getAssignment} from "../graphql/queries";
-import {shuffle} from "../utils/shuffle";
-import DevUtilityDashboard from "../devUtility/DevUtilityDashboard";
+import {shuffle} from "./utils/shuffle";
+import DevUtilityDashboard from "../developer/DevUtilityDashboard";
 
-import {createMockCourseMembers} from "../utils/MockRingLeader";
-import {fetchUsers, hasValidSession} from "../utils/RingLeader";
+import {createMockCourseMembers} from "../lmsConnection/MockRingLeader";
+import {fetchUsers, hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
-import SelectionDashboard from "../lmsLinkage/SelectionDashboard";
+import SelectionDashboard from "../instructor/lmsLinkage/SelectionDashboard";
 
 
 

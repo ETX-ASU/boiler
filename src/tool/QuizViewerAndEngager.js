@@ -5,7 +5,9 @@ import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 
 function QuizViewerAndEngager(props) {
-  const {quizQuestions, quizAnswers, isReadOnly, isShowCorrect, handleOptSelected} = props;
+  const {isReadOnly, isShowCorrect, updateToolHomeworkData, toolAssignmentData, toolHomeworkData} = props;
+  const {quizQuestions} = toolAssignmentData;
+  const {quizAnswers} = toolHomeworkData;
 
   function styleForAnswer(qNum, selectedAnswerIndex) {
     const isSelected = (quizAnswers[qNum] === selectedAnswerIndex);
@@ -16,6 +18,12 @@ function QuizViewerAndEngager(props) {
 
   function isCorrectChoice(qNum, selectedAnswerIndex) {
     return (quizQuestions[qNum].correctAnswerIndex === selectedAnswerIndex);
+  }
+
+  function handleOptSelected(qNum, optNum) {
+    const updatedQuizAnswers = quizAnswers.slice();
+    updatedQuizAnswers[qNum] = optNum;
+    updateToolHomeworkData(Object.assign({}, {quizAnswers:updatedQuizAnswers}))
   }
 
   return (
