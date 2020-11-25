@@ -10,9 +10,9 @@ import "./assignments.scss";
 
 import {Container, Row, Button, Col} from "react-bootstrap";
 import {getAssignment, listAssignments} from "../../graphql/queries";
-import LoadingIndicator from "../../app/assets/LoadingIndicator";
-import HeaderBar from "../../app/HeaderBar";
-import ConfirmationModal from "../../app/ConfirmationModal";
+import LoadingIndicator from "../../app/components/LoadingIndicator";
+import HeaderBar from "../../app/components/HeaderBar";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -69,7 +69,7 @@ function AssignmentNavOrDupe() {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
       const assignment = assignmentQueryResults.data.getAssignment;
 
-      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
+      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, isLinkedToLms: false, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
       delete inputData.createdAt;
       delete inputData.updatedAt;
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});

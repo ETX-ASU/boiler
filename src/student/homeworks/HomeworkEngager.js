@@ -6,12 +6,12 @@ import {Button, Container, Row, Col} from 'react-bootstrap';
 import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations";
 import {API} from "aws-amplify";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
-import HeaderBar from "../../app/HeaderBar";
+import HeaderBar from "../../app/components/HeaderBar";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
-import ConfirmationModal from "../../app/ConfirmationModal";
-import QuizViewerAndEditor from "../../tool/QuizViewerAndEditor";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
+import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
 library.add(faCheck, faTimes);
 
 
@@ -19,10 +19,10 @@ library.add(faCheck, faTimes);
 /** This screen is shown to the student so they can "engage" with the homework assignment.
  * Any work they do or changes or interactions they make would be recorded and the updates
  * saved to the database as necessary. */
-function HomeworkEditor(props) {
+function HomeworkEngager(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
-	const [formData, setFormData] = useState(Object.assign({}, {quizQuestions:assignment.toolAssignmentData.quizQuestions, quizAnswers:homework.toolHomeworkData.quizAnswers}));
+	const [toolHomeworkData, setToolHomeworkData] = useState(Object.assign({}, homework.toolHomeworkData));
   const [activeModal, setActiveModal] = useState(null);
 
 
@@ -31,15 +31,12 @@ function HomeworkEditor(props) {
 
     try {
       const inputData = Object.assign({}, homework, {
-        toolHomeworkData: {quizAnswers: formData.quizAnswers.slice()},
+        toolHomeworkData,
         beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
         submittedOnDate: (homework.submittedOnDate) ? homework.submittedOnDate : moment().valueOf()
       });
-      delete inputData.assignment;
       delete inputData.createdAt;
       delete inputData.updatedAt;
-      delete inputData.resultScore;
-      delete inputData.comment;
       delete inputData.activityProgress;
       delete inputData.homeworkStatus;
       delete inputData.gradingProgress;
@@ -61,12 +58,13 @@ function HomeworkEditor(props) {
     await props.refreshHandler();
   }
 
+  function handleHomeworkDataChange(data) {
+	  setToolHomeworkData(data);
+  }
 
-	function handleOptSelected(qNum, optNum) {
-		const quizAnswers = formData.quizAnswers.slice();
-    quizAnswers[qNum] = optNum;
-		setFormData(Object.assign({}, formData, {quizAnswers}))
-	}
+  function autoSave() {
+	  // TODO: add in method to handle automatically saving student work
+  }
 
   function renderModal() {
     switch (activeModal.type) {
@@ -105,8 +103,13 @@ function HomeworkEditor(props) {
         </Container>
 
         <Container className='pb-5'>
-          <QuizViewerAndEditor quizQuestions={formData.quizQuestions} quizAnswers={formData.quizAnswers}
-                               isReadOnly={false} isShowCorrect={false} handleOptSelected={handleOptSelected} />
+          <QuizViewerAndEngager
+            isReadOnly={false}
+            isShowCorrect={false}
+            toolAssignmentData={assignment.toolAssignmentData}
+            toolHomeworkData={toolHomeworkData}
+            updateToolHomeworkData={handleHomeworkDataChange}
+            triggerAutoSave={autoSave} />
         </Container>
 
 			</form>
@@ -114,4 +117,4 @@ function HomeworkEditor(props) {
 	)
 }
 
-export default HomeworkEditor;
+export default HomeworkEngager;

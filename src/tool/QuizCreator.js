@@ -7,10 +7,10 @@ library.add(faTrash, faPlus);
 
 
 function QuizCreator(props) {
-  const {isUseAutoScore, setQuizQuestions} = props;
+  const {isUseAutoScore, updateToolAssignmentData, toolAssignmentData} = props;
 
   function handleAddQuestionButton(e) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     quizQuestions.push({
       questionText: '',
       answerOptions: ['', ''],
@@ -18,40 +18,40 @@ function QuizCreator(props) {
       progressPointsForCompleting: 1,
       gradePointsForCorrectAnswer: (isUseAutoScore) ? 10 : 0
     });
-    setQuizQuestions(quizQuestions)
+    updateToolAssignmentData({quizQuestions});
   }
 
   function handleQuestionChange(e, qNum, propName) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     quizQuestions[qNum][propName] =  e.target.value;
-    setQuizQuestions(quizQuestions);
+    updateToolAssignmentData({quizQuestions});
   }
 
   function handleCorrectAnswerSelected(e, qNum, index) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     quizQuestions[qNum].correctAnswerIndex = index;
-    setQuizQuestions(quizQuestions);
+    updateToolAssignmentData({quizQuestions});
   }
 
   function handleOptionChange(e, qNum, index) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     const options = quizQuestions[qNum].answerOptions.slice();
     options[index] = e.target.value;
     if ((!e.target.value) && (index-1 <= quizQuestions.length)) options.splice(index, 1);
 
     quizQuestions[qNum].answerOptions = options;
-    setQuizQuestions(quizQuestions);
+    updateToolAssignmentData({quizQuestions});
   }
 
   function addAnswerOpt(qNum) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     quizQuestions[qNum].answerOptions = quizQuestions[qNum].answerOptions.slice();
     quizQuestions[qNum].answerOptions.push("");
-    setQuizQuestions(quizQuestions);
+    updateToolAssignmentData({quizQuestions});
   }
 
   function removeAnswerOpt(qNum, optIndex) {
-    const quizQuestions = props.quizQuestions.slice();
+    const quizQuestions = toolAssignmentData.quizQuestions.slice();
     let correctIndex = quizQuestions[qNum].correctAnswerIndex;
     correctIndex = (correctIndex <= optIndex) ? correctIndex : correctIndex-1;
     correctIndex = Math.max(correctIndex, 0);
@@ -59,15 +59,15 @@ function QuizCreator(props) {
     quizQuestions[qNum].answerOptions.splice(optIndex, 1);
     quizQuestions[qNum].correctAnswerIndex = correctIndex;
 
-    setQuizQuestions(quizQuestions)
+    updateToolAssignmentData({quizQuestions});
   }
 
 
   function generateQuestionForm(qNum) {
-    const qData = props.quizQuestions[qNum];
+    const qData = toolAssignmentData.quizQuestions[qNum];
     return (
       <Fragment key={qNum}>
-        <h3 className={'subtext mt-2 mb-2'}>Question ({qNum+1} of {props.quizQuestions.length})</h3>
+        <h3 className={'subtext mt-2 mb-2'}>Question ({qNum+1} of {toolAssignmentData.quizQuestions.length})</h3>
 
         <Container className='mt-4'>
           <Row className='m-2 border-bottom'>
@@ -146,7 +146,7 @@ function QuizCreator(props) {
 	return (
     <Container>
       <h2 className='mb-3'>Quiz Details</h2>
-      {props.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
+      {toolAssignmentData.quizQuestions.map((question, qNum) => generateQuestionForm(qNum))}
 
       <Row className='mt-3 mb-5'>
         <Col className='text-center'>

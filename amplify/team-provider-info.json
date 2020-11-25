@@ -1,25 +1,4 @@
 {
-  "dunedev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-boiler-dunedev-162535-authRole",
-      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-dunedev-162535-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-dunedev-162535-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-boiler-dunedev-162535-deployment",
-      "UnauthRoleName": "amplify-boiler-dunedev-162535-unauthRole",
-      "StackName": "amplify-boiler-dunedev-162535",
-      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-dunedev-162535/c2e9b380-208f-11eb-a3d4-02f676be589d",
-      "AmplifyAppId": "dyl4ur5zvn9kt"
-    },
-    "categories": {
-      "auth": {
-        "boiler5da431b2": {}
-      },
-      "function": {
-        "ltilambda": {}
-      }
-    }
-  },
   "stage": {
     "awscloudformation": {
       "AuthRoleName": "amplify-boiler-stage-164450-authRole",
