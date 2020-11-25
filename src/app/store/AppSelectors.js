@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../utils/homeworkUtils";
+import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../tool/ToolUtils";
 import {EMPTY_HOMEWORK, HOMEWORK_PROGRESS, ROLE_TYPES} from "../constants";
-import {shuffle} from "../../utils/shuffle";
+import {shuffle} from "../utils/shuffle";
 
 export function useStudents() {
   const {assignment, members, homeworks, grades} = useSelector(state => state.app);

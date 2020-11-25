@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {API, graphqlOperation} from 'aws-amplify';
 import {Col, Container, Row} from "react-bootstrap";
-import {listAssignments} from "../graphql/queries";
+import {listAssignments} from "../../graphql/queries";
 import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
-import {hasValidSession} from "../utils/RingLeader";
-import aws_exports from '../aws-exports';
+import {hasValidSession} from "../../lmsConnection/RingLeader";
+import aws_exports from '../../aws-exports';
 
 
 function SelectionDashboard() {

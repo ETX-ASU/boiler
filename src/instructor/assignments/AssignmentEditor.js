@@ -6,12 +6,12 @@ import {setActiveUiScreenMode, setAssignmentData} from "../../app/store/appReduc
 import {UI_SCREEN_MODES, MODAL_TYPES} from "../../app/constants";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import "./assignments.scss";
-import HeaderBar from "../../app/HeaderBar";
-import ToggleSwitch from "../../app/assets/ToggleSwitch";
+import HeaderBar from "../../app/components/HeaderBar";
+import ToggleSwitch from "../../app/components/ToggleSwitch";
 import QuizCreator from "../../tool/QuizCreator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
-import ConfirmationModal from "../../app/ConfirmationModal";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
 
 
 function AssignmentEditor() {
@@ -56,8 +56,8 @@ function AssignmentEditor() {
     setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit: false});
   }
 
-  function handleQuizChanges(quizQuestions) {
-    setFormData({...formData, toolAssignmentData: {quizQuestions} });
+  function handleQuizChanges(toolAssignmentData) {
+    setFormData({...formData, toolAssignmentData});
   }
 
 
@@ -165,8 +165,8 @@ function AssignmentEditor() {
         <QuizCreator
           isLimitedEditing={isLimitedEditing}
           isUseAutoScore={formData.isUseAutoScore}
-          quizQuestions={formData.toolAssignmentData.quizQuestions}
-          setQuizQuestions={handleQuizChanges}/>
+          toolAssignmentData={formData.toolAssignmentData}
+          updateToolAssignmentData={handleQuizChanges}/>
       </form>
     </Fragment>
   )

@@ -3,14 +3,14 @@ import {API, graphqlOperation} from 'aws-amplify';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import moment from "moment";
-import {testComments, createMockGrades, deleteMockGrades} from "../utils/MockRingLeader";
+import {testComments, createMockGrades, deleteMockGrades} from "../lmsConnection/MockRingLeader";
 import {HOMEWORK_PROGRESS, ROLE_TYPES} from "../app/constants";
 import { v4 as uuid } from "uuid";
-import {shuffle} from "../utils/shuffle";
-import {calcAutoScore} from "../utils/homeworkUtils";
+import {shuffle} from "../app/utils/shuffle";
+import {calcAutoScore} from "../tool/ToolUtils";
 import {createHomework, deleteHomework} from "../graphql/mutations";
 import {listHomeworks} from "../graphql/queries";
-import {hasValidSession} from "../utils/RingLeader";
+import {hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from "../aws-exports";
 
 

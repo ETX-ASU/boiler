@@ -4,7 +4,7 @@ import "./GradingBar.scss";
 import {Container, Col, Row, Button} from 'react-bootstrap';
 import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, STATUS_TEXT} from "../../../app/constants";
 import {setCurrentlyReviewedStudentId} from "../../../app/store/appReducer";
-import {sendInstructorGradeToLMS} from "../../../utils/RingLeader";
+import {sendInstructorGradeToLMS} from "../../../lmsConnection/RingLeader";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

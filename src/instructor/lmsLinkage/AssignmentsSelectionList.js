@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {API} from 'aws-amplify';
-import LoadingIndicator from "../app/assets/LoadingIndicator";
+import LoadingIndicator from "../../app/components/LoadingIndicator";
 import {Col, Container, Row, Button} from "react-bootstrap";
 import AssignmentListItem from "./AssignmentListItem";
-import {createAssignmentInLms} from "../utils/RingLeader";
-import {updateAssignment} from "../graphql/mutations";
+import {createAssignmentInLms} from "../../lmsConnection/RingLeader";
+import {updateAssignment} from "../../graphql/mutations";
 
 // import $ from "jquery";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
