@@ -84,7 +84,7 @@ function AssignmentCreator() {
     switch (activeModal.type) {
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
-          <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Creation Warning'} buttons={[
             {name: 'Cancel', onClick: handleReturnToCreateOrDupe},
             {name: 'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>
@@ -94,7 +94,7 @@ function AssignmentCreator() {
         );
       case MODAL_TYPES.confirmAssignmentSaved:
         return (
-          <ConfirmationModal title={'Assignment Saved'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'} buttons={[
             {name: 'Continue', onClick: handleReturnToCreateOrDupe},
           ]}>
             <p>Assignment has been saved! It is now accessible in your LMS.</p>

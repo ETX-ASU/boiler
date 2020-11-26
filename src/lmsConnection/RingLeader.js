@@ -1,5 +1,3 @@
-import moment from "moment";
-import { ASSIGNMENT_STATUS_TYPES, HOMEWORK_PROGRESS, ROLE_TYPES } from "../app/constants";
 import aws_exports from '../aws-exports';
 /*
 import {
@@ -193,7 +191,6 @@ export function sendInstructorGradeToLMS(gradeData) {
 
 
 // Note: resourceId is NOT required in actual API, but is used by mock API
-export function sendAutoGradeToLMS(assignmentId, studentId, resultScore, comment) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(assignmentId, studentId, resultScore, comment) :
-    realAutoSubmitGrade({resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+export function sendAutoGradeToLMS(gradeData) {
+  return (window.isDevMode) ? mockAutoSendGradeToLMS(gradeData) : realAutoSubmitGrade(gradeData);
 }

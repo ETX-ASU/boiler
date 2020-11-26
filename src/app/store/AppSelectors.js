@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {calcAutoScore, calcPercentCompleted, getHomeworkStatus} from "../../tool/ToolUtils";
-import {EMPTY_HOMEWORK, HOMEWORK_PROGRESS, ROLE_TYPES} from "../constants";
+import {calcAutoScore, calcPercentCompleted, getHomeworkStatus, getNewToolHomeworkDataForAssignment} from "../../tool/ToolUtils";
+import {HOMEWORK_PROGRESS, ROLE_TYPES} from "../constants";
 import {shuffle} from "../utils/shuffle";
 
 export function useStudents() {
@@ -19,7 +19,7 @@ export function useStudents() {
       if (!gradeDataForStudent) gradeDataForStudent = {resultScore:0, resultMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
-      if (!homeworkForStudent) homeworkForStudent = Object.assign({}, EMPTY_HOMEWORK, {toolHomeworkData:{quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill[-1]}});
+      if (!homeworkForStudent) homeworkForStudent = getNewToolHomeworkDataForAssignment(assignment.toolAssignmentData);
 
       let percentCompleted = calcPercentCompleted(assignment, homeworkForStudent);
       let autoScore = calcAutoScore(assignment, homeworkForStudent);

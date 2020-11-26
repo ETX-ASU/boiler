@@ -127,7 +127,7 @@ export const mockGetGrades = (assignmentId) => new Promise(function (resolve, re
 
 
 export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
-  const {resourceId, resultScore, comment, studentId, gradingProgress} = gradeData;
+  const {resourceId, resultScore, comment, studentId, gradingProgress, activityProgress} = gradeData;
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
   const assignmentId = resourceId;
 
@@ -156,25 +156,26 @@ export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function 
 });
 
 
-export const mockAutoSendGradeToLMS = (assignmentId, studentId, resultScore, comment) => new Promise(function (resolve, reject) {
+export const mockAutoSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockAutoSendGradeToLMS()")), mockDuration);
   } else {
     setTimeout(() => {
-      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
+      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${gradeData.resourceId}`));
       if (!userGrades) userGrades = [];
-      let gradeIndex = userGrades.findIndex(g => g.studentId === studentId);
+      let gradeIndex = userGrades.findIndex(g => g.studentId === gradeData.studentId);
       if (gradeIndex > -1) {
-        userGrades[gradeIndex].resultScore = resultScore;
-        userGrades[gradeIndex].comment = comment;
+        userGrades[gradeIndex].activityProgress = gradeData.activityProgress;
+        userGrades[gradeIndex].resultScore = gradeData.resultScore;
+        userGrades[gradeIndex].comment = gradeData.comment;
         userGrades[gradeIndex].gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
       } else {
-        userGrades.push({studentId, resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
+        userGrades.push(gradeData);
       }
 
-      localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
+      localStorage.setItem(`boiler-scores-${gradeData.resourceId}`, JSON.stringify(userGrades));
 
       resolve(true, mockDuration)
     });
@@ -249,8 +250,8 @@ export const testNames = [
   {givenName:"Ann", familyName:"Aardvark"},
   {givenName:"Ava", familyName:"Aardwolf"},
   {givenName:"Alic", familyName:"Anthill"},
-  {givenName:"Alex", familyName:"Asprin"},
-  {givenName:"Aaron", familyName:"Ascott"},
+  {givenName:"Alex", familyName:"Aspirin"},
+  {givenName:"Aaron", familyName:"Argonaut"},
   {givenName:"Betsy", familyName:"Bigbonett"},
   {givenName:"Brook", familyName:"Babbler"},
   {givenName:"Bob", familyName:"Bobberton"},
