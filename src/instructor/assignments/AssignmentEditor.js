@@ -75,7 +75,7 @@ function AssignmentEditor() {
     switch (activeModal.type) {
       case MODAL_TYPES.cancelDupedAssignmentEditsWarning:
         return (
-          <ConfirmationModal title={'Cancel Edits Warning'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Edits Warning'} buttons={[
             {name:'Cancel', onClick:returnToNewOrDupeAssignmentScreen},
             {name:'Continue Editing', onClick: () => setActiveModal(null)},
           ]}>
@@ -85,7 +85,7 @@ function AssignmentEditor() {
         )
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
-          <ConfirmationModal title={'Cancel Creation Warning'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Creation Warning'} buttons={[
             {name:'Cancel', onClick:returnToViewAssignmentScreen},
             {name:'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>

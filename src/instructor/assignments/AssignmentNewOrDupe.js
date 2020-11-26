@@ -90,7 +90,7 @@ function AssignmentNavOrDupe() {
     switch (activeModal.type) {
       case MODAL_TYPES.confirmAssignmentDuped:
         return (
-          <ConfirmationModal title={'Assignment Saved'}
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
              buttons={[{name:'Edit Duplicated Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[1])}]}>
             <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
             <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>

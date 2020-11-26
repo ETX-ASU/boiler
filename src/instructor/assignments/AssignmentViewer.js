@@ -1,26 +1,34 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {UI_SCREEN_MODES} from "../../app/constants";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import LoadingIndicator from "../../app/components/LoadingIndicator";
 import {
   setActiveUiScreenMode,
   setGradesData,
-  addHomeworksData, setCurrentlyReviewedStudentId, toggleHideStudentIdentity
+  addHomeworksData,
+  setCurrentlyReviewedStudentId,
+  toggleHideStudentIdentity
 } from "../../app/store/appReducer";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {API, graphqlOperation} from "aws-amplify";
 import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
-import {fetchAllGrades} from "../../lmsConnection/RingLeader";
+import {fetchAllGrades, sendInstructorGradeToLMS} from "../../lmsConnection/RingLeader";
 import {useStudents} from "../../app/store/AppSelectors";
 import HeaderBar from "../../app/components/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEdit, faPen, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
+import ConfirmationModal from "../../app/components/ConfirmationModal";
 library.add(faEdit, faPen, faChevronLeft);
 
+
+const SUBMISSION_MODAL_OPTS = {
+  all: 'all',
+  submittedOnly: 'submittedOnly'
+}
 
 function AssignmentViewer(props) {
 	const dispatch = useDispatch();
@@ -29,6 +37,7 @@ function AssignmentViewer(props) {
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
   const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);
   const [nextTokenVal, setNextTokenVal] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
   const students = useStudents();
 
 
@@ -96,18 +105,68 @@ function AssignmentViewer(props) {
 		dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editAssignment));
 	}
 
-	function handleBatchSubmitBtn() {
-    // TODO: Needs actual implementation
-		alert('about to batch submit grades');
+	async function handleBatchSubmit() {
+    try {
+      const radioElems = Array.from(document.getElementsByName('modalRadioOpts'));
+      const isSubmittedOnly = radioElems.find(e => e.checked).value === SUBMISSION_MODAL_OPTS.submittedOnly;
+
+      await Promise.all(students.forEach(s => {
+        const status = s.homework.homeworkStatus;
+        if (status === HOMEWORK_PROGRESS.fullyGraded) return;
+        if (isSubmittedOnly && status !== HOMEWORK_PROGRESS.submitted) return;
+        handleSubmitScore(s, assignment)
+      }));
+    } catch(error) {
+      window.confirm("Sorry. There appears to have been an error when batch submitting grades. Please refresh and try again.");
+    }
+		setActiveModal(null);
 	}
 
   function toggleHideAndRandomize(e) {
     dispatch(toggleHideStudentIdentity(!isHideStudentIdentity));
   }
 
+  async function handleSubmitScore(student, assignment) {
+    const scoreDataObj = {
+      resourceId: assignment.id,
+      studentId: student.id,
+      resultScore: student.homework.autoScore,
+      comment: student.homework.comment || '',
+      activityProgress: ACTIVITY_PROGRESS[student.homework.homeworkStatus],
+      gradingProgress: HOMEWORK_PROGRESS.fullyGraded
+    };
+
+    const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
+    if (!lmsResult) window.confirm(`We're sorry. We encountered an error while posting the grade for this student's work.`);
+    props.refreshHandler();
+  }
+
+
+  function renderModal() {
+    switch (activeModal.type) {
+      case MODAL_TYPES.showBatchSubmitOptions:
+        return (
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Batch Submit'} buttons={[
+            {name: 'Cancel', onClick: () => setActiveModal(null)},
+            {name: 'Submit', onClick: (e) => handleBatchSubmit(e)},
+          ]}>
+            <p>Submit auto-scores for...</p>
+            <form id={'batchSubmitModalForm'} >
+              <input type="radio" name={`modalRadioOpts`} value={SUBMISSION_MODAL_OPTS.all} />
+              <label>All students, including those with incomplete/non-submitted work</label>
+              <input type="radio" name={`modalRadioOpts`} defaultChecked={true} value={SUBMISSION_MODAL_OPTS.submittedOnly} />
+              <label>Only students who completed/submitted their work</label>
+            </form>
+            <p>(Note: batch auto submission will <em>not</em> overwrite any scores you may have manually submitted.)</p>
+          </ConfirmationModal>
+        );
+    }
+  }
 
 	return (
     <Fragment>
+      {activeModal && renderModal()}
+
       {(!reviewedStudentId) ?
         <HeaderBar title={`Overview: ${(assignment?.title) ? assignment.title : ''}`}>
           <Button onClick={handleEditBtn}>
@@ -132,7 +191,7 @@ function AssignmentViewer(props) {
         <Fragment>
           <Row className='mt-2 mb-2 pt-2 pb-2'>
             <Col className='col-6'>
-              <Button onClick={handleBatchSubmitBtn}>
+              <Button onClick={() => setActiveModal({type:MODAL_TYPES.showBatchSubmitOptions})}>
                 <FontAwesomeIcon className='btn-icon' icon={faPen} />Batch Submit
               </Button>
             </Col>
