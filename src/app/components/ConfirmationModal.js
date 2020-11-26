@@ -4,7 +4,7 @@ import {Modal, Button} from "react-bootstrap";
 
 function ConfirmationModal(props) {
   return(
-    <Modal show={true}>
+    <Modal show={true} onHide={props.onHide}>
       <Modal.Header>
         <Modal.Title>{props.title}</Modal.Title>
       </Modal.Header>

@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import moment from "moment";
-import {useDispatch} from "react-redux";
-import {MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
+import {useDispatch, useSelector} from "react-redux";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import {Button, Container, Row, Col} from 'react-bootstrap';
 import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations";
 import {API} from "aws-amplify";
@@ -12,6 +12,8 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
+import {sendAutoGradeToLMS, sendInstructorGradeToLMS} from "../../lmsConnection/RingLeader";
+import {calcAutoScore} from "../../tool/ToolUtils";
 library.add(faCheck, faTimes);
 
 
@@ -22,6 +24,7 @@ library.add(faCheck, faTimes);
 function HomeworkEngager(props) {
 	const dispatch = useDispatch();
 	const {homework, assignment} = props;
+	const activeUser = useSelector(state => state.app.activeUser);
 	const [toolHomeworkData, setToolHomeworkData] = useState(Object.assign({}, homework.toolHomeworkData));
   const [activeModal, setActiveModal] = useState(null);
 
@@ -40,15 +43,34 @@ function HomeworkEngager(props) {
       delete inputData.activityProgress;
       delete inputData.homeworkStatus;
       delete inputData.gradingProgress;
+      delete inputData.resultScore;
 
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (result) {
+        if (assignment.isUseAutoSubmit) await calcAndSendScore();
         setActiveModal({type: MODAL_TYPES.confirmHomeworkSubmitted})
       } else {
         window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
       }
     } catch (error) {
       window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again. Error: ${error}`);
+    }
+  }
+
+  async function calcAndSendScore() {
+	  try {
+      const scoreDataObj = {
+        resourceId: assignment.id,
+        studentId: activeUser.id,
+        resultScore: calcAutoScore(assignment, homework),
+        comment: '',
+        activityProgress: ACTIVITY_PROGRESS[homework.homeworkStatus],
+        gradingProgress: HOMEWORK_PROGRESS.fullyGraded
+      };
+
+      await sendAutoGradeToLMS(scoreDataObj);
+    } catch(error) {
+      window.confirm(`We're sorry. There was a problem posting your grade`);
     }
   }
 
@@ -70,7 +92,7 @@ function HomeworkEngager(props) {
     switch (activeModal.type) {
       case MODAL_TYPES.warningBeforeHomeworkSubmission:
         return (
-          <ConfirmationModal title={'Are you sure?'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Are you sure?'} buttons={[
             {name:'Cancel', onClick: () => setActiveModal(null)},
             {name:'Submit', onClick:submitHomeworkForReview},
           ]}>
@@ -79,7 +101,7 @@ function HomeworkEngager(props) {
         )
       case MODAL_TYPES.confirmHomeworkSubmitted:
         return (
-          <ConfirmationModal title={'Submitted!'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Submitted!'} buttons={[
             {name:'Review', onClick:closeModalAndReview},
           ]}>
             <p>You can now review your submitted assignment.</p>

@@ -1,4 +1,4 @@
-import {HOMEWORK_PROGRESS} from "../app/constants";
+import {EMPTY_HOMEWORK, HOMEWORK_PROGRESS} from "../app/constants";
 
 
 export function getHomeworkStatus(gradeData, homework) {
@@ -7,6 +7,10 @@ export function getHomeworkStatus(gradeData, homework) {
     (homework.submittedOnDate) ? HOMEWORK_PROGRESS.submitted :
       (homework.beganOnDate) ? HOMEWORK_PROGRESS.inProgress :
         HOMEWORK_PROGRESS.notBegun;
+}
+
+export function getNewToolHomeworkDataForAssignment(toolAssignmentData) {
+  return Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(toolAssignmentData.quizQuestions.length).fill[-1]});
 }
 
 export function calcPercentCompleted(assignment, homework) {

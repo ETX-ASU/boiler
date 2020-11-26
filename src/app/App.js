@@ -64,14 +64,8 @@ function App() {
           return;
         }
 
-        // ActiveUser is an instructor, so save data about all students in the course, and create default homework data values for them
         let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
-        let positions = shuffle(studentsOnly.map((h, i) => i+1));
-        let students = studentsOnly.map((s,i) => (
-          {...s, randomOrderNum:positions[i], homework:{percentCompleted:0, beganOnDate:0, autoScore:0, progress:HOMEWORK_PROGRESS.notBegun}}
-        ));
-
-        dispatch(setSessionData(courseId, assignmentId, activeUser, students));
+        dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly));
       } catch (error) {
         console.error(" -------------> CHECK devMode. In local env should be set to true.", error);
         window.confirm(`We're sorry. There was an error initializing session data. Please wait a moment and try again. Error: ${error}`);
