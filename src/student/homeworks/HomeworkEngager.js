@@ -13,7 +13,7 @@ import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
 import {sendAutoGradeToLMS, sendInstructorGradeToLMS} from "../../lmsConnection/RingLeader";
-import {calcAutoScore} from "../../tool/ToolUtils";
+import {calcAutoScore, calcMaxScoreForAssignment} from "../../tool/ToolUtils";
 library.add(faCheck, faTimes);
 
 
@@ -43,8 +43,8 @@ function HomeworkEngager(props) {
       delete inputData.activityProgress;
       delete inputData.homeworkStatus;
       delete inputData.gradingProgress;
-      delete inputData.resultScore;
-      delete inputData.resultMaximum;
+      delete inputData.scoreGiven;
+      delete inputData.scoreMaximum;
       delete inputData.comment;
 
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
@@ -62,9 +62,10 @@ function HomeworkEngager(props) {
   async function calcAndSendScore(homework) {
 	  try {
       const scoreDataObj = {
-        resourceId: assignment.id,
+        assignmentId: assignment.id,
         studentId: activeUser.id,
-        resultScore: calcAutoScore(assignment, homework),
+        scoreGiven: calcAutoScore(assignment, homework),
+        scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
         comment: '',
         activityProgress: ACTIVITY_PROGRESS[homework.homeworkStatus],
         gradingProgress: HOMEWORK_PROGRESS.fullyGraded
@@ -87,7 +88,7 @@ function HomeworkEngager(props) {
   }
 
   function autoSave() {
-	  // TODO: add in method to handle automatically saving student work
+	  // TODO: Bonus. Add in method to handle automatically saving student work
   }
 
   function renderModal() {

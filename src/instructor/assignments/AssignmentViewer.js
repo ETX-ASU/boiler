@@ -23,7 +23,7 @@ import {faEdit, faPen, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {shuffle} from "../../app/utils/shuffle";
 import {
-  calcAutoScore,
+  calcAutoScore, calcMaxScoreForAssignment,
   calcPercentCompleted,
   getHomeworkStatus,
   getNewToolHomeworkDataForAssignment
@@ -71,7 +71,7 @@ function AssignmentViewer(props) {
 
     const enhancedDataStudents = studentsOnly.map(s => {
       let gradeDataForStudent = (grades) ? Object.assign({}, grades.find(g => g.studentId === s.id)) : null;
-      if (!gradeDataForStudent) gradeDataForStudent = {resultScore:0, resultMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+      if (!gradeDataForStudent) gradeDataForStudent = {scoreGiven:0, scoreMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
       if (!homeworkForStudent) homeworkForStudent = getNewToolHomeworkDataForAssignment(assignment.toolAssignmentData);
@@ -81,8 +81,8 @@ function AssignmentViewer(props) {
       let homeworkStatus = getHomeworkStatus(gradeDataForStudent, homeworkForStudent);
       return Object.assign({}, s, {
         randomOrderNum: positions.shift(),
-        resultScore: gradeDataForStudent.resultScore,
-        resultMaximum: gradeDataForStudent.resultMaximum,
+        scoreGiven: gradeDataForStudent.scoreGiven,
+        scoreMaximum: gradeDataForStudent.scoreMaximum,
         comment: gradeDataForStudent.comment,
         percentCompleted,
         autoScore,
@@ -166,9 +166,10 @@ function AssignmentViewer(props) {
 
   async function handleSubmitScore(student, assignment) {
     const scoreDataObj = {
-      resourceId: assignment.id,
+      assignmentId: assignment.id,
       studentId: student.id,
-      resultScore: student.autoScore,
+      scoreGiven: student.autoScore,
+      scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
       comment: student.comment || '',
       activityProgress: ACTIVITY_PROGRESS[student.homeworkStatus],
       gradingProgress: HOMEWORK_PROGRESS.fullyGraded

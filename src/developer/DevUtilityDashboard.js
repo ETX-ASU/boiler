@@ -70,10 +70,10 @@ function DevUtilityDashboard() {
 
     const gradedHomeworks = mockHomeworks.filter((h,i) => progressStats[i] === HOMEWORK_PROGRESS.fullyGraded);
     const mockGrades = gradedHomeworks.map(h => {
-      let resultScore = calcAutoScore(assignment, h);
+      let scoreGiven = calcAutoScore(assignment, h);
       let comment = (!rand(0,3)) ? testComments[rand(0, testComments.length)] : '';
       let gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-      return ({assignmentId:assignment.id, studentId:h.studentOwnerId, resultScore, gradingProgress, comment })
+      return ({assignmentId:assignment.id, studentId:h.studentOwnerId, scoreGiven, gradingProgress, comment })
     })
 
     const dbHomeworks = mockHomeworks.filter(h => h.beganOnDate);

@@ -9,6 +9,8 @@ import {sendInstructorGradeToLMS} from "../../../lmsConnection/RingLeader";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {calcMaxScoreForAssignment} from "../../../tool/ToolUtils";
+
 library.add(faArrowCircleLeft, faArrowCircleRight);
 
 
@@ -17,17 +19,17 @@ function GradingBar(props) {
   const {assignment, reviewedStudent} = props;
 
   const displayOrder = useSelector(state => state.app.displayOrder);
-  const [resultScore, setResultScore] = useState(calcShownScore(reviewedStudent));
+  const [scoreGiven, setScoreGiven] = useState(calcShownScore(reviewedStudent));
   const [comment, setComment] = useState('');
   const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
   useEffect(() => {
     setComment(reviewedStudent.comment || '');
-    setResultScore(calcShownScore(reviewedStudent));
-  }, [reviewedStudent.resultScore, reviewedStudent.id, reviewedStudent.comment])
+    setScoreGiven(calcShownScore(reviewedStudent));
+  }, [reviewedStudent.scoreGiven, reviewedStudent.id, reviewedStudent.comment])
 
-  function calcShownScore({homeworkStatus, resultScore, autoScore}) {
-    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return resultScore;
+  function calcShownScore({homeworkStatus, scoreGiven, autoScore}) {
+    if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return scoreGiven;
     return (autoScore) ? autoScore : 0;
   }
 
@@ -45,10 +47,11 @@ function GradingBar(props) {
 
   async function handleSubmitScore() {
     const scoreDataObj = {
-      resourceId: assignment.id,
+      assignmentId: assignment.id,
       studentId: reviewedStudent.id,
-      resultScore,
-      comment,
+      scoreGiven: scoreGiven,
+      scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
+      comment: comment,
       activityProgress: ACTIVITY_PROGRESS[reviewedStudent.homeworkStatus],
       gradingProgress: HOMEWORK_PROGRESS.fullyGraded
     };
@@ -80,7 +83,7 @@ function GradingBar(props) {
               <Col className='col-8 pt-1 pb-2 xbg-light'>
                 <div className='ml-0 mr-4 d-inline-block align-top'>
                   <label htmlFor='autoScore' className='xtext-darkest'>Auto Score</label>
-                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${assignment.toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)}`}</div>
+                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${calcMaxScoreForAssignment(assignment.toolAssignmentData)}`}</div>
                 </div>
                 <div className='mr-4 d-inline-block align-top'>
                   <label htmlFor='yourScore' className='xtext-darkest'>Given Score</label>
@@ -88,14 +91,14 @@ function GradingBar(props) {
                          type="number"
                          className='form-control'
                          min={0} max={100}
-                         onChange={(e) => setResultScore(parseInt(e.target.value))} value={resultScore}
+                         onChange={(e) => setScoreGiven(parseInt(e.target.value))} value={scoreGiven}
                   />
                 </div>
                 <div className='mr-1 pt-3 d-inline-block align-middle float-right'>
                   <span className='ml-1 mr-0'>
                     <Button className='btn-med xbg-darkest'
                       disabled={reviewedStudent.progress === HOMEWORK_PROGRESS.fullyGraded}
-                      onClick={handleSubmitScore}>{(reviewedStudent.resultScore !== undefined) ? `Update` : `Submit`}</Button>
+                      onClick={handleSubmitScore}>{(reviewedStudent.scoreGiven !== undefined) ? `Update` : `Submit`}</Button>
                   </span>
                 </div>
               </Col>

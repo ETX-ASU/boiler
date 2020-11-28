@@ -1,5 +1,4 @@
-import {HOMEWORK_PROGRESS, ROLE_TYPES} from "../app/constants";
-import SubmitLineItem from "@asu-etx/rl-shared/build/model/SubmitLineItem";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, ROLE_TYPES} from "../app/constants";
 
 
 const getAsyncSpecs = () => {
@@ -127,29 +126,26 @@ export const mockGetGrades = (assignmentId) => new Promise(function (resolve, re
 
 
 export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
-  const {resourceId, resultScore, comment, studentId, gradingProgress, activityProgress} = gradeData;
+  const {assignmentId} = gradeData;
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
-  const assignmentId = resourceId;
+
+  let gradeSubmissionObj = Object.assign({}, gradeData);
+  delete gradeSubmissionObj.assignmentId;
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockInstructorSendGradeToLMS()")), mockDuration);
   } else {
     setTimeout(() => {
-      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`));
-      if (!userGrades) userGrades = [];
-      let gradeIndex = userGrades.findIndex(g => g.studentId === studentId);
+      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`)) || [];
+      let gradeIndex = userGrades.findIndex(g => g.studentId === gradeSubmissionObj.studentId);
+
       if (gradeIndex > -1) {
-        userGrades[gradeIndex].resultScore = resultScore;
-        userGrades[gradeIndex].comment = comment;
-        userGrades[gradeIndex].gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
-        localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
-        console.log("Updated existing student grade", assignmentId, userGrades[gradeIndex]);
+        userGrades[gradeIndex] = gradeSubmissionObj;
       } else {
-        userGrades.push({studentId, resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
-        console.log("Added new student grade", assignmentId, {studentId, resultScore, comment, gradingProgress:HOMEWORK_PROGRESS.fullyGraded});
-        localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
+        userGrades.push(gradeSubmissionObj);
       }
 
+      localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
       resolve(true, mockDuration)
     });
   }
@@ -157,22 +153,24 @@ export const mockInstructorSendGradeToLMS = (gradeData) => new Promise(function 
 
 
 export const mockAutoSendGradeToLMS = (gradeData) => new Promise(function (resolve, reject) {
+  const {assignmentId} = gradeData;
   const {isMockFailureResult, mockDuration} = getAsyncSpecs();
+
+  let gradeSubmissionObj = Object.assign({}, gradeData);
+  delete gradeSubmissionObj.assignmentId;
 
   if (isMockFailureResult) {
     setTimeout(() => reject(new Error("====> MOCK ERROR triggered by mockAutoSendGradeToLMS()")), mockDuration);
   } else {
     setTimeout(() => {
-      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${gradeData.resourceId}`));
-      if (!userGrades) userGrades = [];
-      let gradeIndex = userGrades.findIndex(g => g.studentId === gradeData.studentId);
+      let userGrades = JSON.parse(localStorage.getItem(`boiler-scores-${assignmentId}`)) || [];
+      let gradeIndex = userGrades.findIndex(g => g.studentId === gradeSubmissionObj.studentId);
+
       if (gradeIndex > -1) {
-        userGrades[gradeIndex].activityProgress = gradeData.activityProgress;
-        userGrades[gradeIndex].resultScore = gradeData.resultScore;
-        userGrades[gradeIndex].comment = gradeData.comment;
-        userGrades[gradeIndex].gradingProgress = HOMEWORK_PROGRESS.fullyGraded;
+        console.log("Updated existing student grade", assignmentId, userGrades[gradeIndex]);
       } else {
-        userGrades.push(gradeData);
+        userGrades.push(gradeSubmissionObj);
+        localStorage.setItem(`boiler-scores-${assignmentId}`, JSON.stringify(userGrades));
       }
 
       localStorage.setItem(`boiler-scores-${gradeData.resourceId}`, JSON.stringify(userGrades));
