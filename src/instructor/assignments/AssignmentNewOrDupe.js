@@ -20,7 +20,6 @@ import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 library.add(faCopy, faPlus);
 
 
-// TODO: Get rid of assignment lockOnData and isLockedOnSubmission
 function AssignmentNavOrDupe() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);

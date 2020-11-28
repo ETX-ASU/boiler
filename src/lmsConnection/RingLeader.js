@@ -65,7 +65,6 @@ export function createAssignmentInLms(submitContentItem) {
 }
 
 
-// TODO: The API needs to use the object names I have provided in the demo objects below
 /**
  * Fetch students from the LMS that are in this course.
  * @param role - can be: null, "learner", "instructor"
@@ -107,7 +106,6 @@ export function fetchUsers(role) {
     picture: string | undefined; // "https://canvas.instructure.com/images/messages/avatar-50.png"
   }
  */
-// TODO: The API should change param order to use courseId then assignmentId
 export function fetchAssignedStudents(courseId, assignmentId) {
   return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
 }
@@ -121,7 +119,6 @@ export function fetchAssignedStudents(courseId, assignmentId) {
  *
  * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
  */
-// TODO: The API should change param order to use courseId then assignmentId
 export function fetchUnassignedStudents(courseId, assignmentId) {
   return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
 }

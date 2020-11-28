@@ -85,7 +85,7 @@ function HomeworkEngager(props) {
   }
 
   function autoSave() {
-	  // TODO: add in method to handle automatically saving student work
+	  // TODO: Bonus. Add in method to handle automatically saving student work
   }
 
   function renderModal() {
