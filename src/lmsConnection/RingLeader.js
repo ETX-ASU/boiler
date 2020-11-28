@@ -132,7 +132,7 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "resultScore": 71,
+    "scoreGiven": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
@@ -154,7 +154,7 @@ export async function fetchGradeForStudent(assignmentId, studentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "resultScore": 71,
+    "scoreGiven": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
@@ -173,7 +173,7 @@ export function fetchAllGrades(assignmentId) {
  * SubmitGradeObj {
  *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3", (assignmentId)
  *   studentId: "fa8fde11-43df-4328-9939-58b56309d20d",
- *   resultScore: 100,
+ *   scoreGiven: 100,
  *   comment: "Instructor comment on the student performance",
  *
  *   // TODO: how come we send progress values, but we can't/don't receive them?!
@@ -182,12 +182,18 @@ export function fetchAllGrades(assignmentId) {
  * }
  */
 export function sendInstructorGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(aws_exports, gradeData);
+  if (window.isDevMode) return mockInstructorSendGradeToLMS(gradeData);
+
+  delete gradeData.assignmentId;
+  return realInstructorSubmitGrade(aws_exports, gradeData);
 }
 
 
 
 // Note: resourceId is NOT required in actual API, but is used by mock API
 export function sendAutoGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(gradeData) : realAutoSubmitGrade(gradeData);
+  if (window.isDevMode) return mockAutoSendGradeToLMS(gradeData);
+
+  delete gradeData.assignmentId;
+  return realAutoSubmitGrade(gradeData);
 }

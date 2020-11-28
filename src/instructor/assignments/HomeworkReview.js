@@ -43,8 +43,6 @@ function HomeworkReview(props) {
       reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded);
   }
 
-
-  console.log('------> ', reviewedStudent.givenName, reviewedStudent.resultScore, reviewedStudent.comment);
 	return (
 	  <Fragment>
       <Container className="homework-viewer">
