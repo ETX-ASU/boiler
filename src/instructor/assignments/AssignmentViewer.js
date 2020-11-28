@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
+import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, MODAL_TYPES, ROLE_TYPES, UI_SCREEN_MODES} from "../../app/constants";
 import LoadingIndicator from "../../app/components/LoadingIndicator";
 import {
   setActiveUiScreenMode,
@@ -15,13 +15,19 @@ import {listHomeworks} from "../../graphql/queries";
 import HomeworkReview from "./HomeworkReview";
 import HomeworkListing from "./HomeworkListing";
 import {fetchAllGrades, sendInstructorGradeToLMS} from "../../lmsConnection/RingLeader";
-import {useStudents} from "../../app/store/AppSelectors";
 import HeaderBar from "../../app/components/HeaderBar";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEdit, faPen, faChevronLeft, faCheck} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
+import {shuffle} from "../../app/utils/shuffle";
+import {
+  calcAutoScore,
+  calcPercentCompleted,
+  getHomeworkStatus,
+  getNewToolHomeworkDataForAssignment
+} from "../../tool/ToolUtils";
 library.add(faEdit, faPen, faChevronLeft);
 
 
@@ -33,12 +39,16 @@ const SUBMISSION_MODAL_OPTS = {
 function AssignmentViewer(props) {
 	const dispatch = useDispatch();
   const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
-  const assignment = useSelector(state => state.app.assignment);
   const reviewedStudentId = useSelector(state => state.app.currentlyReviewedStudentId);
+  const assignment = useSelector(state => state.app.assignment);
+  const homeworks = useSelector(state => state.app.homeworks);
+  const members = useSelector(state => state.app.members);
+  const grades = useSelector(state => state.app.grades);
+
   const [isLoadingHomeworks, setIsLoadingHomeworks] = useState(true);
   const [nextTokenVal, setNextTokenVal] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
-  const students = useStudents();
+  const [students, setStudents] = useState([]);
 
 
   useEffect(() => {
@@ -52,6 +62,38 @@ function AssignmentViewer(props) {
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
   }, [nextTokenVal]);
+
+
+  useEffect(() => {
+    if (!assignment?.id || !members.length) return;
+    let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
+    let positions = shuffle(studentsOnly.map((h, i) => i+1));
+
+    const enhancedDataStudents = studentsOnly.map(s => {
+      let gradeDataForStudent = (grades) ? Object.assign({}, grades.find(g => g.studentId === s.id)) : null;
+      if (!gradeDataForStudent) gradeDataForStudent = {resultScore:0, resultMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+
+      let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
+      if (!homeworkForStudent) homeworkForStudent = getNewToolHomeworkDataForAssignment(assignment.toolAssignmentData);
+
+      let percentCompleted = calcPercentCompleted(assignment, homeworkForStudent);
+      let autoScore = calcAutoScore(assignment, homeworkForStudent);
+      let homeworkStatus = getHomeworkStatus(gradeDataForStudent, homeworkForStudent);
+      return Object.assign({}, s, {
+        randomOrderNum: positions.shift(),
+        resultScore: gradeDataForStudent.resultScore,
+        resultMaximum: gradeDataForStudent.resultMaximum,
+        comment: gradeDataForStudent.comment,
+        percentCompleted,
+        autoScore,
+        homeworkStatus,
+        homework: homeworkForStudent
+      });
+    });
+
+    setStudents(enhancedDataStudents);
+    console.log("ENHANCED STUDENTS[0] NOW: ", enhancedDataStudents[0]);
+  }, [assignment, members, homeworks, grades]);
 
 
   /**
@@ -91,14 +133,11 @@ function AssignmentViewer(props) {
       let grades = await fetchAllGrades(assignment.id);
       grades = (grades) ? grades : [];
       await dispatch(setGradesData(grades));
+      console.log('grades fetched and set');
     } catch (error) {
+      console.error("ARG1:", error);
       window.confirm(`We're sorry. There was an error fetching student grade data. Please wait a moment and try again. Error: ${error}`);
     }
-  }
-
-  function handleRefreshAfterGradeSubmission() {
-    fetchScores();
-    console.log('-----------> handleRefreshAfterGradeSubmission()')
   }
 
 	function handleEditBtn() {
@@ -109,13 +148,12 @@ function AssignmentViewer(props) {
     try {
       const radioElems = Array.from(document.getElementsByName('modalRadioOpts'));
       const isSubmittedOnly = radioElems.find(e => e.checked).value === SUBMISSION_MODAL_OPTS.submittedOnly;
+      const qualifiedStudents = students.filter(s => s.homeworkStatus !== HOMEWORK_PROGRESS.fullyGraded && (!isSubmittedOnly || s.homeworkStatus === HOMEWORK_PROGRESS.submitted));
 
-      await Promise.all(students.forEach(s => {
-        const status = s.homework.homeworkStatus;
-        if (status === HOMEWORK_PROGRESS.fullyGraded) return;
-        if (isSubmittedOnly && status !== HOMEWORK_PROGRESS.submitted) return;
-        handleSubmitScore(s, assignment)
-      }));
+      await Promise.all(qualifiedStudents.map(s => handleSubmitScore(s, assignment)));
+
+      console.log("done with all");
+      await fetchScores();
     } catch(error) {
       window.confirm("Sorry. There appears to have been an error when batch submitting grades. Please refresh and try again.");
     }
@@ -130,15 +168,13 @@ function AssignmentViewer(props) {
     const scoreDataObj = {
       resourceId: assignment.id,
       studentId: student.id,
-      resultScore: student.homework.autoScore,
-      comment: student.homework.comment || '',
-      activityProgress: ACTIVITY_PROGRESS[student.homework.homeworkStatus],
+      resultScore: student.autoScore,
+      comment: student.comment || '',
+      activityProgress: ACTIVITY_PROGRESS[student.homeworkStatus],
       gradingProgress: HOMEWORK_PROGRESS.fullyGraded
     };
 
-    const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
-    if (!lmsResult) window.confirm(`We're sorry. We encountered an error while posting the grade for this student's work.`);
-    props.refreshHandler();
+    await sendInstructorGradeToLMS(scoreDataObj);
   }
 
 
@@ -152,12 +188,16 @@ function AssignmentViewer(props) {
           ]}>
             <p>Submit auto-scores for...</p>
             <form id={'batchSubmitModalForm'} >
-              <input type="radio" name={`modalRadioOpts`} value={SUBMISSION_MODAL_OPTS.all} />
-              <label>All students, including those with incomplete/non-submitted work</label>
-              <input type="radio" name={`modalRadioOpts`} defaultChecked={true} value={SUBMISSION_MODAL_OPTS.submittedOnly} />
-              <label>Only students who completed/submitted their work</label>
+              <div className='ml-4'>
+                <input type="radio" name={`modalRadioOpts`} value={SUBMISSION_MODAL_OPTS.all} />
+                <label className='ml-2'>All students, including those who did not submit any work</label>
+              </div>
+              <div className='ml-4'>
+                <input type="radio" name={`modalRadioOpts`} defaultChecked={true} value={SUBMISSION_MODAL_OPTS.submittedOnly} />
+                <label className='ml-2'>Only students who submitted their work</label>
+              </div>
             </form>
-            <p>(Note: batch auto submission will <em>not</em> overwrite any scores you may have manually submitted.)</p>
+            <p className='mt-3'>Note: batch auto submission will <em>not</em> overwrite any scores you previously submitted.</p>
           </ConfirmationModal>
         );
     }
@@ -207,7 +247,7 @@ function AssignmentViewer(props) {
               <h3>Summary</h3>
               <p className='summary-data xt-med'>{assignment.summary}</p>
             </Col>
-            <Col className='col-3 text-right'>
+            <Col className='col-3 text-right mr-2'>
               <h3>Autoscore</h3>
               <p className='summary-data xt-med float-right'>
                 {assignment.isUseAutoScore && <FontAwesomeIcon className='mr-2' icon={faCheck} size='lg'/>}
@@ -220,7 +260,7 @@ function AssignmentViewer(props) {
         }
 
         {reviewedStudentId && (students?.length > 0) &&
-          <HomeworkReview refreshGrades={handleRefreshAfterGradeSubmission} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
+          <HomeworkReview refreshGrades={fetchScores} assignment={assignment} students={students} reviewedStudentId={reviewedStudentId} />
         }
       </Container>
     </Fragment>

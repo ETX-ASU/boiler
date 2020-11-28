@@ -29,7 +29,7 @@ function HomeworkListItem(props) {
       <td>{studentRefName}</td>
       <td className='text-center'>{(student.autoScore !== undefined) ? student.autoScore : '--'}</td>
       <td className='text-center'>{(student.resultScore !== undefined) ? student.resultScore : '--'}</td>
-      <td className='text-center'>{(student.comment !== undefined) ? <FontAwesomeIcon icon={faComment} onClick={handleShowComment}/> : '--'}</td>
+      <td className='text-center'>{student.comment ? <FontAwesomeIcon icon={faComment} onClick={handleShowComment}/> : '--'}</td>
       <td className=''>{STATUS_TEXT[student.homeworkStatus]}</td>
       <td className='text-right'>{student.percentCompleted}%</td>
     </tr>
