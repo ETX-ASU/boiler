@@ -14,6 +14,7 @@ import {fetchGradeForStudent, hasValidSession} from "../lmsConnection/RingLeader
 import {getHomeworkStatus} from "../tool/ToolUtils";
 import LoadingIndicator from "../app/components/LoadingIndicator";
 import aws_exports from '../aws-exports';
+import moment from "moment";
 
 
 function StudentDashboard() {
@@ -38,7 +39,13 @@ function StudentDashboard() {
 			const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {"studentOwnerId":{eq:activeUser.id}, "assignmentId":{eq:assignment.id}}}));
 			if (!fetchHomeworkResult.data.listHomeworks.items?.length) {
         console.warn("NO homework exists for this student. Attempting to create.")
-			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {id: uuid(), studentOwnerId:activeUser.id, assignmentId:assignment.id, toolHomeworkData:{quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill(-1)}});
+			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {
+			    id: uuid(),
+          beganOnDate: moment().valueOf(),
+          studentOwnerId: activeUser.id,
+          assignmentId: assignment.id,
+          toolHomeworkData: {quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill(-1)}
+			  });
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
         console.warn("Successful in creating homework for this student");
 

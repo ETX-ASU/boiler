@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Col, Row} from "react-bootstrap";
+import {Button, Col, DropdownButton, Row, Dropdown} from "react-bootstrap";
 import LoadingIndicator from "../../app/components/LoadingIndicator";
 import HomeworkListItem from "./HomeworkListItem";
 import {HOMEWORK_PROGRESS, SORT_BY} from "../../app/constants";
@@ -16,7 +16,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {setDisplayOrder} from "../../app/store/appReducer";
-library.add(faBackward, faForward, faCaretLeft, faCaretRight, faComment, faPercent, faEdit, faCheck, faCaretDown, faCaretUp);
 
 
 function HomeworkListing(props) {
@@ -51,7 +50,7 @@ function HomeworkListing(props) {
 
     const shown = sortedStudents.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
-  }, [pageCount, sortBy, curPageNum, isHideStudentIdentity, activeUiScreenMode])
+  }, [props.students, pageCount, sortBy, curPageNum, isHideStudentIdentity, activeUiScreenMode])
 
 
   function getSortedStudents(items, type, direction) {
@@ -136,6 +135,10 @@ function HomeworkListing(props) {
     )
   }
 
+  function handleStudentsPerPageSelected(e) {
+    console.log(`SPP => ${e}`)
+    setStudentsPerPage(parseInt(e));
+  }
 
   return (
     <Fragment>
@@ -159,17 +162,29 @@ function HomeworkListing(props) {
             <FontAwesomeIcon icon={faForward}/>
           </Button>}
         </Col>
+        <Col className='text-right mr-2'>
+          <span>Per page
+            <DropdownButton className='d-inline-block ml-2' title={studentsPerPage} onSelect={handleStudentsPerPageSelected}>
+              <Dropdown.Item eventKey={10}>10</Dropdown.Item>
+              <Dropdown.Item eventKey={15}>15</Dropdown.Item>
+              <Dropdown.Item eventKey={20}>20</Dropdown.Item>
+              <Dropdown.Item eventKey={30}>30</Dropdown.Item>
+              <Dropdown.Item eventKey={50}>50</Dropdown.Item>
+              <Dropdown.Item eventKey={100}>100</Dropdown.Item>
+            </DropdownButton>
+          </span>
+        </Col>
       </Row>
 
       <Row>
         <Col className="pr-4">
           {props.isFetchingHomeworks &&
-            <LoadingIndicator className='p-4 text-center h-100 align-middle' isDarkSpinner={true} loadingMsg={'FETCHING STUDENT HOMEWORK'} size={3} />
+          <LoadingIndicator className='p-4 text-center h-100 align-middle' isDarkSpinner={true} loadingMsg={'FETCHING STUDENT HOMEWORK'} size={3} />
           }
 
           {(!props.isFetchingHomeworks && props.students.length > 0) &&
           (<table className="listing table table-hover">
-            <thead>
+              <thead>
               <tr>
                 <th scope="col" className={`pb-1 pt-2 student-col ${sortBy.type === SORT_BY.name ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.name)}>Student
@@ -235,19 +250,22 @@ function HomeworkListing(props) {
                   )}
                 </th>
               </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               {getHomeworksList()}
-            </tbody>
+              </tbody>
             </table>
           )}
           {!props.isFetchingHomeworks && (props.students.length < 1) &&
-            <p className='mt-4'>No students have begun their homework for this assignment yet.</p>
+          <p className='mt-4'>No students have begun their homework for this assignment yet.</p>
           }
         </Col>
       </Row>
     </Fragment>
   )
 }
+
+
+library.add(faBackward, faForward, faCaretLeft, faCaretRight, faComment, faPercent, faEdit, faCheck, faCaretDown, faCaretUp);
 
 export default HomeworkListing;
