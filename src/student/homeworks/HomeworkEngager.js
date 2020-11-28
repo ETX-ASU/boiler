@@ -44,10 +44,12 @@ function HomeworkEngager(props) {
       delete inputData.homeworkStatus;
       delete inputData.gradingProgress;
       delete inputData.resultScore;
+      delete inputData.resultMaximum;
+      delete inputData.comment;
 
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (result) {
-        if (assignment.isUseAutoSubmit) await calcAndSendScore();
+        if (assignment.isUseAutoSubmit) await calcAndSendScore(inputData);
         setActiveModal({type: MODAL_TYPES.confirmHomeworkSubmitted})
       } else {
         window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
@@ -57,7 +59,7 @@ function HomeworkEngager(props) {
     }
   }
 
-  async function calcAndSendScore() {
+  async function calcAndSendScore(homework) {
 	  try {
       const scoreDataObj = {
         resourceId: assignment.id,
