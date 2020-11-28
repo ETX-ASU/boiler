@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "",
   "dependencies": {
-    "@asu-etx/rl-client-lib": "^0.7.32",
+    "@asu-etx/rl-client-lib": "^0.7.33",
     "@asu-etx/rl-shared": "^0.7.9",
     "@aws-amplify/cache": "^3.1.35",
     "@aws-amplify/ui-react": "^0.2.15",
