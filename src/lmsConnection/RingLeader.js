@@ -65,7 +65,6 @@ export function createAssignmentInLms(submitContentItem) {
 }
 
 
-// TODO: The API needs to use the object names I have provided in the demo objects below
 /**
  * Fetch students from the LMS that are in this course.
  * @param role - can be: null, "learner", "instructor"
@@ -107,7 +106,6 @@ export function fetchUsers(role) {
     picture: string | undefined; // "https://canvas.instructure.com/images/messages/avatar-50.png"
   }
  */
-// TODO: The API should change param order to use courseId then assignmentId
 export function fetchAssignedStudents(courseId, assignmentId) {
   return (window.isDevMode) ? mockGetAssignedStudents(courseId, assignmentId) : realGetAssignedStudents(aws_exports, courseId, assignmentId);
 }
@@ -121,7 +119,6 @@ export function fetchAssignedStudents(courseId, assignmentId) {
  *
  * NOTE: We must pass assignmentId because it is possible to enter into the app without a specific assignment id.
  */
-// TODO: The API should change param order to use courseId then assignmentId
 export function fetchUnassignedStudents(courseId, assignmentId) {
   return (window.isDevMode) ? mockGetUnassignedStudents(courseId, assignmentId) : realGetUnassignedStudents(aws_exports, courseId, assignmentId);
 }
@@ -135,7 +132,7 @@ export function fetchUnassignedStudents(courseId, assignmentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "resultScore": 71,
+    "scoreGiven": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
@@ -157,7 +154,7 @@ export async function fetchGradeForStudent(assignmentId, studentId) {
  *
  * GradeObj {
     "studentId": "fa8fde11-43df-4328-9939-58b56309d20d",
-    "resultScore": 71,
+    "scoreGiven": 71,
     "comment": "Instructor comment on the student performance"
    }
  *
@@ -176,7 +173,7 @@ export function fetchAllGrades(assignmentId) {
  * SubmitGradeObj {
  *   resourceId: "9551a0fe-802d-44df-802d-27451ad14cc3", (assignmentId)
  *   studentId: "fa8fde11-43df-4328-9939-58b56309d20d",
- *   resultScore: 100,
+ *   scoreGiven: 100,
  *   comment: "Instructor comment on the student performance",
  *
  *   // TODO: how come we send progress values, but we can't/don't receive them?!
@@ -185,12 +182,18 @@ export function fetchAllGrades(assignmentId) {
  * }
  */
 export function sendInstructorGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockInstructorSendGradeToLMS(gradeData) : realInstructorSubmitGrade(aws_exports, gradeData);
+  if (window.isDevMode) return mockInstructorSendGradeToLMS(gradeData);
+
+  delete gradeData.assignmentId;
+  return realInstructorSubmitGrade(aws_exports, gradeData);
 }
 
 
 
 // Note: resourceId is NOT required in actual API, but is used by mock API
 export function sendAutoGradeToLMS(gradeData) {
-  return (window.isDevMode) ? mockAutoSendGradeToLMS(gradeData) : realAutoSubmitGrade(gradeData);
+  if (window.isDevMode) return mockAutoSendGradeToLMS(gradeData);
+
+  delete gradeData.assignmentId;
+  return realAutoSubmitGrade(gradeData);
 }

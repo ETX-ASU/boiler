@@ -2,12 +2,13 @@ import React, {Fragment} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {EMPTY_HOMEWORK} from "../app/constants";
 
 
 function QuizViewerAndEngager(props) {
   const {isReadOnly, isShowCorrect, updateToolHomeworkData, toolAssignmentData, toolHomeworkData} = props;
   const {quizQuestions} = toolAssignmentData;
-  const {quizAnswers} = toolHomeworkData;
+  const {quizAnswers} = toolHomeworkData || EMPTY_HOMEWORK;
 
   function styleForAnswer(qNum, selectedAnswerIndex) {
     const isSelected = (quizAnswers[qNum] === selectedAnswerIndex);

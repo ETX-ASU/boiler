@@ -37,12 +37,8 @@ function AssignmentsSelectionList(props) {
       const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
       if (!updateResult) throw new Error('could not update link status in tool database');
 
-      //TODO remove query, launch with React.
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
-      // $("body").append(linkToLmsResult);
-      // append the HTML to the body
       await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
-      // submit the form
       document.getElementById("ltijs_submit").submit();
     } catch (error) {
       console.log(error);
