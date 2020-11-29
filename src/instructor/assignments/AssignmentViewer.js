@@ -28,6 +28,7 @@ import {
   getHomeworkStatus,
   getNewToolHomeworkDataForAssignment
 } from "../../tool/ToolUtils";
+import {reportError} from "../../developer/DevUtils";
 library.add(faEdit, faPen, faChevronLeft);
 
 
@@ -114,7 +115,8 @@ function AssignmentViewer(props) {
       nextToken: token
     }))
     .then(handleHomeworksResult)
-    .catch((error) => window.confirm(`We're sorry. There was a problem fetching student work. Error: ${error}`)
+    .catch((error) =>
+      reportError(error, `We're sorry. There was a problem fetching student work.`)
     );
   }
 
@@ -133,10 +135,9 @@ function AssignmentViewer(props) {
       let grades = await fetchAllGrades(assignment.id);
       grades = (grades) ? grades : [];
       await dispatch(setGradesData(grades));
-      console.log('grades fetched and set');
+      console.log('grades fetched and set', grades);
     } catch (error) {
-      console.error("ARG1:", error);
-      window.confirm(`We're sorry. There was an error fetching student grade data. Please wait a moment and try again. Error: ${error}`);
+      reportError(error, `We're sorry. There was an error fetching student grade data. Please wait a moment and try again.`);
     }
   }
 
@@ -155,7 +156,7 @@ function AssignmentViewer(props) {
       console.log("done with all");
       await fetchScores();
     } catch(error) {
-      window.confirm("Sorry. There appears to have been an error when batch submitting grades. Please refresh and try again.");
+      reportError(error, "Sorry. There appears to have been an error when batch submitting grades. Please refresh and try again.");
     }
 		setActiveModal(null);
 	}

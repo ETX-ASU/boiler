@@ -6,6 +6,7 @@ import AssignmentsSelectionList from "./AssignmentsSelectionList";
 import {useLocation} from "react-router-dom";
 import {hasValidSession} from "../../lmsConnection/RingLeader";
 import aws_exports from '../../aws-exports';
+import {reportError} from "../../developer/DevUtils";
 
 
 function SelectionDashboard() {
@@ -41,7 +42,7 @@ function SelectionDashboard() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
 		} catch (error) {
-      window.confirm(`We're sorry. There was an error while attempting to fetch the list of your existing assignments. Error: ${error}`);
+      reportError(error, `We're sorry. There was an error while attempting to fetch the list of your existing assignments.`);
 		}
 	}
 

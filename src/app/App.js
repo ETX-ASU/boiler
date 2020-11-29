@@ -19,6 +19,7 @@ import {createMockCourseMembers} from "../lmsConnection/MockRingLeader";
 import {fetchUsers, hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
 import SelectionDashboard from "../instructor/lmsLinkage/SelectionDashboard";
+import {reportError} from "../developer/DevUtils";
 
 
 
@@ -56,7 +57,7 @@ function App() {
         const activeUser = members.find(m => m.id === userId);
         activeUser.activeRole = activeRole;
         if (!activeUser) {
-          window.confirm(`We're sorry. Initialization of session data failed because no matching user was found.`);
+          reportError('', `We're sorry. Initialization of session data failed because no matching user was found.`);
         }
 
         if (activeUser.activeRole === ROLE_TYPES.learner) {
@@ -67,8 +68,7 @@ function App() {
         let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
         dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly));
       } catch (error) {
-        console.error(" -------------> CHECK devMode. In local env should be set to true.", error);
-        window.confirm(`We're sorry. There was an error initializing session data. Please wait a moment and try again. Error: ${error}`);
+        reportError(error, "We're sorry. There was an error initializing session data. Please wait a moment and try again. -------------> CHECK devMode. In local env should be set to true.");
       }
     }
 
@@ -111,10 +111,10 @@ function App() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.getAssignment;
-      if (!assignment?.id) window.confirm(`We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
+      if (!assignment?.id) reportError('', `We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
       dispatch(setAssignmentData(assignment));
 		} catch (error) {
-      window.confirm(`We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again. Error: ${error}`);
+      reportError(error, `We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again.`);
 		}
 	}
 

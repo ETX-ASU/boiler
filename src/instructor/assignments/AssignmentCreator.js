@@ -15,6 +15,7 @@ import ToggleSwitch from "../../app/components/ToggleSwitch";
 
 import QuizCreator from "../../tool/QuizCreator";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
+import {reportError} from "../../developer/DevUtils";
 
 const emptyAssignment = {
   id: '',
@@ -63,7 +64,7 @@ function AssignmentCreator() {
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
       if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
     } catch (error) {
-      window.confirm(`We're sorry. There was a problem saving your new assignment. Error: ${error}`);
+      reportError(error, `We're sorry. There was a problem saving your new assignment.`);
     }
 	}
 

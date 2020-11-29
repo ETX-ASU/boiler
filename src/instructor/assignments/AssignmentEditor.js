@@ -12,6 +12,7 @@ import QuizCreator from "../../tool/QuizCreator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
+import {reportError} from "../../developer/DevUtils";
 
 
 function AssignmentEditor() {
@@ -40,7 +41,7 @@ function AssignmentEditor() {
     try {
       await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
     } catch (error) {
-      window.confirm(`We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again. Error: ${error}`);
+      reportError(error, `We're sorry. An error occurred while trying to update the edits to your assignment. Please wait a moment and try again.`);
     }
 
     if (!urlAssignmentId) {
