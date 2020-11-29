@@ -8,6 +8,7 @@ import {updateAssignment} from "../../graphql/mutations";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy} from "@fortawesome/free-solid-svg-icons";
+import {reportError} from "../../developer/DevUtils";
 
 function AssignmentsSelectionList(props) {
 	const assignments = props.assignments;
@@ -42,7 +43,7 @@ function AssignmentsSelectionList(props) {
       document.getElementById("ltijs_submit").submit();
     } catch (error) {
       console.log(error);
-      window.confirm(`Sorry. An error occurred while trying to connect and create this assignment within the LMS. Error: ${error}`);
+      reportError(error, `Sorry. An error occurred while trying to connect and create this assignment within the LMS.`);
     }
   }
 

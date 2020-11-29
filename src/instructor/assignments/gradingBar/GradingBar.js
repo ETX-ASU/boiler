@@ -10,6 +10,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {calcMaxScoreForAssignment} from "../../../tool/ToolUtils";
+import {reportError} from "../../../developer/DevUtils";
 
 library.add(faArrowCircleLeft, faArrowCircleRight);
 
@@ -57,7 +58,7 @@ function GradingBar(props) {
     };
 
     const lmsResult = await sendInstructorGradeToLMS(scoreDataObj);
-    if (!lmsResult) window.confirm(`We're sorry. We encountered an error while posting the grade for this student's work.`);
+    if (!lmsResult) reportError('', `We're sorry. We encountered an error while posting the grade for this student's work.`);
     props.refreshHandler();
   }
 

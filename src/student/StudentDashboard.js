@@ -15,6 +15,7 @@ import {getHomeworkStatus} from "../tool/ToolUtils";
 import LoadingIndicator from "../app/components/LoadingIndicator";
 import aws_exports from '../aws-exports';
 import moment from "moment";
+import {reportError} from "../developer/DevUtils";
 
 
 function StudentDashboard() {
@@ -64,7 +65,7 @@ function StudentDashboard() {
         setIsLoading(false);
       }
 		} catch (error) {
-      window.confirm(`We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again. ${error}`);
+      reportError(error, `We're sorry. There was an error while attempting to fetch your current assignment. Please wait a moment and try again.`);
 		}
 	}
 

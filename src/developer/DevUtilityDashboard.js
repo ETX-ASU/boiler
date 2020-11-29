@@ -12,7 +12,7 @@ import {createHomework, deleteHomework} from "../graphql/mutations";
 import {listHomeworks} from "../graphql/queries";
 import {hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from "../aws-exports";
-
+import {reportError} from "./DevUtils";
 
 function DevUtilityDashboard() {
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ function DevUtilityDashboard() {
       console.log(`-----> mockGrades`, mockGrades);
 
     } catch (error) {
-      window.confirm(`Sorry. An error occurred. Error: ${error}`);
+      reportError(error, `Sorry. An error occurred.`);
     }
     console.log(`-----> results`, results);
   }
@@ -101,7 +101,7 @@ function DevUtilityDashboard() {
       deleteMockGrades(assignment.id);
       console.log('grades for homework deleted.');
     } catch (error) {
-      window.confirm(`Sorry. An error occurred. Error: ${error}`);
+      reportError(error, `Sorry. An error occurred.`);
     }
   }
 

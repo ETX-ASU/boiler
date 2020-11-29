@@ -17,6 +17,7 @@ import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
+import {reportError} from "../../developer/DevUtils";
 library.add(faCopy, faPlus);
 
 
@@ -53,7 +54,7 @@ function AssignmentNavOrDupe() {
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
     } catch (error) {
-      window.confirm(`We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication. Error: ${error}`);
+      reportError(error, `We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.`);
     }
   }
 
@@ -76,7 +77,7 @@ function AssignmentNavOrDupe() {
       setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
 
     } catch (error) {
-      window.confirm(`We're sorry. There was a problem duplicating and saving your new assignment. Error: ${error}`);
+      reportError(error, `We're sorry. There was a problem duplicating and saving your new assignment.`);
     }
   }
 
