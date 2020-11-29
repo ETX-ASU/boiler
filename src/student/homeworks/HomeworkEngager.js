@@ -69,7 +69,7 @@ function HomeworkEngager(props) {
         scoreGiven: await calcAutoScore(assignment, homework),
         scoreMaximum: await calcMaxScoreForAssignment(assignment.toolAssignmentData),
         comment: '',
-        activityProgress: ACTIVITY_PROGRESS[HOMEWORK_PROGRESS.fullyGraded],
+        activityProgress: ACTIVITY_PROGRESS.Completed,
         gradingProgress: HOMEWORK_PROGRESS.fullyGraded
       };
 
