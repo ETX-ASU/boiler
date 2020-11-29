@@ -195,5 +195,6 @@ export function sendAutoGradeToLMS(gradeData) {
   if (window.isDevMode) return mockAutoSendGradeToLMS(gradeData);
 
   delete gradeData.assignmentId;
+  console.warn('-----> passing this gradeData to API: ', gradeData);
   return realAutoSubmitGrade(gradeData);
 }
