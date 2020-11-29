@@ -30,7 +30,7 @@ function AssignmentEditor() {
   }
 
   async function handleUpdateBtn() {
-    // TODO: Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
+    // TODO: Bonus. Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title || !formData.summary) return;
 
     const inputData = Object.assign({}, formData);

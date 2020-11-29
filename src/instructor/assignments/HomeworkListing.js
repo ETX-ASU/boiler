@@ -65,8 +65,8 @@ function HomeworkListing(props) {
         break;
       case SORT_BY.score:
         items.sort((a, b) => {
-          const aVal = isNaN(a.resultScore) ? -1 : a.resultScore;
-          const bVal = isNaN(b.resultScore) ? -1 : b.resultScore;
+          const aVal = isNaN(a.scoreGiven) ? -1 : a.scoreGiven;
+          const bVal = isNaN(b.scoreGiven) ? -1 : b.scoreGiven;
           return aVal - bVal;
         });
         break;

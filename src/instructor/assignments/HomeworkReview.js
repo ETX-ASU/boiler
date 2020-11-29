@@ -28,7 +28,6 @@ function HomeworkReview(props) {
       case(HOMEWORK_PROGRESS.notBegun): return `${studentRefName} has not started their work yet.`;
       case(HOMEWORK_PROGRESS.inProgress): return`${studentRefName} completed A PORTION of their homework, but never submitted it.`;
       case(HOMEWORK_PROGRESS.submitted): return`${studentRefName}'s homework is ready for grading.`;
-      // TODO: should switch to use the activityProgress to check this
       case(HOMEWORK_PROGRESS.fullyGraded): return`You have already graded ${studentRefName}'s homework`;
       default: return `no progress information for ${studentRefName}`;
     }
@@ -40,15 +39,10 @@ function HomeworkReview(props) {
   }
 
   function isShowWork() {
-    // TODO: should switch to use the activityProgress to check this
-    if (!reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) return false;
-
     return (reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.submitted ||
       reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded);
   }
 
-
-  console.log('------> ', reviewedStudent.givenName, reviewedStudent.resultScore, reviewedStudent.comment);
 	return (
 	  <Fragment>
       <Container className="homework-viewer">

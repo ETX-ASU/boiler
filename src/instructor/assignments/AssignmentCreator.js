@@ -40,7 +40,7 @@ const emptyAssignment = {
   }
 };
 
-// TODO: Get rid of assignment lockOnData and isLockedOnSubmission
+
 function AssignmentCreator() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);

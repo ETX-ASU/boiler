@@ -9,6 +9,10 @@ export function getHomeworkStatus(gradeData, homework) {
         HOMEWORK_PROGRESS.notBegun;
 }
 
+export function calcMaxScoreForAssignment(toolAssignmentData) {
+  return toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)
+}
+
 export function getNewToolHomeworkDataForAssignment(toolAssignmentData) {
   return Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(toolAssignmentData.quizQuestions.length).fill[-1]});
 }
