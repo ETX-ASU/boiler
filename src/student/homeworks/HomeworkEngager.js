@@ -7,13 +7,15 @@ import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations"
 import {API} from "aws-amplify";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
 import HeaderBar from "../../app/components/HeaderBar";
+import {reportError} from "../../developer/DevUtils";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
-import {sendAutoGradeToLMS, sendInstructorGradeToLMS} from "../../lmsConnection/RingLeader";
+import {sendAutoGradeToLMS} from "../../lmsConnection/RingLeader";
 import {calcAutoScore, calcMaxScoreForAssignment} from "../../tool/ToolUtils";
+
 library.add(faCheck, faTimes);
 
 
@@ -50,30 +52,31 @@ function HomeworkEngager(props) {
       const result = await API.graphql({query: updateHomeworkMutation, variables: {input: inputData}});
       if (result) {
         if (assignment.isUseAutoSubmit) await calcAndSendScore(inputData);
-        setActiveModal({type: MODAL_TYPES.confirmHomeworkSubmitted})
+        await setActiveModal({type: MODAL_TYPES.confirmHomeworkSubmitted})
       } else {
-        window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
+        reportError('', `We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
       }
     } catch (error) {
-      window.confirm(`We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again. Error: ${error}`);
+      reportError(error, `We're sorry. There was a problem submitting your homework for review. Please wait a moment and try again.`);
     }
   }
 
   async function calcAndSendScore(homework) {
-	  try {
+    try {
       const scoreDataObj = {
         assignmentId: assignment.id,
         studentId: activeUser.id,
-        scoreGiven: calcAutoScore(assignment, homework),
-        scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
+        scoreGiven: await calcAutoScore(assignment, homework),
+        scoreMaximum: await calcMaxScoreForAssignment(assignment.toolAssignmentData),
         comment: '',
         activityProgress: ACTIVITY_PROGRESS[homework.homeworkStatus],
         gradingProgress: HOMEWORK_PROGRESS.fullyGraded
       };
 
+      console.warn('-----> about to send scoreDataObj: ', scoreDataObj);
       await sendAutoGradeToLMS(scoreDataObj);
     } catch(error) {
-      window.confirm(`We're sorry. There was a problem posting your grade`);
+      reportError(error, `We're sorry. There was a problem posting your grade`);
     }
   }
 
