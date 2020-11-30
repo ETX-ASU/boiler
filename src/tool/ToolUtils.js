@@ -10,15 +10,15 @@ export function getHomeworkStatus(gradeData, homework) {
 }
 
 
-export function calcMaxScoreForAssignment(toolAssignmentData) {
+export function calcMaxScoreForAssignment(assignment) {
   // TOOL-DEV: Use your own code here to receive toolAssignmentData and use it to return the maximum possible score for this assignment
-  return toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)
+  return assignment.toolAssignmentData.quizQuestions.reduce((acc, q) => acc + q.gradePointsForCorrectAnswer, 0)
 }
 
-export function getNewToolHomeworkDataForAssignment(toolAssignmentData) {
+export function getNewToolHomeworkDataForAssignment(assignment) {
   // TOOL-DEV: Use your own code here to receive toolAssignmentData and use it create a new "blank" instance of the assignment
   // (This is the student's homework before the student has done any work on it.)
-  return Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(toolAssignmentData.quizQuestions.length).fill[-1]});
+  return Object.assign({}, EMPTY_HOMEWORK, {quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill[-1]});
 }
 
 export function calcPercentCompleted(assignment, homework) {

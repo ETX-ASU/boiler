@@ -51,7 +51,7 @@ function GradingBar(props) {
       assignmentId: assignment.id,
       studentId: reviewedStudent.id,
       scoreGiven: scoreGiven,
-      scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
+      scoreMaximum: calcMaxScoreForAssignment(assignment),
       comment: comment,
       activityProgress: ACTIVITY_PROGRESS[reviewedStudent.homeworkStatus],
       gradingProgress: HOMEWORK_PROGRESS.fullyGraded
@@ -84,7 +84,7 @@ function GradingBar(props) {
               <Col className='col-8 pt-1 pb-2 xbg-light'>
                 <div className='ml-0 mr-4 d-inline-block align-top'>
                   <label htmlFor='autoScore' className='xtext-darkest'>Auto Score</label>
-                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${calcMaxScoreForAssignment(assignment.toolAssignmentData)}`}</div>
+                  <div id={`yourScore`}>{`${reviewedStudent.autoScore} of ${calcMaxScoreForAssignment(assignment)}`}</div>
                 </div>
                 <div className='mr-4 d-inline-block align-top'>
                   <label htmlFor='yourScore' className='xtext-darkest'>Given Score</label>
