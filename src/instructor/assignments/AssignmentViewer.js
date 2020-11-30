@@ -132,12 +132,13 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
-      const scoreMaximum = calcMaxScoreForAssignment(assignment);
+      // const scoreMaximum = calcMaxScoreForAssignment(assignment);
       let grades = await fetchAllGrades(assignment.id);
       grades = (grades) ? grades : [];
       grades = grades.map(g => {
-        const scoreGiven = Math.round(scoreMaximum * (g.resultScore / g.resultMaximum));
-        return ({...g, scoreGiven, scoreMaximum});
+        // This is an ugly work-around until I the back-end sends me the correct response.
+        const scoreGiven = g.scoreGiven || g.resultScore || 0; // && g.resultMaximum) ? Math.round(scoreMaximum * (g.resultScore / g.resultMaximum)) : 0;
+        return ({...g, scoreGiven});
       })
       await dispatch(setGradesData(grades));
       console.log('grades fetched and set', grades);
@@ -151,6 +152,8 @@ function AssignmentViewer(props) {
 	}
 
 	async function handleBatchSubmit() {
+    setActiveModal({type:MODAL_TYPES.showWaitingForGrades});
+
     try {
       const radioElems = Array.from(document.getElementsByName('modalRadioOpts'));
       const isSubmittedOnly = radioElems.find(e => e.checked).value === SUBMISSION_MODAL_OPTS.submittedOnly;
@@ -162,8 +165,9 @@ function AssignmentViewer(props) {
       await fetchScores();
     } catch(error) {
       reportError(error, "Sorry. There appears to have been an error when batch submitting grades. Please refresh and try again.");
+    } finally {
+      setActiveModal(null);
     }
-		setActiveModal(null);
 	}
 
   function toggleHideAndRandomize(e) {
@@ -174,7 +178,7 @@ function AssignmentViewer(props) {
     const scoreDataObj = {
       assignmentId: assignment.id,
       studentId: student.id,
-      scoreGiven: student.autoScore,
+      scoreGiven: student.autoScore || 0,
       scoreMaximum: calcMaxScoreForAssignment(assignment),
       comment: student.comment || '',
       activityProgress: ACTIVITY_PROGRESS[student.homeworkStatus],
@@ -205,6 +209,17 @@ function AssignmentViewer(props) {
               </div>
             </form>
             <p className='mt-3'>Note: batch auto submission will <em>not</em> overwrite any scores you previously submitted.</p>
+          </ConfirmationModal>
+        );
+
+      case MODAL_TYPES.showWaitingForGrades:
+        return (
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Batch Submit... processing'} buttons={[]}>
+            <p>Processing Grades Submission.</p>
+              <div className='ml-4'>
+                <LoadingIndicator loadingMsg={'BATCH SUBMITTING GRADES...'} />
+              </div>
+            <p className='mt-3'>This make take a few moments.</p>
           </ConfirmationModal>
         );
     }
