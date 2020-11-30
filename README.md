@@ -28,4 +28,12 @@ Successfully set up the new user.
   1. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to Dynamodb and currently there is no support for adding a dynamodb resource to the REST API backend, you will need to create a new dynamodb table in your region, called Session. Then add permissions through the AWS console to the specific lambda generated as part of the amplify build process to give the lambda access to create, populate and access the table.
   
   2. LTI requires that the API Gateway has enabled CORS for the backend APIs. The backend and the frontend applications will exist in different domains, at least during development.
+  
+  3. .env values which will need to be updated:
+     a. environment=local (name of folder inside environments that contains tool consumers for this tool)
+     b. URL_ROOT=/stage (suffix of the amplify env that is being pushed)
+     c. API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (base url for ltilambda API)
+     d. APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com (url of the react application)
+     c. DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com (endpoint for dynamodb endpoint)
+     d. DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (typically same as API_URL but can be different)
    
