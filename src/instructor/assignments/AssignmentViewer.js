@@ -75,7 +75,7 @@ function AssignmentViewer(props) {
       if (!gradeDataForStudent) gradeDataForStudent = {scoreGiven:0, scoreMaximum:100, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
 
       let homeworkForStudent = homeworks.find(h => (h.studentOwnerId === s.id && h.assignmentId === assignment.id));
-      if (!homeworkForStudent) homeworkForStudent = getNewToolHomeworkDataForAssignment(assignment.toolAssignmentData);
+      if (!homeworkForStudent) homeworkForStudent = getNewToolHomeworkDataForAssignment(assignment);
 
       let percentCompleted = calcPercentCompleted(assignment, homeworkForStudent);
       let autoScore = calcAutoScore(assignment, homeworkForStudent);
@@ -175,7 +175,7 @@ function AssignmentViewer(props) {
       assignmentId: assignment.id,
       studentId: student.id,
       scoreGiven: student.autoScore,
-      scoreMaximum: calcMaxScoreForAssignment(assignment.toolAssignmentData),
+      scoreMaximum: calcMaxScoreForAssignment(assignment),
       comment: student.comment || '',
       activityProgress: ACTIVITY_PROGRESS[student.homeworkStatus],
       gradingProgress: HOMEWORK_PROGRESS.fullyGraded
