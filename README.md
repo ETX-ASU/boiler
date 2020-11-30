@@ -25,6 +25,7 @@ Successfully set up the new user.
 
 ```
 ## 4. Additional backend requirements for LTI backend:
-   a. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to the dynamodb and currently there is no support for adding a            dynamodb resource to the REST API backend, you    will need to create a new dynamodb table in your region, called Session. Then add permissions through the AWS      console to the specific lambda generated as part of    the amplify build process to give the lambda access to create, populate and access the table.
-   b. LTI requires that the API Gateway has enable CORS for the backend APIs for ltilambda because the backend and the front end will exist in different domains, at      least for development. 
+  1. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to Dynamodb and currently there is no support for adding a dynamodb resource to the REST API backend, you will need to create a new dynamodb table in your region, called Session. Then add permissions through the AWS console to the specific lambda generated as part of the amplify build process to give the lambda access to create, populate and access the table.
+  
+  2. LTI requires that the API Gateway has enabled CORS for the backend APIs. The backend and the frontend applications will exist in different domains, at least during development.
    
