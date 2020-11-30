@@ -55,7 +55,7 @@ function StudentDashboard() {
       } else {
 			  const theHomework = fetchHomeworkResult.data.listHomeworks.items[0];
         let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
-        if (!scoreData) scoreData = {scoreGiven:0, gradingProgress:HOMEWORK_PROGRESS.notBegun, comment:'' };
+        if (!scoreData) scoreData = {scoreGiven:0, gradingProgress: HOMEWORK_PROGRESS.notBegun, comment:'' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);
         await setHomework(theHomework);
