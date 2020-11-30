@@ -3,7 +3,8 @@
 Before starting you will need access to aws-etx repository and the aws-asu account.
 ## 1. Create new repository in EXT-ASU for your application
      location here: https://github.com/ETX-ASU (or repository of your choice)
-## 2. Clone repository into your local environment
+## 2. Fork repository into your local environment
+      https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo
 ## 3. Install amplify cli:
      instructions are here https://docs.amplify.aws/cli/start/install
 
@@ -23,3 +24,7 @@ This would update/create the AWS Profile in your local machine
 Successfully set up the new user.
 
 ```
+## 4. Additional backend requirements for LTI backend:
+   a. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to the dynamodb and currently there is no support for adding a            dynamodb resource to the REST API backend, you    will need to create a new dynamodb table in your region, called Session. Then add permissions through the AWS      console to the specific lambda generated as part of    the amplify build process to give the lambda access to create, populate and access the table.
+   b. LTI requires that the API Gateway has enable CORS for the backend APIs for ltilambda because the backend and the front end will exist in different domains, at      least for development. 
+   
