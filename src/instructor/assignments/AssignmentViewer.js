@@ -132,8 +132,13 @@ function AssignmentViewer(props) {
 
   async function fetchScores() {
     try {
+      const scoreMaximum = calcMaxScoreForAssignment(assignment);
       let grades = await fetchAllGrades(assignment.id);
       grades = (grades) ? grades : [];
+      grades = grades.map(g => {
+        const scoreGiven = Math.round(scoreMaximum * (g.resultScore / g.resultMaximum));
+        return ({...g, scoreGiven, scoreMaximum});
+      })
       await dispatch(setGradesData(grades));
       console.log('grades fetched and set', grades);
     } catch (error) {

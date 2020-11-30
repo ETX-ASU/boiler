@@ -6,6 +6,7 @@ import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 library.add(faTrash, faPlus);
 
 
+// TOOL-DEV: You will provide your own component to act as a UI for creating your tool's specific assignment data
 function QuizCreator(props) {
   const {isUseAutoScore, updateToolAssignmentData, toolAssignmentData} = props;
 
