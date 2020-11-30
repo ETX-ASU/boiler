@@ -5,6 +5,7 @@ import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {EMPTY_HOMEWORK} from "../app/constants";
 
 
+// TOOL-DEV: You will provide your own component to act as a UI allowing a student to engage with and view their homework
 function QuizViewerAndEngager(props) {
   const {isReadOnly, isShowCorrect, updateToolHomeworkData, toolAssignmentData, toolHomeworkData} = props;
   const {quizQuestions} = toolAssignmentData;

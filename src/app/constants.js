@@ -1,3 +1,5 @@
+import {EMPTY_TOOL_HOMEWORK_DATA} from '../tool/constants'
+
 export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 
 
@@ -37,9 +39,7 @@ export const EMPTY_HOMEWORK = {
   id: '',
   assignmentId: '',
   studentOwnerId: '',
-  toolHomeworkData: {
-    quizAnswers: []
-  },
+  toolHomeworkData: EMPTY_TOOL_HOMEWORK_DATA,
   beganOnDate: 0,
   submittedOnDate: 0,
   isLocked: false
