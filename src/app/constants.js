@@ -10,7 +10,8 @@ export const MODAL_TYPES = {
   confirmAssignmentSaved: "confirmAssignmentSaved",
   confirmHomeworkSubmitted: "confirmHomeworkSubmitted",
   warningBeforeHomeworkSubmission: "warningBeforeHomeworkSubmission",
-  showBatchSubmitOptions: "showBatchSubmitOptions"
+  showBatchSubmitOptions: "showBatchSubmitOptions",
+  showWaitingForGrades: "showWaitingForGrades"
 }
 
 export const SORT_BY = {
