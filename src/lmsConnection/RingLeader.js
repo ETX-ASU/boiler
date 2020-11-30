@@ -39,6 +39,7 @@ import {
   mockAutoSendGradeToLMS,
   mockSubmitResourceSelection
 } from "./MockRingLeader";
+import {HOMEWORK_PROGRESS} from "../app/constants";
 
 
 
@@ -161,7 +162,10 @@ export async function fetchGradeForStudent(assignmentId, studentId) {
  * NOTE: A grade only exists for homework that has been fully graded and sent to the LMS grade book.
  */
 export function fetchAllGrades(assignmentId) {
-  return (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(aws_exports, assignmentId);
+  const grades = (window.isDevMode) ? mockGetGrades(assignmentId) : realGetGrades(aws_exports, assignmentId);
+  // Because grades do not return gradingProgress when we fetch them... BUT... they only return
+  // results for student's whom have been graded, we manually set gradingProgress to "fullyGraded"
+  return grades.map(g => ({...g, gradingProgress:HOMEWORK_PROGRESS.fullyGraded}));
 }
 
 
