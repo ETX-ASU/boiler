@@ -29,11 +29,11 @@ Successfully set up the new user.
   
   2. LTI requires that the API Gateway has enabled CORS for the backend APIs. The backend and the frontend applications will exist in different domains, at least during development.
   
-  3. .env values which will need to be updated:
-     a. environment=local (name of folder inside environments that contains tool consumers for this tool)
-     b. URL_ROOT=/stage (suffix of the amplify env that is being pushed)
-     c. API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (base url for ltilambda API)
-     d. APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com (url of the react application)
-     c. DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com (endpoint for dynamodb endpoint)
-     d. DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (typically same as API_URL but can be different)
+  3. .env values which will need to be updated, found at amplify/backend/function/ltilambda/src/.env:
+     * environment=local (name of folder inside environments that contains tool consumers for this tool)
+     * URL_ROOT=/stage (suffix of the amplify env that is being pushed)
+     * API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (base url for ltilambda API)
+     * APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com (url of the react application)
+     * DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com (endpoint for dynamodb endpoint)
+     * DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com (typically same as API_URL but can be different)
    
