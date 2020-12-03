@@ -86,12 +86,12 @@ function AssignmentEditor() {
         )
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Creation Warning'} buttons={[
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Editing Assignment'} buttons={[
             {name:'Cancel', onClick:returnToViewAssignmentScreen},
             {name:'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>
-            <p>Do you want to cancel new assignment creation or continue editing?</p>
-            <p>Canceling will not save your new assignment.</p>
+            <p>Do you want to cancel editing this assignment or continue?</p>
+            <p>Canceling will loose any changes you may have made to this assignment.</p>
           </ConfirmationModal>
         )
     }

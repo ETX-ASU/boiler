@@ -50,7 +50,7 @@ function AssignmentCreator() {
   const [activeModal, setActiveModal] = useState(null);
 
 	async function handleSubmitBtn() {
-    if (!formData.title || !formData.summary) return;
+    if (!formData.title) return;
 
 		const assignmentId = uuid();
 		const inputData = Object.assign({}, formData, {
