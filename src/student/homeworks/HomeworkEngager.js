@@ -141,6 +141,12 @@ function HomeworkEngager(props) {
         </Container>
 
 			</form>
+
+      <Row>
+        <Col className='text-right mr-4'>
+          <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
+        </Col>
+      </Row>
 		</Fragment>
 	)
 }

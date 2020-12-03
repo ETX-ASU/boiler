@@ -75,7 +75,7 @@ function StudentDashboard() {
     <Container className='student-dashboard dashboard bg-white rounded h-100'>
       <Row className={'m-0 pb-5'}>
         <Col className='rounded p-0'>
-          {isLoading && <LoadingIndicator loadingMsg='LOADING HOMEWORK'/>}
+          {isLoading && <LoadingIndicator loadingMsg='LOADING STUDENT ASSIGNMENTS'/>}
 
 					{!isLoading && (activeUiScreenMode === UI_SCREEN_MODES.reviewHomework) &&
 					<HomeworkViewer refreshHandler={fetchAndSetHomework} assignment={assignment} homework={homework} />

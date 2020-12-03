@@ -93,8 +93,8 @@ function AssignmentViewer(props) {
     });
 
     setStudents(enhancedDataStudents);
-    console.log("ENHANCED STUDENTS[0] NOW: ", enhancedDataStudents[0]);
-  }, [assignment, members, homeworks, grades]);
+    console.log("ENHANCED STUDENTS[29] NOW: ", enhancedDataStudents[29]);
+  }, [assignment, members, homeworks, grades, isHideStudentIdentity]);
 
 
   /**
@@ -277,7 +277,7 @@ function AssignmentViewer(props) {
               </p>
             </Col>
           </Row>
-          <HomeworkListing isFetchingHomeworks={isLoadingHomeworks} students={students} studentsPerPage={15}/>
+          <HomeworkListing isUseAutoScore={assignment.isUseAutoScore} isFetchingHomeworks={isLoadingHomeworks} students={students} studentsPerPage={15}/>
         </Fragment>
         }
 

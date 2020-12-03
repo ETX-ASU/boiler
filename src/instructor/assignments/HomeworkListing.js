@@ -131,7 +131,7 @@ function HomeworkListing(props) {
 
   function getHomeworksList() {
     return (
-      shownStudents.map((student, rowNum) => <HomeworkListItem key={student.id} rowNum={rowNum+1} student={student} />)
+      shownStudents.map((student, rowNum) => <HomeworkListItem isUseAutoScore={props.isUseAutoScore} key={student.id} rowNum={rowNum+1} student={student} />)
     )
   }
 
@@ -140,10 +140,11 @@ function HomeworkListing(props) {
     setStudentsPerPage(parseInt(e));
   }
 
+
   return (
     <Fragment>
       <Row className='pt-2 pb-4'>
-        <Col>
+        <Col className='col-9'>
           {pageCount > 5 &&
           <Button className='page-nav-btn mr-1 xbg-dark text-white' onClick={() => setCurPageNum(Math.max(curPageNum-5, 0))}>
             <FontAwesomeIcon icon={faBackward}/>
@@ -190,10 +191,12 @@ function HomeworkListing(props) {
                   <span onClick={() => toggleSortOn(SORT_BY.name)}>Student
                   </span>
                 </th>
+                {props.isUseAutoScore &&
                 <th scope="col" className={`pb-1 pt-2 mini-col text-center ${sortBy.type === SORT_BY.autoScore ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.autoScore)}>Auto
                   </span>
                 </th>
+                }
                 <th scope="col" className={`pb-1 pt-2 mini-col text-center ${sortBy.type === SORT_BY.score ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.score)}>Final
                   </span>
@@ -217,10 +220,12 @@ function HomeworkListing(props) {
                   {(sortBy.type === SORT_BY.name && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
                   {(sortBy.type === SORT_BY.name && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
+                {props.isUseAutoScore &&
                 <th scope="col" className={`marker ${sortBy.type === SORT_BY.autoScore ? 'sort-col' : ''}`}>
                   {(sortBy.type === SORT_BY.autoScore && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
                   {(sortBy.type === SORT_BY.autoScore && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}
                 </th>
+                }
                 <th scope="col" className={`marker ${sortBy.type === SORT_BY.score ? 'sort-col' : ''}`}>
                   {(sortBy.type === SORT_BY.score && !sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretDown}/>}
                   {(sortBy.type === SORT_BY.score && sortBy.isAscending) && <FontAwesomeIcon className={'ml-2'} icon={faCaretUp}/>}

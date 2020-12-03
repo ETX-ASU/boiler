@@ -8,7 +8,7 @@ library.add(faTrash, faPlus);
 
 // TOOL-DEV: You will provide your own component to act as a UI for creating your tool's specific assignment data
 function QuizCreator(props) {
-  const {isUseAutoScore, updateToolAssignmentData, toolAssignmentData} = props;
+  const {isUseAutoScore, updateToolAssignmentData, toolAssignmentData, isLimitedEditing} = props;
 
   function handleAddQuestionButton(e) {
     const quizQuestions = toolAssignmentData.quizQuestions.slice();
@@ -17,7 +17,7 @@ function QuizCreator(props) {
       answerOptions: ['', ''],
       correctAnswerIndex: 0,
       progressPointsForCompleting: 1,
-      gradePointsForCorrectAnswer: (isUseAutoScore) ? 10 : 0
+      gradePointsForCorrectAnswer: 10
     });
     updateToolAssignmentData({quizQuestions});
   }
@@ -77,6 +77,7 @@ function QuizCreator(props) {
                 <label htmlFor={`q${qNum}-prompt`} className='mr-0' style={{width:'calc(100% - 108px'}}>
                   <h3>Prompt</h3>
                   <input id={`q${qNum}-prompt`}
+                         disabled={isLimitedEditing}
                          className={'form-control'}
                          onChange={e => handleQuestionChange(e, qNum, 'questionText')}
                          placeholder={`Provide text for Question #${qNum+1}`}
@@ -89,7 +90,7 @@ function QuizCreator(props) {
                   <input id={`q${qNum}-points`}
                          type="number"
                          className='form-control input-group-append'
-                         disabled={Boolean(!isUseAutoScore)}
+                         disabled={isLimitedEditing}
                          min={0} max={1000}
                          onChange={e => handleQuestionChange(e, qNum, 'gradePointsForCorrectAnswer')}
                          defaultValue={qData.gradePointsForCorrectAnswer}/>
@@ -117,14 +118,16 @@ function QuizCreator(props) {
                          placeholder={`Answer ${index+1}`}/>
                   <div className='input-group-append'>
                     <div className='input-group-text form-control'>
-                      <input className="form-check-inline" type="radio" name={`q${qNum}RadioOpts`}
+                      <input className="form-check-inline" type="radio"
+                             name={`q${qNum}RadioOpts`}
+                             disabled={isLimitedEditing}
                              onChange={e => handleCorrectAnswerSelected(e, qNum, index)}
                              checked={qData.correctAnswerIndex===index}/>
                       correct
                     </div>
                   </div>
                   <Button className='ml-2 btn xbg-dark'
-                          disabled={qData.answerOptions.length <= 1}
+                          disabled={isLimitedEditing || qData.answerOptions.length <= 1}
                           onClick={() => removeAnswerOpt(qNum, index)}>
                     <FontAwesomeIcon className='btn-icon mr-0' icon={faTrash} />
                   </Button>
@@ -134,7 +137,7 @@ function QuizCreator(props) {
           )}
           <Row className='m-2'>
             <Col className={'col-12 m-2 p-2 border-top'}>
-              <Button className='align-middle pl-3 pr-3 xbg-dark' disabled={qData.answerOptions.length >= 5} onClick={() => addAnswerOpt(qNum)}>
+              <Button className='align-middle pl-3 pr-3 xbg-dark' disabled={isLimitedEditing || qData.answerOptions.length >= 5} onClick={() => addAnswerOpt(qNum)}>
                 Add an option
               </Button>
             </Col>
@@ -152,7 +155,7 @@ function QuizCreator(props) {
       <Row className='mt-3 mb-5'>
         <Col className='text-center'>
           <h3 className={'subtext'}>
-            <Button className='align-middle rounded-circle xbg-dark p-0 m-2' style={{width:'40px', height:'40px'}} onClick={handleAddQuestionButton}>
+            <Button disabled={isLimitedEditing} className='align-middle rounded-circle xbg-dark p-0 m-2' style={{width:'40px', height:'40px'}} onClick={handleAddQuestionButton}>
               <FontAwesomeIcon className='btn-icon mr-0' icon={faPlus} />
             </Button>
             Add another question

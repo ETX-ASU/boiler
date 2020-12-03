@@ -15,7 +15,7 @@ function HomeworkReview(props) {
 
   useEffect(() => {
     setReviewedStudent(students.find(s => s.id === reviewedStudentId))
-  }, [reviewedStudentId])
+  }, [students, reviewedStudentId])
 
 
   function getStatusMsg() {

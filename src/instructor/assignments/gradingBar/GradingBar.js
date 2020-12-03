@@ -8,11 +8,11 @@ import {sendInstructorGradeToLMS} from "../../../lmsConnection/RingLeader";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowCircleLeft, faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {faArrowCircleLeft, faArrowCircleRight, faCaretUp, faCheck} from "@fortawesome/free-solid-svg-icons";
 import {calcMaxScoreForAssignment} from "../../../tool/ToolUtils";
 import {reportError} from "../../../developer/DevUtils";
 
-library.add(faArrowCircleLeft, faArrowCircleRight);
+library.add(faArrowCircleLeft, faArrowCircleRight, faCheck);
 
 
 function GradingBar(props) {
@@ -21,13 +21,14 @@ function GradingBar(props) {
 
   const displayOrder = useSelector(state => state.app.displayOrder);
   const [scoreGiven, setScoreGiven] = useState(calcShownScore(reviewedStudent));
+  // const [homeworkStatus, setHomeworkStatus] = useState(reviewedStudent.homeworkStatus);
   const [comment, setComment] = useState('');
   const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
   useEffect(() => {
     setComment(reviewedStudent.comment || '');
     setScoreGiven(calcShownScore(reviewedStudent));
-  }, [reviewedStudent.scoreGiven, reviewedStudent.id, reviewedStudent.comment])
+  }, [reviewedStudent.scoreGiven, reviewedStudent.id, reviewedStudent.comment, reviewedStudent.homeworkStatus])
 
   function calcShownScore({homeworkStatus, scoreGiven, autoScore}) {
     if (homeworkStatus === HOMEWORK_PROGRESS.fullyGraded) return scoreGiven;
@@ -95,6 +96,12 @@ function GradingBar(props) {
                          onChange={(e) => setScoreGiven(parseInt(e.target.value))} value={scoreGiven}
                   />
                 </div>
+
+                {reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded &&
+                <div className='mr-2 mt-4 d-inline-block align-top'>
+                  <FontAwesomeIcon className={'ml-2 mr-2'} icon={faCheck} />
+                </div>
+                }
                 <div className='mr-1 pt-3 d-inline-block align-middle float-right'>
                   <span className='ml-1 mr-0'>
                     <Button className='btn-med xbg-darkest'
