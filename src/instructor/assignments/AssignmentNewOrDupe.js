@@ -69,7 +69,7 @@ function AssignmentNavOrDupe() {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
       const assignment = assignmentQueryResults.data.getAssignment;
 
-      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, isLinkedToLms: false, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
+      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, lineItemId:'', isLinkedToLms: false, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
       delete inputData.createdAt;
       delete inputData.updatedAt;
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});

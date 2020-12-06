@@ -14,6 +14,7 @@ export const createAssignment = /* GraphQL */ `
       summary
       image
       isLinkedToLms
+      lineItemId
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
@@ -45,6 +46,7 @@ export const updateAssignment = /* GraphQL */ `
       summary
       image
       isLinkedToLms
+      lineItemId
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
@@ -76,6 +78,7 @@ export const deleteAssignment = /* GraphQL */ `
       summary
       image
       isLinkedToLms
+      lineItemId
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore

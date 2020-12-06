@@ -24,6 +24,7 @@ const emptyAssignment = {
   summary: '',
   image: '',
   isLinkedToLms: false,
+  lineItemId: '',
   isLockedOnSubmission: true,
   lockOnDate: 0,
   isUseAutoScore: true,

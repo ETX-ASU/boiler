@@ -200,5 +200,5 @@ export function sendAutoGradeToLMS(gradeData) {
 
   delete gradeData.assignmentId;
   console.warn('-----> passing this gradeData to API: ', gradeData);
-  return realAutoSubmitGrade(gradeData);
+  return realAutoSubmitGrade(aws_exports, gradeData);
 }

@@ -8,6 +8,7 @@ import AssignmentEditor from "./assignments/AssignmentEditor";
 import {Col, Container, Row} from "react-bootstrap";
 import {hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
+import {useLocation} from "react-router-dom";
 
 
 function InstructorDashboard() {
