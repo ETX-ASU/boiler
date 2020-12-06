@@ -30,13 +30,13 @@ function AssignmentsSelectionList(props) {
       }
     }
 
-    const inputData = Object.assign({}, assignment, {isLinkedToLms: true});
-    delete inputData.createdAt;
-    delete inputData.updatedAt;
+    // const inputData = Object.assign({}, assignment, {isLinkedToLms: true});
+    // delete inputData.createdAt;
+    // delete inputData.updatedAt;
 
     try {
-      const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
-      if (!updateResult) throw new Error('could not update link status in tool database');
+      // const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
+      // if (!updateResult) throw new Error('could not update link status in tool database');
 
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
       await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);

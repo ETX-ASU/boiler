@@ -11,6 +11,7 @@ export const getAssignment = /* GraphQL */ `
       summary
       image
       isLinkedToLms
+      lineItemId
       lockOnDate
       isLockedOnSubmission
       isUseAutoScore
@@ -44,6 +45,7 @@ export const listAssignments = /* GraphQL */ `
         summary
         image
         isLinkedToLms
+        lineItemId
         lockOnDate
         isLockedOnSubmission
         isUseAutoScore

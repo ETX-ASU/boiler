@@ -11,13 +11,14 @@ export const ADD_HOMEWORKS_DATA = APP_NAMESPACE+'.ADD_HOMEWORKS_DATA';
 export const TOGGLE_HIDE_STUDENT_IDENTITY = 'grading-bar.TOGGLE_HIDE_STUDENT_IDENTITY';
 
 
-export function setSessionData(courseId, assignmentId, activeUser, members) {
+export function setSessionData(courseId, assignmentId, activeUser, members, lineItemId) {
   return {
     type: SET_SESSION_DATA,
     courseId,
     assignmentId,
     activeUser,
-    members
+    members,
+    lineItemId
   }
 }
 

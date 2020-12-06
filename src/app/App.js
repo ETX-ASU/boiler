@@ -20,6 +20,7 @@ import {fetchUsers, hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
 import SelectionDashboard from "../instructor/lmsLinkage/SelectionDashboard";
 import {reportError} from "../developer/DevUtils";
+import {updateAssignment} from "../graphql/mutations";
 
 
 
@@ -28,6 +29,7 @@ function App() {
 	const activeUser = useSelector(state => state.app.activeUser);
   const assignmentId = useSelector(state => state.app.assignmentId);
   const params = new URLSearchParams(useLocation().search);
+  const lineItemId = params.get('lineItemId');
   const mode = params.get('mode');
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function App() {
     const courseIdParam = params.get('courseId');
     const mode = params.get('mode');
 
-    console.warn(`uId, role, resId, cId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam}`)
+    console.warn(`uId, role, resId, cId, lineItemId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam} | ${lineItemId}`)
 
     /**
      * This initializes the redux store with courseId, assignmentId, activeUser data,
@@ -51,7 +53,7 @@ function App() {
      * @returns nothing. It simply updates redux store with initial session data.
      *
      */
-    async function initializeSessionData(courseId, assignmentId, userId, activeRole) {
+    async function initializeSessionData(courseId, assignmentId, userId, activeRole, lineItemId) {
       try {
         let members = await fetchUsers(courseId);
         const activeUser = members.find(m => m.id === userId);
@@ -61,12 +63,12 @@ function App() {
         }
 
         if (activeUser.activeRole === ROLE_TYPES.learner) {
-          dispatch(setSessionData(courseId, assignmentId, activeUser, []));
+          dispatch(setSessionData(courseId, assignmentId, activeUser, [], lineItemId));
           return;
         }
 
         let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
-        dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly));
+        dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly, lineItemId));
       } catch (error) {
         reportError(error, "We're sorry. There was an error initializing session data. Please wait a moment and try again. -------------> CHECK devMode. In local env should be set to true.");
       }
@@ -82,7 +84,7 @@ function App() {
     // Required params: role=dev, userId=any, courseId=any, assignmentId=null or existing assignment id
     if (window.isDevMode) createMockCourseMembers(courseIdParam, 80);
 
-    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam);
+    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam, lineItemId);
 	}, []);
 
 
@@ -106,11 +108,22 @@ function App() {
   }, [assignmentId, activeUser])
 
 
-
 	async function initializeAssignmentAndHomeworks() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.getAssignment;
+
+      // If the item we fetched doesn't have a lineItemId, we take the one we have and add it to assignment in the DB
+      // This way, it can't be used again
+      if (assignment.id && !assignment.lineItemId && lineItemId) {
+        const inputData = Object.assign({}, assignment, {lineItemId});
+        delete inputData.createdAt;
+        delete inputData.updatedAt;
+
+        const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
+        if (updateResult) console.log(`linking assignment ${assignment.id} in DB to use lineItemId: ${lineItemId}`);
+        if (!updateResult) reportError('', 'Could not update lineItemId link in tool database');
+      }
       if (!assignment?.id) reportError('', `We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
       dispatch(setAssignmentData(assignment));
 		} catch (error) {
