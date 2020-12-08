@@ -51,6 +51,7 @@ function AssignmentNavOrDupe() {
         allAssignments.push(...assignmentQueryResults.data.listAssignments.items);
       } while (nextTokenVal);
 
+      if (window.isDevMode) console.log("------> assignmentIds: ", allAssignments.map(a => a.id));
       setAssignments(allAssignments);
       setIsFetchingAssignments(false);
     } catch (error) {
