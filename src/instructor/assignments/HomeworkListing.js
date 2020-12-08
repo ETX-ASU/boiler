@@ -80,7 +80,7 @@ function HomeworkListing(props) {
       case HOMEWORK_PROGRESS.inProgress:
         order = [HOMEWORK_PROGRESS.fullyGraded, HOMEWORK_PROGRESS.submitted, HOMEWORK_PROGRESS.inProgress, HOMEWORK_PROGRESS.notBegun];
         items.sort((a, b) => {
-          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted - b.percentCompleted;
           const aVal = order.indexOf(a.homeworkStatus);
           const bVal = order.indexOf(b.homeworkStatus);
           if (aVal !== bVal) return aVal - bVal;
@@ -93,7 +93,7 @@ function HomeworkListing(props) {
           const aVal = order.indexOf(a.homeworkStatus);
           const bVal = order.indexOf(b.homeworkStatus);
           if (aVal !== bVal) return aVal - bVal;
-          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted - b.percentCompleted;
           return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
         });
         break;
@@ -103,7 +103,7 @@ function HomeworkListing(props) {
           const aVal = order.indexOf(a.homeworkStatus);
           const bVal = order.indexOf(b.homeworkStatus);
           if (aVal !== bVal) return aVal - bVal;
-          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted !== b.percentCompleted;
+          if (a.percentCompleted !== b.percentCompleted) return a.percentCompleted - b.percentCompleted;
           return (isHideStudentIdentity) ? a.randomOrderNum - b.randomOrderNum : a.name.localeCompare(b.name);
         });
         break;
@@ -185,7 +185,7 @@ function HomeworkListing(props) {
 
           {(!props.isFetchingHomeworks && props.students.length > 0) &&
           (<table className="listing table table-hover">
-              <thead>
+            <thead>
               <tr>
                 <th scope="col" className={`pb-1 pt-2 student-col ${sortBy.type === SORT_BY.name ? 'sort-col' : ''}`}>
                   <span onClick={() => toggleSortOn(SORT_BY.name)}>Student
@@ -211,7 +211,7 @@ function HomeworkListing(props) {
                   <span className='float-right'>
                     <FontAwesomeIcon className='ml-2' icon={faPercent} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.inProgress)} />
                     <FontAwesomeIcon className='ml-2' icon={faEdit} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.submitted)} />
-                    <FontAwesomeIcon className='ml-2' icon={faCheck} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.completed)} />
+                    <FontAwesomeIcon className='ml-2' icon={faCheck} onClick={() => toggleSortOn(HOMEWORK_PROGRESS.fullyGraded)} />
                   </span>
                 </th>
               </tr>

@@ -23,7 +23,6 @@ import {reportError} from "../developer/DevUtils";
 import {updateAssignment} from "../graphql/mutations";
 
 
-
 function App() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
@@ -112,6 +111,9 @@ function App() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
       const assignment = assignmentQueryResults.data.getAssignment;
+      if (!assignment?.id) reportError('', `We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
+
+      dispatch(setAssignmentData(assignment));
 
       // If the item we fetched doesn't have a lineItemId, we take the one we have and add it to assignment in the DB
       // This way, it can't be used again
@@ -124,8 +126,6 @@ function App() {
         if (updateResult) console.log(`linking assignment ${assignment.id} in DB to use lineItemId: ${lineItemId}`);
         if (!updateResult) reportError('', 'Could not update lineItemId link in tool database');
       }
-      if (!assignment?.id) reportError('', `We're sorry. There was an error fetching the assignment. Provided assignmentId from URL strand does not match any existing DB assignment.`);
-      dispatch(setAssignmentData(assignment));
 		} catch (error) {
       reportError(error, `We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again.`);
 		}
