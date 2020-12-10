@@ -7,7 +7,7 @@
     "platformOIDCAuthEndPoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/authorizationcode",
     "platformAccessTokenEndpoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/token",
     "alg": "RS256",
-    "keyid": "ASU ETX - Ring Leader - james-stanley  - Public Key",
+    "keyid": "blackboard:cfea46eaf36c43c3b2d4c67a1546ed36",
     "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv0PTzyKB/KiGfJR3oo2Z\nXnVRCBRag7PA4ARCZ5CZMSFuyMtJXZdQKiibTezlFD976lJQZsNTbmXoxEKzho7w\nS5+XEYXtUWhgDmVZ46RPpheay+HUzCikDMIKavOpp7+ri7bIOej9RNjsJ5VzrFI1\nIqLZWT4CyJ/ePzaKRUydpLcvO1mi4gGRblCpB2jm/laUUtAG5yXMpkutMowx1uJr\nLKHjZ8r8bjWw4mqyhbJcx0UKehIc/7yMoeyZpRYtoux0aOPRpL+l8b1uOuVhuLvA\nHl60wuhXrCNHzl39oAyI1+O2vS7t0PTnUZkYyLxQeh5Ca+ja/zj6kFAENgB+4+Ln\nZwIDAQAB\n-----END PUBLIC KEY-----\n",
     "public_key_jwk": {
       "kty": "RSA",
@@ -15,20 +15,20 @@
       "e": "AQAB",
       "alg": "RS256",
       "use": "sig",
-      "kid": "ASU ETX - Ring Leader - james-stanley  - Public Key"
+      "kid": "blackboard:cfea46eaf36c43c3b2d4c67a1546ed36"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n"
   },
   {
-    "name": "canvas-amplify-boiler-plate",
-    "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
+    "name": "unicon-canvas",
+    "uuid": "5f0838bfbc224b7493d9f61c7d4d6209",
     "client_id": "97140000000000193",
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://unicon.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
     "deployment_id": "430:5440a08422ab1ee7794a0588b5e4cb4a094c4256",
     "alg": "RS256",
-    "keyid": "ASU ETX - Ring Leader - james-stanley  - Public Key",
+    "keyid": "unicon-canvas:5f0838bfbc224b7493d9f61c7d4d6209",
     "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv0PTzyKB/KiGfJR3oo2Z\nXnVRCBRag7PA4ARCZ5CZMSFuyMtJXZdQKiibTezlFD976lJQZsNTbmXoxEKzho7w\nS5+XEYXtUWhgDmVZ46RPpheay+HUzCikDMIKavOpp7+ri7bIOej9RNjsJ5VzrFI1\nIqLZWT4CyJ/ePzaKRUydpLcvO1mi4gGRblCpB2jm/laUUtAG5yXMpkutMowx1uJr\nLKHjZ8r8bjWw4mqyhbJcx0UKehIc/7yMoeyZpRYtoux0aOPRpL+l8b1uOuVhuLvA\nHl60wuhXrCNHzl39oAyI1+O2vS7t0PTnUZkYyLxQeh5Ca+ja/zj6kFAENgB+4+Ln\nZwIDAQAB\n-----END PUBLIC KEY-----\n",
     "public_key_jwk": {
       "kty": "RSA",
@@ -36,7 +36,7 @@
       "e": "AQAB",
       "alg": "RS256",
       "use": "sig",
-      "kid": "ASU ETX - Ring Leader - james-stanley  - Public Key"
+      "kid": "unicon-canvas:5f0838bfbc224b7493d9f61c7d4d6209"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n"
   },
@@ -47,9 +47,10 @@
     "iss": "https://ltiadvantagevalidator.imsglobal.org",
     "platformOIDCAuthEndPoint": "https://ltiadvantagevalidator.imsglobal.org/ltitool/oidcauthurl.html",
     "platformAccessTokenEndpoint": "https://ltiadvantagevalidator.imsglobal.org/ltitool/authcodejwt.html",
+    "platformPublicJWKEndpoint": "",
     "deployment_id": "testdeploy",
     "alg": "RS256",
-    "keyid": "ASU ETX - Ring Leader - james-stanley  - Public Key",
+    "keyid": "ims_certification:38e20f1039f34a108c7743c36c8d06a3",
     "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv0PTzyKB/KiGfJR3oo2Z\nXnVRCBRag7PA4ARCZ5CZMSFuyMtJXZdQKiibTezlFD976lJQZsNTbmXoxEKzho7w\nS5+XEYXtUWhgDmVZ46RPpheay+HUzCikDMIKavOpp7+ri7bIOej9RNjsJ5VzrFI1\nIqLZWT4CyJ/ePzaKRUydpLcvO1mi4gGRblCpB2jm/laUUtAG5yXMpkutMowx1uJr\nLKHjZ8r8bjWw4mqyhbJcx0UKehIc/7yMoeyZpRYtoux0aOPRpL+l8b1uOuVhuLvA\nHl60wuhXrCNHzl39oAyI1+O2vS7t0PTnUZkYyLxQeh5Ca+ja/zj6kFAENgB+4+Ln\nZwIDAQAB\n-----END PUBLIC KEY-----\n",
     "public_key_jwk": {
       "kty": "RSA",
@@ -57,10 +58,52 @@
       "e": "AQAB",
       "alg": "RS256",
       "use": "sig",
-      "kid": "ASU ETX - Ring Leader - james-stanley  - Public Key"
+      "kid": "ims_certification:38e20f1039f34a108c7743c36c8d06a3"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n"
+  },
+  {
+    "name": "test_consumer",
+    "uuid": "177045D2A76E-40D3-8085-E11BBE482EB7",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDjKZ1eRGq+1urV\nezaRAP+aCD+GxjAkzhBAveOTfbKdb4GTkBmqvJKjL0MOsWeJWSqkM/TYI6d3eOfV\nUUf9BhDQL8dBOO68ZJCvNzOQoCXk2gDxZH19fzCNSAimFmB/U2h/N938zn8CgnEa\nDm+yzDaDKqsFH+H/dDliAsz+/dswi/GwkLRPt9+/8vaKE2+0XBZbT60BpfRpic8B\n7UnxixG1BDiao0Ho3XBMa8fotJ9xwOCgJx+OR2hCUtRgFDF0lJ5uUsaqcpEHkEkC\nHr7IvTmLGzLuSjeB3Z0C4uD+TDUaIG37CEyaLr7hAVCqFxuC9hmphY9aodNVviKP\nuDVLX8ZPAgMBAAECggEBAIoDOYoRVS1XE9vZ/SACFEj4I+h1NsDVtUgwVjjA0KkY\nGwiVLxLteMXOLBacMARheSfELUi3+MH8YhXXST5v1f02Wf/FYD5zdvgNOLXwprUw\nwgvm+tspUE0165NE2yHgggdw4Nz8dGwI5kBnbvOZYLE2VitJ4Ju8eDSU8QknIGmQ\nJ3Ja2WUhwVcof8l1k1fYng0SEZ4G7XlTmDkmISCif0lfEggcY9nZzfUpmJz/wz3m\nYywCCdSPHOEpAgbSBG0hnw4cTuYsiLQVy+c/xXDFqdA/+4iDcnMiFszgitwON6WD\nylRnsr2LzStfWWqaXFcocJtaivOHfKbVqfSvcK2jQnkCgYEA+gVBNdK8aMC5AMx0\nU2qIW5rKOd23mazHe6R/yeadHsoIOQtkHT+XH1aMkwCb2uj3+ZtZxktXXdM5xXim\nLUa/mXb1Ca3liSYHQ2Vcjs3ox21uN8cfm2P1COP1TSBf8tVwF4NtGmObF2mneMV5\npwRzttJ0LoZxjv/DGJVX+BT9Ou0CgYEA6JhpnlBeG7m+qC7Vso91N7+QAkV4Rmfo\n33UFe7rmB0LscWQkIivnPugnhrKj4sYmRRkMCViwUOYK820BydTFhFJkOBFxl0DC\nEfgpRAriKZEkk3TJ9Ojk/3J+0DdI6kH9+VRXOTNM+97V4YZMBuHWuOSJWwdw5pLa\nL5642ngP0qsCgYADbAj9dJnxkRm3IhVBgwbEwjScYCWAK/Y7AgBhwg9KeZdtOHOx\nVsp5ulSIOoznjSK/vtmWtjdG6Ho08rbLjdlXf2JRNJkcrHGTAZMnvTe/awcEKmyL\nUu3qpjwYRyYpC7TSDZFzuANKab7KD2Hf4Fa5HN5MOLjbLTL9ZiXjFl507QKBgQC0\nDvkEc5bGw94SeF86IdBOXd9vwrO/XUVrZz3dcOwOBwLfLPTD91TG4BVpMvWn4llR\n+HfW7G9h0RP9Kg/OXQaizt2Cgg57Vshl/MSFRh+aqh+0fx6wl3JfRhVhvsqVfozL\n7TywrUQVX4YXVk2Yrk/5RgIHFBWUiW6amrbjeTpWjQKBgQCJByC1SXAUsH9Zp6dG\nx18u8VZvECj/v8iULmfXS6FLSAsYXK/OGBwibQGnoGIdmCBmUGmhyt5WqC+gBJNG\njTJcUClS5rknPcVOo9fX6xrv9hF9DvnvvYw52Pfm8Mt3pj/b1gPy2nCCo2zStKDV\nvj1GEBVD9uUmfi+FFe109PSK1A==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ymdXkRqvtbq1Xs2kQD/\nmgg/hsYwJM4QQL3jk32ynW+Bk5AZqrySoy9DDrFniVkqpDP02COnd3jn1VFH/QYQ\n0C/HQTjuvGSQrzczkKAl5NoA8WR9fX8wjUgIphZgf1Nofzfd/M5/AoJxGg5vssw2\ngyqrBR/h/3Q5YgLM/v3bMIvxsJC0T7ffv/L2ihNvtFwWW0+tAaX0aYnPAe1J8YsR\ntQQ4mqNB6N1wTGvH6LSfccDgoCcfjkdoQlLUYBQxdJSeblLGqnKRB5BJAh6+yL05\nixsy7ko3gd2dAuLg/kw1GiBt+whMmi6+4QFQqhcbgvYZqYWPWqHTVb4ij7g1S1/G\nTwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "4ymdXkRqvtbq1Xs2kQD_mgg_hsYwJM4QQL3jk32ynW-Bk5AZqrySoy9DDrFniVkqpDP02COnd3jn1VFH_QYQ0C_HQTjuvGSQrzczkKAl5NoA8WR9fX8wjUgIphZgf1Nofzfd_M5_AoJxGg5vssw2gyqrBR_h_3Q5YgLM_v3bMIvxsJC0T7ffv_L2ihNvtFwWW0-tAaX0aYnPAe1J8YsRtQQ4mqNB6N1wTGvH6LSfccDgoCcfjkdoQlLUYBQxdJSeblLGqnKRB5BJAh6-yL05ixsy7ko3gd2dAuLg_kw1GiBt-whMmi6-4QFQqhcbgvYZqYWPWqHTVb4ij7g1S1_GTw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "test_consumer:177045D2A76E-40D3-8085-E11BBE482EB7"
+    },
+    "alg": "RS256",
+    "keyid": "test_consumer:177045D2A76E-40D3-8085-E11BBE482EB7",
+    "client_id": "client_id supplied by consumer/platform",
+    "iss": "iss supplied by consumer/platform",
+    "platformOIDCAuthEndPoint": "client_id supplied by consumer/platform",
+    "platformAccessTokenEndpoint": "platformAccessTokenEndpoint supplied by consumer/platform",
+    "platformPublicJWKEndpoint": "platformPublicJWKEndpoint supplied by consumer/platform, may not be required",
+    "deployment_id": "deployment_id supplied by consumer/platform"
+  },
+  {
+    "name": "my-new-tool",
+    "uuid": "4A724B1734E5467E9B60ED9842D2C044",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDNUiyBtp//jS0n\n2+AUZ6Ae87w3VBt1GH53F0DTu2nH6Z4I7bJiGG4TMBZ58ze+Giwop1hEfO2Dc1nD\n3DX8mzq8I47uPg4zGCI8YQ+XVqMMq5CohdsHFluP8yR8ki1nDKo+cNmfW6i9XtyM\nk1IP3weSXV/s06nmtGjjy1lpbqCz9Qf5hMRtThGQj7xGbreG8GhCPcEffhJPb+SE\nXu0cru6x7vNUeowdffFu9pf4KFgWr7YrOJ5wh8USzdi2WoHvi8TGpzQBOQQKtz0i\nWJ5Uq+RKkcDLfWGfNE8ivmK0qQRbE/krKmM0PfqJWNtWS0mHfuIrnFlXU99nbaS5\nbWPao5eZAgMBAAECggEAdEV5sMcz2isfjDfmsIdyVLTgPFDj7668R0Ki0oSKRcyV\nUycQYp7FDxanU84ZHg2CPk9uG/LHKi6TgefdprxdSZe1ZFM+BU9AbALnKmPEl/M8\nS0LqIxxVI7KkUesRzQ6OBigwBR+J8hubN/xhd11s00UPgnTm/R/jWkSY0Kz2UpGH\nXJokhlLyRo8HUrccRbj+7UWVBbrg+bcc1CjLorPdTD7FyYiBTJrX+d2fHIawyA6p\n5aIj7m/+KMh1VhcX2OR46yDmKpVw93LYjPyntuecHa2ictbygfzKcJHXSK8h1jaY\nxPdqEbcca4hReL6hA7spcJ2HaLp9zis6GbcVwOHtlQKBgQDu8XCZ2h6IE+xQe1T5\npxVwDdYYw03r+j1mToZAqofo7mPYS+U5zOmEkqGBXWn3W9JlxREQLwEOuiMLTVyE\n6mAQa7xsnxLZsOR0DLMK2ECEnycYFv1hrQBQUEFJzlfhzxvKy8oJNJIxwuRoW/zJ\n6JNAR/bc8DHnHiaBr7zeDGNZfwKBgQDb+k6jdqcmCXvHqSV2E2o6AGC3ZTDCP21Q\na6b4F1pAu5p80oCKGpUY42J/dSwkKWD7B3ep1+glsWroIO1kfrcv8lxX0jNUYxvz\ndY9cNaw9sFRijPc2hbm1EyWuib6woFe8uf/EgCt9fNQ5zRAb7jeJANomoFSTYwU7\noQw/QTEq5wKBgAj+l7GC73FJ5rRk4B8BtiHgs3V9LJq8ccE/JXibssAG8UU8HiXd\n29B8wI2hGZMRJstj7q+ARXbrdNRBFkF+nR0hIRepqUj+iqr/q2G2ID+dyhfzDZi2\nrXNYggyoMtCyPiaVI0bTbslmv7hZ9hsXoStjShypAgfkL6jkF6T4LGk7AoGBAMxS\npgJtLnpFKsTclqAjDnMLcMpH4k867MVbCL69qiYgWzF/sMcWQ9DXO+EZq8N2786b\nNAn9MnL4ZU1xcC79CBgv7Jfh9a13VToAwwUqEW9HPko/l0v8T+8h9sk0xnt2o6f3\nt9sEFeE8Nj/t+f2Heev2b6qbF5PC0NR/FUoXupyXAoGAHLstYiOaRn9YjVh4PCPq\n23pe40Ov3q82rBQPEBBBX35Olt45PcGYyBFGLHxCy/x1nXqbMLx3t4sqErZ10G4h\njjAAV17/d8HlnsYYQIetDgNa5tsPoXTU/Mb7B5F2BRyMFakiUMFObBo9Ff7EkAcm\nsWWV2To5hMp+xS69Rq1tLq4=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVIsgbaf/40tJ9vgFGeg\nHvO8N1QbdRh+dxdA07tpx+meCO2yYhhuEzAWefM3vhosKKdYRHztg3NZw9w1/Js6\nvCOO7j4OMxgiPGEPl1ajDKuQqIXbBxZbj/MkfJItZwyqPnDZn1uovV7cjJNSD98H\nkl1f7NOp5rRo48tZaW6gs/UH+YTEbU4RkI+8Rm63hvBoQj3BH34ST2/khF7tHK7u\nse7zVHqMHX3xbvaX+ChYFq+2KziecIfFEs3YtlqB74vExqc0ATkECrc9IlieVKvk\nSpHAy31hnzRPIr5itKkEWxP5KypjND36iVjbVktJh37iK5xZV1PfZ22kuW1j2qOX\nmQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "zVIsgbaf_40tJ9vgFGegHvO8N1QbdRh-dxdA07tpx-meCO2yYhhuEzAWefM3vhosKKdYRHztg3NZw9w1_Js6vCOO7j4OMxgiPGEPl1ajDKuQqIXbBxZbj_MkfJItZwyqPnDZn1uovV7cjJNSD98Hkl1f7NOp5rRo48tZaW6gs_UH-YTEbU4RkI-8Rm63hvBoQj3BH34ST2_khF7tHK7use7zVHqMHX3xbvaX-ChYFq-2KziecIfFEs3YtlqB74vExqc0ATkECrc9IlieVKvkSpHAy31hnzRPIr5itKkEWxP5KypjND36iVjbVktJh37iK5xZV1PfZ22kuW1j2qOXmQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "my-new-tool:4A724B1734E5467E9B60ED9842D2C044"
+    },
+    "alg": "RS256",
+    "keyid": "my-new-tool:4A724B1734E5467E9B60ED9842D2C044",
+    "client_id": "client_id supplied by consumer/platform",
+    "iss": "iss supplied by consumer/platform",
+    "platformOIDCAuthEndPoint": "client_id supplied by consumer/platform",
+    "platformAccessTokenEndpoint": "platformAccessTokenEndpoint supplied by consumer/platform",
+    "platformPublicJWKEndpoint": "platformPublicJWKEndpoint supplied by consumer/platform, may not be required",
+    "deployment_id": "deployment_id supplied by consumer/platform"
   }
-
-
 ]
