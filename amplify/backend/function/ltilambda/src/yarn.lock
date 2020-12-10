@@ -10,10 +10,10 @@
     d "1"
     es5-ext "^0.10.47"
 
-"@asu-etx/rl-server-lib@^0.8.8":
-  version "0.8.9"
-  resolved "https://registry.yarnpkg.com/@asu-etx/rl-server-lib/-/rl-server-lib-0.8.9.tgz#cc103fa6aa7b5d49750efb7548d0914773445d94"
-  integrity sha512-XzMNMHvKJ+8NhnKX3SA3EBGFEb99GQSqTHBEv9jD5hk8f/mytJ5Hj1FhdF2E5sjAAzVlPMcr+Yp2mUxk+w1NQg==
+"@asu-etx/rl-server-lib@^0.8.12":
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/@asu-etx/rl-server-lib/-/rl-server-lib-0.8.12.tgz#76415824a84d527a094197d45d2aadbafac1419f"
+  integrity sha512-KKhHsFf00ATux95jO2IadzTPtjPNMmMYXCz1iiEGwvSPa2q+5JPcCiRtQT38yFgZNGnavt/O7I3NPdkLiG1rjg==
   dependencies:
     "@asu-etx/rl-shared" "^0.7.11"
     "@types/express" "^4.17.8"
