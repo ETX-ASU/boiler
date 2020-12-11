@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {UI_SCREEN_MODES} from "../app/constants";
+import {ROLE_TYPES, UI_SCREEN_MODES} from "../app/constants";
 import AssignmentViewer from "./assignments/AssignmentViewer";
 import AssignmentCreator from "./assignments/AssignmentCreator";
 import AssignmentNewOrDupe from "./assignments/AssignmentNewOrDupe";
@@ -15,7 +15,7 @@ function InstructorDashboard() {
   const assignmentId = useSelector(state => state.app.assignmentId);
 	const activeUiScreenMode = useSelector(state => state.app.activeUiScreenMode);
 
-	return (
+  return (
 		<Container className='instructor-dashboard dashboard bg-white rounded h-100'>
 			<Row className={'m-0 pb-5'}>
 				<Col className='rounded p-0'>

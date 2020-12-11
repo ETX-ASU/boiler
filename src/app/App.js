@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
 import {API, graphqlOperation} from "aws-amplify";
 
@@ -11,7 +11,7 @@ import InstructorDashboard from "../instructor/InstructorDashboard";
 import StudentDashboard from "../student/StudentDashboard";
 import LoadingIndicator from "./components/LoadingIndicator";
 import {useLocation} from "react-router-dom";
-import {getAssignment} from "../graphql/queries";
+import {getAssignment, listAssignments} from "../graphql/queries";
 import {shuffle} from "./utils/shuffle";
 import DevUtilityDashboard from "../developer/DevUtilityDashboard";
 
@@ -27,62 +27,33 @@ function App() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
   const assignmentId = useSelector(state => state.app.assignmentId);
+  const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
+  const [strandedAssignments, setStrandedAssignments] = useState(true);
   const params = new URLSearchParams(useLocation().search);
   const lineItemId = params.get('lineItemId');
   const mode = params.get('mode');
 
   useEffect(() => {
     console.log(`------------ initialize`);
+    // in selection mode I have userId, courseId, mode="selectAssignment", activeRole="instructor"
     const userIdParam = params.get('userId');
     const activeRoleParam = params.get('role');
     const assignmentIdParam = params.get('assignmentId');
     const courseIdParam = params.get('courseId');
-    const mode = params.get('mode');
 
     console.warn(`uId, role, resId, cId, lineItemId: ${userIdParam} | ${activeRoleParam} | ${assignmentIdParam} | ${courseIdParam} | ${lineItemId}`)
 
-    /**
-     * This initializes the redux store with courseId, assignmentId, activeUser data,
-     * members data for members in this course.
-     *
-     * @param courseId - should not change once set
-     * @param assignmentId - may only change from null to an existing resource in the DB
-     * @param userId - should not change once set
-     * @param activeRole - for now, should not change once set
-     * @returns nothing. It simply updates redux store with initial session data.
-     *
-     */
-    async function initializeSessionData(courseId, assignmentId, userId, activeRole, lineItemId) {
-      try {
-        let members = await fetchUsers(courseId);
-        const activeUser = members.find(m => m.id === userId);
-        activeUser.activeRole = activeRole;
-        if (!activeUser) {
-          reportError('', `We're sorry. Initialization of session data failed because no matching user was found.`);
-        }
-
-        if (activeUser.activeRole === ROLE_TYPES.learner) {
-          dispatch(setSessionData(courseId, assignmentId, activeUser, [], lineItemId));
-          return;
-        }
-
-        let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
-        dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly, lineItemId));
-      } catch (error) {
-        reportError(error, "We're sorry. There was an error initializing session data. Please wait a moment and try again. -------------> CHECK devMode. In local env should be set to true.");
-      }
-    }
 
     if (activeRoleParam === ROLE_TYPES.dev && !window.isDevMode) { throw new Error("Can NOT use dev role when not in DevMode. Set DevMode to true in codebase.") }
     if (!assignmentIdParam && activeRoleParam === ROLE_TYPES.learner) { throw new Error("User role of student trying to access app with no assignmentId value.") }
 
-    if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
 
     // TODO: Comment this out for LIVE deployment.
     // IF in DEV mode, and mock data doesn't exist for provided courseId, this creates mock students and instructors for the course
     // Required params: role=dev, userId=any, courseId=any, assignmentId=null or existing assignment id
     if (window.isDevMode) createMockCourseMembers(courseIdParam, 80);
 
+    // if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
     if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam, lineItemId);
 	}, []);
 
@@ -107,6 +78,38 @@ function App() {
   }, [assignmentId, activeUser])
 
 
+  /**
+   * This initializes the redux store with courseId, assignmentId, activeUser data,
+   * members data for members in this course.
+   *
+   * @param courseId - should not change once set
+   * @param assignmentId - may only change from null to an existing resource in the DB
+   * @param userId - should not change once set
+   * @param activeRole - for now, should not change once set
+   * @returns nothing. It simply updates redux store with initial session data.
+   *
+   */
+  async function initializeSessionData(courseId, assignmentId, userId, activeRole, lineItemId) {
+    try {
+      let members = await fetchUsers(courseId);
+      const activeUser = members.find(m => m.id === userId);
+      activeUser.activeRole = activeRole;
+      if (!activeUser) {
+        reportError('', `We're sorry. Initialization of session data failed because no matching user was found.`);
+      }
+
+      if (activeUser.activeRole === ROLE_TYPES.learner) {
+        dispatch(setSessionData(courseId, assignmentId, activeUser, [], lineItemId));
+        return;
+      }
+
+      let studentsOnly = members.filter(m => m.roles.indexOf(ROLE_TYPES.learner) > -1);
+      dispatch(setSessionData(courseId, assignmentId, activeUser, studentsOnly, lineItemId));
+    } catch (error) {
+      reportError(error, "We're sorry. There was an error initializing session data. Please wait a moment and try again. -------------> CHECK devMode. In local env should be set to true.");
+    }
+  }
+
 	async function initializeAssignmentAndHomeworks() {
 		try {
       const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:assignmentId}));
@@ -130,14 +133,6 @@ function App() {
       reportError(error, `We're sorry. There was an error fetching the assignment and associated student work. Please wait a moment and try again.`);
 		}
 	}
-
-	if (mode === 'selectAssignment') return (
-    <Container className="app mt-4 mb-2 p-0">
-      <Row className='main-content-row'>
-        <SelectionDashboard />
-      </Row>
-    </Container>
-  )
 
 	return (
 		<Container className="app mt-4 mb-5 p-0">

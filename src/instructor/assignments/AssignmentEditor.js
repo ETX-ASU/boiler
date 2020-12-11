@@ -13,6 +13,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {reportError} from "../../developer/DevUtils";
+import {handleConnectToLMS} from "../../lmsConnection/RingLeader";
 
 
 function AssignmentEditor() {
@@ -45,7 +46,8 @@ function AssignmentEditor() {
     }
 
     if (!urlAssignmentId) {
-      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+      await handleConnectToLMS(inputData);
+      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.returnToLmsScreen));
     } else {
       dispatch(setAssignmentData(formData));
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
