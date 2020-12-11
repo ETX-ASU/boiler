@@ -54,7 +54,7 @@ function App() {
     if (window.isDevMode) createMockCourseMembers(courseIdParam, 80);
 
     // if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
-    if (mode !== 'selectAssignment') initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam, lineItemId);
+    initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam, lineItemId);
 	}, []);
 
 
@@ -68,7 +68,7 @@ function App() {
 	    initializeAssignmentAndHomeworks()
     }
 
-    if (!assignmentId && activeUser.id) {
+    if (!assignmentId && activeUser.id && mode === 'selectAssignment') {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
     } else if (activeUser.activeRole === ROLE_TYPES.dev) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.devUtilityDashboard));
