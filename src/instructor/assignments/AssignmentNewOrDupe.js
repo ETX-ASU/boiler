@@ -71,19 +71,19 @@ function AssignmentNewOrDupe() {
     dispatch(editDupedAssignment(dupedAssignmentData));
   }
 
-  function handleSelectionMade() {
+  async function handleSelectionMade() {
     const selectedId = document.getElementById('assignmentSelector').value;
-    setSelectedAssignment(assignments.find(a => a.id === selectedId));
+    const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
+    setSelectedAssignment(assignmentQueryResults.data.getAssignment);
   }
 
   async function handleDupeAssignment(e) {
     try {
-      const assignment = selectedAssignment;
-      const inputData = Object.assign({}, assignment, {
-        title: (!assignment.lineItemId) ? assignment.title : `Copy of ${assignment.title}`,
+      const inputData = Object.assign({}, selectedAssignment, {
+        title: (!selectedAssignment.lineItemId) ? selectedAssignment.title : `Copy of ${selectedAssignment.title}`,
         lineItemId:'',
         isLinkedToLms: false,
-        id: (!assignment.lineItemId) ? assignment.id : uuid(),
+        id: (!selectedAssignment.lineItemId) ? selectedAssignment.id : uuid(),
         ownerId: activeUser.id,
         courseId,
         lockOnDate: 0
@@ -92,12 +92,12 @@ function AssignmentNewOrDupe() {
       delete inputData.updatedAt;
 
       let result;
-      if (assignment.lineItemId) {
+      if (selectedAssignment.lineItemId) {
         result = await API.graphql({query: createAssignment, variables: {input: inputData}})
-        setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[selectedAssignment.title, result.data.createAssignment]});
       } else {
         result = await API.graphql({query: updateAssignment, variables: {input: inputData}});
-        setActiveModal({type:MODAL_TYPES.confirmAssignmentRecovered, data:[assignment.title, result.data.updateAssignment]});
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentRecovered, data:[selectedAssignment.title, result.data.updateAssignment]});
       }
 
     } catch (error) {
@@ -207,9 +207,9 @@ function AssignmentNewOrDupe() {
               <Container className={'p-4'}>
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
-                    <Button className='align-middle' onClick={handleDupeAssignment} disabled={!selectedAssignment?.lineItemId}>
+                    <Button className='align-middle' onClick={handleDupeAssignment} disabled={!assignments.length}>
                       <FontAwesomeIcon className='btn-icon' icon={faCopy} />
-                      {(!selectedAssignment?.lineItemId) ? 'Recover' : 'Duplicate'}
+                      {(!assignments.length || selectedAssignment?.lineItemId) ? 'Duplicate' : 'Recover'}
                     </Button>
                   </Col>
                 </Row>
