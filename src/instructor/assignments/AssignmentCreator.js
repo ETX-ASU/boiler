@@ -160,7 +160,7 @@ function AssignmentCreator() {
         </Container>
 
         {/*The assignment data collected here is specific to the tool, while the above assignment data is used in every tool*/}
-        <GraphCreator isUseAutoScore={formData.isUseAutoScore} toolAssignmentData={formData.toolAssignmentData} updateToolAssignmentData={handleQuizChanges}/>
+        <QuizCreator isUseAutoScore={formData.isUseAutoScore} toolAssignmentData={formData.toolAssignmentData} updateToolAssignmentData={handleQuizChanges}/>
       </form>
     </Fragment>
   )
