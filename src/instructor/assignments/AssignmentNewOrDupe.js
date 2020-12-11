@@ -128,23 +128,6 @@ function AssignmentNewOrDupe() {
             <p>Your assignment "{activeModal.data[0]}" has been recovered. You will now be taken to a screen so you can edit and customize this recovered assignment.</p>
           </ConfirmationModal>
         );
-
-      //
-      // case MODAL_TYPES.chooseLinkOrDelete:
-      //   return (
-      //     <ConfirmationModal onHide={() => setActiveModal(null)} title={'Stranded Assignment'}
-      //        buttons={[
-      //          {name:'Use Stranded Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[0])},
-      //          {name:'Delete', onClick:() => closeModalDeleteStranded(activeModal.data[0])}
-      //        ]}>
-      //       <p className={'mt-3 mb-2'}>We found an assignment you previously created, titled "{activeModal.data[0].title}." It
-      //         appears it was not properly connected to your LMS. This could happen if you create an assignment in this external tool,
-      //         but don't complete the LMS assignment creation process. That said, we can recover or delete this stranded assignment.</p>
-      //       <p>Would you like to use this stranded assignment instead of creating a new one? If you're not sure, we recommend
-      //         using it. You will be allowed to edit before saving. If not, we must delete this stranded assignment before you
-      //         can create a new one.</p>
-      //     </ConfirmationModal>
-      //   )
     }
   }
 
@@ -224,9 +207,9 @@ function AssignmentNewOrDupe() {
               <Container className={'p-4'}>
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
-                    <Button className='align-middle' onClick={handleDupeAssignment}>
+                    <Button className='align-middle' onClick={handleDupeAssignment} disabled={!selectedAssignment?.lineItemId}>
                       <FontAwesomeIcon className='btn-icon' icon={faCopy} />
-                      {(selectedAssignment.lineItemId) ? 'Duplicate' : 'Recover'}
+                      {(!selectedAssignment?.lineItemId) ? 'Recover' : 'Duplicate'}
                     </Button>
                   </Col>
                 </Row>
