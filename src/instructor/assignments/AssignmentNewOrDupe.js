@@ -18,15 +18,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 import {reportError} from "../../developer/DevUtils";
+import AssignmentsSelectionList from "../lmsLinkage/AssignmentsSelectionList";
 library.add(faCopy, faPlus);
 
 
-function AssignmentNavOrDupe() {
+function AssignmentNewOrDupe() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
   const courseId = useSelector(state => state.app.courseId);
 
   const [assignments, setAssignments] = useState([]);
+  const [strandedAssignments, setStrandedAssignments] = useState([]);
   const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
 
@@ -53,7 +55,10 @@ function AssignmentNavOrDupe() {
 
       if (window.isDevMode) console.log("------> assignmentIds: ", allAssignments.map(a => a.id));
       setAssignments(allAssignments);
+      const stranded = allAssignments.filter(a => a.lineItemId === '');
+      setStrandedAssignments(stranded);
       setIsFetchingAssignments(false);
+      // if (stranded.length) setActiveModal({type:MODAL_TYPES.chooseLinkOrDelete, data:[strandedAssignments[0]]});
     } catch (error) {
       reportError(error, `We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.`);
     }
@@ -92,11 +97,30 @@ function AssignmentNavOrDupe() {
       case MODAL_TYPES.confirmAssignmentDuped:
         return (
           <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
-             buttons={[{name:'Edit Duplicated Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[1])}]}>
-            <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
-            <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+            buttons={[{ name: 'Edit Duplicated Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
+            { (activeModal.data[0].lineItemId)
+              ? <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
+              : <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+            }
           </ConfirmationModal>
-        )
+        );
+
+      //
+      // case MODAL_TYPES.chooseLinkOrDelete:
+      //   return (
+      //     <ConfirmationModal onHide={() => setActiveModal(null)} title={'Stranded Assignment'}
+      //        buttons={[
+      //          {name:'Use Stranded Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[0])},
+      //          {name:'Delete', onClick:() => closeModalDeleteStranded(activeModal.data[0])}
+      //        ]}>
+      //       <p className={'mt-3 mb-2'}>We found an assignment you previously created, titled "{activeModal.data[0].title}." It
+      //         appears it was not properly connected to your LMS. This could happen if you create an assignment in this external tool,
+      //         but don't complete the LMS assignment creation process. That said, we can recover or delete this stranded assignment.</p>
+      //       <p>Would you like to use this stranded assignment instead of creating a new one? If you're not sure, we recommend
+      //         using it. You will be allowed to edit before saving. If not, we must delete this stranded assignment before you
+      //         can create a new one.</p>
+      //     </ConfirmationModal>
+      //   )
     }
   }
 
@@ -115,7 +139,7 @@ function AssignmentNavOrDupe() {
           </Row>
         }
 
-        {!isFetchingAssignments &&
+        {!isFetchingAssignments && !strandedAssignments.length &&
         <Fragment>
           <Row className={'mt-4 mb-4'}>
             <Col>Create a new assignment by selecting one of the following options:</Col>
@@ -145,10 +169,11 @@ function AssignmentNavOrDupe() {
                     <div className="form-group">
                       <select className="form-control" id="assignmentSelector">
                         {assignments.map((a,i) =>
-                          <option key={i} value={a.id}>{a.title}</option>
+                          <option key={i} value={a.id}>{!a.lineItemId && '*'}{a.title}</option>
                         )}
                       </select>
                     </div>
+                    {strandedAssignments.length && <p>*Marked assignments were not properly created in the LMS, but can be recovered by duplicating it here.</p>}
                   </Col>
                 </Row>
               </Container>
@@ -189,4 +214,4 @@ function AssignmentNavOrDupe() {
   )
 }
 
-export default AssignmentNavOrDupe;
+export default AssignmentNewOrDupe;

@@ -9,6 +9,7 @@ import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
 
 function HomeworkReview(props) {
   const {students, reviewedStudentId, assignment} = props;
+
   const [reviewedStudent, setReviewedStudent] = useState(students.find(s => s.id === reviewedStudentId));
   const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
 
