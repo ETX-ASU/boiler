@@ -108,10 +108,11 @@ const toolConsumerPromises = toolConsumers.map(
 
         toolConsumer.client_id = toolConsumer.client_id ? toolConsumer.client_id : "client_id supplied by consumer/platform";
         toolConsumer.iss = toolConsumer.iss ? toolConsumer.iss : "iss supplied by consumer/platform";
+        toolConsumer.deployment_id = toolConsumer.deployment_id ? toolConsumer.deployment_id : "deployment_id supplied by consumer/platform";
         toolConsumer.platformOIDCAuthEndPoint = toolConsumer.platformOIDCAuthEndPoint ? toolConsumer.platformOIDCAuthEndPoint : "client_id supplied by consumer/platform";
         toolConsumer.platformAccessTokenEndpoint = toolConsumer.platformAccessTokenEndpoint ? toolConsumer.platformAccessTokenEndpoint : "platformAccessTokenEndpoint supplied by consumer/platform";
-        toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "platformPublicJWKEndpoint supplied by consumer/platform, may not be required";
-        toolConsumer.deployment_id = toolConsumer.deployment_id ? toolConsumer.deployment_id : "deployment_id supplied by consumer/platform";
+        toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint;
+        toolConsumer.platformPublicKey = toolConsumer.platformPublicKey ? toolConsumer.platformPublicKey : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
         fs.unlinkSync(keyFileNames.privateKeyFile);
         fs.unlinkSync(keyFileNames.publicKeyFile);
         console.log(
