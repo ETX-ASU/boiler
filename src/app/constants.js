@@ -5,6 +5,7 @@ export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 
 export const MODAL_TYPES = {
   confirmAssignmentDuped: "confirmAssignmentDuped",
+  confirmAssignmentRecovered: "confirmAssignmentRecovered",
   cancelNewAssignmentEditsWarning: "cancelNewAssignmentEditsWarning",
   cancelDupedAssignmentEditsWarning: "cancelDupedAssignmentEditsWarning",
   confirmAssignmentSaved: "confirmAssignmentSaved",

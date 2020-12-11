@@ -19,6 +19,12 @@ function InstructorDashboard() {
 		<Container className='instructor-dashboard dashboard bg-white rounded h-100'>
 			<Row className={'m-0 pb-5'}>
 				<Col className='rounded p-0'>
+          {(activeUiScreenMode === UI_SCREEN_MODES.returnToLmsScreen) &&
+            <div>
+              <h3>Your assignment has been created and registered!</h3>
+              <p>But you're not done yet. You must first close this window</p>
+            </div>
+          }
 					{(activeUiScreenMode === UI_SCREEN_MODES.viewAssignment) &&
 					<AssignmentViewer />
 					}

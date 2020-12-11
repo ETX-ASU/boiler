@@ -3,7 +3,7 @@ import {API, graphqlOperation} from 'aws-amplify';
 import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
+import {createAssignment, updateAssignment} from '../../graphql/mutations';
 import {UI_SCREEN_MODES, MODAL_TYPES} from "../../app/constants";
 import {editDupedAssignment, setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
@@ -18,7 +18,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 import {reportError} from "../../developer/DevUtils";
-import AssignmentsSelectionList from "../lmsLinkage/AssignmentsSelectionList";
+// import AssignmentsSelectionList from "../lmsLinkage/AssignmentsSelectionList";
 library.add(faCopy, faPlus);
 
 
@@ -31,6 +31,7 @@ function AssignmentNewOrDupe() {
   const [strandedAssignments, setStrandedAssignments] = useState([]);
   const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
 
   useEffect(() => {
     fetchAssignmentList();
@@ -57,6 +58,7 @@ function AssignmentNewOrDupe() {
       setAssignments(allAssignments);
       const stranded = allAssignments.filter(a => a.lineItemId === '');
       setStrandedAssignments(stranded);
+      if (allAssignments.length) setSelectedAssignment(allAssignments[0]);
       setIsFetchingAssignments(false);
       // if (stranded.length) setActiveModal({type:MODAL_TYPES.chooseLinkOrDelete, data:[strandedAssignments[0]]});
     } catch (error) {
@@ -69,18 +71,34 @@ function AssignmentNewOrDupe() {
     dispatch(editDupedAssignment(dupedAssignmentData));
   }
 
+  function handleSelectionMade() {
+    const selectedId = document.getElementById('assignmentSelector').value;
+    setSelectedAssignment(assignments.find(a => a.id === selectedId));
+  }
+
   async function handleDupeAssignment(e) {
     try {
-      const selectedId = document.getElementById('assignmentSelector').value;
-      const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
-      const assignment = assignmentQueryResults.data.getAssignment;
-
-      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, lineItemId:'', isLinkedToLms: false, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
+      const assignment = selectedAssignment;
+      const inputData = Object.assign({}, assignment, {
+        title: (!assignment.lineItemId) ? assignment.title : `Copy of ${assignment.title}`,
+        lineItemId:'',
+        isLinkedToLms: false,
+        id: (!assignment.lineItemId) ? assignment.id : uuid(),
+        ownerId: activeUser.id,
+        courseId,
+        lockOnDate: 0
+      });
       delete inputData.createdAt;
       delete inputData.updatedAt;
-      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
 
-      setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+      let result;
+      if (assignment.lineItemId) {
+        result = await API.graphql({query: createAssignment, variables: {input: inputData}})
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+      } else {
+        result = await API.graphql({query: updateAssignment, variables: {input: inputData}});
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentRecovered, data:[assignment.title, result.data.updateAssignment]});
+      }
 
     } catch (error) {
       reportError(error, `We're sorry. There was a problem duplicating and saving your new assignment.`);
@@ -90,7 +108,6 @@ function AssignmentNewOrDupe() {
   function handleCreateAssignment(e) {
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createAssignment));
   }
-
 
   function renderModal() {
     switch (activeModal.type) {
@@ -102,6 +119,13 @@ function AssignmentNewOrDupe() {
               ? <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
               : <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
             }
+          </ConfirmationModal>
+        );
+      case MODAL_TYPES.confirmAssignmentRecovered:
+        return (
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
+            buttons={[{ name: 'Edit Recovered Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
+            <p>Your assignment "{activeModal.data[0]}" has been recovered. You will now be taken to a screen so you can edit and customize this recovered assignment.</p>
           </ConfirmationModal>
         );
 
@@ -139,7 +163,7 @@ function AssignmentNewOrDupe() {
           </Row>
         }
 
-        {!isFetchingAssignments && !strandedAssignments.length &&
+        {!isFetchingAssignments &&
         <Fragment>
           <Row className={'mt-4 mb-4'}>
             <Col>Create a new assignment by selecting one of the following options:</Col>
@@ -167,13 +191,16 @@ function AssignmentNewOrDupe() {
                     <h3 className={'mt-3 mb-2'}>Duplicate an assignment</h3>
                     <p>Choose an existing assignment, duplicate it, then customize it.</p>
                     <div className="form-group">
-                      <select className="form-control" id="assignmentSelector">
+                      <select onChange={handleSelectionMade} className="form-control" id="assignmentSelector" disabled={!assignments.length} >
                         {assignments.map((a,i) =>
                           <option key={i} value={a.id}>{!a.lineItemId && '*'}{a.title}</option>
                         )}
                       </select>
+                      {!assignments.length &&
+                        <h4>*You must have at least 1 existing assignment before you can duplicate anything.</h4>
+                      }
                     </div>
-                    {strandedAssignments.length && <p>*Marked assignments were not properly created in the LMS, but can be recovered by duplicating it here.</p>}
+                    {!!strandedAssignments.length && <p>*Marked assignments were not properly created in the LMS, but can be recovered by selecting it here.</p>}
                   </Col>
                 </Row>
               </Container>
@@ -199,7 +226,7 @@ function AssignmentNewOrDupe() {
                   <Col className={'xbg-light text-center p-2'}>
                     <Button className='align-middle' onClick={handleDupeAssignment}>
                       <FontAwesomeIcon className='btn-icon' icon={faCopy} />
-                      Duplicate
+                      {(selectedAssignment.lineItemId) ? 'Duplicate' : 'Recover'}
                     </Button>
                   </Col>
                 </Row>

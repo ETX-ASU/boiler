@@ -68,7 +68,7 @@ function App() {
 	    initializeAssignmentAndHomeworks()
     }
 
-    if (!assignmentId && activeUser.id && mode === 'selectAssignment') {
+    if (!assignmentId && activeUser.id) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
     } else if (activeUser.activeRole === ROLE_TYPES.dev) {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.devUtilityDashboard));

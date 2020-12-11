@@ -69,6 +69,7 @@ export async function handleConnectToLMS(assignment) {
   try {
     const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
     await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
+    if (window.isDevMode) return;
     document.getElementById("ltijs_submit").submit();
   } catch (error) {
     console.log(error);
