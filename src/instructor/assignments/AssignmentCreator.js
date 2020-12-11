@@ -16,6 +16,8 @@ import ToggleSwitch from "../../app/components/ToggleSwitch";
 import QuizCreator from "../../tool/QuizCreator";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {reportError} from "../../developer/DevUtils";
+import {createAssignmentInLms, handleConnectToLMS} from "../../lmsConnection/RingLeader";
+import {calcMaxScoreForAssignment} from "../../tool/ToolUtils";
 
 const emptyAssignment = {
   id: '',
@@ -63,7 +65,8 @@ function AssignmentCreator() {
 
 		try {
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
+      await handleConnectToLMS(inputData);
+      // if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
     } catch (error) {
       reportError(error, `We're sorry. There was a problem saving your new assignment.`);
     }
@@ -79,7 +82,7 @@ function AssignmentCreator() {
 
   function handleReturnToCreateOrDupe() {
     setActiveModal(null);
-    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment))
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.returnToLmsScreen))
   }
 
   function renderModal() {

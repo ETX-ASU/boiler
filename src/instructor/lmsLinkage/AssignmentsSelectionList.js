@@ -11,7 +11,7 @@ import {faCopy} from "@fortawesome/free-solid-svg-icons";
 import {reportError} from "../../developer/DevUtils";
 
 function AssignmentsSelectionList(props) {
-	const assignments = props.assignments;
+	const assignments = props.strandedAssignments;
 
   async function handleConnectToLMS() {
     const selectedId = document.getElementById('assignmentSelector').value;
@@ -30,14 +30,7 @@ function AssignmentsSelectionList(props) {
       }
     }
 
-    // const inputData = Object.assign({}, assignment, {isLinkedToLms: true});
-    // delete inputData.createdAt;
-    // delete inputData.updatedAt;
-
     try {
-      // const updateResult = await API.graphql({query: updateAssignment, variables: {input: inputData}});
-      // if (!updateResult) throw new Error('could not update link status in tool database');
-
       const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
       await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
       document.getElementById("ltijs_submit").submit();
@@ -51,7 +44,12 @@ function AssignmentsSelectionList(props) {
 		<Container className="h-100">
       <Row>
         <Col className='w-auto xt-large xtext-dark font-weight-bold'>
-          <h3 className={'mt-3 mb-2'}>Choose which Quiz Assignment to use in your LMS</h3>
+          <h3 className={'mt-3 mb-2'}>You have a stray assignment.</h3>
+          <p className={'mt-3 mb-2'}>It appears one or more previously created assignments have not been properly connected
+            to your LMS. This happens sometimes when you start creating an assignment in this tool, but don't finish selecting it
+            and saving the changes in the LMS assignment creation process.</p>
+          <p>Would you like to use this stray assignment instead of creating a new one? If not, we will delete it before moving on.</p>
+
         </Col>
       </Row>
       <Row>
