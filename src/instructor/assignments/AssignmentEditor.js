@@ -13,6 +13,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {reportError} from "../../developer/DevUtils";
+import {handleConnectToLMS} from "../../lmsConnection/RingLeader";
+import { v4 as uuid } from "uuid";
 
 
 function AssignmentEditor() {
@@ -32,7 +34,7 @@ function AssignmentEditor() {
 
   async function handleUpdateBtn() {
     // TODO: Bonus. Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
-    if (!formData.title || !formData.summary) return;
+    if (!formData.title) return;
 
     const inputData = Object.assign({}, formData);
     delete inputData.createdAt;
@@ -45,7 +47,12 @@ function AssignmentEditor() {
     }
 
     if (!urlAssignmentId) {
-      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+      await handleConnectToLMS(inputData);
+      if (window.isDevMode) {
+        inputData.lineItemId = (`FAKE-${uuid()}`);
+        await API.graphql({query: updateAssignmentMutation, variables: {input: inputData}});
+      }
+      dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.returnToLmsScreen));
     } else {
       dispatch(setAssignmentData(formData));
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));

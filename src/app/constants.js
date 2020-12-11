@@ -5,13 +5,15 @@ export const APP_NAMESPACE = 'QUIZ_APP'; // Change this to name of tool
 
 export const MODAL_TYPES = {
   confirmAssignmentDuped: "confirmAssignmentDuped",
+  confirmAssignmentRecovered: "confirmAssignmentRecovered",
   cancelNewAssignmentEditsWarning: "cancelNewAssignmentEditsWarning",
   cancelDupedAssignmentEditsWarning: "cancelDupedAssignmentEditsWarning",
   confirmAssignmentSaved: "confirmAssignmentSaved",
   confirmHomeworkSubmitted: "confirmHomeworkSubmitted",
   warningBeforeHomeworkSubmission: "warningBeforeHomeworkSubmission",
   showBatchSubmitOptions: "showBatchSubmitOptions",
-  showWaitingForGrades: "showWaitingForGrades"
+  showWaitingForGrades: "showWaitingForGrades",
+  chooseLinkOrDelete: "chooseLinkOrDelete"
 }
 
 export const SORT_BY = {
@@ -34,6 +36,7 @@ export const UI_SCREEN_MODES = {
   reviewHomework: 'UI_SCREEN_MODES.reviewHomework',
   devUtilityDashboard: 'UI_SCREEN_MODES.devUtilityDashboard',
   assignmentSelectorTool: 'UI_SCREEN_MODES.assignmentSelectorTool',
+  returnToLmsScreen: 'UI_SCREEN_MODES.returnToLmsScreen'
 }
 
 export const EMPTY_HOMEWORK = {

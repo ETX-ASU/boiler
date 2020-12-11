@@ -1,31 +1,4 @@
 import aws_exports from '../aws-exports';
-/*
-import {
-  // getDeepLinkResourceLinks as realGetDeepLinkResourceLinks,
-  submitResourceSelection as realSubmitResourceSelection,
-  getGrades as realGetGrades,
-  getUsers as realGetUsers,
-  getUnassignedStudents as realGetUnassignedStudents,
-  getAssignedStudents as realGetAssignedStudents,
-  submitInstructorGrade as realInstructorSubmitGrade,
-  submitGrade as realAutoSubmitGrade,
-  // getLineItems as realGetLineItems,
-  // deleteLineItem as realDeleteLineItem,
-  // hasValidSession as realHasValidSession,
-} from '@asu-etx/rl-client-lib'
-*/
-
-import {
-  hasValidSessionAws as realHasValidSession,
-  getUsersAws as realGetUsers,
-  getUnassignedStudentsAws as realGetUnassignedStudents,
-  getAssignedStudentsAws as realGetAssignedStudents,
-  getGradesAws as realGetGrades,
-  getGradeAws as realGetGrade,
-  submitInstructorGradeAws as realInstructorSubmitGrade,
-  submitGradeAws as realAutoSubmitGrade,
-  submitResourceSelectionAws as realSubmitResourceSelection
-} from '@asu-etx/rl-client-lib';
 
 
 import {
@@ -42,20 +15,68 @@ import {
 import {HOMEWORK_PROGRESS} from "../app/constants";
 
 
+import {
+  hasValidSessionAws as realHasValidSession,
+  getUsersAws as realGetUsers,
+  getUnassignedStudentsAws as realGetUnassignedStudents,
+  getAssignedStudentsAws as realGetAssignedStudents,
+  getGradesAws as realGetGrades,
+  getGradeAws as realGetGrade,
+  submitInstructorGradeAws as realInstructorSubmitGrade,
+  submitGradeAws as realAutoSubmitGrade,
+  submitResourceSelectionAws as realSubmitResourceSelection
+} from '@asu-etx/rl-client-lib';
+import {calcMaxScoreForAssignment} from "../tool/ToolUtils";
+import {reportError} from "../developer/DevUtils";
+
+// const realHasValidSession = () => {};
+// const realGetUsers = () => {};
+// const realGetUnassignedStudents = () => {};
+// const realGetAssignedStudents = () => {};
+// const realGetGrades = () => {};
+// const realGetGrade = () => {};
+// const realInstructorSubmitGrade = () => {};
+// const realAutoSubmitGrade = () => {};
+// const realSubmitResourceSelection = () => {};
 
 
-/*const submitContentItem = {
-  type: 'ltiResourceLink',
-  label: 'name of the quiz (used in gradebook)',
-  url: '', // leave null
-  resourceId: 'the actual assignment id used in my DynamoDB',
-  lineItem: {
-    scoreMaximum: 100,
-    label: 'name of the quiz',
-    resourceId: 'the actual assignment id used in my DynamoDB - same as above',
-    tag: 'not required'
+/**
+ *
+ * This function connects the assignment to the LMS.
+ *
+ * PLEASE NOTE!!!!
+ * Once this is called, the result received from the LMS is added to the DOM as a form
+ * and this form is then submitted. Once received by the LMS, this application window
+ * is CLOSED.
+ *
+ * @param assignment - data about the assignment we are connecting to the LMS
+ * @returns {Promise<void>}
+ */
+export async function handleConnectToLMS(assignment) {
+  const resourceDataForLms = {
+    type: 'ltiResourceLink',
+    label: assignment.title,
+    url: '', // leave null
+    resourceId: assignment.id,
+    lineItem: {
+      scoreMaximum: calcMaxScoreForAssignment(assignment),
+      label: assignment.title,
+      resourceId: assignment.id,
+      tag: `TAG FOR ${assignment.title}`
+    }
   }
-}*/
+
+  try {
+    const linkToLmsResult = await createAssignmentInLms(resourceDataForLms);
+    await document.body.insertAdjacentHTML('afterbegin', linkToLmsResult);
+    if (window.isDevMode) return;
+    document.getElementById("ltijs_submit").submit();
+  } catch (error) {
+    console.log(error);
+    reportError(error, `Sorry. An error occurred while trying to connect and create this assignment within the LMS.`);
+  }
+}
+
 
 export function hasValidSession(awsExports) {
   return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
@@ -84,8 +105,8 @@ export function createAssignmentInLms(submitContentItem) {
     roles: [string] | undefined; // ["Learner"]
   }
  */
-export function fetchUsers(role) {
-  return (window.isDevMode) ? mockGetUsers(role) : realGetUsers(aws_exports, role);
+export function fetchUsers(courseId, role) {
+  return (window.isDevMode) ? mockGetUsers(courseId, role) : realGetUsers(aws_exports, role);
 }
 
 /**
@@ -200,5 +221,5 @@ export function sendAutoGradeToLMS(gradeData) {
 
   delete gradeData.assignmentId;
   console.warn('-----> passing this gradeData to API: ', gradeData);
-  return realAutoSubmitGrade(gradeData);
+  return realAutoSubmitGrade(aws_exports, gradeData);
 }

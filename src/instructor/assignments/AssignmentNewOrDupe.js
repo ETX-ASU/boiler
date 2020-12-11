@@ -3,7 +3,7 @@ import {API, graphqlOperation} from 'aws-amplify';
 import {useDispatch, useSelector} from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import {createAssignment as createAssignmentMutation} from '../../graphql/mutations';
+import {createAssignment, updateAssignment} from '../../graphql/mutations';
 import {UI_SCREEN_MODES, MODAL_TYPES} from "../../app/constants";
 import {editDupedAssignment, setActiveUiScreenMode} from "../../app/store/appReducer";
 import "./assignments.scss";
@@ -18,17 +18,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 import {reportError} from "../../developer/DevUtils";
+// import AssignmentsSelectionList from "../lmsLinkage/AssignmentsSelectionList";
 library.add(faCopy, faPlus);
 
 
-function AssignmentNavOrDupe() {
+function AssignmentNewOrDupe() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
   const courseId = useSelector(state => state.app.courseId);
 
   const [assignments, setAssignments] = useState([]);
+  const [strandedAssignments, setStrandedAssignments] = useState([]);
   const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
   const [activeModal, setActiveModal] = useState(null);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
 
   useEffect(() => {
     fetchAssignmentList();
@@ -51,8 +54,13 @@ function AssignmentNavOrDupe() {
         allAssignments.push(...assignmentQueryResults.data.listAssignments.items);
       } while (nextTokenVal);
 
+      if (window.isDevMode) console.log("------> assignmentIds: ", allAssignments.map(a => a.id));
       setAssignments(allAssignments);
+      const stranded = allAssignments.filter(a => a.lineItemId === '');
+      setStrandedAssignments(stranded);
+      if (allAssignments.length) setSelectedAssignment(allAssignments[0]);
       setIsFetchingAssignments(false);
+      // if (stranded.length) setActiveModal({type:MODAL_TYPES.chooseLinkOrDelete, data:[strandedAssignments[0]]});
     } catch (error) {
       reportError(error, `We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.`);
     }
@@ -63,18 +71,34 @@ function AssignmentNavOrDupe() {
     dispatch(editDupedAssignment(dupedAssignmentData));
   }
 
+  function handleSelectionMade() {
+    const selectedId = document.getElementById('assignmentSelector').value;
+    setSelectedAssignment(assignments.find(a => a.id === selectedId));
+  }
+
   async function handleDupeAssignment(e) {
     try {
-      const selectedId = document.getElementById('assignmentSelector').value;
-      const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:selectedId}));
-      const assignment = assignmentQueryResults.data.getAssignment;
-
-      const inputData = Object.assign({}, assignment, {title: `Copy of ${assignment.title}`, isLinkedToLms: false, id: uuid(), ownerId: activeUser.id, courseId, lockOnDate: 0});
+      const assignment = selectedAssignment;
+      const inputData = Object.assign({}, assignment, {
+        title: (!assignment.lineItemId) ? assignment.title : `Copy of ${assignment.title}`,
+        lineItemId:'',
+        isLinkedToLms: false,
+        id: (!assignment.lineItemId) ? assignment.id : uuid(),
+        ownerId: activeUser.id,
+        courseId,
+        lockOnDate: 0
+      });
       delete inputData.createdAt;
       delete inputData.updatedAt;
-      const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
 
-      setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+      let result;
+      if (assignment.lineItemId) {
+        result = await API.graphql({query: createAssignment, variables: {input: inputData}})
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentDuped, data:[assignment.title, result.data.createAssignment]});
+      } else {
+        result = await API.graphql({query: updateAssignment, variables: {input: inputData}});
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentRecovered, data:[assignment.title, result.data.updateAssignment]});
+      }
 
     } catch (error) {
       reportError(error, `We're sorry. There was a problem duplicating and saving your new assignment.`);
@@ -85,17 +109,25 @@ function AssignmentNavOrDupe() {
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createAssignment));
   }
 
-
   function renderModal() {
     switch (activeModal.type) {
       case MODAL_TYPES.confirmAssignmentDuped:
         return (
           <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
-             buttons={[{name:'Edit Duplicated Assignment', onClick:() => closeModalAndEditDuped(activeModal.data[1])}]}>
-            <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
-            <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+            buttons={[{ name: 'Edit Duplicated Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
+            { (activeModal.data[0].lineItemId)
+              ? <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
+              : <p>You will now be taken to a screen so you can edit and customize your newly duplicated assignment.</p>
+            }
           </ConfirmationModal>
-        )
+        );
+      case MODAL_TYPES.confirmAssignmentRecovered:
+        return (
+          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
+            buttons={[{ name: 'Edit Recovered Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
+            <p>Your assignment "{activeModal.data[0]}" has been recovered. You will now be taken to a screen so you can edit and customize this recovered assignment.</p>
+          </ConfirmationModal>
+        );
     }
   }
 
@@ -142,12 +174,16 @@ function AssignmentNavOrDupe() {
                     <h3 className={'mt-3 mb-2'}>Duplicate an assignment</h3>
                     <p>Choose an existing assignment, duplicate it, then customize it.</p>
                     <div className="form-group">
-                      <select className="form-control" id="assignmentSelector">
+                      <select onChange={handleSelectionMade} className="form-control" id="assignmentSelector" disabled={!assignments.length} >
                         {assignments.map((a,i) =>
-                          <option key={i} value={a.id}>{a.title}</option>
+                          <option key={i} value={a.id}>{!a.lineItemId && '*'}{a.title}</option>
                         )}
                       </select>
+                      {!assignments.length &&
+                        <h4>*You must have at least 1 existing assignment before you can duplicate anything.</h4>
+                      }
                     </div>
+                    {!!strandedAssignments.length && <p>*Marked assignments were not properly created in the LMS, but can be recovered by selecting it here.</p>}
                   </Col>
                 </Row>
               </Container>
@@ -171,9 +207,9 @@ function AssignmentNavOrDupe() {
               <Container className={'p-4'}>
                 <Row className={'mt-auto'}>
                   <Col className={'xbg-light text-center p-2'}>
-                    <Button className='align-middle' onClick={handleDupeAssignment}>
+                    <Button className='align-middle' onClick={handleDupeAssignment} disabled={!selectedAssignment?.lineItemId}>
                       <FontAwesomeIcon className='btn-icon' icon={faCopy} />
-                      Duplicate
+                      {(!selectedAssignment?.lineItemId) ? 'Recover' : 'Duplicate'}
                     </Button>
                   </Col>
                 </Row>
@@ -188,4 +224,4 @@ function AssignmentNavOrDupe() {
   )
 }
 
-export default AssignmentNavOrDupe;
+export default AssignmentNewOrDupe;
