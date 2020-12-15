@@ -58,9 +58,13 @@ function AssignmentNewOrDupe() {
       setAssignments(allAssignments);
       const stranded = allAssignments.filter(a => a.lineItemId === '');
       setStrandedAssignments(stranded);
-      if (allAssignments.length) setSelectedAssignment(allAssignments[0]);
+
+      if (allAssignments.length) {
+        const assignmentQueryResults = await API.graphql(graphqlOperation(getAssignment, {id:allAssignments[0].id}));
+        setSelectedAssignment(assignmentQueryResults.data.getAssignment);
+      }
+
       setIsFetchingAssignments(false);
-      // if (stranded.length) setActiveModal({type:MODAL_TYPES.chooseLinkOrDelete, data:[strandedAssignments[0]]});
     } catch (error) {
       reportError(error, `We're sorry. There was an error while attempting to fetch the list of your existing assignments for duplication.`);
     }
