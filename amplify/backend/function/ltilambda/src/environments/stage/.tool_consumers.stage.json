@@ -4,6 +4,7 @@
     "client_id": "f6dfa56c-8620-475f-b3df-4697e542404b",
     "uuid": "cfea46eaf36c43c3b2d4c67a1546ed36",
     "iss": "https://blackboard.com",
+    "deployment_id": "e1fc5f4e-cc51-4674-9f7e-110f5ba8d3a4",
     "platformOIDCAuthEndPoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/authorizationcode",
     "platformAccessTokenEndpoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/oauth2/token",
     "platformPublicJWKEndpoint": "https://partner-smoke-test-b.blackboard.com/learn/api/public/v1/jwks.json",
