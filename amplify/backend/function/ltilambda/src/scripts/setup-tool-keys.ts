@@ -107,8 +107,9 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.keyid = jwk.kid;
 
         toolConsumer.client_id = toolConsumer.client_id ? toolConsumer.client_id : "client_id supplied by consumer/platform";
-        toolConsumer.iss = toolConsumer.iss ? toolConsumer.iss : "iss supplied by consumer/platform";
         toolConsumer.deployment_id = toolConsumer.deployment_id ? toolConsumer.deployment_id : "deployment_id supplied by consumer/platform";
+        
+        toolConsumer.iss = toolConsumer.iss ? toolConsumer.iss : "iss supplied by consumer/platform";
         toolConsumer.platformOIDCAuthEndPoint = toolConsumer.platformOIDCAuthEndPoint ? toolConsumer.platformOIDCAuthEndPoint : "client_id supplied by consumer/platform";
         toolConsumer.platformAccessTokenEndpoint = toolConsumer.platformAccessTokenEndpoint ? toolConsumer.platformAccessTokenEndpoint : "platformAccessTokenEndpoint supplied by consumer/platform";
         toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
@@ -117,7 +118,7 @@ const toolConsumerPromises = toolConsumers.map(
         fs.unlinkSync(keyFileNames.privateKeyFile);
         fs.unlinkSync(keyFileNames.publicKeyFile);
         console.log(
-          "The JWK needed to create a developer key in Canvas...",
+          "The JWK needed to create a developer key in Canvas... or you can use the jwks endpoint as well",
           jwk
         );
       })

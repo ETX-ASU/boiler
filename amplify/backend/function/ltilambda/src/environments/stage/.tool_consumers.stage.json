@@ -21,7 +21,7 @@
       "kid": "blackboard:cfea46eaf36c43c3b2d4c67a1546ed36"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n",
-    "toolApplicationUrl" : "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
   },
   {
     "name": "unicon-canvas",
@@ -45,7 +45,7 @@
       "kid": "unicon-canvas:5f0838bfbc224b7493d9f61c7d4d6209"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n",
-    "toolApplicationUrl" : "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
   },
   {
     "name": "ims_certification",
@@ -69,7 +69,7 @@
       "kid": "ims_certification:38e20f1039f34a108c7743c36c8d06a3"
     },
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/Q9PPIoH8qIZ8\nlHeijZledVEIFFqDs8DgBEJnkJkxIW7Iy0ldl1AqKJtN7OUUP3vqUlBmw1NuZejE\nQrOGjvBLn5cRhe1RaGAOZVnjpE+mF5rL4dTMKKQMwgpq86mnv6uLtsg56P1E2Own\nlXOsUjUiotlZPgLIn94/NopFTJ2kty87WaLiAZFuUKkHaOb+VpRS0AbnJcymS60y\njDHW4mssoeNnyvxuNbDiarKFslzHRQp6Ehz/vIyh7JmlFi2i7HRo49Gkv6XxvW46\n5WG4u8AeXrTC6FesI0fOXf2gDIjX47a9Lu3Q9OdRmRjIvFB6HkJr6Nr/OPqQUAQ2\nAH7j4udnAgMBAAECggEBAImN4V395lhsZ1Rffm7kwWGCpAVYhgRkGZnC1nMfNl10\nOvWj5h6uPRQk4hS4A8R9J8RM8NAHOBCUsEO96NkkIcNxgjczB4tdsn+H+o7SVAoS\nvdxVjTJLJDicsNtcZC5llZ1Ellm3q7aA/840GN3cvaQsVH5vL5dUCoWR1v2h7VpQ\nue8bMC1gjwa080W8op7IMC7ePHhUh2ab69vOBWv+a9e3arkA6KZKqyLsaLVT6m/n\nqYmxj2TXak27oOsK9Hxblys9481Y3l0G17CGr9thvnWQ/X2xkOSdLQ3j+Pm/s+Km\n6kwt45EfwUTHL30azvFuY2r3AXFI3awG5B7o/3L+aIkCgYEA5JIeBNRpHJ6PMek6\nSDBzmmSBgk8Jgw5YSM0k1EtEhD7qaMg1+mlQ2CYYXFkFoYNQ24u/2LfsuZIEpeL9\nDhAD5/B+VWmmOFK6n2ZEm5NElWyic+rvdDITU9W2ECF33NEskUtRAGlieRjDg26v\nscZzX53H9XqNf+4j4v0jwZ12SuUCgYEA1jelAIcHE4LlQ5dvHeGgIbtu/wE/MmD7\nm35+A2ZTTVk1ewXkAS58dR1JQHdrNp1Iv5hqzNBXyfPrEPhi1JzleiJ55t1w/tTK\nvaCQzbIX0Zhjy+w7LnkfTzrgPHVOO8+Pa8amkOsADRgYuE/2JPXTedXVWpjFGXA/\nvIkCB5fwqFsCgYEA3rfuHkCnZ2atGzIqQztK+c8jTska+KParJ2QXHg2/DGeEZm8\n1xMV3nhIVnu7++RLvpHOzypwtWWtt8KVV8WNOMzjHPEEMW+TP0zUX0/BjWQ8a30p\n9Gvy30anz9H8zKLZrX3ZIPCPLnZN1FzfP/eiZjIFLJJNHLH8L+r/k2KOaG0CgYA/\nB4JaJGC1ofb5K057eU6XfkHLcD97AEQn3VEQiQQLpyrwNqx+mIHwJ5zNBhYarK6i\nCSOrfcXG2ykYBi12J2/xvsElZ5R+tnes0dipXTRa7D642poTM3o94rHluBI70Pd/\nG6UY0LxkHenwGT7wYxBFMeCj1n1v3bIzNBDP0SnzLwKBgF5uqqawvZpvdvKszxzg\nI7lyRsctc/TWdPqh1QNBHjU3gqWqVBQP/WYPxrFj/x2Xbyw0cO8s7jtxLLx7QWnG\n2FSbrnsmLU/17YtFzDzzHQLJR2a7RfUT/5cJU3IdJ0HRqqShEYuC8pY2NLsDs/Ly\nlBKfrr464JAX9v0oj4pIWgR6\n-----END PRIVATE KEY-----\n",
-    "toolApplicationUrl" : "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
   },
   {
     "name": "blackboard_mel",
@@ -93,6 +93,30 @@
     "platformAccessTokenEndpoint": "https://devportal-stage.saas.bbpd.io/api/v1/gateway/oauth2/jwttoken",
     "platformPublicJWKEndpoint": "https://devportal-stage.saas.bbpd.io/api/v1/management/applications/3eb46365-db88-4e61-b890-b04ed566bc89/jwks.json",
     "platformPublicKey": "",
-    "toolApplicationUrl" : "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com"
+  },
+  {
+    "name": "prt-unicon-canvas",
+    "uuid": "8762C04E78D647EC9B09C6CA934ED02A",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDSAc6IL+q6osml\nMYVx/u8hSdLts5Lcm6Qp85q+ZQY4UAxFO9SvptDiEA3z7+LJ97CTM2vr3V2tn1dt\n+/bnGse9P/+sIwbEFkXyU/gqN5fhs+iSiakiQfrL+FRxYH1qKX1a12R2GvwBknDh\n0K1KrQohGjK9RhgH/MSIdZLJGtkub5t5mCCNUowGzcjFyEQz4Eae+iKMs4BPr8Ij\nJGqPeAPPOgV5ZeHWU0SNFhB7ANi5cAk1JmVo9psscG4J0a/k1yyuCvYMaksF7MqO\noYjzGAFqXQXduOAxeigyAz0cdpwvljYgo88gWvrXrQgM6/yFTj248PHk8i6ItLgV\n/ezhbTRnAgMBAAECggEBAK+QGxz3EgCc/n4/fBPkz/zAPrnBGdGbvA3mPUNWKXEC\nWn+2mQOPLakPStrXfHzjuJYWsu4nzZzMTMcBkVN6q+imjBNX5Nwg0rDXSevhNfPV\n92Qp+V9OUWAbZlyyEaaisM00rCOgQ3T8+6mMTpLTPliWEjzxUD29Ln/16pR9AXsz\nBpSEaq/Jl/mK0rA2oQywJfXUBTaS8HMWHE0OQLewmweZZki/q7pha9RBenDh3poZ\nIoyET2+wnQ8llQ/Q9us8ZPK19TLPVsqzr6yHkkS+e43mNMEd60vtk6VxjrsF8fF7\nG8ajx/in87zf8zEvj/d0Um8Ew1twhXx4l302Lo0kwaECgYEA8GOIzVWoqKq1O12Z\n0fobGToCeXq+8UjRHCQrwLA6EeUeP9qu98qu9klT9tTMl71E4HhAzzj9gNHKSsiy\ngt6kOp3sZIiH3OjpGO4+74Ju+x35MqkbJ+4ui/DjHHClLTsjbd+2XFf1N+7IYnvv\nxjcJTudsDyYNM1nNpWdXQkivbTsCgYEA36Us8+o/VhWaHKdBOVX32lNodd2Q3p55\nDR0k5SExjzEXigaHkdYzezAqLGc3c8kDwdJgkY1eLRn8tbkfSz7QnYzJzwVnvXGd\nDgLi23ieaDu/VrHFo+HEA8i8c6v25x30VkXAbhuzP8tAfX08Rt6v8by4enQKadMf\nuSXLHQpAEsUCgYB3cq4GgfrlnLWjQxZs7R9MALQ8Es8QbANkPWD0RV0FiVjnl817\nWV5pCPTM4N6sw6KW+4oQrhvhR92CHYn+V405h0FwjxsbnSw+dBwXvTNSWol6L+dL\nhyHf7Zmchyi8efdX4GLoLdiuq1ss/LKfRre8WmgqetjyXDxAZUJJsH5jAwKBgQDF\nFtBtyCK232SoGbF+MMezLMwjCvZvaaLuLp/kGQOO2EmRRr3UhLtrtX+FEBUrQZvB\nBIA75SR4hK1TDGiKrDm2jmsOuQm6RtSMk3iOx1Z6LyUo5pNxIDXYy99f5M060ggQ\nu3mgz2KBNsKHlIU5Q2g0lgbRS1AeAIO1a5v65JygrQKBgQDsVJjDYs3q3Px4ba9r\nsy5GeezXhcp8r/M4BkIwxWdDHmI0vZSuXqvcI7LwiMNZDMoI60SEqoVhK2h7/8oY\n399xOoRm1ea3ziI+JcUY5eAWw9lsMwXwNXz0YN34EoSNPDlzs+3hnrfiNLVvVtam\nfsujvLk8Un0x+WtEkwIZH1HnGQ==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0gHOiC/quqLJpTGFcf7v\nIUnS7bOS3JukKfOavmUGOFAMRTvUr6bQ4hAN8+/iyfewkzNr691drZ9Xbfv25xrH\nvT//rCMGxBZF8lP4KjeX4bPokompIkH6y/hUcWB9ail9Wtdkdhr8AZJw4dCtSq0K\nIRoyvUYYB/zEiHWSyRrZLm+beZggjVKMBs3IxchEM+BGnvoijLOAT6/CIyRqj3gD\nzzoFeWXh1lNEjRYQewDYuXAJNSZlaPabLHBuCdGv5Ncsrgr2DGpLBezKjqGI8xgB\nal0F3bjgMXooMgM9HHacL5Y2IKPPIFr6160IDOv8hU49uPDx5PIuiLS4Ff3s4W00\nZwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "0gHOiC_quqLJpTGFcf7vIUnS7bOS3JukKfOavmUGOFAMRTvUr6bQ4hAN8-_iyfewkzNr691drZ9Xbfv25xrHvT__rCMGxBZF8lP4KjeX4bPokompIkH6y_hUcWB9ail9Wtdkdhr8AZJw4dCtSq0KIRoyvUYYB_zEiHWSyRrZLm-beZggjVKMBs3IxchEM-BGnvoijLOAT6_CIyRqj3gDzzoFeWXh1lNEjRYQewDYuXAJNSZlaPabLHBuCdGv5Ncsrgr2DGpLBezKjqGI8xgBal0F3bjgMXooMgM9HHacL5Y2IKPPIFr6160IDOv8hU49uPDx5PIuiLS4Ff3s4W00Zw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "prt-unicon-canvas:8762C04E78D647EC9B09C6CA934ED02A"
+    },
+    "alg": "RS256",
+    "keyid": "prt-unicon-canvas:8762C04E78D647EC9B09C6CA934ED02A",
+    "client_id": "97140000000000195",
+    "deployment_id": "433:5440a08422ab1ee7794a0588b5e4cb4a094c4256",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://unicon.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://unicon.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "",
+    "toolApplicationUrl": "https://dev.d2rdcu542u9e6c.amplifyapp.com"
   }
 ]
