@@ -117,6 +117,6 @@
     "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://unicon.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "",
-    "toolApplicationUrl": "https://dev.d2rdcu542u9e6c.amplifyapp.com"
+    "toolApplicationUrl": "https://dev.d3tg2utvxeebst.amplifyapp.com/"
   }
 ]
