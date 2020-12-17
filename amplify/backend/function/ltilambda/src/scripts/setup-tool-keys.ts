@@ -113,6 +113,7 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.platformAccessTokenEndpoint = toolConsumer.platformAccessTokenEndpoint ? toolConsumer.platformAccessTokenEndpoint : "platformAccessTokenEndpoint supplied by consumer/platform";
         toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
         toolConsumer.platformPublicKey = toolConsumer.platformPublicKey ? toolConsumer.platformPublicKey : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
+        toolConsumer.toolApplicationUrl = toolConsumer.toolApplicationUrl ? toolConsumer.toolApplicationUrl : "you will need to supply the url of the react application"
         fs.unlinkSync(keyFileNames.privateKeyFile);
         fs.unlinkSync(keyFileNames.publicKeyFile);
         console.log(

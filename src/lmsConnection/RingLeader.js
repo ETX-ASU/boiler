@@ -1,4 +1,4 @@
-import aws_exports from '../aws-exports';
+import aws_exports from '../lti-exports';
 
 
 import {
