@@ -3,10 +3,6 @@
 
 const awsmobile = {
     "aws_project_region": "us-west-2",
-    "aws_appsync_graphqlEndpoint": "https://hih22265vjexjb2cjjwgyi4r2q.appsync-api.us-west-2.amazonaws.com/graphql",
-    "aws_appsync_region": "us-west-2",
-    "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-muhptfofmzfv5iwhaqqpsc2dai",
     "aws_cloud_logic_custom": [
         {
             "name": "ringleaderapi",
