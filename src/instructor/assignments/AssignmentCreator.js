@@ -65,8 +65,11 @@ function AssignmentCreator() {
 
 		try {
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      await handleConnectToLMS(inputData);
-      // if (result) setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved});
+      if (isDevMode && result) {
+        setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved, id:assignmentId});
+      } else {
+        await handleConnectToLMS(inputData);
+      }
     } catch (error) {
       reportError(error, `We're sorry. There was a problem saving your new assignment.`);
     }
@@ -102,7 +105,7 @@ function AssignmentCreator() {
           <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'} buttons={[
             {name: 'Continue', onClick: handleReturnToCreateOrDupe},
           ]}>
-            <p>Assignment has been saved! It is now accessible in your LMS.</p>
+            <p>Assignment has been saved! In order to access it, use this assignmentId: ${activeModal.id}</p>
           </ConfirmationModal>
         );
     }
