@@ -65,7 +65,7 @@ function AssignmentCreator() {
 
 		try {
       const result = await API.graphql({query: createAssignmentMutation, variables: {input: inputData}});
-      if (isDevMode && result) {
+      if (window.isDevMode && result) {
         setActiveModal({type:MODAL_TYPES.confirmAssignmentSaved, id:assignmentId});
       } else {
         await handleConnectToLMS(inputData);
