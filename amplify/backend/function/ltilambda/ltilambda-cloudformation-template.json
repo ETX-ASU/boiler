@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-boiler-stage-164450-deployment",
-          "S3Key": "amplify-builds/ltilambda-4a48395538745675356f-build.zip"
+          "S3Key": "amplify-builds/ltilambda-617a572f38594e575a70-build.zip"
         }
       }
     },
