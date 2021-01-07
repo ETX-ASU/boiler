@@ -115,7 +115,7 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
         toolConsumer.platformPublicKey = toolConsumer.platformPublicKey ? toolConsumer.platformPublicKey : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
         toolConsumer.toolApplicationUrl = toolConsumer.toolApplicationUrl ? toolConsumer.toolApplicationUrl : "you will need to supply the url of the react application"
-        toolConsumer.accessTokenPostContentType = toolConsumer.accessTokenPostContentType ? toolConsumer.accessTokenPostContentType : "application/x-www-form-urlencoded:application/json (default is json but some platforms use formEncoded)";
+        toolConsumer.accessTokenPostContentType = toolConsumer.accessTokenPostContentType ? toolConsumer.accessTokenPostContentType : "application/x-www-form-urlencoded:application/json (platforms should use formEncoded but option is there.)";
         fs.unlinkSync(keyFileNames.privateKeyFile);
         fs.unlinkSync(keyFileNames.publicKeyFile);
         console.log(
