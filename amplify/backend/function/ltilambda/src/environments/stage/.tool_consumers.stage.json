@@ -97,7 +97,7 @@
     "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/d779272e-8450-480b-aa87-c878c290bd75/jwks.json",
     "platformPublicKey": "",
     "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
-    "accessTokenPostContentType": "application/json"
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
     "name": "prt-unicon-canvas",
