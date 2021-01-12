@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@asu-etx/rl-server-lib": "^0.8.48",
-    "@asu-etx/rl-shared": "^0.7.11",
+    "@asu-etx/rl-server-lib": "^0.8.49",
+    "@asu-etx/rl-shared": "^0.7.12",
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
     "dotenv-expand": "^5.1.0",
