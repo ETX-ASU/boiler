@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@asu-etx/rl-server-lib": "^0.8.47",
+    "@asu-etx/rl-server-lib": "^0.8.48",
     "@asu-etx/rl-shared": "^0.7.11",
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
