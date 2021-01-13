@@ -173,5 +173,30 @@
     "platformPublicKey": "",
     "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "jackie",
+    "uuid": "18FEBDDC74E14198A96F565E8DC56F51",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDOcCTzt0WiMvPR\nXLIxWrtiHj8LBEcQ4BFJOhnkRS9CTZnNd/cditjIgPHAT1PRogHoYjw93O4UK9/d\nInzd4q6e9FZjeUcKUiJIPorAE7DUpKtE3a+3D45VtLnX6mnEjU32VYuEyDUNuezm\nai+9OKlWpeFZVjbtAfuBucB5SLiK6t1qhEkmVE0DZalRosMwk98J0aryCAQzrJ8m\nnI3N1gJ1evHtVlCWQyBpYgRsWLZrUJVq+92OugD05ICvlZufBubykw0UWH6kAGCU\nAr12NC8VsVaFDsHiK8CORtX3xm/P+6LKBOKGPg5wEalgQ8+Rm4mlp9unR2NtJttA\n+Gh8tcYdAgMBAAECggEAGsCjuUW962go+q/Fk+nLMMr0povWXdR7yP6TjmZ82l3O\nGbd7OcPdlhZHvgFJvnf9QU1Bu06fN9P7vd+TSPnwYT8O1vNHhongUXZxarTijJwO\nae1EsTd93ZN/JgEF1eft+4dYfkunvHCkx7NpHl9yan0yt+4ZThucqVIWJGGNMMtF\nH8cw92llPXYXl+McB2j/0CHzCvF15gHPqC4FdPvwPLB25t7VB+CIWRZtUbc1jHpv\nbQQp0KTo7DiVUf6i94iIPVZ3+WCkvd7eJSrwzMGNJ+CcPb9IbjsY14E9H0tvJE/C\nsJwobsAQVEsHmRGQXWZWRbM5mjB7t5ihJm4eb1VBYQKBgQD/MFsbCGkRa+N+w3MR\nKpJLluGxqE1uFBC/1k/Ja/kwbv4y9UrYZL5Uw1lpNdDBCPyeD5WdB27S53U5jpgi\nxJfkNOEUJZyQnexWRtP8xu/IhYwxb1fbhlPLW9T/5O6YudeU88QkNhEJWDVp449j\naiua8BpbyEHuoxfbCzBRpahbhQKBgQDPGB7ZVouxD7Tk9QLgRsgOspNHyEB0MvgW\nmGFV0cy/cEveAW1YV3N8qBcP+wtIA5c3jABgJ1vFdEP6GPGBtcPty8AZjSTxSzTs\n2epM03zj6aUoByuEBL7/Za83sGGMR9GN10CPr4BkPgKIP4K8EBX3kejKu4qCBPoH\ngLUp788HuQKBgGOze9Ta+1ngIhjTufA6BsBbqcAkdmQMmOKqk6+pbMlchBpataxH\n6Ajr7dHqQa45maETi6u3TLg/0A/1w0DKOGHjuxCJBVuHJ+ApegdnniVk7/oce2H8\nYF6yeUylIAcxjKXYe4h+Szewa+X8D3iS8YhuSI4VdpUKyXY+L9mmdFmVAoGABWjr\n5WGNZKK0Zwa/fHxc3YVss4NXq7FpKa3xXPyODLIySSpgYN5n9emuMIyuTsNJP/o4\nSEq+6vmOjQn5xRmqdJvN+NznCiacy1Ml+7vKl2mTFuiZCmnVU3akjR/ebHuzzbDB\nzv8Wq4ezKTv/fkotSLpXCnS7uYnHvkpucRoCnoECgYATquP1a6dKpdPkPgBiLKJE\ndHJZqR6ssKpuQrZ327rrPR9O8AOcxa7kkQNgwodmHTgTvfdMOz21w1rewKLRbHcv\nprvwldkv8J9tAu7Ejc0tS/+GTibUQYx1exkDriE6dsp9DfWBNHyOhaptaiZpb+6W\nW8UYUpcDjN0htVfW+oYyQA==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAznAk87dFojLz0VyyMVq7\nYh4/CwRHEOARSToZ5EUvQk2ZzXf3HYrYyIDxwE9T0aIB6GI8PdzuFCvf3SJ83eKu\nnvRWY3lHClIiSD6KwBOw1KSrRN2vtw+OVbS51+ppxI1N9lWLhMg1Dbns5movvTip\nVqXhWVY27QH7gbnAeUi4iurdaoRJJlRNA2WpUaLDMJPfCdGq8ggEM6yfJpyNzdYC\ndXrx7VZQlkMgaWIEbFi2a1CVavvdjroA9OSAr5Wbnwbm8pMNFFh+pABglAK9djQv\nFbFWhQ7B4ivAjkbV98Zvz/uiygTihj4OcBGpYEPPkZuJpafbp0djbSbbQPhofLXG\nHQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "znAk87dFojLz0VyyMVq7Yh4_CwRHEOARSToZ5EUvQk2ZzXf3HYrYyIDxwE9T0aIB6GI8PdzuFCvf3SJ83eKunvRWY3lHClIiSD6KwBOw1KSrRN2vtw-OVbS51-ppxI1N9lWLhMg1Dbns5movvTipVqXhWVY27QH7gbnAeUi4iurdaoRJJlRNA2WpUaLDMJPfCdGq8ggEM6yfJpyNzdYCdXrx7VZQlkMgaWIEbFi2a1CVavvdjroA9OSAr5Wbnwbm8pMNFFh-pABglAK9djQvFbFWhQ7B4ivAjkbV98Zvz_uiygTihj4OcBGpYEPPkZuJpafbp0djbSbbQPhofLXGHQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "jackie:18FEBDDC74E14198A96F565E8DC56F51"
+    },
+    "alg": "RS256",
+    "keyid": "jackie:18FEBDDC74E14198A96F565E8DC56F51",
+    "client_id": "106490000000000180",
+    "deployment_id": "1886:c40f4542d0fb4b2f59a28290a056454369ab768f",
+    "iss": "https://asuce.test.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.test.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://asuce.test.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://asuce.test.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
