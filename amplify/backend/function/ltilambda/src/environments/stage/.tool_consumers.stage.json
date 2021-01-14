@@ -191,7 +191,7 @@
     "keyid": "jackie:18FEBDDC74E14198A96F565E8DC56F51",
     "client_id": "106490000000000180",
     "deployment_id": "1886:c40f4542d0fb4b2f59a28290a056454369ab768f",
-    "iss": "https://asuce.test.instructure.com",
+    "iss": "https://canvas.test.instructure.com",
     "platformOIDCAuthEndPoint": "https://asuce.test.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://asuce.test.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.test.instructure.com/api/lti/security/jwks",
