@@ -51,7 +51,7 @@
   },
   {
     "name": "ims_certification",
-    "client_id": "imstester_530fac0",
+    "client_id": "imstester_92c5359",
     "uuid": "38e20f1039f34a108c7743c36c8d06a3",
     "iss": "https://ltiadvantagevalidator.imsglobal.org",
     "platformOIDCAuthEndPoint": "https://ltiadvantagevalidator.imsglobal.org/ltitool/oidcauthurl.html",
