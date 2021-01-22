@@ -192,7 +192,7 @@
     "client_id": "106490000000000150",
     "deployment_id": "1899:61a0af232e16c64a03e29dff20e94245adae760f",
     "iss": "https://canvas.instructure.com",
-    "platformOIDCAuthEndPoint": "https://asuce.test.instructure.com/api/lti/authorize_redirect",
+    "platformOIDCAuthEndPoint": "https://asuce.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://asuce.test.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.test.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
