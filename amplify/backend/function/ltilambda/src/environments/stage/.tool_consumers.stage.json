@@ -198,5 +198,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "jackie-process-planner",
+    "uuid": "74228A16A0124AD09F9A894ABA64814E",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCySV6ESHtCGk5V\nKsVpKBrJVA5fTg55y/2reM6kLlYuUExfC6nVpIWvowT2ahV84njIrq82R8BmEENd\nNanml8OTGSwysCjgCS1GyowmKIzDh3wz/JehZV5pGYPpGnT9HU97eiOBcMOpd+X7\nlUYjnu9m9mAUZ1FZLfGRZqCuyaHaPpUnj/kPh8wnzB9mK0IDPwiasMAfg6fbSoL0\nOnKjm22uLBxi5kE96IxbSBom2JMcXJuL5/xrHGgGRZSc02DsrUvByeQ48nQ5caXw\n+//8dDtH4D+SXgn7lnwJeGqSMRD614K6SJfrHclMxHezuITiMUaV1JOEhWVVAAK8\na855xEqnAgMBAAECggEBAKjBzheEzDcr003GaIo7De/YAqqvpgAf2QOAHIlH2weH\ntmKZFa9GRcyUkFP24lQNwqqivvKwRCvX5QvLigDdUqBgSXfJS0eVKChD/Rj5dRR3\noFdNFvIMk6sEHdp90pLsNZn5aLZTWMGG3kifaX66KH3bY+KsUVIKrQgmjp4j+XIs\nCC/uB5em97szb30Db76fXP2gk5t16ARdC4BEm3SWe+0dftI7rX38GxNzcyTA0t1V\nk8vDM+75agvZbZ1Qzd8AUFk7NPBmVHPwrUk3O37EyaZE4PGsJVHK8/xqzaZfCzt8\nIreOCVVJnMF0TptGpXWW36HY3vQhcQqmHHFHuX38vKECgYEA7VX44RILv2cmrD3s\nvDYd99ForW7TDqrKHFhESMtwFMoPHkEmjhycbcmognwKeqtUfsyuBbmUedhIuGk6\n0gk2WOOcmCYoJ4WgFatyAkck7jZetPD2Ug8RJnJDHEdHDoID8qI3u575p/8W5uCJ\nQ4fKML8XXjh/EZKYK0NkrKxTPhkCgYEAwE6fRmJ23GLXCuFRWInkKhAQz3tCKPLP\na7Z2lvOFlL9UYej0RIR9cklLpKyHujXRqLaUsjA5uVGamp/F+PSffAkKFjy4oi7m\nInNT2EuBqZPzdcm8Vn/YalWbGLB2eFJzN+5VNnIDQY3JftV9i5nawOxnDfChtBYI\nstq1MiujZr8CgYA9i7TdkNNxECvMMMbKS/JbiHdvujSLMij1TsJuaisniPqAqv53\njd3W7pt/MvF4vCNOOn/KRkTFkBvTjp5NR0xLosLCBesVzKYl2G7ZPl/KUlke7PnD\nb9rPsIPMuoMntPmXGw/+3Iv7T8A9oO6Xj4gUOgmySk5RXUWOuoxJ5uozSQKBgADN\n01il/L07JI8FFiP6n5uVaZyUdVhae4eFwcUry3ktu5qVMMBAlY2uxMQxfHfI1dGQ\nwdpk3TjrIGxZEqjRzQDlwMcLBfKXo5qtRMJ4vlgJKFFrwH/UFQGMzhMyWaxzG8w2\nEOEjZOQXRapkFhxJTmLUGjIyuVpZZTvqMiu9hvddAoGAPdPI2dicH+3T5+syPO9c\nuMJ+Ta/Q0SLC2x9+hw6heKJUGPj3sl+itIwPN7SBP7m62wzZOVf7O64LvNMeThU6\n6gdMa+fNFrFq3hKM6YiVRyQ2EkIKK+Ij3+PkLNc7UejlUe8dOyaRY+miCB23zwpW\nAeoYqkcobyXVR4u1chfhE+0=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsklehEh7QhpOVSrFaSga\nyVQOX04Oecv9q3jOpC5WLlBMXwup1aSFr6ME9moVfOJ4yK6vNkfAZhBDXTWp5pfD\nkxksMrAo4AktRsqMJiiMw4d8M/yXoWVeaRmD6Rp0/R1Pe3ojgXDDqXfl+5VGI57v\nZvZgFGdRWS3xkWagrsmh2j6VJ4/5D4fMJ8wfZitCAz8ImrDAH4On20qC9Dpyo5tt\nriwcYuZBPeiMW0gaJtiTHFybi+f8axxoBkWUnNNg7K1LwcnkOPJ0OXGl8Pv//HQ7\nR+A/kl4J+5Z8CXhqkjEQ+teCukiX6x3JTMR3s7iE4jFGldSThIVlVQACvGvOecRK\npwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "sklehEh7QhpOVSrFaSgayVQOX04Oecv9q3jOpC5WLlBMXwup1aSFr6ME9moVfOJ4yK6vNkfAZhBDXTWp5pfDkxksMrAo4AktRsqMJiiMw4d8M_yXoWVeaRmD6Rp0_R1Pe3ojgXDDqXfl-5VGI57vZvZgFGdRWS3xkWagrsmh2j6VJ4_5D4fMJ8wfZitCAz8ImrDAH4On20qC9Dpyo5ttriwcYuZBPeiMW0gaJtiTHFybi-f8axxoBkWUnNNg7K1LwcnkOPJ0OXGl8Pv__HQ7R-A_kl4J-5Z8CXhqkjEQ-teCukiX6x3JTMR3s7iE4jFGldSThIVlVQACvGvOecRKpw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "jackie-process-planner:74228A16A0124AD09F9A894ABA64814E"
+    },
+    "alg": "RS256",
+    "keyid": "jackie-process-planner:74228A16A0124AD09F9A894ABA64814E",
+    "client_id": "106490000000000151",
+    "deployment_id": "1900:61a0af232e16c64a03e29dff20e94245adae760f",
+    "iss": "https://asuce.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.structure.com/ltitool/oidcauthurl.html",
+    "platformAccessTokenEndpoint": "https://asuce.structure.com/ltitool/authcodejwt.html",
+    "platformPublicJWKEndpoint": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com/",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
