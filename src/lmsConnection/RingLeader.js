@@ -79,7 +79,8 @@ export async function handleConnectToLMS(assignment) {
 
 
 export function hasValidSession(awsExports) {
-  return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
+  return true;
+  //return (window.isDevMode) ? mockHasValidSession() : realHasValidSession(awsExports);
 }
 
 export function createAssignmentInLms(submitContentItem) {
