@@ -273,5 +273,30 @@
     "platformPublicKey": "-----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0mf393TPAWkos5/Ni7Kx y5qjoy+O/j3oLxakoTLfD4giHNz7EpriN+FiO7nFQ7lwTILzcy+SBkklFjytVwKl 7gMSp0xOuSJopVEk2Vs2qyEBBHauDMG0PFoJlszdPqKDwS0FWsLqWaOMgGUmHxuD ZNHyr6Zy2/Nz+9XhxQxFBHED6r651dndg/yzIATPz8/TcxtRwp1kU/QujocFYwcG Deo0dvi4F9XhIEcxHhlR2edLCAYSG3ecuntB/uuEgo1POG9jqvnFOIjwsWL72wFV ZEKpTZ3YVfvgoI77Li3EKRouKZLVDNH6xbRB/ShhGsWHS7wa5NWElpGS6JYz6dox lwIDAQAB -----END PUBLIC KEY-----",
     "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "coap-data-tool",
+    "uuid": "D15C14CA1CA64189AE5FFD8FAB37CC38",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCbONQTJmqj7se4\nOH86SCvPHSvy8WsDoHxL9PtciKjp9LhpLWrNUhEkk7mEu5B0tSCFi1uBLsMAHibt\nVIB/B/V6duZxgFFrdRo5dmsz6JXanm3DY+rlqk+0x1vhALANphwArVqL4TAis56p\nvILAZsn4nmLL4WMWYXTVdJ0LDaomyiitLjN1031cRi/+3plexcYkE6buarORJj32\nxgZa5/9hJaPlc2Kva6xCZ98B4D7k7w9ce2XxZDU3t1I4WG1dyo7pRLDx/lpXr2UI\neGKIMux0tYmhzyTKbvbt2Ee03Opz5vvAQqYSoo+i64W8TMX5OCTV+5TWPyTKIkQ6\nIimD6Lc1AgMBAAECggEAcaJWz3YuV7j1CU6DBb3UJJnslLxcZZlVpZ3Bbuq1DiGT\n55vSNmHAHxDunddaV7ZKCroM0TPUmf947AIS1+yRr4fgCHOyJ4LhIfQpYyUAn72g\nCYzaaCwYkfXos333ZOaYVX6TbRf8T0tD+msBJa2aaqI5HZzxF29dQu9OEMt+J0pw\nLm1rfB6Cynm+6HH0fuZfXf8+dObiZR9qlEBLHiNPv07Rxp6EP1bOvOfrqLMrAy8E\nWjPYjOnAUDGuPL4t22qTKIDOfriD9sXiXmA6vFbUNvSToYGN+7mhAnImFCljuzhY\nWEggIvCBf11W0Wwog1OI2/Nt9M0EswAwZy7n8kFBgQKBgQDL/eWkPhpV9/R/fOke\nxpnBtQ2ULj4JLYzQmokrwvpvrTrCcpLfWDvmcwwnMBSgcfn6rJ7llEDtewQyaemc\nS691AnpNjRrG6JyA4YSvSNjhtiAsfMRU/ovNTSwEjB+/uE+/z05yRNZlilCtc0wA\nxS4lVq5pvp0DH5k+7lHTven1cQKBgQDCy9T8qC4etevwgQPkIa5WQt9KVopNNHmI\nD/PoDwUwU+nD2U0R93p73kjF5FlLy8QRniKDdFuGAYVG5N95Hi8LEq7RfAJDfz30\nnfKCfHAjyrECvthWhJ005XoXsTWrtLqBhvCtsw0ZOZ5CP+qS5npY4o5Zx3agUOvi\nmzQF0N+sBQKBgQC/L7w9/hKSxiz6G6kltf8/ZKBQZDKySWWz0VKEmF49sr7ipZ1w\nBHNHnkYiqFZ8tbYTshvOke90ZBpf4ZIYcXsFkIfuDTSufi7IQBUqb30NtrNa3qjn\n/BYtGYoKzQWom2brH7GnOUszqbnJhskR47xHNIGNDCB+X+wx5gz9Bf6zkQKBgGb5\nAToeXWL2oCaezMPH2jTXXNobLTjqyGPYqwK9De0iLqzNLiSVQjZApw+VSm765Ea7\n5VrAI7GPFDkJu+h2wD+GPMuYVkn/9WxeIlhAF7eT6kadRBdYOxI/TG9ByjFedEkM\nYCYyRHZVMweqagIFvB9IhB+JhXfxzwAXM0TvyY1RAoGBAKRiRlfNFBu70Eqf5LZU\n1uZoldu/9bUA9qIlu5mR8qtsdngayubhhk0pQ35XWy3Po8f4nX9Ahfkup/cccrcR\nxLpZpczkJT0gK438C4kLFZlPytBYbX2TRRLNQnwXVdl9HFWt8x9z/fC2Lndecrkw\nO+AwsJcKIy7DVwV0R7k9yCdN\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmzjUEyZqo+7HuDh/Okgr\nzx0r8vFrA6B8S/T7XIio6fS4aS1qzVIRJJO5hLuQdLUghYtbgS7DAB4m7VSAfwf1\nenbmcYBRa3UaOXZrM+iV2p5tw2Pq5apPtMdb4QCwDaYcAK1ai+EwIrOeqbyCwGbJ\n+J5iy+FjFmF01XSdCw2qJsoorS4zddN9XEYv/t6ZXsXGJBOm7mqzkSY99sYGWuf/\nYSWj5XNir2usQmffAeA+5O8PXHtl8WQ1N7dSOFhtXcqO6USw8f5aV69lCHhiiDLs\ndLWJoc8kym727dhHtNzqc+b7wEKmEqKPouuFvEzF+Tgk1fuU1j8kyiJEOiIpg+i3\nNQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "mzjUEyZqo-7HuDh_Okgrzx0r8vFrA6B8S_T7XIio6fS4aS1qzVIRJJO5hLuQdLUghYtbgS7DAB4m7VSAfwf1enbmcYBRa3UaOXZrM-iV2p5tw2Pq5apPtMdb4QCwDaYcAK1ai-EwIrOeqbyCwGbJ-J5iy-FjFmF01XSdCw2qJsoorS4zddN9XEYv_t6ZXsXGJBOm7mqzkSY99sYGWuf_YSWj5XNir2usQmffAeA-5O8PXHtl8WQ1N7dSOFhtXcqO6USw8f5aV69lCHhiiDLsdLWJoc8kym727dhHtNzqc-b7wEKmEqKPouuFvEzF-Tgk1fuU1j8kyiJEOiIpg-i3NQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "coap-data-tool:D15C14CA1CA64189AE5FFD8FAB37CC38"
+    },
+    "alg": "RS256",
+    "keyid": "coap-data-tool:D15C14CA1CA64189AE5FFD8FAB37CC38",
+    "client_id": "client_id supplied by consumer/platform",
+    "deployment_id": "deployment_id supplied by consumer/platform",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com/",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
