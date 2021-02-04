@@ -290,7 +290,7 @@
     "alg": "RS256",
     "keyid": "process-planner-blackboard:26AE1BCBC661453ABC07AD8D56D81F1F",
     "client_id": "31cb9c6e-49bd-4e5b-a6d0-3d63fcd6f398",
-    "deployment_id": "deployment_id supplied by consumer/platform",
+    "deployment_id": "c8b87df5-b214-4509-a7ae-301e53f59b5b",
     "iss": "https://bd-partner-a-original.blackboard.com/",
     "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
     "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
