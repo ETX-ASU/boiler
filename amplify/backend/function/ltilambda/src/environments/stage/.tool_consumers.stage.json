@@ -273,5 +273,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com/",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "process-planner-blackboard",
+    "uuid": "26AE1BCBC661453ABC07AD8D56D81F1F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQD2MnAs4Ze9Rnzn\nopt+ZLY+//rEKbJmQeNmfB3fj79fYkhwSTPnOGX0a4W4c0ACB+2PNrPAdRkZ4vM7\nfC2XStEReI4F+HIRZI01mtrWGjqPiS4KC2wIZ34vCx8nessgrkcNl7oRDfM2Khm8\nhQLxmhf+zrdnYr0k7VGDlvZF6YXfdnhNU+3nxmSGM1+8TSxeSCqhtLW1PwnMryUS\nB4x85vATBMA67rLNSzJ5+3S5saiLq/ahEB50x2BCGJiwhw8pl8fW0GPjuCr9OCKa\nrgRPj50b9fk2E3rcbbEqhbNJxcfkbQoTExWAwg3ndI14fHbtgtHAuglcMffK5QIR\nDvQdeX/PAgMBAAECggEBAK+UiyHHBaOsKJo+Aq0igELv5lSN9DgvV1EYxWlSKEaL\nXmQOIOEO/M9S+3vvXb/VDZwshAeGu48VpyhOSGl0pyPRmWAyro8u6fJH7TfyXr9N\nMzNgr/xSatB8GwzZ6xH0mKHeContK/3+CnrDVbUek2xa2rv11DUItzCksiBsCdiy\nS8IBcAdCkhRCINkPvFIXHnxI4q40nX4XWZ5Khl9rib9bVaQg/JMylrzC8K4ufYK/\n/2CIFvrguGiCr07qVs6jbp618CR3DP89YaVZiUJrrq11i9pdPrKS3PVrviPnWKGj\nLzTz2qMw4kyYtMqaClHF+/3lN8xMBcvbnR0R0iY+A7kCgYEA/RaCgxQqMwRTbdWY\ncr5VH3ZGIW1Z+Tspt7QkiczbspjivPH3ZcX8VYOT62O1pGVMDVZ59NVuTioISYuf\nxkjFCqW37hViICmWM2JEUprCOQptpuqeutqdmxxucvaaZK3Cw6nSnGFUM4W2gway\nFp7NnybXtSjRkTXBUW+EoZFtUlMCgYEA+Qehc/sPLi2YeNewj3CvG0EJniOsGm3W\ng33Aob24lRowGEQHEOM6iwFASMUKKmKVP3CRja45yIAw0q0pjLa5VCpLldyrP7rH\nwsNhSIWZk2hI+F1cTgm5b1Z1IiAaR3zn9HXMwhAOomFJpzNzHnSvaj1KXAkous0Q\nqu+6Ykb9ZRUCgYBhLlyNEpgloNqcSTFRlg4/l33UZhXvYq1hMdX55+TQjm46GTtj\nJAQBnhWVhGMCLjdmw7busWm6r98gxnFihRzMOtgGnsVgDjfzoR8VDQHZP0zdlCfB\nHiL4pZEvqcudLy+jTDln/OOFKSns5AxMLUxNeW/Iy1S1Sovhxk2KcLomqwKBgQDT\nVth8FzqA1A0rsNCUSuswU/eXj2qFW2XLXbNXEC1PzFO4pDLi8BRE16D4oM/JvLQw\njJXaCVvcfn3wrSgv1PpfJS3UVtu2UAsrjKhI5ai54qzaqlClobcPd+4cMeZbePNZ\nEYfdwcbJo4rgLNerpxcfMDik9tjr/xAAIUaqFNkDKQKBgQDEMFE5whcFLznqSQYf\n+PnoTGUtz6AGZFibY5w+WnuZifm17dfCC9169Mf4u+z0S91Eymn3ACDYGH7BQpwO\n5frQ1hSgQgEiyoRmJoagjG1J/AxGZv4iIP8M/OrejkYwQ3ZIZbOCSCK9c29f8ktM\nqyjiIiIvC4pw/NcMOWKSNAlO6Q==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9jJwLOGXvUZ856KbfmS2\nPv/6xCmyZkHjZnwd34+/X2JIcEkz5zhl9GuFuHNAAgftjzazwHUZGeLzO3wtl0rR\nEXiOBfhyEWSNNZra1ho6j4kuCgtsCGd+LwsfJ3rLIK5HDZe6EQ3zNioZvIUC8ZoX\n/s63Z2K9JO1Rg5b2RemF33Z4TVPt58ZkhjNfvE0sXkgqobS1tT8JzK8lEgeMfObw\nEwTAOu6yzUsyeft0ubGoi6v2oRAedMdgQhiYsIcPKZfH1tBj47gq/Tgimq4ET4+d\nG/X5NhN63G2xKoWzScXH5G0KExMVgMIN53SNeHx27YLRwLoJXDH3yuUCEQ70HXl/\nzwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "9jJwLOGXvUZ856KbfmS2Pv_6xCmyZkHjZnwd34-_X2JIcEkz5zhl9GuFuHNAAgftjzazwHUZGeLzO3wtl0rREXiOBfhyEWSNNZra1ho6j4kuCgtsCGd-LwsfJ3rLIK5HDZe6EQ3zNioZvIUC8ZoX_s63Z2K9JO1Rg5b2RemF33Z4TVPt58ZkhjNfvE0sXkgqobS1tT8JzK8lEgeMfObwEwTAOu6yzUsyeft0ubGoi6v2oRAedMdgQhiYsIcPKZfH1tBj47gq_Tgimq4ET4-dG_X5NhN63G2xKoWzScXH5G0KExMVgMIN53SNeHx27YLRwLoJXDH3yuUCEQ70HXl_zw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "process-planner-blackboard:26AE1BCBC661453ABC07AD8D56D81F1F"
+    },
+    "alg": "RS256",
+    "keyid": "process-planner-blackboard:26AE1BCBC661453ABC07AD8D56D81F1F",
+    "client_id": "31cb9c6e-49bd-4e5b-a6d0-3d63fcd6f398",
+    "deployment_id": "deployment_id supplied by consumer/platform",
+    "iss": "https://bd-partner-a-original.blackboard.com/",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "platformPublicJWKEndpoint": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "platformPublicKey": "https://developer.blackboard.com/api/v1/management/applications/31cb9c6e-49bd-4e5b-a6d0-3d63fcd6f398/jwks.json",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com/",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
