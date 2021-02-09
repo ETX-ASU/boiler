@@ -373,5 +373,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "you will need to supply the url of the react application",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "coap-data-tool-3",
+    "uuid": "24C4BECD35CC424AADB0B6870A700348",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCR/HbF5Mr+uaGr\neE6AVyui7aVCBiLqnGdhBQQfteT5vXgs6KOcQ3yQ8FOuThc2NvK6+Xptq672GSSy\nYpcjs5ftu/4VxQTsPkiHBkfJVcN1Klv+BQHGQKkLZqLIz2394XMR3tqXSywNOgUG\nJ2YGIWBa3kcw0Tf9dLWp0NkLmeWCYWPpqYkyNCKrcRmExMdX/3rP/nOmx3cvwZV8\nrvaxjHIuE1AVkr6rHgIW+XkiMbsz+Y3V7jxMSDOSRySvRRFTxnbZQq7l9K5iDGli\ntWglaLCOPOW2GzLXjRQe3k0AtlYnnLi2fzHzGWSIAQ8zpRx9j2vslJxBsR2LxmJF\ngb56W8o9AgMBAAECggEAXYzIXAZCozs3w9cDjzDNMMpTJV0jUO7LPJvnSZ7ZTcTB\n1x15gvCoSYUISuGV9FL/9xtZ/h+PrfrszjdpnSJAUMMwjqjDf9Rly8kVhYqlB1cO\nvlhdC7tx2HF8DW0HkjK/94q0z1EHuK4efBQRSAppYbGhM0JPO+dnZpwECnAjaAmj\nJTYoKToVXV4mQ1YXbsqRWV7Zl14N3V6VAbXHErGkyF81cX3umFzYNmf5u7v/myGt\nf3VZS4zDWWQkOIMrJofroAkzAvYH8vfVU5yWWyVzFeBWcFapTsjdZPkzzVwyzC6o\n3LRZTZaKxNZCt0ah25d6oh+Q+nQpTvAE3Y1h04JCDQKBgQDCDaaVYVeyDayE1d8C\nSbb+4+2FNsUJZ+F8oRCHx68BJhSYPjTr1hpOLt7u8UekW537E+FyNA62AMCGTgTC\nSZ9y83jcDlxoHOtzCVbYNKmRGZFfTXd1SknSFznwKLh2cd6ZbWgSQHQPuu87yD83\nZUkwR2/C9qyOfx9vdpTrV2bkcwKBgQDAlrCPnnLJPRAgcRwQuNu+FC/IJjepMuT3\nGrdtRVtQdLL+Id8i+3gpxvRJ4iwRFX1PGe6l2CJh5jXGLK+TO9mZZn5VoUUZfcC3\nRkKNhzUPgFpUKHIJ2UAWS1yAjHp+K7WeVE4ZxGKbGBOjlWB2fMo6Ml4GjaSF3NXv\nZChp63eajwKBgQCdJpTrkKOGbJB0Gwe5QJ1UGp32Lf6vuVLgrUdHzqypT3+KM4aE\nHyW6fzbHZtrP/eoYtWb0J7hqKH3BxlkQRrM8UnRkMbUgE5uR09Riz3MrMPuLpJ7D\ne+AAphKjrTaFpX3R3spTTaMwQgEP9wFLCVmWIaQezcm8tLJugCfl1yhahQKBgFT8\nKj22NgEHqS4nu7LFYHKohc1U0AsiIlfIuljF2l3OoY3zdHwDbCtDWFmiLL/9M6bM\nUrtsfP+mjuQ8o93c81D2IZm36L4u9/PoVUYO/CMzCKlKj8g4zkcISnGPjB5RO3v6\nx9wnBTxbi48MQ90FhFfaEhPiPU+0+9L/57WV6tmRAoGAR6j7DaoaShbX9LlvkIwt\nZKgalxNSy5D0fW4N11+c872V5jpeBPrg2X5UcepB4lX7fjMzDpV3M+wVWxx8o8KK\njCBsoEg0Dprgscxy+RZuYba4No1RNgd+X1TEeQnAji2sHngL3oMEqOXNcbcActot\nUBJk5mWuJyX5Dxo6F63HDDI=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkfx2xeTK/rmhq3hOgFcr\nou2lQgYi6pxnYQUEH7Xk+b14LOijnEN8kPBTrk4XNjbyuvl6bauu9hkksmKXI7OX\n7bv+FcUE7D5IhwZHyVXDdSpb/gUBxkCpC2aiyM9t/eFzEd7al0ssDToFBidmBiFg\nWt5HMNE3/XS1qdDZC5nlgmFj6amJMjQiq3EZhMTHV/96z/5zpsd3L8GVfK72sYxy\nLhNQFZK+qx4CFvl5IjG7M/mN1e48TEgzkkckr0URU8Z22UKu5fSuYgxpYrVoJWiw\njjzlthsy140UHt5NALZWJ5y4tn8x8xlkiAEPM6UcfY9r7JScQbEdi8ZiRYG+elvK\nPQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "kfx2xeTK_rmhq3hOgFcrou2lQgYi6pxnYQUEH7Xk-b14LOijnEN8kPBTrk4XNjbyuvl6bauu9hkksmKXI7OX7bv-FcUE7D5IhwZHyVXDdSpb_gUBxkCpC2aiyM9t_eFzEd7al0ssDToFBidmBiFgWt5HMNE3_XS1qdDZC5nlgmFj6amJMjQiq3EZhMTHV_96z_5zpsd3L8GVfK72sYxyLhNQFZK-qx4CFvl5IjG7M_mN1e48TEgzkkckr0URU8Z22UKu5fSuYgxpYrVoJWiwjjzlthsy140UHt5NALZWJ5y4tn8x8xlkiAEPM6UcfY9r7JScQbEdi8ZiRYG-elvKPQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "coap-data-tool-3:24C4BECD35CC424AADB0B6870A700348"
+    },
+    "alg": "RS256",
+    "keyid": "coap-data-tool-3:24C4BECD35CC424AADB0B6870A700348",
+    "client_id": "26969776-9786-44c9-83a7-ab058f1b05fd",
+    "deployment_id": "701663a2-3395-41fe-af98-0db1deca5883",
+    "iss": "https://blackboard.com",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/26969776-9786-44c9-83a7-ab058f1b05fd/jwks.json",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "you will need to supply the url of the react application",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
