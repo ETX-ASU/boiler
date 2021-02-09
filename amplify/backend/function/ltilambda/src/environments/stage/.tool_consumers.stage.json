@@ -323,5 +323,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com/",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "blackboard-boiler-plate-2d8f7f3f",
+    "uuid": "F18FD2114A0444349631C3971DFAB88B",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC8+pEoSpXMh2fm\nOqBQrUftBGygBqHmZvWABur+iYOs20viHxyJgmQwDAgjOCuAw7zoy82BLVtZJn7e\nlpX9IIB1AZKIiUPvtpA7DljqiOdgqK4VymY05I4c8Oh5uUAT5c5GcuWeEAR2nQCM\n6pXl6Lmpnuy5FTlJsop/bIBSbLpI0pWh7WbaeyfhYerm6greaUS1m15h20yq+YFO\ntKnkppXhlQysbDBZA0Dp28KLkU1x5lmJmwmmjKHoWcGpeY8ih6L3VHvt9LHP+XVM\ns05j3fP8kKaJDcw8/I1U3WtJXUyKFZBl/z6BTcXFi/1/Hx7mh3PuwzTjQF7u/BZ9\nmppuOV6LAgMBAAECggEBAKFrtoogC4zFLK6v7Th8iy+d09ttTuWrlJBjWF9Lvznr\nqAniYVHkGwgffuP2mtJGYBrJ2yQ4RgsEouIm5r9s/8zyJuSRu4ILA3AudS0A/ALI\nksryNBOCFxIJhcpTvrRAW845XoGBVQ6sVUgJKTlVbSHCKpp90o1tAHiPiZzeWtDP\n95WbRMUyGzYJFP+UcFHgshLBpk3UM5nRDj1H8mvHh5n7KFlVxeHSmAkigFo/yQDh\nfT7m+R7XElt4HSIG4Yu7DtlM6D2Ny1DtCbWchq6M7iOPMgUD626KR0D8LjwaMfn+\nfk539wawQELePZBY9dwcc9bbG5o3C9K+WgBzz58SkYECgYEA6lCLzATvZZICjV8R\nEEWWQIwTRRnSqWbaX9+3eu7ePV9MSbUmX85t/weTpzdiCvvtYVWWSL7XTNotmv80\nY+sKFSm2K+AAKrCzqkTX6pn2oE+ls8uJ2QfyuE5LRF4helk8MV16jOha+WiWOqB1\ntO99azq44H+vZspUqDVoeiYUeNECgYEAznfo9OKAgecDj5ye+YHTh1akPuSDMHRo\n/pN9hfDjwBdMbXvmbJN4jF8F79hBBll2OaH9lTcFy1ulqeb2u84Wdx6CAe9z5Ivo\nnl4A1SsS5VWaTwrBNW6iA/LavT5HTJCpaFbx8k2kfnXhgnzOFGzwwRxPnAPsHDnA\n2oXQaJieuJsCgYEAxzKwlkJ/zwahGtR+KiougTNUUoOQfymMbsM/NciKsPwqW+Mf\n+4UAKDalxRulQxdHiF79g1ySpqg46zMYs/UmPjWWxJgLLD/Kje827B/19fWgNkjM\nKPDD3QHapQWtSllAfeste0sxxCSwyqiNSMPtCNMERv7l++n4rIOzDV0APHECgYEA\npBulO3gJQrdXGkAYECPD+S/Brwe8yrfMeITM4bh9nkImimNP3H8+8vvYYTJXRO+4\ny8hZIdAxN9kpjSk6dj4xlw7VsSodyMv34mC/crAg/c4Tr73RomHEPzU57e9hhpb5\nQCjTeI+ELswNqcT/nDaXCjcxg8WOV0UEZ+yyoWClz/8CgYAoe8Zj3FdLzYO2acrN\nj4lE/I+vbg46aZ4ZIIrUPlKkRQJMEkLMdV5I7pLS9ZZxlqWGgVPvAVWBZ3Nh3788\n61Zzf9lGWeeaR4nemg1DwR74EEUQzGexnWYfTzTjyJSv6EV4RS+CWeDdG20wyX14\neEV+9JCTY/I4kNj9bCL+O9iMfA==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvPqRKEqVzIdn5jqgUK1H\n7QRsoAah5mb1gAbq/omDrNtL4h8ciYJkMAwIIzgrgMO86MvNgS1bWSZ+3paV/SCA\ndQGSiIlD77aQOw5Y6ojnYKiuFcpmNOSOHPDoeblAE+XORnLlnhAEdp0AjOqV5ei5\nqZ7suRU5SbKKf2yAUmy6SNKVoe1m2nsn4WHq5uoK3mlEtZteYdtMqvmBTrSp5KaV\n4ZUMrGwwWQNA6dvCi5FNceZZiZsJpoyh6FnBqXmPIoei91R77fSxz/l1TLNOY93z\n/JCmiQ3MPPyNVN1rSV1MihWQZf8+gU3FxYv9fx8e5odz7sM040Be7vwWfZqabjle\niwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "vPqRKEqVzIdn5jqgUK1H7QRsoAah5mb1gAbq_omDrNtL4h8ciYJkMAwIIzgrgMO86MvNgS1bWSZ-3paV_SCAdQGSiIlD77aQOw5Y6ojnYKiuFcpmNOSOHPDoeblAE-XORnLlnhAEdp0AjOqV5ei5qZ7suRU5SbKKf2yAUmy6SNKVoe1m2nsn4WHq5uoK3mlEtZteYdtMqvmBTrSp5KaV4ZUMrGwwWQNA6dvCi5FNceZZiZsJpoyh6FnBqXmPIoei91R77fSxz_l1TLNOY93z_JCmiQ3MPPyNVN1rSV1MihWQZf8-gU3FxYv9fx8e5odz7sM040Be7vwWfZqabjleiw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "blackboard-boiler-plate-2d8f7f3f:F18FD2114A0444349631C3971DFAB88B"
+    },
+    "alg": "RS256",
+    "keyid": "blackboard-boiler-plate-2d8f7f3f:F18FD2114A0444349631C3971DFAB88B",
+    "client_id": "d779272e-8450-480b-aa87-c878c290bd75",
+    "deployment_id": "2d8f7f3f-8891-4e3a-b732-3facd658fa11",
+    "iss": "https://blackboard.com",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/d779272e-8450-480b-aa87-c878c290bd75/jwks.json",
+    "platformPublicKey": "",
+    "toolApplicationUrl": "https://stage.dyl4ur5zvn9kt.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
