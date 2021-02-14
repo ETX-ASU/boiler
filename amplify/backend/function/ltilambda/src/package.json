@@ -1,0 +1,29 @@
+{
+  "name": "ltilambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@asu-etx/rl-server-lib": "^0.8.103",
+    "@asu-etx/rl-shared": "^0.7.15",
+    "aws-serverless-express": "^3.3.5",
+    "body-parser": "^1.17.1",
+    "dotenv-expand": "^5.1.0",
+    "express": "^4.15.2",
+    "express-session": "^1.17.1",
+    "global-request-logger": "^0.1.1",
+    "got": "^11.8.0",
+    "lodash.isplainobject": "^4.0.6",
+    "pem-jwk": "^2.0.0",
+    "serverless": "^2.11.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup-tool-keys": "npx ts-node scripts/setup-tool-keys.ts",
+    "adjust-lti-lambda": "npx ts-node scripts/adjust-lti-lambda.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}
