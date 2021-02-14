@@ -49,7 +49,7 @@ Successfully set up the new user.
  * Starting at the project root do the following:
  ```
     cd /amplify/backend/function/ltilambda/src in a terminal
-    yarn setup-tool-keys --name=my-new-consumer
+    yarn run setup-tool-keys --name=my-new-consumer
  ```
     Note: you may need to adjust the script to properly find your tool_consumers.${environment}.json, (make sure you have updated .env with the name of you environment)
  * Find the tool_consumers.${environment}.json file open it you should see an object with the name (my-new-consumer):
