@@ -44,7 +44,7 @@ for(let i=0; i < process.argv.length; i++) {
   }
 }
 
-
+console.log("you can not use ':', ',' or '=' in the name of your tool-consumer entry");
 let hasDuplicates = false;
 for (let i = 0; i < toolConsumers.length; i++) {
   if (toolNames.indexOf(toolConsumers[i].name) >= 0) {

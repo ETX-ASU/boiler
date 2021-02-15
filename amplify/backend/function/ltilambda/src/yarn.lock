@@ -10,12 +10,12 @@
     d "1"
     es5-ext "^0.10.47"
 
-"@asu-etx/rl-server-lib@^0.8.34":
-  version "0.8.34"
-  resolved "https://registry.yarnpkg.com/@asu-etx/rl-server-lib/-/rl-server-lib-0.8.34.tgz#f03dd29daf09d5eaedc21f5d51c5d1fd5345c522"
-  integrity sha512-BG6KyW9Bo9p1PFs5/R9NE8n61lCPlAqNamH/M70cNEU8ly8haLuEvFNwO7Fma/N12kKlJbEtq1dIn7ko1G/IHQ==
+"@asu-etx/rl-server-lib@^0.8.105":
+  version "0.8.105"
+  resolved "https://registry.yarnpkg.com/@asu-etx/rl-server-lib/-/rl-server-lib-0.8.105.tgz#281efe29773d2b99794648f494189c6a0d8a283a"
+  integrity sha512-oKUPOq2cWujjwPGNl2yZi8sgWbtBqcfAmQ5Cid6M9mE2vT8K0cBasbOoLQ1XPN/c/JMNvp5HrL8BWXbgkVYpfg==
   dependencies:
-    "@asu-etx/rl-shared" "^0.7.11"
+    "@asu-etx/rl-shared" "^0.7.15"
     "@types/express" "^4.17.8"
     "@types/jsonwebtoken" "^8.5.0"
     "@types/jwt-decode" "^2.2.1"
@@ -32,10 +32,10 @@
     parse-link "^1.0.3"
     uuid "^8.3.1"
 
-"@asu-etx/rl-shared@^0.7.11":
-  version "0.7.11"
-  resolved "https://registry.yarnpkg.com/@asu-etx/rl-shared/-/rl-shared-0.7.11.tgz#d7db7343017e753229577fa7187e468d68214f76"
-  integrity sha512-4Ls+od8wrMGSR9pUWAX5iKNT0tcQ8dpL5NtXTZFtVPt1Cy66WEcoJcKPwwTToR3GfupLk7P8ne79DdnwMSSCjg==
+"@asu-etx/rl-shared@^0.7.15":
+  version "0.7.15"
+  resolved "https://registry.yarnpkg.com/@asu-etx/rl-shared/-/rl-shared-0.7.15.tgz#4ffc2a6455311fe4050388f6ba2cb641edbb9b79"
+  integrity sha512-djhNC2VsSDpFlPoZCTLyh5IEzCbhzO1J/YIP5BfQFcCUpD8o8xAgsoeOAZbC/FEVvLg29TpT7zpVDOKWgaXLYQ==
   dependencies:
     typescript "~4.0.2"
     winston "^3.3.3"
