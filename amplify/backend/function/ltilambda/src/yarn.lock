@@ -10,11 +10,7 @@
     d "1"
     es5-ext "^0.10.47"
 
-<<<<<<< HEAD
 "@asu-etx/rl-server-lib@^0.8.105":
-=======
-"@asu-etx/rl-server-lib@^0.8.103":
->>>>>>> 0ece5e5ea3d949fc2bb2b3de8df1297a3a913929
   version "0.8.105"
   resolved "https://registry.yarnpkg.com/@asu-etx/rl-server-lib/-/rl-server-lib-0.8.105.tgz#281efe29773d2b99794648f494189c6a0d8a283a"
   integrity sha512-oKUPOq2cWujjwPGNl2yZi8sgWbtBqcfAmQ5Cid6M9mE2vT8K0cBasbOoLQ1XPN/c/JMNvp5HrL8BWXbgkVYpfg==

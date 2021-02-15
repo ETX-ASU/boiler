@@ -1,0 +1,56 @@
+{
+  "stage": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boiler-stage-164450-authRole",
+      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-stage-164450-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-stage-164450-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-boiler-stage-164450-deployment",
+      "UnauthRoleName": "amplify-boiler-stage-164450-unauthRole",
+      "StackName": "amplify-boiler-stage-164450",
+      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-stage-164450/0f4cb780-2541-11eb-a3d4-02f676be589d",
+      "AmplifyAppId": "dyl4ur5zvn9kt"
+    },
+    "categories": {
+      "function": {
+        "ltilambda": {}
+      }
+    }
+  },
+  "devstage": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boiler-devstage-144109-authRole",
+      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-devstage-144109-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-devstage-144109-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-boiler-devstage-144109-deployment",
+      "UnauthRoleName": "amplify-boiler-devstage-144109-unauthRole",
+      "StackName": "amplify-boiler-devstage-144109",
+      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-devstage-144109/a881e820-2c4a-11eb-b89d-0af231211242",
+      "AmplifyAppId": "dyl4ur5zvn9kt"
+    },
+    "categories": {
+      "function": {
+        "ltilambda": {}
+      }
+    }
+  },
+  "puredev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boiler-puredev-174503-authRole",
+      "UnauthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-puredev-174503-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::540838891768:role/amplify-boiler-puredev-174503-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-boiler-puredev-174503-deployment",
+      "UnauthRoleName": "amplify-boiler-puredev-174503-unauthRole",
+      "StackName": "amplify-boiler-puredev-174503",
+      "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-boiler-puredev-174503/7107ca50-3658-11eb-88d1-02cc23e9ec51",
+      "AmplifyAppId": "dyl4ur5zvn9kt"
+    },
+    "categories": {
+      "function": {
+        "ltilambda": {}
+      }
+    }
+  }
+}
