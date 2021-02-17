@@ -43,7 +43,7 @@ for(let i=0; i < process.argv.length; i++) {
     args[1].split(",").forEach((value) => {toolConsumers.push({name:value})})
   }
 }
-
+console.log(`tool-consumer names: ${JSON.stringify(toolNames)}`);
 console.log("you can not use ':', ',' or '=' in the name of your tool-consumer entry");
 let hasDuplicates = false;
 for (let i = 0; i < toolConsumers.length; i++) {

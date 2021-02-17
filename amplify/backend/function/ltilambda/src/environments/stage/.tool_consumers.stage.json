@@ -247,5 +247,30 @@
     "platformPublicKey": "",
     "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com/",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "canvas-boiler-prod",
+    "uuid": "AE433F220C274715A051F79A5EC6A433",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDKbrdTaHdTAStR\njYh++4F0GNNm9gnq9O4fOZHhrIrJQom7lKC5CkhxE2tsFDEG9ztvAm/zkpX96BKs\nIZTW4T6wZnRUcNu5lp09WXLjEbD+YsEPcuW3bzVxLW1P5fM5RcgE4ivbj6GL07pb\nOKGlEDrb8TSdewmoAEayEp2ff37DEejSJyOfzu2s5np26f824xOdeElLhb2FM4/f\nshhGRAl8IT1zXjP7QLhETj7+PNXUprAK4+IjYnb5yEg9JnABVIx2kMOMImNxANUn\ndG66+bnuCJQOu3SMAY+BdUlsEuNvYbBebeEp3e6bxskZhWItOtcGEr+WpeFSaeUb\nM2VhSFGrAgMBAAECggEBAIZ2fHd+0KPmBuwo4x3V2etQAjxF+diD0RgUmX4ZqiZ9\neBeNZiUDW5Mgnx4vW1GRL31RVSOpntAFM0H7HG6PN6DcrTDZtlnUXaW+oL2LptGS\nr0Kfw07RI+KFljKYP7MvUulLgm5ZPakvfn3RZC3MVgx6b8SbUZKyfEMUcnbbrUvM\njnZAkF3tHmcyrEDYFh9C7AjI8kak2Nk045zlMdwvW188JUiN3bg1AHnhQbCV+Jgs\nBk7HCUiEbMYZhD3XeA/eTBZX/DxqvKOmBgznzDHA03RtJ3JKlfksGAFZGbCTaPt7\nnjAhVLPz3O8K5dbWP1xXwcV4w2hLKRq1j5F94yLHQOECgYEA9F8wgGqaZY0a6Mku\nkHXO3+CiK2z7m/UCCOWbCGkBiCmsTmrRB9vLTly07QACd0rJhXMAKxT5jxa+Z5SU\nnhahvsTkUTeN99VBrXexjFtCdrfl8slDHI103DW67Rc+wJLxgebkeSViYsUBEg1j\ntulZQlzqRr73xHUMVq9Fisq7bAcCgYEA1BCksRhhgXEbjNv56mUBCPmFD+wwIqgh\nLItW4xGLSabQFP7LYIsVY5tr5mlyjwG1qCRoVkMXUhn/iYiIeF5w3nZNI9sE8qO0\nj0mvNm+KcbuBtdtwuIKkZ5EpQN7Ive5D2sAVkxSXrKjtWJGxteHdx/UBLv9xOinM\nnkISwfSmzD0CgYEAh2YWoZBva8T7G/AcdL5RmYoFULpZzte6AOP3Onmz95XferOE\nji4iP5DuTkKrGx28+sv1U+mTPM0FQq74iX9Qrzq4pqd5adAnS839+h62fMD4D8Wk\nAbX/AeRjZepzQpAocClWfilQkhlFtpLkpPw2EKcax4gYECoqY/1JMtWRcxECgYAg\nZZqDY5Ih0EHBNynq4RtTX6swT4jbAoxu3aqcbeW1jsJjMrmnOhg+a1QEkz9pEX3K\n/iTiaMV7SXV8cVtH6EWd9ry6KY+L8e53pW4bBtdDoL2kJq4Fwg+Tst12h5JrUacU\nGBwzqAWz3urDiR55BtR247sWjvehRxl3Y+ixsMp6kQKBgDsopjpPbVuBi/QzH3Ng\nQ70EnJ6ogclyWjaWRQOsHgOwQXNHKFB3fxiW6ymqnB/+V4y7+EvEgFnQ4jNHtxf1\nlhdkCiJATSTg15bVaTNuYCLBS4NsGob/3ryPXM1UDlrVLbKj+V5a1d02g3IlrBH4\nBmxC/SMHfT+IkBNzuSxi0iK1\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAym63U2h3UwErUY2IfvuB\ndBjTZvYJ6vTuHzmR4ayKyUKJu5SguQpIcRNrbBQxBvc7bwJv85KV/egSrCGU1uE+\nsGZ0VHDbuZadPVly4xGw/mLBD3Llt281cS1tT+XzOUXIBOIr24+hi9O6WzihpRA6\n2/E0nXsJqABGshKdn39+wxHo0icjn87trOZ6dun/NuMTnXhJS4W9hTOP37IYRkQJ\nfCE9c14z+0C4RE4+/jzV1KawCuPiI2J2+chIPSZwAVSMdpDDjCJjcQDVJ3Ruuvm5\n7giUDrt0jAGPgXVJbBLjb2GwXm3hKd3um8bJGYViLTrXBhK/lqXhUmnlGzNlYUhR\nqwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "ym63U2h3UwErUY2IfvuBdBjTZvYJ6vTuHzmR4ayKyUKJu5SguQpIcRNrbBQxBvc7bwJv85KV_egSrCGU1uE-sGZ0VHDbuZadPVly4xGw_mLBD3Llt281cS1tT-XzOUXIBOIr24-hi9O6WzihpRA62_E0nXsJqABGshKdn39-wxHo0icjn87trOZ6dun_NuMTnXhJS4W9hTOP37IYRkQJfCE9c14z-0C4RE4-_jzV1KawCuPiI2J2-chIPSZwAVSMdpDDjCJjcQDVJ3Ruuvm57giUDrt0jAGPgXVJbBLjb2GwXm3hKd3um8bJGYViLTrXBhK_lqXhUmnlGzNlYUhRqw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "canvas-boiler-prod:AE433F220C274715A051F79A5EC6A433"
+    },
+    "alg": "RS256",
+    "keyid": "canvas-boiler-prod:AE433F220C274715A051F79A5EC6A433",
+    "client_id": "97140000000000198",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://unicon.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://unicon.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "",
+    "deployment_id": "436:5440a08422ab1ee7794a0588b5e4cb4a094c4256",
+    "toolApplicationUrl": "https://prod.dyl4ur5zvn9kt.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
