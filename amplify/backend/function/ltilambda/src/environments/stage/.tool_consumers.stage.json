@@ -297,5 +297,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "you will need to supply the url of the react application",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "process-planner-openskill-2",
+    "uuid": "426B4C5B33DD4BE2B0D24A401EED8DEF",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDAlSwjb3Cx3oPk\n6Q8zsZAMdz7iz9CLwzMS1Hwg8XwOvj8+Ky3ntg8+6OlqlN0XAYL1VwLeC12b0/CC\nnNz3MXM99bTYiFzPaZD6O8dwTu/kXr/xXghafLQlzvOV5/Pr0VVXGxMyZnduq6Q7\n4oTZx9lw7uHakd62yN5ayoqei0W9W2SgBl6eEz+0r2NxLfqgjLBgMpQlqJaTNmsv\nv6QNy8ED/5iGvH0GG4Z/Ec3973v3JvRM0/9GOjMrVjfWVycFENzD58Ms6QE9YyFH\njDUk0z9e3t/j9uVzlT9DXIBnE89uFbAmz6QkcdFCQJi3FHPvAxvnm2Z7aD2AUX4R\nbi0na1hJAgMBAAECggEBAIQYjjsMIJfQ0lV8yzGhFPaIALmg5CJJ1UmQOEh8e6S9\nODITehxa0+BJ8Hlr/K7gGYzhjxTxZNcTLADbSfHAmJSiadawykB237vUrztI2eGi\nYDRWVJKEwSjB6HEltjlF0Cy8ZJGImVlvIGr3ODsNiwecw4yhy8tCwsox7Z1MWJzF\n1plqJdd6R9R817X/98FDtzuO/xg69QwMsw48Tq5TX6yd1w2Sx9w78Cu3jUd2hTs8\n2die8oNST+IoljQKpvT/AEfgN+rzFkamOw4SK9lM3pjD3e50V8F222Kbooir5nC/\nnIvje6kZNy1WwuG1rdF4BAMvv1jg/dJwjyiFTGho65ECgYEA9KEy8Uq4P1j22zRt\n4bVc1Iio0aeTGP3bdI1LgcbjTr3zPYW2g4lYEOAce6NooiTrWiZlY93VLobbRIKl\nLpyT53VjdmT8iBW/NhG0VruicJeofu5/XTxgWqzlbGcgKtkzEs85XugA1uuc0xfg\nwSPapvc/IMpOHmzE7XmK0z5/ck0CgYEAyYitMjcgHugeFNUT5H8URSeuJWHPDK7o\n1STEO3S4/zt23i6lR4prvspHzkR6PREHgVuZqMWkkkPEk7UA8kPzRcf5MvK+QK+0\nQ8B+gAt2ACYXaXWcTuMHGgIknEIoTWsdAImjhOsLtHz0d29OIAlrrn1iD5NuFQLZ\ngpJ5s3UGI+0CgYEA8hWAC0bNNGs+x0iIIN/QgMbIgclaiVXW0e1ttnzyvx680ro7\nFspY60JNDZF1X1g3y9vJZF3HtKZh4NeEza7Hszr49dYUDjuvILu+gkJnCxMZ/Jra\nUZMJK1KEK5WWQLD2mPuXI7Nl+UnqxP+RPLDVlXuB7lolmng7HWK1Hj1v89UCgYEA\npMxuDG0FiCB5UMG45ZWBJte+0PS9UfrJjFnnWVMmYBfpKOBt6SVo2/gfZa2bY8pE\nH+Ser2MHI0/lNH/DyVgFW5+dyKq1JsJHH0wOZXh5wr9jT6qL6fo9+WedNmXm/P/F\nFIZ4v51Q0gOICQ5sjUgG1QXUpTYCw42z/dD3Uec04TUCgYBOoexd5rPet/OShwp1\n/grbg43cdKt9myTNUZsRUDKeAAAN5Q7IiS5hA+LK0nDBLm+CZ9gIMc1my8hFkIeV\nSRx5jmGJOmo9zUMymYVQOfJIrHrAR1XHZWKrwdsfp5Vy5S9LwkrGVDtcPEZEM267\nBEV7/B1c0UMBpfz9Ae2//ySs5w==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJUsI29wsd6D5OkPM7GQ\nDHc+4s/Qi8MzEtR8IPF8Dr4/Pist57YPPujpapTdFwGC9VcC3gtdm9Pwgpzc9zFz\nPfW02Ihcz2mQ+jvHcE7v5F6/8V4IWny0Jc7zlefz69FVVxsTMmZ3bqukO+KE2cfZ\ncO7h2pHetsjeWsqKnotFvVtkoAZenhM/tK9jcS36oIywYDKUJaiWkzZrL7+kDcvB\nA/+Yhrx9BhuGfxHN/e979yb0TNP/RjozK1Y31lcnBRDcw+fDLOkBPWMhR4w1JNM/\nXt7f4/blc5U/Q1yAZxPPbhWwJs+kJHHRQkCYtxRz7wMb55tme2g9gFF+EW4tJ2tY\nSQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "wJUsI29wsd6D5OkPM7GQDHc-4s_Qi8MzEtR8IPF8Dr4_Pist57YPPujpapTdFwGC9VcC3gtdm9Pwgpzc9zFzPfW02Ihcz2mQ-jvHcE7v5F6_8V4IWny0Jc7zlefz69FVVxsTMmZ3bqukO-KE2cfZcO7h2pHetsjeWsqKnotFvVtkoAZenhM_tK9jcS36oIywYDKUJaiWkzZrL7-kDcvBA_-Yhrx9BhuGfxHN_e979yb0TNP_RjozK1Y31lcnBRDcw-fDLOkBPWMhR4w1JNM_Xt7f4_blc5U_Q1yAZxPPbhWwJs-kJHHRQkCYtxRz7wMb55tme2g9gFF-EW4tJ2tYSQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "process-planner-openskill-2:426B4C5B33DD4BE2B0D24A401EED8DEF"
+    },
+    "alg": "RS256",
+    "keyid": "process-planner-openskill-2:426B4C5B33DD4BE2B0D24A401EED8DEF",
+    "client_id": "c556dba5-e736-4697-b58c-ff61308e0d4d",
+    "deployment_id": "dcabe413-853f-4d08-a371-1b0533863b05",
+    "iss": "www.blackboard.com",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth ",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken ",
+    "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/c556dba5-e736-4697-b58c-ff61308e0d4d/jwks.json",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "you will need to supply the url of the react application",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
