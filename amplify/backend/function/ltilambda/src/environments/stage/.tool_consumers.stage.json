@@ -322,5 +322,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "you will need to supply the url of the react application",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "jackie-peer-review-tool",
+    "uuid": "B94A913768B44E09A1AABD4CEBB8A98E",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCjAebsC9TH18j7\nmYzhs0kouSZwZPO/UzSs3ZhpQsvJ3N4eVsYhyoN/qefuppLqzXMinFQBvAb3eoap\nenHPDBCTMllEJJusEE46MTFAqrqIk1IoXKBx25iAXY9AD2+d01r2MFYLIZpCoJwt\nHcc1BMcOhu+rzmfP62dluruOUqNsiIiRm0yOuxSrbuEugEd6K12eC6QAHC8DAsLM\nmaHdC7zipRRZYCmefgfwkNVMSmS6Z9abHAn0bQcGdzRw9psl4NKwZM5VPl+4qp4z\n4PE77wFQogjYzvf2O7SwJFpVijffg1j8UAKXndicybLCEo30ehhRoh5b9Js/X3Ru\nJFSQA9M/AgMBAAECggEAGxGeykXwsLr5qiZGidhe5r9QTcvF2liz35zwyVIJS109\nGWapgkUB7zpExJGuxgUWAIJbROp3cbNMF2q46XwEaJ0sy68Uls8iXnF6z1VKopFs\nTD2NezrPKUngFvA5RckqSsWeFD0hQ70uEiPmx7wiXhw0QqCFBrb9tZv7t1erwcLq\nlWygMEOTKW+d/EqYOQU+0wGa6HwJIvIaIX6cHrVwfH+cyDcCcXYj+zBL73u571g8\n+mDoqBQaQUoPrzW4HvrIz/HEgjxmMt4VouX9xAvUI1x3+fmlswTjc76pCPDh6TYO\ngfnFJ1lbPVXb00EP0la/60lJ0sEQfPufmxxUkA4tEQKBgQDWjqT3FrUdp9qQHYGV\nDaLD64eA2OId6S0V9FLZQ6V8DWVuODl2tp0QjbixWjw6TyDcCq81lewPaDo8Uwpp\nBWZOPUKbt28gqOvSFfpGY8/pBfl+J1+hhyCUIDSQUJuUiCeCcdRNNXWMF8nBjBso\ndJydBBQZcUuTKQtSXaTg2S5FSQKBgQDCfj2wIPhz5Z3JV1yirDL7B36QfFWG53dq\nwUDveaFcnXMuWtWTieQVoPw+xE+qzjXqxAl9zhoqCsP3x/vguJqDcdOAvGpAj4nn\n69pfbciq1cI4imVNDmOvMLybwlEz3ShsbaM5WB/pMIDMCrvhtvFCJDJTAwJXqgbG\nnRKGZ+W8RwKBgQChACU17Oo3uK8/mYSVbsgGsITb4OO8gi783HwW4LYbIopMbRBh\nzqKJu28uVoH/V0VXGQVk9n1PCm04uy+CozSj3UBQTROstFVRLoDBtUBcockYKz+N\nnDKMNKZ87J/yk0Dil7wxu73bRDZ3cEUo1Gh5Qog6l1OYuCHwyqhguVgJUQKBgE+Z\nZxnchJK6WPd8P7d8DmlaydvMZxyNQvx4F2FrQDUtY2SHXH3Do4uOlW4C3jAjsUFh\n9hh874xhV47jVBzGsMY3Ib7AXiQKGwDGMFt6DPSOA60sRwVgbD/ZDHga8SzuyIqH\n3JOtk3HWnf/kLLzWKKtPMSF0S9MhDSDgTCKiBw4lAoGBAMaVOtcM7+lEgaAhtK86\nMqNGHHVK2Fil8V2bKCydjzFNG+PL0tg0C0gW6batWRlztUfZ8Jg3ItwVGeUUXFxR\n/SfC6cgY3yEyUJ2HKVtEV1Avo8FY72V2Fb4g08XEyU+xBLncXzYW5QAs8Oj69UiI\n4OFGl4phBJzmgEfucWDFgvL2\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAowHm7AvUx9fI+5mM4bNJ\nKLkmcGTzv1M0rN2YaULLydzeHlbGIcqDf6nn7qaS6s1zIpxUAbwG93qGqXpxzwwQ\nkzJZRCSbrBBOOjExQKq6iJNSKFygcduYgF2PQA9vndNa9jBWCyGaQqCcLR3HNQTH\nDobvq85nz+tnZbq7jlKjbIiIkZtMjrsUq27hLoBHeitdngukABwvAwLCzJmh3Qu8\n4qUUWWApnn4H8JDVTEpkumfWmxwJ9G0HBnc0cPabJeDSsGTOVT5fuKqeM+DxO+8B\nUKII2M739ju0sCRaVYo334NY/FACl53YnMmywhKN9HoYUaIeW/SbP190biRUkAPT\nPwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "owHm7AvUx9fI-5mM4bNJKLkmcGTzv1M0rN2YaULLydzeHlbGIcqDf6nn7qaS6s1zIpxUAbwG93qGqXpxzwwQkzJZRCSbrBBOOjExQKq6iJNSKFygcduYgF2PQA9vndNa9jBWCyGaQqCcLR3HNQTHDobvq85nz-tnZbq7jlKjbIiIkZtMjrsUq27hLoBHeitdngukABwvAwLCzJmh3Qu84qUUWWApnn4H8JDVTEpkumfWmxwJ9G0HBnc0cPabJeDSsGTOVT5fuKqeM-DxO-8BUKII2M739ju0sCRaVYo334NY_FACl53YnMmywhKN9HoYUaIeW_SbP190biRUkAPTPw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "jackie-peer-review-tool:B94A913768B44E09A1AABD4CEBB8A98E"
+    },
+    "alg": "RS256",
+    "keyid": "jackie-peer-review-tool:B94A913768B44E09A1AABD4CEBB8A98E",
+    "client_id": "106490000000000153",
+    "deployment_id": "2096:61a0af232e16c64a03e29dff20e94245adae760f",
+    "iss": "https://asuce.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
