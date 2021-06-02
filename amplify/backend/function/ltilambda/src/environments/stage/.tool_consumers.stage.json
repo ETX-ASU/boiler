@@ -363,14 +363,14 @@
     },
     "alg": "RS256",
     "keyid": "scc-peer-review-canvas:EC65DB01D1F04E2F8B0DF3043494B0C4",
-    "client_id": "client_id supplied by consumer/platform",
-    "deployment_id": "deployment_id supplied by consumer/platform",
-    "iss": "iss supplied by consumer/platform",
-    "platformOIDCAuthEndPoint": "client_id supplied by consumer/platform",
-    "platformAccessTokenEndpoint": "platformAccessTokenEndpoint supplied by consumer/platform",
-    "platformPublicJWKEndpoint": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "client_id": "50000000000380",
+    "deployment_id": "222260:bdd16460df3473ecb290884bd851b5fa982cb9f4",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://mcccd.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://mcccd.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://mcccd.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "you will need to supply the url of the react application",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
