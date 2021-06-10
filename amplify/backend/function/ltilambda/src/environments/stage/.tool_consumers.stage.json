@@ -372,5 +372,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cmu-test-peer-review-canvas",
+    "uuid": "51C67552C6C943DDA760CAA62CC37C99",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDxkgma0IU2g+ph\ngfQZlis2Mr56iBi4aCdkBwDGfwYe03v7rRJWUcvpTU9skWpANIncUtB23vXbdBSR\n48uLUXFpaBGMKKNpPd8G9ftR/LTwRxUS+GHlf1wp6xxiKMLCZyNzLGXitQmoegQO\na8p8eGHploScHwvoe3nCbFpUi2jsEncE2Q0+7VOWu83j2jOV9AYdor8zdClNtJ6C\nT8nDsb+bsh9jNcnTELMEEHHxfS8UqngczpuGUmC1culPBw8srYCyvd8jPRo2emks\n6CeB3s/PqAiHBH0EWHRmL/9BnRp+6aOO92npNGKdJQcca7pdGm+vgwj448d92hTn\nfhmv0vU7AgMBAAECggEBALt8TFgLXlhhKZdj9L+m/QKjf5I57nWw4GGRzdhA3c8u\n9BrwyDqWYVxA1FO+yGfsXtLQs1qO0OHxxcU0ttT58LuOOZA+OhWEH4SXhOas6wFR\nKdn/THuBzVX7U5wbZoza33iUDL9XIpfPmzZWEmFoTRWt7F3++o8ExgtPbQwQ5u3Q\nJNFmEdIQv+T37m6fxeTjEkTIH9IcYrSfDkjDbe8wLBqDy/gI+kCo1xCon6IgQhmR\n5ejSaQSPP52eK6b2jhzzBx4qjNPjJxJNCwJi/yP6ENmLDHZrou+SeHbS7mhKOl1A\nPV7CtyUjGS2FRIGdvodU220M9o9VyYFLs00noDH3pgECgYEA/oQSBjuRaagqkTx4\nR6rpM35J+hs4EMt/oWa9gmtqcVwZ72L83e6F+4eZ3pVkoyrWvhYnXuwwLyGO+EuX\nTvAgme2ySdFr4RCI+pb//4OJDbHcNrMibEsK7TxpSp8FJdMkBe7XdeMTjWVnFpTQ\nGZPRilzWnnUfGbUlMdYAeTf0BFECgYEA8vqki4WkI1Hmaz8wDTvEZ6QgS9kJ+5gF\ndlgexGRyp1byv9h/NhdrmAhDHdCKZHxJyLVwTpr6T6FuKYTBDyMEYp3Ryf46lHCn\nHiP4F9pK3NVr9eWjm9IUEhvJlAuPKi9NVVDiZlW4J4PExje2XOAOqOq/4sMpnfb7\n+HG/bpKlucsCgYEA7R8as9fXmDpmvj06Snr/HUxxm6S0TWFqnXLc6J8u4kJOn2r3\n78SD613gizFgO2xz+VEmiRc/pQl86/NxGsg5d2+vBXspKNyA4gbApstjavDkG8o1\nLfOUUIZSCoWxBBZ8n1JwRpKy6q8opi8q2kmPlXr9MVApE4hjCNU6R7VLkKECgYA8\nsSK8vwr6z5BQpZ3pEE7E3Jg8meAGejiTEPvObpC8/9ju1rMf3cXAWf/5yIdpBiqf\n+cItwERZ86bCtChNEaAcyfMHE3uqbGEyBCYKPzqH4r9u0oeFenoM8+fsFN8T2HDm\nqKeEjFDNffp+0Je6pzTCOLDpgXo5vOG/cxowEm1W9QKBgAdnkz8KFi8d9vrOjVwE\nS+l/OhcqJYkeeX/uh/iUZ2IFp3f7YZAEZXl2ciK+AJSOKBgWo+hCBp41cbMb7HJR\n3bU/L1aOzN0gBqP6w3ROviavLyEpF5glW15/LaMDZHf3K4AwhnLI1k2uG1IOLZVa\n0VcQ7lHs17ugx2ocf+iyxYJJ\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8ZIJmtCFNoPqYYH0GZYr\nNjK+eogYuGgnZAcAxn8GHtN7+60SVlHL6U1PbJFqQDSJ3FLQdt7123QUkePLi1Fx\naWgRjCijaT3fBvX7Ufy08EcVEvhh5X9cKescYijCwmcjcyxl4rUJqHoEDmvKfHhh\n6ZaEnB8L6Ht5wmxaVIto7BJ3BNkNPu1TlrvN49ozlfQGHaK/M3QpTbSegk/Jw7G/\nm7IfYzXJ0xCzBBBx8X0vFKp4HM6bhlJgtXLpTwcPLK2Asr3fIz0aNnppLOgngd7P\nz6gIhwR9BFh0Zi//QZ0afumjjvdp6TRinSUHHGu6XRpvr4MI+OPHfdoU534Zr9L1\nOwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "8ZIJmtCFNoPqYYH0GZYrNjK-eogYuGgnZAcAxn8GHtN7-60SVlHL6U1PbJFqQDSJ3FLQdt7123QUkePLi1FxaWgRjCijaT3fBvX7Ufy08EcVEvhh5X9cKescYijCwmcjcyxl4rUJqHoEDmvKfHhh6ZaEnB8L6Ht5wmxaVIto7BJ3BNkNPu1TlrvN49ozlfQGHaK_M3QpTbSegk_Jw7G_m7IfYzXJ0xCzBBBx8X0vFKp4HM6bhlJgtXLpTwcPLK2Asr3fIz0aNnppLOgngd7Pz6gIhwR9BFh0Zi__QZ0afumjjvdp6TRinSUHHGu6XRpvr4MI-OPHfdoU534Zr9L1Ow",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cmu-test-peer-review-canvas:51C67552C6C943DDA760CAA62CC37C99"
+    },
+    "alg": "RS256",
+    "keyid": "cmu-test-peer-review-canvas:51C67552C6C943DDA760CAA62CC37C99",
+    "client_id": "77520000000000230",
+    "deployment_id": "8374:e70ad14d217747b07a8cee7648e718c683f36c94",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://cmu.test.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://cmu.test.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://cmu.test.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
