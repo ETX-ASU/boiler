@@ -390,7 +390,7 @@
     "keyid": "cmu-test-peer-review-canvas:51C67552C6C943DDA760CAA62CC37C99",
     "client_id": "77520000000000230",
     "deployment_id": "8374:e70ad14d217747b07a8cee7648e718c683f36c94",
-    "iss": "https://canvas.instructure.com",
+    "iss": "https://canvas.test.instructure.com",
     "platformOIDCAuthEndPoint": "https://cmu.test.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://cmu.test.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://cmu.test.instructure.com/api/lti/security/jwks",
