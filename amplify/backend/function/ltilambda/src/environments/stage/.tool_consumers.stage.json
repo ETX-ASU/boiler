@@ -71,7 +71,7 @@
     "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://unicon.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "",
-    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
@@ -196,7 +196,7 @@
     "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com/",
+    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
@@ -345,7 +345,7 @@
     "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
@@ -370,7 +370,7 @@
     "platformAccessTokenEndpoint": "https://mcccd.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://mcccd.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
@@ -395,7 +395,7 @@
     "platformAccessTokenEndpoint": "https://cmu.test.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://cmu.test.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com/",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
