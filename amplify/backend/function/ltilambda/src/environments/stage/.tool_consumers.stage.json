@@ -397,5 +397,80 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cmu-oli-peer-review-canvas",
+    "uuid": "ED3C259D843C40FEA1048DF2541C99A6",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDnHL5NLhq3j9qC\nKQ02/iSS4VF5IbufVcRCsV7Xzp4sjyPDlvFv/7OtrZHS59MGBlJuvozWuXfpHMP+\nj4sB0C/Xo0Dg9G4PWvQgNon5727+jdeUQ++4lQG3MoxhezjeDKq8q21gC2B8tFh4\n+ksdH0ta0kr6lSK1euA/wBlcEaxI2JvDFXgvENtPTz94Rn+5g6QNMwLIjByTKu4Q\nIK0i3ZN94C0SFDzcOmUI1yRrDDKWlMfCKNaYgTiIZyJPJhcz5dNjS3zPve6SsMVG\nyD0mtpkUIi0x9CbU7n2Fd7DwMXCy2eAcusFah9QviS2x7BGG3/vcETAYJP2BqtHT\n5aNb210dAgMBAAECggEATnhn9PSuhZ0GaCNgJUftSyHN8/8MIXGRjcODnGq/Mgn3\n7rUVjR2Y+GNym9WyxNzoqElysIWQvUnTEl/Spu71D5aStM7Jf9U2Bqn99yrg2PV4\nORNIFbgiOP2kxIR+LobGggECxhWW0UC6uXjigCTcBR5Z7vMsMcpi0cJ72dL2WFTu\nejMM7GTQU5xrBccPKwPTlguPwjGFRXpdO1kOGFm/B6X28OgWqn4kzfX/OvzLV5yS\ngD7/s8MKt/jHOJXhPtSTShZ7pLJr3TK/tYuOCpQb6hCOmqLmnV+C0VLTDMC63vhk\nwIvJI28Pft+CLnDS6tdo6beducm6UX2X+BHrbGc7gQKBgQD3kaOn5HzK8YfgEtTo\nZGe+xM8u1/DK3BqgydJ0JlxYfFPwjfTJo3r/CCNrbG7ClBKCiBlYvnJp2fkWSZiH\noJUbu8eRQeZ+MVAmZhTLXlH+KG2AI192gQcXPIz3kV5xbMPi9yD2yueCxAJsbc6G\nojqlOjMHhy6pcTYZFd0ZzO5cSQKBgQDu+6Guy96yh7FkP7sSUMt4wABcjFFrfzOc\n3d0XynwVZJ0kL3XU18cXcr/PzvCQ3LqSkv8n25dE6e/3TDl22v2tChy6I8qjsfiz\nZgZIP+yDv51iDmzqH6YNI0FHwYk77exYb7rnsxqlqEg0Mow/Piu2+1JE5bv51NEz\no130BJwyNQKBgQCxMnDs7sHTkGUsoM37OEJ5bOzOHome6UO16j7UG9DlFLgP6ctX\nt8eFWxHfBdGRO+Kzwy5BMq85zGZY6XxfNzUCkLka4wxTLoCru00O8wfE3rLhkG/3\npgqpOxG68TWkAbGDdlcFzd0+34TMjxvPibZoJOv5a2yeowWRlvCWUvQY4QKBgQCC\n7rZckDHI2nMkG46gsEdqNrd7/Ry2qpBah2uUl0l4ZxF5O89w92+Kt0HD1vsSQvyt\nRYAqFDNCfHEOqmJpbf3CCmJG0Uk6ek1p7KHQf8VTQW42xPSDKSfO1tvzNmO7w9TT\ndxON0iDtVc+JWZBhLezBadxfBwcAD8s2YXEeOlBhaQKBgHANzu8yHPb9b5qpzg9w\nyptmKAkOoD1pyhSSE2vNv5iuw1YxAKjXkDg7npbXQfA3k6A0tUg4w7Pr1Ik4yOlV\nRoSqOz9k4abcB/BFDCibz6JGG02OqtQYRzH9HSSA3qxYh6a3Xqzc6uVmOG/oimlt\nDjIPnNoE6Wf6N5qh14X9QDEt\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5xy+TS4at4/agikNNv4k\nkuFReSG7n1XEQrFe186eLI8jw5bxb/+zra2R0ufTBgZSbr6M1rl36RzD/o+LAdAv\n16NA4PRuD1r0IDaJ+e9u/o3XlEPvuJUBtzKMYXs43gyqvKttYAtgfLRYePpLHR9L\nWtJK+pUitXrgP8AZXBGsSNibwxV4LxDbT08/eEZ/uYOkDTMCyIwckyruECCtIt2T\nfeAtEhQ83DplCNckawwylpTHwijWmIE4iGciTyYXM+XTY0t8z73ukrDFRsg9JraZ\nFCItMfQm1O59hXew8DFwstngHLrBWofUL4ktsewRht/73BEwGCT9garR0+WjW9td\nHQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "5xy-TS4at4_agikNNv4kkuFReSG7n1XEQrFe186eLI8jw5bxb_-zra2R0ufTBgZSbr6M1rl36RzD_o-LAdAv16NA4PRuD1r0IDaJ-e9u_o3XlEPvuJUBtzKMYXs43gyqvKttYAtgfLRYePpLHR9LWtJK-pUitXrgP8AZXBGsSNibwxV4LxDbT08_eEZ_uYOkDTMCyIwckyruECCtIt2TfeAtEhQ83DplCNckawwylpTHwijWmIE4iGciTyYXM-XTY0t8z73ukrDFRsg9JraZFCItMfQm1O59hXew8DFwstngHLrBWofUL4ktsewRht_73BEwGCT9garR0-WjW9tdHQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cmu-oli-peer-review-canvas:ED3C259D843C40FEA1048DF2541C99A6"
+    },
+    "alg": "RS256",
+    "keyid": "cmu-oli-peer-review-canvas:ED3C259D843C40FEA1048DF2541C99A6",
+    "client_id": "10000000000057",
+    "deployment_id": "115:8865aa05b4b79b64a91a86042e43af5ea8ae79eb",
+    "iss": "https://canvas.oli.cmu.edu",
+    "platformOIDCAuthEndPoint": "https://canvas.oli.cmu.edu/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.oli.cmu.edu/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://canvas.oli.cmu.edu/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cmu-oli-process-planner-canvas",
+    "uuid": "5ADC27B662704C2888EC077E949CDF94",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2frmm1+QOB6Hl\nkdBojWZMbp+v8JH6HVPNWVCHx2wsXhYpay+jEcYNDqq0inSq6Ew8lanfZpTX+lJT\nqHN2P4Us5fVP95UnbU9R1b3j0rtB7ulJyqQImos1jVU0Wppx7y+kxzppSH98e28j\nwnal6Fx3lsXp/CV2Q+a9ol+fp/IqgqrvhkhCyPyi8RocdyQm3IIWFr+glkB39umC\nUqh6QR5w/zyRT5OlyMchrFvPP4rUaaiz84x65ksD/dlAGTtShwDuByprf9xPx0MQ\n6kmnC+TGoRBHJqM6ucCWY4wOd3cRshzRc+So5kX2uCNxPkzJP09aMMNYRLrFGv4y\nESIO/g5dAgMBAAECggEAHfLP/rxhNZg1DlqOjAngZtykohflrNkRPprQp2enreRG\n2Mc5SxaInO3yP6yVFtMGZ87b0Mih1ovC5O24/QfRkBuw1U25EX5TzQc5oWCc0GYn\nrK9vmeXawJAQEoZn4BizheQYBt0Z5tDO3Vx1YiauvgVlN0/kyfK8tBQogyfpiuYd\nbZTqtpkdwg5zeTQ7u7fG25yUcsYwy6nvkNs0l2AddWAxSoe8B2AjbjDVdNWsUZGh\nylqY9IYLfsX3wOBhMb1uqcyyBmvXrsCivTIdV3KTOqBGrAECWELjZdVYYHjIIryy\nna6q8bWxWE7Js1wRiHW+gQetlmPDiC7L7Tk0eFwjNQKBgQDtLQvW7bUu4XoxG4NZ\nv+cU9axXWih/XL2wYWT2LAjNU8JE1i+F8wnxW93UphqfzGfWGpFQiTKvWWqz9vpq\nWTWWi98zWj5m8oLYV2iR9dTxI9z7Y5INTiEq9qjKGu0Mp4a50xiZOG6F+9EPqm1r\nII2Mh8M8JCb+Wt4BE8bJxEgaYwKBgQDE+qsvGbePIFBibjDSnYbM8qHd2lky6VC2\nDRUUYiZlsShWqdf9JxDvkTIy9DoxuFcNXmotTXAaRzXlsCLWWbqE/VGNi+QsKAM7\nn2wXfEduVbpQuQdIjvMvtOV6kiKxKxiGwqDhIG1k9TXpheMd9n/Y5IOB3sArMeOV\nH4BQNY8wPwKBgBYSch6fYpQpUajOSawJiuTNdCtw7YHkzJZkifPK50rMd7DWSffq\nRUub5AoNJz8l06f+MvXOvtPIu4BiBK3u/Wi0PaJWzKXh/cFKaSXkPdvvHXqbqpTo\nZ3fLGqwsU1ExKf2TIp/nu4lmhO8zShmFHwcr/0RSjPpw1GY/Q+m1BYzHAoGBAMTg\ngf6GprfQJWfsGLI5rkTj8bMLDQJcvkXnV31TCGu1oMrV4UJuLHg12EWjYxLU23VK\nO7dh4bzyFcWnwXoantlTU5K1Em6r42dRVTk4BzEZUCpkdQopjpjNJlvW+gO4PkBb\nAW9h+NTiXWs1XaZR/MBszaAdYlcJ+xzOKnKAxcgDAoGATdapbuIuhE8a5zN5PJNB\nnU8ZjF9945ZY4HGBBYCEhOXFFFgxORDxDy5TPzF+G0vtHugJzFRPiCEgY+BdYGwf\nQrPMIDhqguS3Qcb9AJ9tIpJghV8Mg01GBT8DP70PfliEBSKx7yXnZIyLWJ/Ub5fg\nriw8W0nnQToVLrAIugi8Hfg=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtn65ptfkDgeh5ZHQaI1m\nTG6fr/CR+h1TzVlQh8dsLF4WKWsvoxHGDQ6qtIp0quhMPJWp32aU1/pSU6hzdj+F\nLOX1T/eVJ21PUdW949K7Qe7pScqkCJqLNY1VNFqace8vpMc6aUh/fHtvI8J2pehc\nd5bF6fwldkPmvaJfn6fyKoKq74ZIQsj8ovEaHHckJtyCFha/oJZAd/bpglKoekEe\ncP88kU+TpcjHIaxbzz+K1Gmos/OMeuZLA/3ZQBk7UocA7gcqa3/cT8dDEOpJpwvk\nxqEQRyajOrnAlmOMDnd3EbIc0XPkqOZF9rgjcT5MyT9PWjDDWES6xRr+MhEiDv4O\nXQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "tn65ptfkDgeh5ZHQaI1mTG6fr_CR-h1TzVlQh8dsLF4WKWsvoxHGDQ6qtIp0quhMPJWp32aU1_pSU6hzdj-FLOX1T_eVJ21PUdW949K7Qe7pScqkCJqLNY1VNFqace8vpMc6aUh_fHtvI8J2pehcd5bF6fwldkPmvaJfn6fyKoKq74ZIQsj8ovEaHHckJtyCFha_oJZAd_bpglKoekEecP88kU-TpcjHIaxbzz-K1Gmos_OMeuZLA_3ZQBk7UocA7gcqa3_cT8dDEOpJpwvkxqEQRyajOrnAlmOMDnd3EbIc0XPkqOZF9rgjcT5MyT9PWjDDWES6xRr-MhEiDv4OXQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cmu-oli-process-planner-canvas:5ADC27B662704C2888EC077E949CDF94"
+    },
+    "alg": "RS256",
+    "keyid": "cmu-oli-process-planner-canvas:5ADC27B662704C2888EC077E949CDF94",
+    "client_id": "10000000000058",
+    "deployment_id": "116:8865aa05b4b79b64a91a86042e43af5ea8ae79eb",
+    "iss": "https://canvas.oli.cmu.edu",
+    "platformOIDCAuthEndPoint": "https://canvas.oli.cmu.edu/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.oli.cmu.edu/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://canvas.oli.cmu.edu/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cmu-oli-data-tool-canvas",
+    "uuid": "1DECF62C017D495496C119244FFC956F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7PCYqjAu+1DyE\nQz8YrM79qO69FupYtp/28xbO3Ts23Tq10eWERI62KAtdK7crcQB3najoNiKtzvSC\n2H5otizPeCp8nWapcGZEw6KAHIUfIYJyybXwtcmK3U5zE4VYj3uTu/RKHiBO/t/q\nq2d96SznV4gI/kdtVnAldke67pLQLUrt1Be5Hpy/iBWSnyX+669H5KATPP4o5oKx\n7hI0khnBLDynKbPLXrq/uJ95g70hDKfLFME+fDxkV/RGw2KH/GS0x3spBOStUCiK\nOkgYcP5ZWiUxYfRTIdf/D13BLa27bbzsxouTZAtKHBUNa8EcIQeBp4zWLH/ASX3x\nxB0wK9ZDAgMBAAECgf96I8LB/pmq4siXf0ap0hE1Z/5VW52EQZ4Yentmdusp3ydt\ndH9EyXRPX9AJ93qF3DFx1mdZE/eLanYW5SORK0YQEVOl9wgBgFE2imh3KiOtKy7t\nsqf9Xpka/UMvzowuOWtj9DhoIT7ySVHIxAe/G10vjOow86+ko76EsaQZTYh4Q/Xz\npa03SJBDEYcrnXYDF+M28Nmf3ndCqTqxZsiLJdrgdBL6tKl+H+mK+eH4cPbWpvbP\n90Xqjadx1oPbtVAYUArS7Bx8MFqKxIqIVjiJ9Wm0ygirT4WEPvW13HhPBGyQh1U1\nMNCoqCcc6WtNcJyxmDhhm18fP9mx03UNhxXhHZECgYEA3aVq9028o+fX8/s7784Q\nu4ifn0j3psZCHmk6aJMSHMt2Z2knB/f96BWA1LFdWnVL60ji0ZbSyX5p/7jmfH9T\nMXvReOvhseijJkcAZgDiy4gtx65h+b7YNH3O0cLONI/KGKcHNkp1wy++YTOXAw5g\nj/lBnowakclSnEb+bnGKqPsCgYEA2EFY1YP4iaKZdYlfLZCUl0yQBIW4LEPJ9uco\n9+UN8KiXP+JfMmt3MjdrQm6+PvwNr4hvH1tH/+5fdEDfs7+ndO3mx1zedqE7cbTZ\nr7IbTWQGcLy5K+XjvBlJd84a5qZYr2gzzRWe254ZcBLEAtS3ZrUeQwQi1YYF+mE2\n6F9HlVkCgYEAx6VwrEIBYUI8azAp1N+wgruVzExVhouekvYF/pw6/GToyk0VM0BW\nHO8BlJQOmqR9Nfn5FQDd7VFI+Wb7dbjanwAAtwMB0NbT3m6mFTtHDj4jvnF9HxCg\nfuezm431X7MFPx90h5qaaK5gtf1aUQ5qPEUwrjdU12yYVNw94g2z8HECgYEArSum\n91O2soCCYpyemt4sHvwwV269DLU8BXsWU2wYvZ5Df+TGVpm32X6HZatIrScpzmZy\nlamC/m7kATPx7v6KGhhntT2o51Y1Q9iOeSMmudJfVefKYFy3AOk+67Ef2ZNbcRsA\nYDnv++2ecSCV1a6BLr3afc/SFSo9n0I5tdqWeAECgYEAkBTDCmu7aDjPG3te1TET\n9m6QRFMmrMfv09C6LQfnnN9sV4S93/ufcTXJwHWNiGxvozklNVZz78EJ75uBzrrV\nMuYSAbmqTA5aUougzY4UALWNo65LxJRZ2RgZv/7MUM2uXK7/O7Jv2oTNeuvjvxD2\nz6Of1AkpcapKaKGyHR098nE=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuzwmKowLvtQ8hEM/GKzO\n/ajuvRbqWLaf9vMWzt07Nt06tdHlhESOtigLXSu3K3EAd52o6DYirc70gth+aLYs\nz3gqfJ1mqXBmRMOigByFHyGCcsm18LXJit1OcxOFWI97k7v0Sh4gTv7f6qtnfeks\n51eICP5HbVZwJXZHuu6S0C1K7dQXuR6cv4gVkp8l/uuvR+SgEzz+KOaCse4SNJIZ\nwSw8pymzy166v7ifeYO9IQynyxTBPnw8ZFf0RsNih/xktMd7KQTkrVAoijpIGHD+\nWVolMWH0UyHX/w9dwS2tu2287MaLk2QLShwVDWvBHCEHgaeM1ix/wEl98cQdMCvW\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "uzwmKowLvtQ8hEM_GKzO_ajuvRbqWLaf9vMWzt07Nt06tdHlhESOtigLXSu3K3EAd52o6DYirc70gth-aLYsz3gqfJ1mqXBmRMOigByFHyGCcsm18LXJit1OcxOFWI97k7v0Sh4gTv7f6qtnfeks51eICP5HbVZwJXZHuu6S0C1K7dQXuR6cv4gVkp8l_uuvR-SgEzz-KOaCse4SNJIZwSw8pymzy166v7ifeYO9IQynyxTBPnw8ZFf0RsNih_xktMd7KQTkrVAoijpIGHD-WVolMWH0UyHX_w9dwS2tu2287MaLk2QLShwVDWvBHCEHgaeM1ix_wEl98cQdMCvWQw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cmu-oli-data-tool-canvas:1DECF62C017D495496C119244FFC956F"
+    },
+    "alg": "RS256",
+    "keyid": "cmu-oli-data-tool-canvas:1DECF62C017D495496C119244FFC956F",
+    "client_id": "client_id supplied by consumer/platform",
+    "deployment_id": "deployment_id supplied by consumer/platform",
+    "iss": "https://canvas.oli.cmu.edu",
+    "platformOIDCAuthEndPoint": "https://canvas.oli.cmu.edu/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.oli.cmu.edu/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://canvas.oli.cmu.edu/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
