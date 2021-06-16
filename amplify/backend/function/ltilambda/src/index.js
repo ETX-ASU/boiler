@@ -1,4 +1,4 @@
-require('dotenv').config({path:`${__dirname}/.env`})
+require('dotenv').config({path:`${__dirname}/env`})
 const { logger } = require('@asu-etx/rl-shared');
 const awsServerlessExpress = require('aws-serverless-express');
 
