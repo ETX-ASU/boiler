@@ -463,6 +463,31 @@
     },
     "alg": "RS256",
     "keyid": "cmu-oli-data-tool-canvas:1DECF62C017D495496C119244FFC956F",
+    "client_id": "77520000000000193",
+    "deployment_id": "8425:f279a54eb39c9da7d42636c0b7b788dbfc76306f",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.cmu.edu/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.cmu.edu/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://canvas.cmu.edu/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cmu-peer-review-canvas",
+    "uuid": "76FC3BE66A294696BABDDD36028446EE",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCMn7hEwtXwrPn\nO7AA/7q50QQIiAfoDuoDqYd/wTuqgkP1oL75iTZdU/Aoi9ETAm+17ItCCQgMS9UX\naieTdbhUeqDup5RjXKzgMJ3eO5fIRrZGLS/fGh7bHdd3FdOKziD5ALOGwWITh2Bf\n4SvheRwefhgBi7itqfBRjQxRDQ/3NLG+Q53u/yuuWuU3rzRWiexBiu3sTSfKR1ZY\n/MXxEbkuXSIaIBDpR39G71YP4CzSdvyB0J+IBo8Di6zgwpXtiJ0v775YdPX+dFxc\nAqI0wbjhKn40VlcUSgwESQsT4hSGru0p7YRkHwQpKl/FMNcu3B55eEA4qTrJkzjN\nuC1jD2vRAgMBAAECggEBAKtKvQ2srbGgZO1OgaWv7DVgvy0DR+4R0aqfS4yNliKF\nOoqbWjhjJlfV5RzujuE0ofKXDhKWQsoNzY0UronsKUYi0HcRy9qE8Vvipi1S5UPb\n04U88F/a+2KNBPPehbSGsyDP1IrFYswU+hY4WGtOV1YyJNygMKrGHdrhDf8kBXQn\nNVMAOqE5AqrAgoG8eRPnCzyNjSRatuwA684DMsbGWLOwJTW0t8XdNi9Q05iXMts2\nanTosgrvkiKAUJUryVP9ohiF4T1zTEF1CXTScZC8lBO8MmNL+MfdcYO3ZSkbpomT\nlB3YfdlZ2dC/id9M4Rv5AJWVF1I/Np/3sx+OdUKwuN0CgYEA74DK7jWHj66wUsBe\ndLh6JQfETE+R+rUCkCumsALl1sG+V8n0QnCSlZXoTEuZ9Jl3zwuXbl9EeepXw2Ew\n6be0Q4Mb+tQ0h9ceoUNchn2IirGHFhGOnflF1lGNfLI8vRnKxnCZ0EWk8Q4n2En1\ngHi8D3tuK3ZihUG7nnszxjnAlGcCgYEAz5LQyyzIhgVdcrnIhxuUMxIubbOQttIJ\nEKtwSkscx/RvYiH2027ttoR8PDJqyvkyvGnOHWV1D6WIMy62GFsfT8bSoY6jfSre\nGDGGPAMebbG5ozAoO9GYSOmw611yzgCt+VfJMZ6t/5c7pUk9Pb1WvDLJ/ekd0Q68\n+mTKidTnmwcCgYBoZqQPIpZtM6D48ZI7Hw9fhPs0qJrhxnXPkreekiTOcLYgXpBz\nRc8gFbClUW9TCHMJdewU2MJowpZvPLatqr6Rj11rAYXEkSlw8oQqvB4BF1HjdNPO\nWRLwUaxzZt7DL7MMvZjPCQzVZ25HAjZaQkb4GL31hC1+GSFH/DyddB9WkQKBgF+q\nDkhVL2V0+4hwTxbVgwu2iWdNpphbXIouOOZEj9MnuF3FwXfYW/4OOSOVKNq61sM3\nECNEKxs28vqDwLCg7mFaBKEol/iL1SfZS0BFP7TWf/PRsfk/s6uG6F7RBqQidAvC\nhZs0woRVMswOYQcfR+YckjNPSMqcvEO6SA4V7VfpAoGACPvmNw3CtJItM0gmz/Ep\nhfmHb8r0wazkTpQ4UYkSd6i/+uKgJYaLKL/tz6azefIupuYtDUtP3qEfNk6gBss9\nIjYk108SQy6bbV4bkW3om6Ox79Ttkw/9nPkJa/QRg2drs8cqz9qwJMPgMyPC7Vhh\nSCdGts0x4jS2LPGWI/5OV64=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwjJ+4RMLV8Kz5zuwAP+6\nudEECIgH6A7qA6mHf8E7qoJD9aC++Yk2XVPwKIvREwJvteyLQgkIDEvVF2onk3W4\nVHqg7qeUY1ys4DCd3juXyEa2Ri0v3xoe2x3XdxXTis4g+QCzhsFiE4dgX+Er4Xkc\nHn4YAYu4ranwUY0MUQ0P9zSxvkOd7v8rrlrlN680VonsQYrt7E0nykdWWPzF8RG5\nLl0iGiAQ6Ud/Ru9WD+As0nb8gdCfiAaPA4us4MKV7YidL+++WHT1/nRcXAKiNMG4\n4Sp+NFZXFEoMBEkLE+IUhq7tKe2EZB8EKSpfxTDXLtweeXhAOKk6yZM4zbgtYw9r\n0QIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "wjJ-4RMLV8Kz5zuwAP-6udEECIgH6A7qA6mHf8E7qoJD9aC--Yk2XVPwKIvREwJvteyLQgkIDEvVF2onk3W4VHqg7qeUY1ys4DCd3juXyEa2Ri0v3xoe2x3XdxXTis4g-QCzhsFiE4dgX-Er4XkcHn4YAYu4ranwUY0MUQ0P9zSxvkOd7v8rrlrlN680VonsQYrt7E0nykdWWPzF8RG5Ll0iGiAQ6Ud_Ru9WD-As0nb8gdCfiAaPA4us4MKV7YidL---WHT1_nRcXAKiNMG44Sp-NFZXFEoMBEkLE-IUhq7tKe2EZB8EKSpfxTDXLtweeXhAOKk6yZM4zbgtYw9r0Q",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cmu-peer-review-canvas:76FC3BE66A294696BABDDD36028446EE"
+    },
+    "alg": "RS256",
+    "keyid": "cmu-peer-review-canvas:76FC3BE66A294696BABDDD36028446EE",
     "client_id": "client_id supplied by consumer/platform",
     "deployment_id": "deployment_id supplied by consumer/platform",
     "iss": "https://canvas.oli.cmu.edu",
@@ -470,7 +495,7 @@
     "platformAccessTokenEndpoint": "https://canvas.oli.cmu.edu/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://canvas.oli.cmu.edu/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]

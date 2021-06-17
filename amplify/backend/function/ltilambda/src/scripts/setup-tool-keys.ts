@@ -12,7 +12,7 @@ const SRC_ROOT = path.resolve(
   __dirname, "../"
 );
 
-dotenv.config({ path: `${SRC_ROOT}/.env` });
+dotenv.config({ path: `${SRC_ROOT}/env` });
 
 
 
@@ -26,7 +26,7 @@ const getKeyFileNames = (platformName: string) => {
 // Get the TOOL_CONSUMERS from the environment variables
 const PATH = path.resolve(SRC_ROOT, `environments/${process.env.environment}`);
 fs.mkdirSync(PATH, { recursive: true });
-const ENV_VARIABLES_PATH = path.resolve(SRC_ROOT, `environments/${process.env.environment}/.tool_consumers.${process.env.environment}.json`);
+const ENV_VARIABLES_PATH = path.resolve(SRC_ROOT, `environments/${process.env.environment}/tool_consumers.${process.env.environment}.json`);
 console.log(`${ENV_VARIABLES_PATH} is where the script is expecting to find your tool consumer json. Please adjust for your project, if necessary`);
 if(!fs.existsSync(ENV_VARIABLES_PATH)) {
   console.log('creating non existent file!');
