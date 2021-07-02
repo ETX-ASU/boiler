@@ -497,5 +497,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "ivytech-peer-review-canvas",
+    "uuid": "04f45b5f479f4e9cb8cc6e4bd75fa045",
+    "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAuMnfpELGCfolV5txfdY686/rD74vct0VrTMx4fEGbonjKvsL\nEa6W16MgiSIeTcMeU6qXwRC2dXRppAnQGmHmS4E2knZjOto2xQPd/h86so5OpN7M\n5j7xyV6qxBMHRRMn1C5sj6l0TYjRl5LnhrSQz9Iu+j97OAWbTBQwDdPKSOTxzhN5\nhUEjTmCUvox/xfyRMlweutZQyaRMRkNO4OSGIlcC0QIt3ndVN8JLCBJXliO9sBIP\nXuV3OZp7Ywv6Lqcm4QmdSQKU7sHyAsk7TkTmpWt1R6e7zK46SzV95vQdXat1V+pm\n/Wi/qwAbsybKxgBsMKSnaIYNgQAsAzqXqypjhwIDAQABAoIBAEMzHsJkihJsxpGy\ndLZXZv7htbD279hssApZeMV62mTufg9OVjsq664lo5pbLvwGfgvdGOzcAA58tEI0\nU1qUyaQhrE/c/78SRiKlgmB8yOLQP6dTYt5Ee7dIVv+RD+69xZky/MXN0P61R8tA\nYDQrjBIXlH/rAAtidpRXLxaIM6MICCr/OKaUmqAO45bYleclTRQfb6zVv/AvoL+q\nHyRuEepSvTeKP6mYc/U2vxKeVt/zrelnuHL0YabM4liL+MLj3UTyPvzy/td58dQ6\nVDSymlADLjKYUHyfwL7bYNB9txzEECuf1zjZY1d6GT55iHWnnInHa2yWvRNw6gCy\n2pg6flECgYEA8KMz4478h1mS6AjJG6gaup8Aiq+eb1wIzn0FZi/nmoEAGnZugF88\n5TlQhmHQMVjCJ8MPjkVZN6zeXPUmpGYy6vKxX5XFJmZwSOXvFrucAB8uViW8AzUC\ncC6Pv3RaIzy7LwGiPa+xysMzdYmJmco4IPvKK8MgK1lfa0se+Hi8mhkCgYEAxJXr\nB3f1AJ4dXnNxpBLvOvXUVdvgVy0ZYaE1wh+vyFypodVeHm8Pq4QBmnFJv737bPJJ\nqu4qRPNifbCxeOXut3hSw3t4gwLkOU2zzVd0hnfUSIAFUSSChFyDt/uUupELdkIA\ngc4s5TE2U3gSWT2E4O1AbXIjYw99+mTaT5ot3p8CgYAdgLTk6mv1oDrNrf4SIPsd\n9E6ZskxndM4zmsplq+vmWniLxgdoP8T0iaFgyG9BDZPIUjb/B2uX0t70YK4bK9iE\nS7sJcBBa0+ZiWaaFj/zhWvFQaJHzhrVE0cCYBYjjlxeP/NBKZdcTd/lAKNuw+kUF\nbjlsQiEYj32OZwhmCE9/SQKBgEPcOJCQcSuwaRT0pvLrcleZCp5E03FkaRGRk7wa\nMhTpH8l0nRPGZNNhMyh8GOgujb8y+AkgQ8kfdw1KVEkWnkwJJhDC63vWILBDSWEF\n4nyUmtwYDT3Qa5mDUhjNqK6qaRl+eSxV3puTXFx941+Y4+i9HXNqZhrI+0TXUaEO\n6OyjAoGBAJyRJOibT1w+lEK/klIv0sW2uwWBhK6rv9Z63kFxwRSsvj7o8cbUg0Ie\nlzxp75UwaQxnHDmL40WeWj15PEzhy5f1MAzGGjXsr3SJcyT3SyjDublFz6ad8q1R\nC9RpIkCzTP8cVo1zSULLqfHBSit1bUmMyQrmSBKDLKOn9tCAk6Ec\n-----END RSA PRIVATE KEY-----",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuMnfpELGCfolV5txfdY6\n86/rD74vct0VrTMx4fEGbonjKvsLEa6W16MgiSIeTcMeU6qXwRC2dXRppAnQGmHm\nS4E2knZjOto2xQPd/h86so5OpN7M5j7xyV6qxBMHRRMn1C5sj6l0TYjRl5LnhrSQ\nz9Iu+j97OAWbTBQwDdPKSOTxzhN5hUEjTmCUvox/xfyRMlweutZQyaRMRkNO4OSG\nIlcC0QIt3ndVN8JLCBJXliO9sBIPXuV3OZp7Ywv6Lqcm4QmdSQKU7sHyAsk7TkTm\npWt1R6e7zK46SzV95vQdXat1V+pm/Wi/qwAbsybKxgBsMKSnaIYNgQAsAzqXqypj\nhwIDAQAB\n-----END PUBLIC KEY-----",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "uMnfpELGCfolV5txfdY686_rD74vct0VrTMx4fEGbonjKvsLEa6W16MgiSIeTcMeU6qXwRC2dXRppAnQGmHmS4E2knZjOto2xQPd_h86so5OpN7M5j7xyV6qxBMHRRMn1C5sj6l0TYjRl5LnhrSQz9Iu-j97OAWbTBQwDdPKSOTxzhN5hUEjTmCUvox_xfyRMlweutZQyaRMRkNO4OSGIlcC0QIt3ndVN8JLCBJXliO9sBIPXuV3OZp7Ywv6Lqcm4QmdSQKU7sHyAsk7TkTmpWt1R6e7zK46SzV95vQdXat1V-pm_Wi_qwAbsybKxgBsMKSnaIYNgQAsAzqXqypjhw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "ivytech-peer-review-canvas:04f45b5f479f4e9cb8cc6e4bd75fa045"
+    },
+    "alg": "RS256",
+    "keyid": "ivytech-peer-review-canvas:04f45b5f479f4e9cb8cc6e4bd75fa045",
+    "client_id": "10080000000000302",
+    "deployment_id": "309614:3178b86dc90bdfd7cb36bf3d863a487512669233",
+    "iss": "https://canvas.test.instructure.com",
+    "platformOIDCAuthEndPoint": "https://ivytech.test.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://ivytech.test.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://ivytech.test.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
