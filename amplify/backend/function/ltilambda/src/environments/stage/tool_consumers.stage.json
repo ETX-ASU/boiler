@@ -125,6 +125,31 @@
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {
+    "name": "jackie-process-planner-test",
+    "uuid": "74228A16A0124AD09F9A894ABA64814F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCySV6ESHtCGk5V\nKsVpKBrJVA5fTg55y/2reM6kLlYuUExfC6nVpIWvowT2ahV84njIrq82R8BmEENd\nNanml8OTGSwysCjgCS1GyowmKIzDh3wz/JehZV5pGYPpGnT9HU97eiOBcMOpd+X7\nlUYjnu9m9mAUZ1FZLfGRZqCuyaHaPpUnj/kPh8wnzB9mK0IDPwiasMAfg6fbSoL0\nOnKjm22uLBxi5kE96IxbSBom2JMcXJuL5/xrHGgGRZSc02DsrUvByeQ48nQ5caXw\n+//8dDtH4D+SXgn7lnwJeGqSMRD614K6SJfrHclMxHezuITiMUaV1JOEhWVVAAK8\na855xEqnAgMBAAECggEBAKjBzheEzDcr003GaIo7De/YAqqvpgAf2QOAHIlH2weH\ntmKZFa9GRcyUkFP24lQNwqqivvKwRCvX5QvLigDdUqBgSXfJS0eVKChD/Rj5dRR3\noFdNFvIMk6sEHdp90pLsNZn5aLZTWMGG3kifaX66KH3bY+KsUVIKrQgmjp4j+XIs\nCC/uB5em97szb30Db76fXP2gk5t16ARdC4BEm3SWe+0dftI7rX38GxNzcyTA0t1V\nk8vDM+75agvZbZ1Qzd8AUFk7NPBmVHPwrUk3O37EyaZE4PGsJVHK8/xqzaZfCzt8\nIreOCVVJnMF0TptGpXWW36HY3vQhcQqmHHFHuX38vKECgYEA7VX44RILv2cmrD3s\nvDYd99ForW7TDqrKHFhESMtwFMoPHkEmjhycbcmognwKeqtUfsyuBbmUedhIuGk6\n0gk2WOOcmCYoJ4WgFatyAkck7jZetPD2Ug8RJnJDHEdHDoID8qI3u575p/8W5uCJ\nQ4fKML8XXjh/EZKYK0NkrKxTPhkCgYEAwE6fRmJ23GLXCuFRWInkKhAQz3tCKPLP\na7Z2lvOFlL9UYej0RIR9cklLpKyHujXRqLaUsjA5uVGamp/F+PSffAkKFjy4oi7m\nInNT2EuBqZPzdcm8Vn/YalWbGLB2eFJzN+5VNnIDQY3JftV9i5nawOxnDfChtBYI\nstq1MiujZr8CgYA9i7TdkNNxECvMMMbKS/JbiHdvujSLMij1TsJuaisniPqAqv53\njd3W7pt/MvF4vCNOOn/KRkTFkBvTjp5NR0xLosLCBesVzKYl2G7ZPl/KUlke7PnD\nb9rPsIPMuoMntPmXGw/+3Iv7T8A9oO6Xj4gUOgmySk5RXUWOuoxJ5uozSQKBgADN\n01il/L07JI8FFiP6n5uVaZyUdVhae4eFwcUry3ktu5qVMMBAlY2uxMQxfHfI1dGQ\nwdpk3TjrIGxZEqjRzQDlwMcLBfKXo5qtRMJ4vlgJKFFrwH/UFQGMzhMyWaxzG8w2\nEOEjZOQXRapkFhxJTmLUGjIyuVpZZTvqMiu9hvddAoGAPdPI2dicH+3T5+syPO9c\nuMJ+Ta/Q0SLC2x9+hw6heKJUGPj3sl+itIwPN7SBP7m62wzZOVf7O64LvNMeThU6\n6gdMa+fNFrFq3hKM6YiVRyQ2EkIKK+Ij3+PkLNc7UejlUe8dOyaRY+miCB23zwpW\nAeoYqkcobyXVR4u1chfhE+0=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsklehEh7QhpOVSrFaSga\nyVQOX04Oecv9q3jOpC5WLlBMXwup1aSFr6ME9moVfOJ4yK6vNkfAZhBDXTWp5pfD\nkxksMrAo4AktRsqMJiiMw4d8M/yXoWVeaRmD6Rp0/R1Pe3ojgXDDqXfl+5VGI57v\nZvZgFGdRWS3xkWagrsmh2j6VJ4/5D4fMJ8wfZitCAz8ImrDAH4On20qC9Dpyo5tt\nriwcYuZBPeiMW0gaJtiTHFybi+f8axxoBkWUnNNg7K1LwcnkOPJ0OXGl8Pv//HQ7\nR+A/kl4J+5Z8CXhqkjEQ+teCukiX6x3JTMR3s7iE4jFGldSThIVlVQACvGvOecRK\npwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "sklehEh7QhpOVSrFaSgayVQOX04Oecv9q3jOpC5WLlBMXwup1aSFr6ME9moVfOJ4yK6vNkfAZhBDXTWp5pfDkxksMrAo4AktRsqMJiiMw4d8M_yXoWVeaRmD6Rp0_R1Pe3ojgXDDqXfl-5VGI57vZvZgFGdRWS3xkWagrsmh2j6VJ4_5D4fMJ8wfZitCAz8ImrDAH4On20qC9Dpyo5ttriwcYuZBPeiMW0gaJtiTHFybi-f8axxoBkWUnNNg7K1LwcnkOPJ0OXGl8Pv__HQ7R-A_kl4J-5Z8CXhqkjEQ-teCukiX6x3JTMR3s7iE4jFGldSThIVlVQACvGvOecRKpw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "jackie-process-planner:74228A16A0124AD09F9A894ABA64814E"
+    },
+    "alg": "RS256",
+    "keyid": "jackie-process-planner-test:74228A16A0124AD09F9A894ABA64814F",
+    "client_id": "106490000000000151",
+    "deployment_id": "1900:61a0af232e16c64a03e29dff20e94245adae760f",
+    "iss": "https://canvas.test.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.test.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://asuce.test.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://asuce.test.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
     "name": "localmoodle",
     "uuid": "C1676F7F2ABA4993A265E054EE662649",
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQChd9G1uKQ8E4Hn\nmqG9ody2EFxQrOEptXKk25dc7qV27foxDLCFlIOet9seQcOyZYYIbaU6ruFKiEm0\nMXDLUy9Sjqu+mUODVa1n3K1pNv7bUKKSpgwwQGAPy3keIktXJSMuysX0IlS+9OKu\nNrdYbYlwtKzMYoTGKIFJx6QU1TIPmze40h/QGmWJhGIrqgrn9Ya5A72b2AHRwt4H\nYTPuAe8frVOGbX/+6qLgTSklY26QVSWWl8V6R/GpOxRLDIrKif2sZkoJLtulBSnl\nDmLXgSFGTQEqKdq/32LghzNz2bP5IfnVcdSFPMshh1ctRNPvY4BqVXrOvgtDXwuG\nF5/l+inxAgMBAAECggEALRySxJiPmhFBK/nx0k9UoLE1eXyzc7m0DAcl5Nrv86hN\nTELlVozFsSRg3bU1/bOLnPM1RI3zd6VYIjXl84iMIh6mMRwU1q6rQedPs6Of1JpU\nsXAe26RAsmkAr8CZGAHSMJKKd8jXsHouksnKs7P2wDxaQsgLnGlYpcpXN1LRJ7ae\nWlic8U5LeLWD17ls+fktP0zaLviPPbN0WRu8Sn6XVku+vIa+DhVExK1cLhe/ziaL\ng+fXOzFXotT2qZY0e3KNmSgJ3xIky1AajAeTK9HnPRAoX3v9owahs5gi3HEfIpzu\nF1qw6072cJ3ajDCOPKfqEs3RjZYjiRoAeSWsEBWhuQKBgQDP6vy6YQ4YCx/MBvsN\ncWPOXMr8QeNN8CIJqaHqr2vyVWtPmBgvIm8pyb2CNIEuWcKLEzB0XOYPvPUNcSAK\nxSy0TP6OWB3ESsng+hVaxz0NKrtLog1ETMfAGdRhKSEzIklCTXT/lyjEmi9LYeuy\nT7x/+ejcYVuesg5ll8LkFCV3OwKBgQDGzvBHSnu5TfKL1ewilAo5GDbx5btZDelk\nepqNIpUty+umz5TW4C7QnNZGOZ2+RWqCblQeUdxR/uNv0O+E5C+bz65hhh2Xrn/E\nkVmgW5U2Q8nIU+ZhRyiu2lvSl2Um4uzzwlz22VTY0LbhO/eXRkDCYSh35xxyAMgO\nN2VayruIwwKBgHgMZf/3KfwX8DQNk8cfQVFVop4kLOpDTGPn3eVzhBBX4a4DU3Nj\nnmuyYAld53iruvgyDDgjq3JK1/L67lVJo5Y3HoNxvT4pMIcF3m6bu1Ru59Wzq5VT\n/8GbKFUxOkob8dCmiHdK/+8EV2pfD4fVIjGCSkF0tUHb7RQbnBu0xi0hAoGAekHc\nBRtKxoOmulONaR48wyue7lbmRTeG5WF4FX7E2mriuaxBzXoDkApCwuC/nri1bQxH\n8nVI1au3VZXZFZH1rQ2kIRkGrbaDn+/6e+CV+87oEad2ry/BVvW1LeYoMCewq55E\n6RBxWvvO2ueztHVhcaep6UJYfcr5O7TZQWIWvV0CgYB9tSogoPSAGX82kMxUqhVT\nVgmb+ywbEvuJpo3OdX1/1R6I8unCZhD3tuGRW7drrNM6aLEv9sIaEVTONoUTtarJ\nazH0ngjQovsp5AeWynEzRK5FAqjSBERwaWjswxvSnazY64cvePiQUKvcyvKQDXYl\nvTNOZRs1zNYaizv1bit16A==\n-----END PRIVATE KEY-----\n",
@@ -344,6 +369,31 @@
     "platformOIDCAuthEndPoint": "https://asuce.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "jackie-peer-review-tool-test",
+    "uuid": "B94A913768B44E09A1AABD4CEBB8A98F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCjAebsC9TH18j7\nmYzhs0kouSZwZPO/UzSs3ZhpQsvJ3N4eVsYhyoN/qefuppLqzXMinFQBvAb3eoap\nenHPDBCTMllEJJusEE46MTFAqrqIk1IoXKBx25iAXY9AD2+d01r2MFYLIZpCoJwt\nHcc1BMcOhu+rzmfP62dluruOUqNsiIiRm0yOuxSrbuEugEd6K12eC6QAHC8DAsLM\nmaHdC7zipRRZYCmefgfwkNVMSmS6Z9abHAn0bQcGdzRw9psl4NKwZM5VPl+4qp4z\n4PE77wFQogjYzvf2O7SwJFpVijffg1j8UAKXndicybLCEo30ehhRoh5b9Js/X3Ru\nJFSQA9M/AgMBAAECggEAGxGeykXwsLr5qiZGidhe5r9QTcvF2liz35zwyVIJS109\nGWapgkUB7zpExJGuxgUWAIJbROp3cbNMF2q46XwEaJ0sy68Uls8iXnF6z1VKopFs\nTD2NezrPKUngFvA5RckqSsWeFD0hQ70uEiPmx7wiXhw0QqCFBrb9tZv7t1erwcLq\nlWygMEOTKW+d/EqYOQU+0wGa6HwJIvIaIX6cHrVwfH+cyDcCcXYj+zBL73u571g8\n+mDoqBQaQUoPrzW4HvrIz/HEgjxmMt4VouX9xAvUI1x3+fmlswTjc76pCPDh6TYO\ngfnFJ1lbPVXb00EP0la/60lJ0sEQfPufmxxUkA4tEQKBgQDWjqT3FrUdp9qQHYGV\nDaLD64eA2OId6S0V9FLZQ6V8DWVuODl2tp0QjbixWjw6TyDcCq81lewPaDo8Uwpp\nBWZOPUKbt28gqOvSFfpGY8/pBfl+J1+hhyCUIDSQUJuUiCeCcdRNNXWMF8nBjBso\ndJydBBQZcUuTKQtSXaTg2S5FSQKBgQDCfj2wIPhz5Z3JV1yirDL7B36QfFWG53dq\nwUDveaFcnXMuWtWTieQVoPw+xE+qzjXqxAl9zhoqCsP3x/vguJqDcdOAvGpAj4nn\n69pfbciq1cI4imVNDmOvMLybwlEz3ShsbaM5WB/pMIDMCrvhtvFCJDJTAwJXqgbG\nnRKGZ+W8RwKBgQChACU17Oo3uK8/mYSVbsgGsITb4OO8gi783HwW4LYbIopMbRBh\nzqKJu28uVoH/V0VXGQVk9n1PCm04uy+CozSj3UBQTROstFVRLoDBtUBcockYKz+N\nnDKMNKZ87J/yk0Dil7wxu73bRDZ3cEUo1Gh5Qog6l1OYuCHwyqhguVgJUQKBgE+Z\nZxnchJK6WPd8P7d8DmlaydvMZxyNQvx4F2FrQDUtY2SHXH3Do4uOlW4C3jAjsUFh\n9hh874xhV47jVBzGsMY3Ib7AXiQKGwDGMFt6DPSOA60sRwVgbD/ZDHga8SzuyIqH\n3JOtk3HWnf/kLLzWKKtPMSF0S9MhDSDgTCKiBw4lAoGBAMaVOtcM7+lEgaAhtK86\nMqNGHHVK2Fil8V2bKCydjzFNG+PL0tg0C0gW6batWRlztUfZ8Jg3ItwVGeUUXFxR\n/SfC6cgY3yEyUJ2HKVtEV1Avo8FY72V2Fb4g08XEyU+xBLncXzYW5QAs8Oj69UiI\n4OFGl4phBJzmgEfucWDFgvL2\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAowHm7AvUx9fI+5mM4bNJ\nKLkmcGTzv1M0rN2YaULLydzeHlbGIcqDf6nn7qaS6s1zIpxUAbwG93qGqXpxzwwQ\nkzJZRCSbrBBOOjExQKq6iJNSKFygcduYgF2PQA9vndNa9jBWCyGaQqCcLR3HNQTH\nDobvq85nz+tnZbq7jlKjbIiIkZtMjrsUq27hLoBHeitdngukABwvAwLCzJmh3Qu8\n4qUUWWApnn4H8JDVTEpkumfWmxwJ9G0HBnc0cPabJeDSsGTOVT5fuKqeM+DxO+8B\nUKII2M739ju0sCRaVYo334NY/FACl53YnMmywhKN9HoYUaIeW/SbP190biRUkAPT\nPwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "owHm7AvUx9fI-5mM4bNJKLkmcGTzv1M0rN2YaULLydzeHlbGIcqDf6nn7qaS6s1zIpxUAbwG93qGqXpxzwwQkzJZRCSbrBBOOjExQKq6iJNSKFygcduYgF2PQA9vndNa9jBWCyGaQqCcLR3HNQTHDobvq85nz-tnZbq7jlKjbIiIkZtMjrsUq27hLoBHeitdngukABwvAwLCzJmh3Qu84qUUWWApnn4H8JDVTEpkumfWmxwJ9G0HBnc0cPabJeDSsGTOVT5fuKqeM-DxO-8BUKII2M739ju0sCRaVYo334NY_FACl53YnMmywhKN9HoYUaIeW_SbP190biRUkAPTPw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "jackie-peer-review-tool:B94A913768B44E09A1AABD4CEBB8A98E"
+    },
+    "alg": "RS256",
+    "keyid": "jackie-peer-review-tool-test:B94A913768B44E09A1AABD4CEBB8A98F",
+    "client_id": "106490000000000153",
+    "deployment_id": "2096:61a0af232e16c64a03e29dff20e94245adae760f",
+    "iss": "https://canvas.test.instructure.com",
+    "platformOIDCAuthEndPoint": "https://asuce.test.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://asuce.test.instructure.com/login/oauth2/token",
+    "platformPublicJWKEndpoint": "https://asuce.test.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
