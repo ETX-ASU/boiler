@@ -340,7 +340,7 @@
     "keyid": "jackie-peer-review-tool:B94A913768B44E09A1AABD4CEBB8A98E",
     "client_id": "106490000000000153",
     "deployment_id": "2096:61a0af232e16c64a03e29dff20e94245adae760f",
-    "iss": "https://canvas.instructure.com",
+    "iss": "https://canvas.test.instructure.com",
     "platformOIDCAuthEndPoint": "https://asuce.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://asuce.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://asuce.instructure.com/api/lti/security/jwks",
