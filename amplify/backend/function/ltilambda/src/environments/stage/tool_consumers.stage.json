@@ -595,7 +595,7 @@
     "platformAccessTokenEndpoint": "https://ivytech.test.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://ivytech.test.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
