@@ -597,5 +597,30 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
-  }
+  },
+  {
+    "name": "miami-backboard-boiler-prod",
+    "uuid": "D0300F35FA6C43AE96B1DE8F94FE6E5F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCrQhxTbVis1hso\nxKUY30U4+lUguyhClVe2aTSryjdTJ2eaB+AOcfNVKjbBX2XKmU8pIy0uBB5BDZEi\nkp+LLTLFrGKhr8S2vFJMuAM9P46xjTtOvfOPx/nry4cvigtkngPepfvYWl2NElmG\na6qOeP6Dcw8BZ5IgQsVY8dCb6qai/tWAJOBrFIt5LcVr3AlDu/h48BIpsSLxCU95\nRv+hxR23gidWbJyPKWfc01dlYbAzFcT6Oogi5GxsBNwzVObWWtP8a51lEe5jw+Oz\nRX2kVqN7UD92iFAD50PH1ZdNbGUgjeQH/nOiN/A0ylSeXPxBzuBYc33ZHbEpgl8k\nuqOUviVzAgMBAAECggEBAI4AWkZew4lEWu655v8xmk89WrqyFRboh/srTs4m9SrQ\n4JmacBDqMU7rms1KUbfk2PuOPFcMeR2Np0sYcovPZWr8nifc+2pdyovshFsTyTi1\nl3iaDkupEDSQ5T3o47uBPkouLR3fB/UCQxMvUROjhb3u+IE8pLB1TPeMQmIV9ift\ndCzn2NyeXA7jRIUgUrZN2gaiusbKOz/YupwWK1R7eQiac+xslSe6LcBZOP/Ipf3/\n0XbY1571H1z+uNWUXnh6SqBL2Fdrc/j0QlOCe4Owgqi0FVBrqUE7tLErUOsN2tQy\n8tw9OU/Q+/HHNzn3tMaONbGlbMo4sEWHHI9QE+6Sf2kCgYEA17Fzn3DqRwtaLw40\nRZQuUX0riJ2YpRLY+D6y8np87F9+nE9mhpxaEztxQ3jKaPpH0WPsG5MyijVcXkZt\nZfoGYN3ihT7bE9Pwg6ptK3eGueJcj2OGey+Lc3ngxmmC7JSjbkExqg78jbFlWWHO\n0qGtEZ0dG3smzPokJ4jy/d3MNH0CgYEAy0Lvnngnoqg3vIXkhKK2laPXygdjEjni\nOI5xxuZq01XqR77hyOmyfz+OBmiHhCtuTojO0xxyRQVzkvo3dA/GaHg8PHhDCgv0\nWv/lIBd4o8UoBt3/ywRb78A/6KVkvAppaCkxfd6KXZ/WszMtEf0+sICFKFpUekMX\nVdFvYFZmlK8CgYA0M4EtJFG+0fOIkeJ6uGshU67WiHWp9c7G/b2nS5eySUZGJD1G\n9M4j+23lC3XJRFFfTtSUs+I2asWpF1hgpssmZGzvHJA+0ztRUkzLiUj08eC+3zJr\n28zfLK8GtgB2q16GT4bqhmf/DuDdaft5JKHTMngZ74srbpqTauSMJkLGrQKBgQCD\nhjmVOjyzdNQ0ChOXe85Xv+A3G1aRCaGHZSzcPmbrf1GMwUhKgGX/DvnwzZy6+ntz\nF/V1B5gtb1ycw4o0cKy7FuorWspOavPgGmuBu45VspK29tm43YY7+hOgj71CLB6O\nxvD+eIziDjaYWEoWtN7myRLgzKqTPmyQHGhMVzwjgwKBgFDzbrMuL5cwvywlJstB\nRRvvd3JOxvPd//g2LOygQL6XJA09+3AupT5RzEe+/BTwURckd5SGgYmOR7L1m5ql\nmA1VevkroErmsZ+s/DdQSQJaQItltIbAF0yN+9JKocBk/mC8D6zMXISGoWwVgUFE\nmJJwIOkU6RjuSPGRJsAO+/K8\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq0IcU21YrNYbKMSlGN9F\nOPpVILsoQpVXtmk0q8o3UydnmgfgDnHzVSo2wV9lyplPKSMtLgQeQQ2RIpKfiy0y\nxaxioa/EtrxSTLgDPT+OsY07Tr3zj8f568uHL4oLZJ4D3qX72FpdjRJZhmuqjnj+\ng3MPAWeSIELFWPHQm+qmov7VgCTgaxSLeS3Fa9wJQ7v4ePASKbEi8QlPeUb/ocUd\nt4InVmycjyln3NNXZWGwMxXE+jqIIuRsbATcM1Tm1lrT/GudZRHuY8Pjs0V9pFaj\ne1A/dohQA+dDx9WXTWxlII3kB/5zojfwNMpUnlz8Qc7gWHN92R2xKYJfJLqjlL4l\ncwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "q0IcU21YrNYbKMSlGN9FOPpVILsoQpVXtmk0q8o3UydnmgfgDnHzVSo2wV9lyplPKSMtLgQeQQ2RIpKfiy0yxaxioa_EtrxSTLgDPT-OsY07Tr3zj8f568uHL4oLZJ4D3qX72FpdjRJZhmuqjnj-g3MPAWeSIELFWPHQm-qmov7VgCTgaxSLeS3Fa9wJQ7v4ePASKbEi8QlPeUb_ocUdt4InVmycjyln3NNXZWGwMxXE-jqIIuRsbATcM1Tm1lrT_GudZRHuY8Pjs0V9pFaje1A_dohQA-dDx9WXTWxlII3kB_5zojfwNMpUnlz8Qc7gWHN92R2xKYJfJLqjlL4lcw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "miami-backboard-boiler-prod:D0300F35FA6C43AE96B1DE8F94FE6E5F"
+    },
+    "alg": "RS256",
+    "keyid": "miami-backboard-boiler-prod:D0300F35FA6C43AE96B1DE8F94FE6E5F",
+    "client_id": "bc318bcc-0d6b-43d2-bc30-1a6a78b5fcc9",
+    "deployment_id": "a6380880-1bb1-472f-bd27-2615af17835b",
+    "iss": "https://www.blackboard.com",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/bc318bcc-0d6b-43d2-bc30-1a6a78b5fcc9/jwks.json ",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "you will need to supply the url of the react application",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  }  }
 ]
