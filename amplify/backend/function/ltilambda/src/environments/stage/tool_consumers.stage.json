@@ -615,7 +615,7 @@
     "keyid": "miami-backboard-boiler-prod:D0300F35FA6C43AE96B1DE8F94FE6E5F",
     "client_id": "bc318bcc-0d6b-43d2-bc30-1a6a78b5fcc9",
     "deployment_id": "a6380880-1bb1-472f-bd27-2615af17835b",
-    "iss": "https://www.blackboard.com",
+    "iss": "https://blackboard.com",
     "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
     "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
     "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/bc318bcc-0d6b-43d2-bc30-1a6a78b5fcc9/jwks.json ",
