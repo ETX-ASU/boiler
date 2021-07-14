@@ -622,5 +622,5 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "you will need to supply the url of the react application",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
-  }  }
+  }
 ]
