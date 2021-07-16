@@ -270,7 +270,7 @@
     "platformOIDCAuthEndPoint": "https://unicon.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://unicon.instructure.com/login/oauth2/token",
     "platformPublicJWKEndpoint": "https://unicon.instructure.com/api/lti/security/jwks",
-    "toolApplicationUrl": "https://prod.dyl4ur5zvn9kt.amplifyapp.com/",
+    "toolApplicationUrl": "https://prod.dyl4ur5zvn9kt.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   },
   {

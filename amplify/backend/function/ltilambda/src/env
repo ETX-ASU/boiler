@@ -2,15 +2,15 @@
 environment=stage
 #Required for development where urls are suffixed with the env
 # All configuration values for the lti library can be found in rl-shared/src/util/environment.ts.
-URL_ROOT=/stage
+URL_ROOT=/prod
 #
-API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com
-APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com
+API_URL=https://qx0moni8xe.execute-api.us-west-2.amazonaws.com/
+APPLICATION_URL=https://prod.dyl4ur5zvn9kt.amplifyapp.coms
 PLATFORM=aws
 
 DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com
 
-DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com
+DEEP_LINK_DISPLAY_BASE_URL=https://qx0moni8xe.execute-api.us-west-2.amazonaws.com/
 
 LOGGING_LEVEL=debug
 #current option: simple or none
