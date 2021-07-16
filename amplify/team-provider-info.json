@@ -13,7 +13,10 @@
     },
     "categories": {
       "function": {
-        "ltilambda": {}
+        "ltilambda": {
+          "deploymentBucketName": "amplify-boiler-stage-164450-deployment",
+          "s3Key": "amplify-builds/ltilambda-5253547254566b535756-build.zip"
+        }
       }
     }
   },

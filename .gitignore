@@ -47,3 +47,5 @@ amplifytools.xcconfig
 /debug.log
 /NOTES.md
 /NOTES-v1.md
+.idea/
+boiler.iml
