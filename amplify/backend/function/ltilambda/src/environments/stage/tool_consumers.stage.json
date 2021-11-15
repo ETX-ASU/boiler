@@ -1039,7 +1039,7 @@
     "alg": "RS256",
     "keyid": "asu-review-it-prod:514C9C39F8B544E99FFEBB1E7A511E59",
     "client_id": "72360000000000192",
-    "deployment_id": "YT3rV8YrmZLGwXelRLJUnRhTXvUsmO48ByvjnINm1UVj3CVPS85xOlycO9EuqVin",
+    "deployment_id": "256976:bdf4acd1e902c94b8111651b74013981638d8ee1",
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://canvas.asu.edu/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://canvas.asu.edu/login/oauth2/token",
