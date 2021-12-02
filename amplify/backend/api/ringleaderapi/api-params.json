@@ -1,7 +1,7 @@
 {
     "paths": [
         {
-            "name": "/lti-service/{proxy}",
+            "name": "/lti-service",
             "lambdaFunction": "ltilambda",
             "privacy": {
                 "open": true
