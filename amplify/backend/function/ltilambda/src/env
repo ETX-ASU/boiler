@@ -1,22 +1,2 @@
 #name of folder inside environments that contains tool consumers for this tool
-environment=dev
-#Required for development where urls are suffixed with the env
-# All configuration values for the lti library can be found in rl-shared/src/util/environment.ts.
-URL_ROOT=/prod
-#
-API_URL=https://qx0moni8xe.execute-api.us-west-2.amazonaws.com
-APPLICATION_URL=https://prod.dyl4ur5zvn9kt.amplifyapp.com
-PLATFORM=aws
-
-DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com
-
-DEEP_LINK_DISPLAY_BASE_URL=https://qx0moni8xe.execute-api.us-west-2.amazonaws.com
-
-LOGGING_LEVEL=debug
-#current option: simple or none
-DEEP_LINK_FORM_SUBMIT_SCRIPT=simple
-
-#current option: MUST ALWAYS BE FALSE. HTML IS RETURNED
-DEEP_LINK_FORWARD_SERVER_SIDE=FALSE
-
-SESSION_TABLE_NAME=Session
+environment=qa

@@ -6,7 +6,7 @@ const awsmobile = {
     "aws_cloud_logic_custom": [
         {
             "name": "ringleaderapi",
-            "endpoint": "https://qx0moni8xe.execute-api.us-west-2.amazonaws.com/prod",
+            "endpoint": "https://yqgnh270oj.execute-api.us-west-2.amazonaws.com/prod",
             "region": "us-west-2"
         }
     ]
