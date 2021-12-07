@@ -6,6 +6,7 @@
     "iss": "https://canvas.instructure.com",
     "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
     "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "",
     "deployment_id": "476:5440a08422ab1ee7794a0588b5e4cb4a094c4256",
