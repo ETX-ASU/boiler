@@ -94,7 +94,7 @@ const toolConsumerPromises = toolConsumers.map(
         );
         const jwk = pem2jwk(public_key_str);
         const id = toolConsumer.uuid ? toolConsumer.uuid : uuid().replace(/-/g, "").toUpperCase();
-        Object.assign(jwk, {
+        const updateJwk = Object.assign(jwk, {
           alg: "RS256",
           use: "sig",
           kid: `${toolConsumer.name}:${id}`
@@ -103,8 +103,9 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.private_key = private_key_str;
         toolConsumer.public_key = public_key_str;
         toolConsumer.public_key_jwk = jwk;
-        toolConsumer.alg = jwk.alg;
-        toolConsumer.keyid = jwk.kid;
+        console.log(` I am Here ${JSON.stringify(jwk)}`)
+        toolConsumer.alg = updateJwk.alg;
+        toolConsumer.keyid = updateJwk.kid;
 
         toolConsumer.client_id = toolConsumer.client_id ? toolConsumer.client_id : "client_id supplied by consumer/platform";
         toolConsumer.deployment_id = toolConsumer.deployment_id ? toolConsumer.deployment_id : "deployment_id supplied by consumer/platform";
@@ -112,9 +113,10 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.iss = toolConsumer.iss ? toolConsumer.iss : "iss supplied by consumer/platform";
         toolConsumer.platformOIDCAuthEndPoint = toolConsumer.platformOIDCAuthEndPoint ? toolConsumer.platformOIDCAuthEndPoint : "client_id supplied by consumer/platform";
         toolConsumer.platformAccessTokenEndpoint = toolConsumer.platformAccessTokenEndpoint ? toolConsumer.platformAccessTokenEndpoint : "platformAccessTokenEndpoint supplied by consumer/platform";
+        toolConsumer.platformAccessTokenAud = toolConsumer.platformAccessTokenAud ? toolConsumer.platformAccessTokenAud : "platformAccessTokenEndpoint supplied by consumer/platform can be null";
         toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
         toolConsumer.platformPublicKey = toolConsumer.platformPublicKey ? toolConsumer.platformPublicKey : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
-        toolConsumer.toolApplicationUrl = toolConsumer.toolApplicationUrl ? toolConsumer.toolApplicationUrl : "you will need to supply the url of the react application"
+        toolConsumer.toolApplicationUrl = toolConsumer.toolApplicationUrl ? toolConsumer.toolApplicationUrl : "you will need to supply the url of the react application, not required if canvas consumer used our json or blackboard install"
         toolConsumer.accessTokenPostContentType = toolConsumer.accessTokenPostContentType ? toolConsumer.accessTokenPostContentType : "application/x-www-form-urlencoded"; // application/x-www-form-urlencoded is default but some platforms use application/json
         fs.unlinkSync(keyFileNames.privateKeyFile);
         fs.unlinkSync(keyFileNames.publicKeyFile);
