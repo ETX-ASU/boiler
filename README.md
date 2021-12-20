@@ -33,33 +33,47 @@ Successfully set up the new user.
 
 ## 4. Additional backend requirements for LTI Lambda:
 
-      a. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to Dynamodb and currently there is no support for adding a dynamodb resource to the REST API backend, you will need to create a new dynamodb table in your region, called YOUR_APPLICATION_SESSION. This will need to be added to the .env file (see below). Then add permissions through the AWS console to the specific lambda generated as part of the amplify build process to give the lambda access to create, populate and access the table.
+  a. LIT requires a Session dynamodb table. Specifically because the ltilambda requires access to Dynamodb and currently there is no support for adding a dynamodb resource to the REST API backend, you will need to create a new dynamodb table in your region, called YOUR_APPLICATION_SESSION. This will need to be added to the .env file (see below). Then add permissions through the AWS console to the specific lambda generated as part of the amplify build process to give the lambda access to create, populate and access the table.
 
-      b. LTI requires that the API Gateway has enabled CORS for the backend APIs. The backend and the frontend applications will exist in different domains, at least during development.
+  b. LTI requires that the API Gateway has enabled CORS for the backend APIs. The backend and the frontend applications will exist in different domains, at least during development.
 
-      c. env values which will need to be updated, found at amplify/backend/function/ltilambda/src/.env:
-         i. environment=local (name of folder inside environments that contains tool consumers for this tool, typically set to your working amplify env)
-         ii. URL_ROOT=/stage #(suffix of the amplify env that is being pushed)
-         iii. API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com #(base url for ltilambda API)
-         iv. APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com #(url of the react application)
-         v. DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com #(endpoint for dynamodb endpoint)
-         vi. DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com #(typically same as API_URL but can be different)
-         vii. SESSION_TABLE_NAME=YOUR_APPLICATION_SESSION #whatever you end up calling your session table.
-
+  c. env values which will need to be updated, found at amplify/backend/function/ltilambda/src/.env:
+     i. environment=local (name of folder inside environments that contains tool consumers for this tool, typically set to your working amplify env)
+     ii.  URL_ROOT=/stage #(suffix of the amplify env that is being pushed)
+     iii. API_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com #(base url for ltilambda API)
+     iv.  APPLICATION_URL=https://stage.dyl4ur5zvn9kt.amplifyapp.com #(url of the react application)
+     v.   DYNAMO_TYPES_ENDPOINT=https://dynamodb.us-west-2.amazonaws.com #(endpoint for dynamodb endpoint)
+     vi.  DEEP_LINK_DISPLAY_BASE_URL=https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com #(typically same as API_URL but can be different)
+     vii. SESSION_TABLE_NAME=YOUR_APPLICATION_SESSION #whatever you end up calling your session table.
 ## 5. How to add a new Consumer:
 
-* Make sure that the .env file has been created and is accurate
+Clone github: git@github.com:ETX-ASU/boiler.git
+Go To stage branch: git checkout stage
+cd amplify/backend/function/ltilambda/src
+
+* **IMPORTANT**: Make sure that the **env** file has the environment variable is set to the current env/ git branch.
 * When a new consumer (Canvas, Moodle etc) is to be added to the tool,  a new tool configuration will need to be created in the tool_consumer.json for that environment and data will need to be inserted from the Consumer and added to the configuration.
+* Currently the production git branch is **stage**
 * Starting at the project root do the following:
 
 ```
    cd ./amplify/backend/function/ltilambda/src in a terminal
    yarn run setup-tool-keys --name=my-new-consumer
 ```
+* where my-new-consumer is a descriptive name of the new consumer-open-skill-tool:
+  example: asu-review-it-prod
+* Navigate to the environments/stage/tool_consumers.stage.json file
+* find "my-new-consumer" edit the following:
+  - client_id
+  - deployment_id
+  - platformOIDCAuthEndPoint
+  - platformAccessTokenEndpoint
+  - platformAccessTokenAud
+  - platformPublicJWKEndpoint
+  - platformPublicKey
+  Note: there are instructions printed out with each of the variables.
 
-Note: you may need to adjust the script to properly find your tool_consumers.${environment}.json, (make sure you have updated env with the name of you environment)
-
-* Find the tool_consumers.${environment}.json file open it you should see an object with the name (my-new-consumer):
+## Example initial output:
 
   ```
 
@@ -90,11 +104,9 @@ Note: you may need to adjust the script to properly find your tool_consumers.${e
 
   ```
 
-You will need to fill in all the values where it says "supplied by consumer/platform" from documentation supplied by the consumer and or generated as part of the installation process. And add platformPublicJWKEndpoint or platformPublicKey (platformPublicJWKEndpoint is preferred. Set the one not filled to an empty string)
 
-## Example Information You Will need for the Consumer/Platform
+## Information You Will need to give the admin of the LMS that will be installing the tool (these are production endpoints):
 
-REPLACE: https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com/stage with the actual root/base url of the Tool instance.
 
 1. Tool End-Point to Receive Launches
    (Note: this is the target_link_url that the cert suite will send in OIDC initiation.)
@@ -112,10 +124,10 @@ REPLACE: https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com/stage with the a
    (Note: this is the REGISTERED URL in OIDC for your Tool's Deep Linking. The cert suite POSTs launches here!)
    https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com/stage/deeplink
 6. Tool PUBLIC JWKS
-   You can either either supply IMS with a public key in PEM format or JWT OR you can give them the url that will send a list of public jwk keys:
+   You can either either supply the LMS admin with a public key in PEM format or JWT OR you can give them the url that will send a list of public jwk keys (using the url is the preferred method but not all LMS's support using an endpoint):
    https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com/stage/jwks
 
-## List of toolApplicationUrls that you will need to supply if not canvas json install, or Blackboard:
+## List of toolApplicationUrls that you will need to supply if not canvas json installed, or Blackboard LMS:
 
 1. Process Planner: https://main.d2cx84babvjpbq.amplifyapp.com
 2. Peer Review Tool: https://main.d1nwigklju3y36.amplifyapp.com
@@ -123,3 +135,43 @@ REPLACE: https://1cxw5vr28f.execute-api.us-west-2.amazonaws.com/stage with the a
 
 Further explanation for what will need to be added between tool and consumer can be found in the ringleader project documentation.
 In addition you will find some notes on the IMS certification process when using the ring leader libraries.
+
+# IMPORTANT: INSURE env file has correct value!!.
+
+### environment variable in env file should be set to env/branch you will be pushing changes too.
+
+```
+example: when making changes to stage branch make sure amplify/backend/function/ltilambda/src/env has environment=stage.
+```
+## Some useful urls and dynamodb tables:
+Dynamotables:
+Review table is only used for the review-it tool: gives number of students: beganOnDate, or createdAt, updatedAt (to filter by date.)
+Homework tables gives number of students: beganOnDate, or createdAt, updatedAt (to filter by date.)
+Assignment tables gives number of Assignments: createdAt or updatedAt (to filter by date) you can use lineItemId to determine school:
+example: https://asuce.instructure.com/api/lti/courses/3789/line_items/202
+
+### Current Tables that are being used:
+* Process Planner
+  - Homework-xmukqbnxmvalvh5qaqbdv2xpci-prod
+  - Assignment-xmukqbnxmvalvh5qaqbdv2xpci-prod
+
+* Chart It
+  - Assignment-htn2s45b65f3bhm2f2dt37newq-prod
+  - Homework-htn2s45b65f3bhm2f2dt37newq-prod
+
+* Review It
+  - Homework-rxjekrr5mbdkbhucixnbtb6ir4-main
+  - Review-rxjekrr5mbdkbhucixnbtb6ir4-main
+  - Assignment-rxjekrr5mbdkbhucixnbtb6ir4-main
+
+### Endpoints for obtaining Canvas Specific Configurations:
+Prod:
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/chart_it_tool.json
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/peer_review_tool.json
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/process_planner.json
+
+QA:
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/qa_chart_it_tool.json
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/qa_peer_review_tool.json
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/qa_process_planner.json
+- https://ringleader-canvas-configs.s3.us-west-2.amazonaws.com/qa_proxy_server_boiler.json

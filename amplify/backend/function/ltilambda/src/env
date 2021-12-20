@@ -1,2 +1,3 @@
-#name of folder inside environments that contains tool consumers for this tool
-environment=qa
+#name of folder inside environments that contains tool consumers for this env/git branch
+#MUST be set to the correct value before pushing to auto build
+environment=stage

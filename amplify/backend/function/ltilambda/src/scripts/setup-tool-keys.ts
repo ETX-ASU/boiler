@@ -111,7 +111,7 @@ const toolConsumerPromises = toolConsumers.map(
         toolConsumer.deployment_id = toolConsumer.deployment_id ? toolConsumer.deployment_id : "deployment_id supplied by consumer/platform";
         
         toolConsumer.iss = toolConsumer.iss ? toolConsumer.iss : "iss supplied by consumer/platform";
-        toolConsumer.platformOIDCAuthEndPoint = toolConsumer.platformOIDCAuthEndPoint ? toolConsumer.platformOIDCAuthEndPoint : "client_id supplied by consumer/platform";
+        toolConsumer.platformOIDCAuthEndPoint = toolConsumer.platformOIDCAuthEndPoint ? toolConsumer.platformOIDCAuthEndPoint : "platformOICDAuthEndPoint supplied by consumer/platform";
         toolConsumer.platformAccessTokenEndpoint = toolConsumer.platformAccessTokenEndpoint ? toolConsumer.platformAccessTokenEndpoint : "platformAccessTokenEndpoint supplied by consumer/platform";
         toolConsumer.platformAccessTokenAud = toolConsumer.platformAccessTokenAud ? toolConsumer.platformAccessTokenAud : "platformAccessTokenEndpoint supplied by consumer/platform can be null";
         toolConsumer.platformPublicJWKEndpoint = toolConsumer.platformPublicJWKEndpoint ? toolConsumer.platformPublicJWKEndpoint : "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint";
