@@ -35,7 +35,7 @@ if(!fs.existsSync(ENV_VARIABLES_PATH)) {
 const toolConsumers = JSON.parse(
   fs.readFileSync(ENV_VARIABLES_PATH, "utf8")
 );
-const toolNames = [];
+const toolNames: any[] =  [] ;
 for(let i=0; i < process.argv.length; i++) {
   const arg = process.argv[i];
   const args = arg.split(/:|=/);

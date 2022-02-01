@@ -1167,5 +1167,57 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "my-new-consumer",
+    "uuid": "FE861F9263A0411A9B232BD8060652C8",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAZJ+1k0emOE//\n+YLPmRKP3QlZfiyd7CYieqRqB3/OCGMdaOhwFikRJTGqPChMPnwX6DfXy018RoxY\ncuaQtJyvrTiD4pTO8P0AJtwb7WPyDTCt8fDMvjWcB9tXvlNrd4O3IoParx9gB7bX\nsU3IrFv7sxnGHuuu/CjkyrXtDOh5D2R2NQi0Fouivbph13EGRyb/xtxwcq7lilDB\nK8wAayilqjECcqctM0LhmdCtRKbXZ62B1KuWmWo/UUybRTQisRhJy3sDRyczCI+f\nbGKXVPJZMyLmC9M4+qidQibnlJkESJfS6Bg6UAUBE7bjDaaMt83K6RWZ7oCDuYWs\n2c0bTejRAgMBAAECggEAG9+4P99ZtxxbgtOMfzVHOi6lByE/p5WqJL6uCWqSuq/+\nZClp26tqQcCoxGg40msPIYuUY6Bh1oqGFN54xyhTtyQalwkB1EWX8iivJSCspUoB\n7oGqCI/aRoPg5IJ/pYdIPwUyI0HSAuC7Pd7DTTqjjQDy0AB01wJTjmpMF08Sc09m\nIUdl1qi7k8QUJ15BdARuHHDeC8qYQbrny1EYu5j2+jxxg+ew4HyiamsZsqXcqe+A\nD5mlkJ4IV0rENgDdKk3cfcGN/d19/bjw9Fd5Z9NpkZdrP+ct0iSMPq7voPS7ih9b\nSEXDgO64NhoZv13YHHXu0+Hdy2gNKChiEEfCMlQBwQKBgQDt522kKHqm0s9xoqsG\nBVdwuG9FQ+6iITzfhC2IzGzLfFhUdNZemKqzz/4l7DhIvClAPE6v4t+ssZKG0dOS\npZfaHZEQvmgjL25uEQZb+zpLtxxftFA+KcE0RW+LD/r4lThgOn4ZYb67ZxFL/Sqh\n505UZCJIeXIh65dtcX/02SffiQKBgQDPBvx6FgqJpEoQQBDQbPl3+VfLB7kU+zgF\nTh3jF+hm1c74SYborFOizZ/DFIh9fsEp3W7DzbozLZ/VieS5pEXlj3jyHfPcX/J+\nKVytThUPKbucF2E27ZED4VJfBRMTPXT2K28mtA45NrqD4Pa9uqErRZha7/WL6TgP\n9rYs3IZlCQKBgQCF3M6oq843yC7JdgpdXOwSlPSnOM4xlBo4eptUehJNfS4Gd6eX\nmreSbdpHZF9XLejYKBbuiO3qshAMpEw0G9ER/cj+buURx0KP1CyL3RS0PdhNUZxF\nHiGEU/2rddZ1wSDzpHYHuiQkNp5Y757pcsl0WtOfjBZYV8Pg5RhmoTn6YQKBgD3c\niY71jRqJ8/OdISkWlwjJgflSCnUBiEDVkcqs9y3bT6gTWHOoIqmwJcAGH67YNGIN\nH670h2IJjQwi0yzBsH0i/PHkD11Xcj9OnrnObi6EuuGufscJ/94X8yQfgQ6ru4pf\neiwne2SPPPZxP2l8HfKvLhJmR4oSG0Vx5AfNsX75AoGADN8Q3pba67uDfpSW11Iq\nujCG7P63D2XA1a/EfL7Sl+5lDhNDHJ0mvh+IlDob5dobopQddtsZFg5q4JdlJp7V\nF8CDimtmwNE5owljn7FgZGqj288urSSDjQfrYROpJJZV2i5sE5vDJMqRa6o2GZYI\nsC4AWYEEu91ALQ6O/Eh/TuE=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwGSftZNHpjhP//mCz5kS\nj90JWX4snewmInqkagd/zghjHWjocBYpESUxqjwoTD58F+g318tNfEaMWHLmkLSc\nr604g+KUzvD9ACbcG+1j8g0wrfHwzL41nAfbV75Ta3eDtyKD2q8fYAe217FNyKxb\n+7MZxh7rrvwo5Mq17QzoeQ9kdjUItBaLor26YddxBkcm/8bccHKu5YpQwSvMAGso\npaoxAnKnLTNC4ZnQrUSm12etgdSrlplqP1FMm0U0IrEYSct7A0cnMwiPn2xil1Ty\nWTMi5gvTOPqonUIm55SZBEiX0ugYOlAFARO24w2mjLfNyukVme6Ag7mFrNnNG03o\n0QIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "wGSftZNHpjhP__mCz5kSj90JWX4snewmInqkagd_zghjHWjocBYpESUxqjwoTD58F-g318tNfEaMWHLmkLScr604g-KUzvD9ACbcG-1j8g0wrfHwzL41nAfbV75Ta3eDtyKD2q8fYAe217FNyKxb-7MZxh7rrvwo5Mq17QzoeQ9kdjUItBaLor26YddxBkcm_8bccHKu5YpQwSvMAGsopaoxAnKnLTNC4ZnQrUSm12etgdSrlplqP1FMm0U0IrEYSct7A0cnMwiPn2xil1TyWTMi5gvTOPqonUIm55SZBEiX0ugYOlAFARO24w2mjLfNyukVme6Ag7mFrNnNG03o0Q",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "my-new-consumer:FE861F9263A0411A9B232BD8060652C8"
+    },
+    "alg": "RS256",
+    "keyid": "my-new-consumer:FE861F9263A0411A9B232BD8060652C8",
+    "client_id": "client_id supplied by consumer/platform",
+    "deployment_id": "deployment_id supplied by consumer/platform",
+    "iss": "iss supplied by consumer/platform",
+    "platformOIDCAuthEndPoint": "platformOICDAuthEndPoint supplied by consumer/platform",
+    "platformAccessTokenEndpoint": "platformAccessTokenEndpoint supplied by consumer/platform",
+    "platformAccessTokenAud": "platformAccessTokenEndpoint supplied by consumer/platform can be null",
+    "platformPublicJWKEndpoint": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "you will need to supply the url of the react application, not required if canvas consumer used our json or blackboard install",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "asu-prod-reviewit-knierman",
+    "uuid": "FDB9A1FFF428460E99181014B6088F9F",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDbI/Sp6+wcBHW+\njCq6VXKcaXanwT9V8mJcY6LIujJKU1fVJdDVpMcKDZ0++iPO9VmnNDpNPIxicMxY\nYE66P/3yW1mMYN3nq3WB8Tb/W9BtKsIg6tdCF5aF3F/tgQSqQziZnvwWVMQVqQXw\n75eYqfwjyaeb8wzcZ5xVU0JkK1eIf9CqizbfimhsGQFM0pcKYEGEOiRHDg4RjgBX\nDqMG7UZICqySE1FAf+DzH6CmlR46TiyECAnPuZu6KVYtIfKV+w1g4HsXXm+2Sn71\nqEIohXk0Ich10mojGfy4sRyHAIVK2noj9LxM/z7W+ABZ4ngDTuWRIDWNiVGrulxy\nfkTB3PZDAgMBAAECggEBAMtFW/Kuc5I9lNaOgCfdkPWDYlwThmN79T9L8LiO9o05\nJ9UAQema8kHiBQVg1AxqS6IscRQp4PKDPRmRJBXhu/auQ69SPyRhSBujm2ddTEWn\nDvGnxMp6xNYgaB8PuTsSJZNiBOXV9Rk+ctNd+1nR+59as42V800TEtGW7JOsHILw\njSjTPxUCZ3EgGCLN/JNla5iNgjSobAoDP4rBr+OwjkPtRGOORir40d4UA9jvZQ4F\nIbvm9hLeyoc3yV0rVxUIzNaNYtMWGIp7jk3KSn/PJ5bzuXVKVMgm2i7pB7865G4m\n1h1UDlrJLhfvX1mcXNeAfHKSFwq4qjuY7KFOK8dtBPkCgYEA8YQ71oB3Od3e5YCs\n9CUAlbTc0pJJ5YcM7DFto6vTIoj7Hj55IfHh2l+PjjHajvvY250bFCrn3Q2PzkHv\nNFEiQ7zvEpGDdRJ41u/641A8ihmAXoWEhQeX4XrEFDpPR5XZ9wixZU+hJTUCF2+7\nMCWS+kubM44qP8823Mn2wDl6IB8CgYEA6Eg0MrV0yTZHcba4XSHpyMQYVUfa10Sq\nUO9WeWkFtRNF6YLnQRO9wveCvWqNuCHrJAyIUCvvQ2fItLvmWyurOk7oBA40Trrc\nqklMIBo+3zPISywGAqR158Hjylb/oPnt0VYZuxOnqksojUndm+VgO+1uxCHg9n8I\nrfV9LL2LVV0CgYEAkyGgpoNqnrkYki36r11fZtRg9nMiS48jgzx1c5E4tcBHY1xh\nxRkrIzK2LMUYRaUNrnSeS4H78MHTSq8GP5Px0NxntKMrN4YCUcauzA5UYzk3591l\nJvnCQB3fGAeRxqV2vLTyBSsmm5kYZhiuK52oVYz7xsOj322oGYd8KAyb5rcCgYBo\niB3deCWPa3rpZLZBS0K/U+gzcLu+Rqty8tJynt2vqHW86WkSs0ShmetfPLV8WN9O\nAMnTcoIhTnJXS3wWKWfMPLhTIuVNTPCDPashg04p+k637Z7iz4oz+uB9LXuqwO7S\nVzILK4Q3sc0VEFnHj4koTuibITfxFigcyS5E1SQADQKBgQCUmVTNzDoeW9+sLVci\nU3uhmvRRiJfEaT8szHLp+7bRAGOf2gcVjngcrnl1+WuRdD9iuFJyE7vk3g28AmHo\nB4s4oYKefRlbQdgwqW6jSIJJPfNqdjVSlkJW/u6QnzqHL2FBeTt83ZUAKnzDgYUO\nk44CZCWCvBcCGTUwIzC3ybUlUQ==\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2yP0qevsHAR1vowqulVy\nnGl2p8E/VfJiXGOiyLoySlNX1SXQ1aTHCg2dPvojzvVZpzQ6TTyMYnDMWGBOuj/9\n8ltZjGDd56t1gfE2/1vQbSrCIOrXQheWhdxf7YEEqkM4mZ78FlTEFakF8O+XmKn8\nI8mnm/MM3GecVVNCZCtXiH/Qqos234pobBkBTNKXCmBBhDokRw4OEY4AVw6jBu1G\nSAqskhNRQH/g8x+gppUeOk4shAgJz7mbuilWLSHylfsNYOB7F15vtkp+9ahCKIV5\nNCHIddJqIxn8uLEchwCFStp6I/S8TP8+1vgAWeJ4A07lkSA1jYlRq7pccn5Ewdz2\nQwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "2yP0qevsHAR1vowqulVynGl2p8E_VfJiXGOiyLoySlNX1SXQ1aTHCg2dPvojzvVZpzQ6TTyMYnDMWGBOuj_98ltZjGDd56t1gfE2_1vQbSrCIOrXQheWhdxf7YEEqkM4mZ78FlTEFakF8O-XmKn8I8mnm_MM3GecVVNCZCtXiH_Qqos234pobBkBTNKXCmBBhDokRw4OEY4AVw6jBu1GSAqskhNRQH_g8x-gppUeOk4shAgJz7mbuilWLSHylfsNYOB7F15vtkp-9ahCKIV5NCHIddJqIxn8uLEchwCFStp6I_S8TP8-1vgAWeJ4A07lkSA1jYlRq7pccn5Ewdz2Qw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "asu-prod-reviewit-knierman:FDB9A1FFF428460E99181014B6088F9F"
+    },
+    "alg": "RS256",
+    "keyid": "asu-prod-reviewit-knierman:FDB9A1FFF428460E99181014B6088F9F",
+    "client_id": "72360000000000197",
+    "deployment_id": "285832:e86d57274656c6ac2810c7902cd47e25b5ccbbbb",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
