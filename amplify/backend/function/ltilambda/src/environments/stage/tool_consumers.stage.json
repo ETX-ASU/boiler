@@ -1217,7 +1217,7 @@
     "platformAccessTokenAud": "",
     "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
-    "toolApplicationUrl": "",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
