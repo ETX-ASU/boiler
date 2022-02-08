@@ -978,7 +978,7 @@
     "client_id": "10080000000000280",
     "deployment_id": "331809:3178b86dc90bdfd7cb36bf3d863a487512669233",
     "iss": "https://canvas.instructure.com",
-    "platformOIDCAuthEndPoint": "https://canvas.instructure.comapi/lti/authorize_redirect",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
     "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
     "platformAccessTokenAud": "",
     "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
