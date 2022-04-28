@@ -1349,5 +1349,31 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "cascadia-prod-reviewit-blong",
+    "uuid": "262F0054BFCB4F0D96ED969A210B78D8",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDDt32rz/LTG01p\nrAMci1dozmFwNqkVAYUSZArw9kV2gsqwl7hBndf8mgDNsJPQ0VUVSHO5GuK5QC/D\nyZG0HKldmlviW374+Gg79m+W3Ihi5FyFfc9bAYZxWRX+OkG/C6voQAfsHEARPGFv\nvXTJjKCUPZaafh+P/ebjkGNtGaZz0Oo05Sg7grKoTbQYq0+KRzcKPpJT1HER91f3\nB4rwzb3L/zN4IAMbnF7fc2qnTe5e1GwtkrfdVzFmqsSA0i/spW7GuzaKMaU3Q/8b\ngnIIxXLEEk1Ju3vzZmHxoUeffJKwTtgQ9ovKNP9ASeyOkuhmv8dbZYQp3QGF3c/4\nDZowyt0NAgMBAAECggEBAJvqJHpoKejVekExoDTwKI08xFDxqpcqY8l322OEvWeg\n4Dn4U/gp97OrN/Kktc0HxoEy+8W9zlqH8MVHYgSbRK1l18cm3qsWsWr7coA7ZYdq\npu5NgI/eUi0gLC4gWNoKQUO/JtCI3N0ePf0Xb99UYWRXABBJY3mBaptlHl/+rCTc\nJV1VpbVVkrtA3FX+Ul0NxDYc+5+AT02iQAmxHOKc9a1wlfyke2Rr+0MK7Y9/QO1i\nnbNVIdVaYDW6krCsA7Ict4y3h8vBfWE+8r8f5bE+b8cz+InFh0sRqr2PhpP/sgvz\nZFaPkkwxWY8gAq6T8UM5YOB6hLA2xyQRh024+yBzD8ECgYEA/CAGyKxUWQyFOwsI\nfPAgSP8sUOh4WhmoskS9rZ5pvVEqT3Z21x2w+LoxnCMLgmcm2+luiYkyBGeoGHWw\nGPwuGSRAmwFSC+MvI9VLLBJdc2wlCVEEATxZpSB2xPPIFZ4AqVtn2eKGffjE4/FD\np0OhFnF7/xMk43byh1PY/myqxz0CgYEAxrmHVBXj0sqO7xA4xpeK95Nz4gbgFF8W\nw+HB3yWxOT6BEMInrbiFMxszBmXz4KPY6e8w99hQg44HL51I0IqA4099MGoMqQVA\n2D5fTOZs7116iaoWAZWM1YionBUSeyQtEE274VOfCn4wfuA/UHqgjmoQkIjWgvwu\nFd7m/6kMShECgYEA11bnVGhT1obqGEbRJhzWBmLjz+ruOE5oFnK96tc9ivQTBjGx\nSQRUDezByJDqGKPPvc5/mbrzXG3IVbPXB1AEc3bSM1IKaJrOvXVEskyxQo8ghveK\nSx/nlTDIIGny//umpv+qEJ/4rQlX6TQ8y1To9klRVchdHmaOuOT1lkDsECUCgYEA\nhBdKNsAeITz26T0VIBwXCR2AB5ueUqwqC6YCIfuB45UCYUtM6JIgJ6pKrlQSWR1P\nz59oIzYrvmYnrKSVg9isd2ucwROcurR9N7+txQXdHvY5v0vJOOBZLo6Z1LXFBQk0\n0wN4gPv+WREr1wnjy/DWzBMAU7JBM+vADlWNoh6RxqECgYEArL+1Xn2gU2S7Da0O\nkV0k+AAxs7Q2T+ryqqoTxP6UBsg1pDacFqBQ77gBE5DpOZ7k2ClCR+99WHX5T2dQ\nHAKG102YpVIUJ34RwuGp5fdJuUb5XmOoVPIGESXQBNtTDwSz8AVsJ5HXWua1G7Ax\nmYfDr6/MeKCRryfnVVpDXc01Ljc=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw7d9q8/y0xtNaawDHItX\naM5hcDapFQGFEmQK8PZFdoLKsJe4QZ3X/JoAzbCT0NFVFUhzuRriuUAvw8mRtByp\nXZpb4lt++PhoO/ZvltyIYuRchX3PWwGGcVkV/jpBvwur6EAH7BxAETxhb710yYyg\nlD2Wmn4fj/3m45BjbRmmc9DqNOUoO4KyqE20GKtPikc3Cj6SU9RxEfdX9weK8M29\ny/8zeCADG5xe33Nqp03uXtRsLZK33VcxZqrEgNIv7KVuxrs2ijGlN0P/G4JyCMVy\nxBJNSbt782Zh8aFHn3ySsE7YEPaLyjT/QEnsjpLoZr/HW2WEKd0Bhd3P+A2aMMrd\nDQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "w7d9q8_y0xtNaawDHItXaM5hcDapFQGFEmQK8PZFdoLKsJe4QZ3X_JoAzbCT0NFVFUhzuRriuUAvw8mRtBypXZpb4lt--PhoO_ZvltyIYuRchX3PWwGGcVkV_jpBvwur6EAH7BxAETxhb710yYyglD2Wmn4fj_3m45BjbRmmc9DqNOUoO4KyqE20GKtPikc3Cj6SU9RxEfdX9weK8M29y_8zeCADG5xe33Nqp03uXtRsLZK33VcxZqrEgNIv7KVuxrs2ijGlN0P_G4JyCMVyxBJNSbt782Zh8aFHn3ySsE7YEPaLyjT_QEnsjpLoZr_HW2WEKd0Bhd3P-A2aMMrdDQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "cascadia-prod-reviewit-blong:262F0054BFCB4F0D96ED969A210B78D8"
+    },
+    "alg": "RS256",
+    "keyid": "cascadia-prod-reviewit-blong:262F0054BFCB4F0D96ED969A210B78D8",
+    "client_id": "90000000000824",
+    "deployment_id": "663821:4929315745e321bd405fd8d4f33f38ad6165f881",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
