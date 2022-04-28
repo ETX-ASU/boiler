@@ -1271,5 +1271,83 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "vccs-prod-reviewit-dtod",
+    "uuid": "670A5E0407B041268FB223FF78C951A0",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDvLv8NTo6G66zp\nl14UqEKpo5Rc8queZsaJ0Lrgf8H8Fh6PIvApv7Y2gzzGV0Di6P44Ev0TsnRVu4sa\nIpomio/rvx4f0YK08ssAEzFiYOEWobJH1CFg0JmMbHBR4y/ogm+F+HEI1Qf+Pdzf\nDENXbg1ffrXEiKJGnKNXcMXxYtZMEBSTIlEuV0UKGAk0SoGAJSwh+a7bgpU4WSd5\nG2mnjcNiqdtdKSlTDc+3J/vjw8QbAURfxLYFePtI0QKivP+tXG7rM0uir+rP2EbL\nnc5Rjnd1ZK/0Kj67qlAJ/o5tr+Z+IpJiX2myjFLLJ5ey1k48MBR/u1O/b/Dzygy1\n3ERQDehVAgMBAAECggEBAO2rQ2GTp+jFkwJimOfp8qPimfBqasJx2eLj+G5QRRAb\nYq5Ux1SU3Zj5e5CS7zUK1GIf7D6AWz09qJGFxKt7kFtvg52WcE0h3Tnr2GyrW79D\nWYYqcihj39A7iLi2Ccr+oZb8MkXWeaTXD/zLkLb18m/r1u693pJP37dppiegUNUu\nUZ2PUeFkF3d5OLZ2/rKy6fUD96475zPkAiyNoOC00rks9r1y5bqrQwcXQQCX40wZ\nYgbYhvdvD1pvp60w3Q5pn6WCnulorPl0j3pnp2FNd8kYnl/8dcVFRhzie95Dqhgc\n5QIO6HwhO+XrIXEOa3lU0dFXmLH8JL2j6vXRj2FvidkCgYEA+BxJER5b2p2/EDMm\n7RlVxsMDcqA3KLGsmPz+WpBl16cBct7M7Po820AMy5DuRSNuWyb7sZd6X7qzE7UY\nF8yv7V7ImVdIRBteMqB0orlQMRN46Hsg3yiQ173uLWrh/vjl/PKziXR2LeQPo0r2\ntZtO/mIk0r5UL87l44StXcbPF6sCgYEA9soK2teUOrGYRS6ld0oJQEcLoiPmARMc\ndWL2lXAWCWGbFwo4x9TSgUZ4QLuF6F4J75TXVcWUOLjJ7vjehM0sSiOtCysZ0nUa\nDfIhz+kEDSLHQvIcVnysKCJEMArdaDuch3ok5WlofAjZhBIE5GmviNTxnE2svOI3\nraep/GOW//8CgYANZeGgNgZ5yLjvlAOPHCYgpJlEEFjKLsYGQOsvUsrdGVyfql5g\nkabFpDDMsVfcjexAqds/nNFz5+4Rq17QsjHx3INynF7/poawry99NgqZi9aknzmI\nM3WW4N/CvhnUHfa1cRm2234iPkWF6N9nsSpT3FLmunZrWn3ZimmePcUjHwKBgCkB\nDuanlQhfg6ZTBskYMwtMAqHRByE8lKjoZYIU2oR6hDNCzoZdVRCHrelLfwdJwKre\n9xxYNLVr9plPHmHAWVCENvc5FRRDwq14gqex1qt8ENGNuqmgE1ajwuKcm4b7CJn1\n8HVxmxuouMNZ3xg4eyLoBrDqsv27NHcU+Yhm36rvAoGAfQjNp+F3COTEC5hTGXnM\nMxjUhgY4zf8Oryth9prtVXFwB5WC35jBy9iHB1bNczjaAVhoc+ahkGnwK/w1rXU0\nrfH4n8Ab7yCmRUqOq7nL0nKTQBU5lL9NUOfqiOx57+NKmPb+QyAYhUhJY+EifMbn\nRthVHrRp1f/mLU0oxTUnSIA=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7y7/DU6Ohuus6ZdeFKhC\nqaOUXPKrnmbGidC64H/B/BYejyLwKb+2NoM8xldA4uj+OBL9E7J0VbuLGiKaJoqP\n678eH9GCtPLLABMxYmDhFqGyR9QhYNCZjGxwUeMv6IJvhfhxCNUH/j3c3wxDV24N\nX361xIiiRpyjV3DF8WLWTBAUkyJRLldFChgJNEqBgCUsIfmu24KVOFkneRtpp43D\nYqnbXSkpUw3Ptyf748PEGwFEX8S2BXj7SNECorz/rVxu6zNLoq/qz9hGy53OUY53\ndWSv9Co+u6pQCf6Oba/mfiKSYl9psoxSyyeXstZOPDAUf7tTv2/w88oMtdxEUA3o\nVQIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "7y7_DU6Ohuus6ZdeFKhCqaOUXPKrnmbGidC64H_B_BYejyLwKb-2NoM8xldA4uj-OBL9E7J0VbuLGiKaJoqP678eH9GCtPLLABMxYmDhFqGyR9QhYNCZjGxwUeMv6IJvhfhxCNUH_j3c3wxDV24NX361xIiiRpyjV3DF8WLWTBAUkyJRLldFChgJNEqBgCUsIfmu24KVOFkneRtpp43DYqnbXSkpUw3Ptyf748PEGwFEX8S2BXj7SNECorz_rVxu6zNLoq_qz9hGy53OUY53dWSv9Co-u6pQCf6Oba_mfiKSYl9psoxSyyeXstZOPDAUf7tTv2_w88oMtdxEUA3oVQ",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "vccs-prod-reviewit-dtod:670A5E0407B041268FB223FF78C951A0"
+    },
+    "alg": "RS256",
+    "keyid": "vccs-prod-reviewit-dtod:670A5E0407B041268FB223FF78C951A0",
+    "client_id": "130960000000000218",
+    "deployment_id": "60820:efc3b0ea03e2936586125e8b6fee42a90441b4ef",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "vccs-prod-planit-dtod",
+    "uuid": "CD256485D33C472E8CCC05611F1DBD06",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDvGK7Eix0h81qQ\nVOnd61Gf8AWQ2WhvhAvGSOyY0tFNP2canLciQGrMwD+/BDGpTVFFK/augzZcpEAU\n5HB4ac0kU5LAgT7JcG6f8azsLZfTFt49Ytu3I5ghzaYlj5KOIS2xOypGInRVC7MN\niUoTjPQ2KSMNqWgmXznqaTXA/79L/YK8IowkzHZwlfPFu+Pf5Zbd4dA5qzvkOs5Y\nAz9yaJc/ifSh5HZgRa9SpKOQFR7IU5bdN+zXm3YqWRHQcPMOz1hDCbQ/E6We3ad/\nMNoBmaLnI+zxbwUq2FbpNon28VGNpOmh6pUBMmffUsvztQgTzRqC8CyrtDl6rCYV\nqsLCTC2PAgMBAAECggEBAOdIJg7DTuv/flRtf0iHEA85W/jxBUASKF2nPw7Zp1Ml\nCLRKcjA0xdrIASHiibNusjXKQDYxgM1+qOpMy6r/FUyVdzi2DSlIlAot+or/04SC\n83nH/ieay9evGY/t4OORnqR5SfxL6eI2jf6DFl/xEm6tvlXB0JiFtv1UxoWqHr7+\nXctrErYQZmAq0zuVSmnFhwOMKeO9/8N/jFQITuMdaXGQcgR6bQGo3vOETjGI29zX\nrBYz5iTSfTklaQMtU2m5h7IYbchXO2vRPHaNkKwNBixcQUS+ZuceIbqD6JGNuNIq\nIaE9k7XiP/Djxbeg4/aK/GcgTOdgOUTmkxMkRDhawlECgYEA/RGp88dcVIkVDBI9\nj6Aa9aPo567UK5FzkAOfUSsuUN7DJIY9CZUK5O16T23uSt0APoQ5uk70QDrRH2Xs\nJ7I95HumsoyvFvbqsIjb4blEBoHyHdvOdOLpbwjPXXj+M34RjVBdfWpIBCG3/39n\nc3sMMs1D/yXTmLvgEvBAXt7CjXcCgYEA8d2XQao0B9C/Y+GjvR7LvLOun9j3krOs\nShQRWK6xSBtBgJzj0WR6lEQUXb6x/mf0G+7aifclq4EoObYyX3UVixKSr5LNVzpW\nmfjW6c+w8P5UFRgj6SB0thVSGi5ZGI+x5/xAgRz6o9Jk9IolqSUsUyUSISSqflwY\nxZw+23LUBqkCgYEA1e/X1+FCWailZVYKOt/jyqMtYqb2cHp+0lFtnqW9etpG6Bqf\ngPlBg3SLAJjzaNBZw3/ueWUDsUTHwx5bvNc+4Wfy7WBnKCfHEUQxdiozqrix4LIQ\nX9nv81DkVKXTZ958ohU9Y6e0h+GlddXTs9li35ONlyX4MlcpP3lhQZJZsFMCgYEA\ngAU7Z51wluZuN68aXSMs0gAFoURVnsgNnNRMbjVhTvpmTG4+w/m8TDhQ02H5kuBx\nPEvMTxSLUuE1an6+4Pn3Yjp9fANnPxF4/1zQXMf7L0RfOx8g+ueb/zj/0S3RKQf+\nMf26It006XuWxj1NO9+aO5Q2qWZf/CxBTG+scbmw8qkCgYEA6dxDIjfzMSV9ILUU\nCEetznR8ipiurqC1XJhGhfzReRXMsW67WdY/yyQ0E7rIMkmK9JZhDMFAcpujcGzC\ntNrL4j/5TipisaB/LNR3tcMDS2X0RLv2QGQUFHLfmwlHsTC/1ijT8KlqAgXtIyIA\nBONyvZSojmTljG7xYFWUslZfCao=\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7xiuxIsdIfNakFTp3etR\nn/AFkNlob4QLxkjsmNLRTT9nGpy3IkBqzMA/vwQxqU1RRSv2roM2XKRAFORweGnN\nJFOSwIE+yXBun/Gs7C2X0xbePWLbtyOYIc2mJY+SjiEtsTsqRiJ0VQuzDYlKE4z0\nNikjDaloJl856mk1wP+/S/2CvCKMJMx2cJXzxbvj3+WW3eHQOas75DrOWAM/cmiX\nP4n0oeR2YEWvUqSjkBUeyFOW3Tfs15t2KlkR0HDzDs9YQwm0PxOlnt2nfzDaAZmi\n5yPs8W8FKthW6TaJ9vFRjaTpoeqVATJn31LL87UIE80agvAsq7Q5eqwmFarCwkwt\njwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "7xiuxIsdIfNakFTp3etRn_AFkNlob4QLxkjsmNLRTT9nGpy3IkBqzMA_vwQxqU1RRSv2roM2XKRAFORweGnNJFOSwIE-yXBun_Gs7C2X0xbePWLbtyOYIc2mJY-SjiEtsTsqRiJ0VQuzDYlKE4z0NikjDaloJl856mk1wP-_S_2CvCKMJMx2cJXzxbvj3-WW3eHQOas75DrOWAM_cmiXP4n0oeR2YEWvUqSjkBUeyFOW3Tfs15t2KlkR0HDzDs9YQwm0PxOlnt2nfzDaAZmi5yPs8W8FKthW6TaJ9vFRjaTpoeqVATJn31LL87UIE80agvAsq7Q5eqwmFarCwkwtjw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "vccs-prod-planit-dtod:CD256485D33C472E8CCC05611F1DBD06"
+    },
+    "alg": "RS256",
+    "keyid": "vccs-prod-planit-dtod:CD256485D33C472E8CCC05611F1DBD06",
+    "client_id": "130960000000000219",
+    "deployment_id": "60819:efc3b0ea03e2936586125e8b6fee42a90441b4ef",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d2cx84babvjpbq.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "vccs-prod-chartit-dtod",
+    "uuid": "D0B86F2E58E6429785961B742A1EFD20",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+F1lYkWVp14lm\no/McZvUkHvRxMJJumw/PQhsAaUx1msTf8xUgQ40Bs9JRscvHcM6C28hmrVWidWnc\neY2mPCAHV9A3TRz2OXsT4FxRJO6Q8XpyhK8wxGEsg31RBFX+szufBa8dFjyIp1x1\nSelnfyZsBPJKP/k/CZJ/6k5GJt8dtJNu8VPqfgjRsfZovUwKDrdsELT8HxStTsbb\ncfxVv7dNvYk5Hj5VhTrh9BF7EaqGk+6VTvNc8ZPzD3BfSK3RbxMvjzoYbRh8jJiI\n2e4SQ/xM/4Kt1jWmyTkJyKVPqksyjRkg/+6fgO8XtpXOcyDqw00W2PIEUrqmbGuE\nFgNrCXNLAgMBAAECggEAKk0X3NW+M6d7NBQX7aIbu0YIL4gXjfWDtyOGzrigAyvF\n0/BMKzndDxvtGbDvIBrCWex+1BqOi/CE9kM2el+24Otxsly+rSxtbybmZEhLroWO\nMh3Evp104msAYB8O4/cOtXyWU2q3XdGgiZlBD38EFdWj9VH3LUf8CesiMApGbF14\nO3Y/YL2dcyiX/Og83sQI8TSyvLleGUQ2Nn+DHrqEqvRMhlFEudjtzu2dQMr7NfaF\nDhmgBWf41R5jvWuL5zxhQ4pv4uRFaVGB5SUKu28tguHbRRZYq2DhwacRKoEE+pEa\nLYuFN/vJHje1NKhVp52hQ86/Nb7zL0OA+uM4TclzAQKBgQDxlEFVuhgKlo+pL2xX\nLQ2xm5TpvAZ/oRo8msqEwFIXLtvTav3H3wrenSxXI5vqg+XBV86/XhC8OoLWNrW3\nyaJ0ORgQ0Sco2W7wm+Fz8t9vpLu4wCLKlxRf5ViKjn92DpLIV2KJn/3GmwEv/VWp\npW0dVnjeCXUWDPl4LGMijs9+EQKBgQDJcEUT1SxPGpbNMpJdW+9VfEStUHQ7aJDz\nYq16JGzdHFZGQnCX+Go3npgMqQtgONrrlE7yJuZ9ngWizFNS8eM4l5yYZ1uyc/N4\noAjoxXxD4SYw4XSLwDJw5n6o1wkjk6bRcXduNG+ejUO7QsOxIMSMILVnvIxRo01P\nxbhwgBMvmwKBgQCuB8t5YnJnTkd37f3yXzZ6OEZyi01zLC+mcSxrrdB1ewBJsc3Y\n6sj9zeRfcfukWhhtzD/YhH8x2kTe5NLL76nkaCz6EHJRbzIIi4NC8DgeSWIimed2\nYpf+7U13o2gXODBtuuX1lxhOtuOIGsxXRiDw/ZZc/hsnI3mkJPXVs2OuwQKBgFQE\nvtsp0+Rem72UtVW5TdcjEOYVI5XP5H2Pj/ndDYcgFaASgDHyzCLMxHCrZXJJ5I3T\n+yWnMgX9Di67+JklCPgGzKsImUeSc1/BqFWmYVFSrIJA10Ke9KsAiJ3Vqxsqr662\nG/Fcb537H+AQVd0gZLppviA5lXFLoqh+OJK76MS3AoGBAIwsXozaWrjm6tETr1Mi\nwp9cjRJPZGc2RpSt730mHwLP6EjtDqDdSNUkOpHy8rak7bEVR0Z0NwCADUpTevpd\nsvdViREYYbCHJaNEVhdv2xmzYqapAiPSm9zw854Xk5LVuyqf9Qb/Vl3OhsZUtKUi\nhO2XXusXnuEP5Tsu22Ej1G/D\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvhdZWJFladeJZqPzHGb1\nJB70cTCSbpsPz0IbAGlMdZrE3/MVIEONAbPSUbHLx3DOgtvIZq1VonVp3HmNpjwg\nB1fQN00c9jl7E+BcUSTukPF6coSvMMRhLIN9UQRV/rM7nwWvHRY8iKdcdUnpZ38m\nbATySj/5PwmSf+pORibfHbSTbvFT6n4I0bH2aL1MCg63bBC0/B8UrU7G23H8Vb+3\nTb2JOR4+VYU64fQRexGqhpPulU7zXPGT8w9wX0it0W8TL486GG0YfIyYiNnuEkP8\nTP+CrdY1psk5CcilT6pLMo0ZIP/un4DvF7aVznMg6sNNFtjyBFK6pmxrhBYDawlz\nSwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "vhdZWJFladeJZqPzHGb1JB70cTCSbpsPz0IbAGlMdZrE3_MVIEONAbPSUbHLx3DOgtvIZq1VonVp3HmNpjwgB1fQN00c9jl7E-BcUSTukPF6coSvMMRhLIN9UQRV_rM7nwWvHRY8iKdcdUnpZ38mbATySj_5PwmSf-pORibfHbSTbvFT6n4I0bH2aL1MCg63bBC0_B8UrU7G23H8Vb-3Tb2JOR4-VYU64fQRexGqhpPulU7zXPGT8w9wX0it0W8TL486GG0YfIyYiNnuEkP8TP-CrdY1psk5CcilT6pLMo0ZIP_un4DvF7aVznMg6sNNFtjyBFK6pmxrhBYDawlzSw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "vccs-prod-chartit-dtod:D0B86F2E58E6429785961B742A1EFD20"
+    },
+    "alg": "RS256",
+    "keyid": "vccs-prod-chartit-dtod:D0B86F2E58E6429785961B742A1EFD20",
+    "client_id": "130960000000000217",
+    "deployment_id": "60821:efc3b0ea03e2936586125e8b6fee42a90441b4ef",
+    "iss": "https://canvas.instructure.com",
+    "platformOIDCAuthEndPoint": "https://canvas.instructure.com/api/lti/authorize_redirect",
+    "platformAccessTokenEndpoint": "https://canvas.instructure.com/login/oauth2/token",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://canvas.instructure.com/api/lti/security/jwks",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "https://main.d8y8in5fp9djc.amplifyapp.com",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
