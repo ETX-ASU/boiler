@@ -31,11 +31,7 @@ export const getAssignment = /* GraphQL */ `
   }
 `;
 export const listAssignments = /* GraphQL */ `
-  query ListAssignments(
-    $filter: ModelAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListAssignments($filter: ModelAssignmentFilterInput, $limit: Int, $nextToken: String) {
     listAssignments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -75,11 +71,7 @@ export const getHomework = /* GraphQL */ `
   }
 `;
 export const listHomeworks = /* GraphQL */ `
-  query ListHomeworks(
-    $filter: ModelHomeworkFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListHomeworks($filter: ModelHomeworkFilterInput, $limit: Int, $nextToken: String) {
     listHomeworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -90,6 +82,43 @@ export const listHomeworks = /* GraphQL */ `
         isLocked
         toolHomeworkData {
           quizAnswers
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const homeworkByStudentAndAssignment = /* GraphQL */ `
+  query HomeworkByStudentAndAssignment(
+    $assignmentId: ID
+    $studentOwnerId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelHomeworkFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    homeworkByStudentAndAssignment(
+      assignmentId: $assignmentId
+      studentOwnerId: $studentOwnerId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        assignmentId
+        studentOwnerId
+        beganOnDate
+        submittedOnDate
+        isLocked
+        toolHomeworkData {
+          chartType
+          chartOptions
+          observations
+          dataSet
         }
         createdAt
         updatedAt
