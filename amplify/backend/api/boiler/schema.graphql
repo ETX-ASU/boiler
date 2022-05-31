@@ -22,7 +22,13 @@ type Assignment @model {
   toolAssignmentData: ToolAssignmentData
 }
 
-type Homework @model {
+type Homework
+  @model
+  @key(
+    name: "ByStudentAndAssignment"
+    fields: ["assignmentId", "studentOwnerId"]
+    queryField: "homeworkByStudentAndAssignment"
+  ) {
   id: ID!
   assignmentId: ID!
   studentOwnerId: ID!
