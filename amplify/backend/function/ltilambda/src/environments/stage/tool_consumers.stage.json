@@ -1375,5 +1375,31 @@
     "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
     "toolApplicationUrl": "https://main.d1nwigklju3y36.amplifyapp.com",
     "accessTokenPostContentType": "application/x-www-form-urlencoded"
+  },
+  {
+    "name": "stockon-blackboard-boiler-prod",
+    "uuid": "BC08E3B06B324D63B2108CDAC7A87F8B",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDJOe7vpjkWie4z\nwim7ZknaUYcieqySkp4OoxdYEWhed6R2PROKYNTdBwFRBUocMbrrp4H1sAlumr1F\n308tSkJSDsjLDNsIgTnVg/DrnyFSlC6gn4qHi2tKmP2UTFu0ilHYqDkSSVPNIVEZ\n+bvugM6la9cwy1n5Ixh75UA00TLFAM5wJx6U6pNAoYE7xaJUd68Qd9HrFWG3iJYO\n637PUZWj6D8rOL1k/75foF9LYaJxYKnEl8v42g1air0dW6w7SqyWuApv68XaA+Gj\nqPypATL+r2wm+0RlCybDfT8i9v+clOsrrUpHb5TXpOgphjlTqq8kn45XdbIVLV1l\n94voSfKXAgMBAAECggEAH4CmW3ZWcaTeWdQH3ILDBR7GXSt/YOL7Q6dcvDjdcgyg\n/rHJIVzPdlrmZdzCIW/Xp5Ttz5zjnSE0iH/RUXHSuC4AWWmF0OsKNtcVHI4pFViF\nhDf15Ap7nY4eBN1/beBJt/V+GdLI/9A7dimWtlwL/fHIGqd7SnmoF51oU9x8akLS\nzNY1UhMISSUO6QGM39tcg9mczbk+0ISDleKfRYOseMAtDugpizMX+yZXKKOWV7qP\nZrvyihGk1viKtSEE5pvAejzjTBfjUAqePGYqSYU9o0lXMBj9seQmtI5/0r8aVWhD\nXIOTBxbl2FTIsu0xUVJ+rLItR5lHXx9BNTMZOmJoQQKBgQD0R+iq7bsWADvQjhBW\nJzRtTcc2LtV65F47hfCQinNhLBt1Xt9QkPA/nSjCsCPlb+ckWuRLT0kpt64KJ3lV\nfeT/t8UCwXhD5s2jgaC94bFiTLJqPIDej707Y0PdujV4LhthWdjZIxg8razXokAg\n3WQ1K9dm2Q7ei9Cr/OXJPnqp7wKBgQDS4UHkIFcNkLTvGuIptX2iMR7598g40hWX\ndMO1rRc+cBlLKyI4vvxaX+bWOCqAV2JjWNmyNxXByXPDFlPdyQ7eH/z44sT2n7oH\nQ8Gds3ZcaMHC5y4aG+uYuDjfO3ik9guIs9CpKnsmrguZxIHF3EffsX/yJ07Miktr\nIuYVw5GJ2QKBgQCIA/4WJpa0Ml8bye5ouh2j+tnAXqV5buzVQcfoA18pLREA8llv\nl7ReB1jpxn/GQd+2y3EwSa5YLzEV8FLL+nRmumFVHnqjfEDmGMhy0dcd/8ycAKJU\nyj44chYYwJUDHNEcDJYEmVjmeGG0E2CXrA4e2RFv784qtjjzerZLrqFIOwKBgQCy\nTBh8/Eb+RjJk07MTFstxfdy19qVIPYBZ/TSYABBeD0OjhYW6uuf8tYcj6nss5jVe\n0DnH78EqhtykvtUL+Tnj3uHxwTJNX0FXcRdb8eeKPFxPIU2eb6rkBia3v73Co/Ge\nlIJA9ZUIYDGYwkgC9bujS51lLYz3bZpUrD4jeqYsCQKBgFeVrtr6zpf2NVjPK979\nwmHeXvDI1GIWwqPWnv4aLbKBgmiE2LkKPkfT51Gwo5BGAVD5RxC24dbm5qwg8Thr\npupQvDL4UX1pUw0QbKV1JNIbXUqxcc/S8WHymlaNtWGft+WmrNpUg7kPG5kUtZ6W\nqMIeAiPysOl0aaSa06IL1wbC\n-----END PRIVATE KEY-----\n",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyTnu76Y5FonuM8Ipu2ZJ\n2lGHInqskpKeDqMXWBFoXnekdj0TimDU3QcBUQVKHDG666eB9bAJbpq9Rd9PLUpC\nUg7IywzbCIE51YPw658hUpQuoJ+Kh4trSpj9lExbtIpR2Kg5EklTzSFRGfm77oDO\npWvXMMtZ+SMYe+VANNEyxQDOcCcelOqTQKGBO8WiVHevEHfR6xVht4iWDut+z1GV\no+g/Kzi9ZP++X6BfS2GicWCpxJfL+NoNWoq9HVusO0qslrgKb+vF2gPho6j8qQEy\n/q9sJvtEZQsmw30/Ivb/nJTrK61KR2+U16ToKYY5U6qvJJ+OV3WyFS1dZfeL6Eny\nlwIDAQAB\n-----END PUBLIC KEY-----\n",
+    "public_key_jwk": {
+      "kty": "RSA",
+      "n": "yTnu76Y5FonuM8Ipu2ZJ2lGHInqskpKeDqMXWBFoXnekdj0TimDU3QcBUQVKHDG666eB9bAJbpq9Rd9PLUpCUg7IywzbCIE51YPw658hUpQuoJ-Kh4trSpj9lExbtIpR2Kg5EklTzSFRGfm77oDOpWvXMMtZ-SMYe-VANNEyxQDOcCcelOqTQKGBO8WiVHevEHfR6xVht4iWDut-z1GVo-g_Kzi9ZP--X6BfS2GicWCpxJfL-NoNWoq9HVusO0qslrgKb-vF2gPho6j8qQEy_q9sJvtEZQsmw30_Ivb_nJTrK61KR2-U16ToKYY5U6qvJJ-OV3WyFS1dZfeL6Enylw",
+      "e": "AQAB",
+      "alg": "RS256",
+      "use": "sig",
+      "kid": "stockon-blackboard-boiler-prod:BC08E3B06B324D63B2108CDAC7A87F8B"
+    },
+    "alg": "RS256",
+    "keyid": "stockon-blackboard-boiler-prod:BC08E3B06B324D63B2108CDAC7A87F8B",
+    "client_id": "28bb7182-7234-4f70-af7c-388570152740",
+    "deployment_id": "1a510cb7-50f4-4af3-ba24-32cf17c9f186",
+    "iss": "https://blackboard.com",
+    "platformOIDCAuthEndPoint": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
+    "platformAccessTokenEndpoint": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "platformAccessTokenAud": "",
+    "platformPublicJWKEndpoint": "https://developer.blackboard.com/api/v1/management/applications/28bb7182-7234-4f70-af7c-388570152740/jwks.json",
+    "platformPublicKey": "not required: one or the other of platformPublicKey/platformPublicJWKEndpoint",
+    "toolApplicationUrl": "you will need to supply the url of the react application, not required if canvas consumer used our json or blackboard install",
+    "accessTokenPostContentType": "application/x-www-form-urlencoded"
   }
 ]
