@@ -115,10 +115,7 @@ export const homeworkByStudentAndAssignment = /* GraphQL */ `
         submittedOnDate
         isLocked
         toolHomeworkData {
-          chartType
-          chartOptions
-          observations
-          dataSet
+          quizAnswers
         }
         createdAt
         updatedAt
