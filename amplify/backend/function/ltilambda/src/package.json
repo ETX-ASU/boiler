@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@asu-etx/rl-server-lib": "^0.9.5",
+    "rl-server-lib": "git+https://writhe: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@github.com/Writhe/rl-server-lib-clone.git#main",
     "@asu-etx/rl-shared": "^0.7.15",
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
